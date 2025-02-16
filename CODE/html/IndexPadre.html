@@ -107,20 +107,52 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                                               <!-- INICIO CONTENIDO HTML -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <div class="padres">
-        <div id="imagenPadres"><img src="../assets/img/avatar.png" alt="avatar"></div>
-        <div id="nombrePadres">NombrePadre</div>
-        <div id="idPadre">N</div>
-        <div id="emailPadres">Correo</div>
-        <button type="button" id="modificarPadre">Modificar datos del Tutor</button><br>
-        <hr>
-        <button type="button" id="suscribirse">Inscribir un niño</button><br>
-        <hr>
-        <div id="divParaSeleccionar">
-            Hijo:
-            <div id="selectHijo"><select name="a" id="a"></select></div>
+    <div class="contenedorPrincipal">
+        <div class="padres">
+            <h1>Datos del Tutor</h1>
+            <div id="imagenPadres"><img src="../assets/img/avatar.png" alt="avatar"></div>
+            <div id="nombrePadres">NombrePadre</div>
+            <div id="idPadre">N</div>
+            <div id="emailPadres">Correo</div>
+            <button type="button" id="modificarPadre">Modificar datos del Tutor</button><br>
+            <hr>
+            <button type="button" id="suscribirse">Inscribir un niño</button><br>
         </div>
+    
+        <div class="hijo" id="hijodiv">
+            <h1 id="tituloHijo">Datos del Hij@s</h1>
 
+            <div class="contenedor-hijo">
+                <!-- Sección de imagen -->
+                <div class="divFotoHijo">
+                    <div id="imagenHijo">
+                        <img src="../assets/img/avatar.png" alt="avatar">
+                    </div>
+                    <div id="divParaSeleccionar">
+                        Hijo:
+                        <div id="selectHijo"><select name="a" id="a"></select></div>
+                    </div>
+                </div>
+        
+                <!-- Sección de información -->
+                <div class="divInformacionHijo">
+                    <div class="info-item"><span class="label">ESTADO:</span> <div id="estadoHijo"></div></div>
+                    <div class="info-item"><span class="label">Plan de horario:</span> <div id="planHijo"></div></div>
+                    <div class="info-item"><span class="label">Nombre:</span> <div id="nombreHijo"></div></div>
+                    <div class="info-item"><span class="label">Edad:</span> <div id="edadHijo"></div></div>
+                    <div class="info-item"><span class="label">Alergia:</span> <div id="alergiaHijo"></div></div>
+                    <div class="info-item"><span class="label">Grupo:</span> <div id="grupoHijo"></div></div>
+                    <div class="info-item"><span class="label">Profesor:</span> <div id="profesorHijo"></div></div>
+                </div>
+            </div>
+        
+            <!-- Botón -->
+            <div class="boton-container">
+                <button type="button" id="modificar">Modificar</button>
+            </div>
+        </div>
+    
+        <div class="contenedorTablas">
         <div id="tablaPadres">
             <table id="tablaActividad" border="1">
                 <thead>
@@ -136,24 +168,10 @@
             </table>
             <div id="infoTabla"></div>
         </div>
-    </div>
-
-    <div class="hijo" id="hijodiv">
-        <div class="divFotoHijo">
-            <div id="imagenHijo"><img src="../assets/img/avatar.png" alt="avatar"></div>
         </div>
-        <div class="divInformacionHijo">
-            ESTADO: <div id="estadoHijo"></div>
-            Plan de horario: <div id="planHijo"></div>
-            Nombre: <div id="nombreHijo"></div>
-            Edad: <div id="edadHijo"></div>
-            Alergia: <div id="alergiaHijo"></div>
-            Grupo: <div id="grupoHijo"></div>
-            Profesor: <div id="profesorHijo"></div>
-        </div>
-        <button type="button" id="modificar">Modificar</button>
     </div>
-
+        
+    
   
      <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                                                               <!-- FOOTER -->
