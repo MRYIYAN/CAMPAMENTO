@@ -426,117 +426,409 @@ body::-webkit-scrollbar {
                                                                          /*HTML CONTENIDO*/
     /* =====================================================================================================================================================*/
 
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333; /* Color oscuro para el texto */
+}
+
+    
+/* ==================================================================*/
+/* estilo para esconder html*/
+/* ==================================================================*/
+.oculto {
+  display: none;
+}
+/* ==================================================================*/
+/* fin de estilo para esconder html*/
+/* ==================================================================*/
+
+
+
+/* ==================================================================*/
+/* estilos del padre */
+/* ==================================================================*/
 .padres {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #e6ccff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative;
+  width: 100%;
+  max-width: 500px;
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  text-align: center;
 }
 
 #imagenPadres img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+}
+
+#nombrePadres,
+#idPadre,
+#emailPadres {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+#modificarPadre,
+#suscribirse {
+  width: 80%;
+  background-color: #4CAF50; /* Azul brillante */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+#modificarPadre:hover,
+#suscribirse:hover {
+  background-color: #388E3C; /* Azul más oscuro al hacer hover */
+}
+
+hr {
+  border: 1px solid #eaeaea;
+  width: 100%;
+  margin: 20px 0;
+}
+
+#divParaSeleccionar {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+
+
+/* ==================================================================*/
+/* fin de estilo de padre */
+/* ==================================================================*/
+
+
+/* ==================================================================*/
+/* estilos de tabla  */
+/* ==================================================================*/
+/* ==================================================================*/
+/* Estilos generales para el contenedor de tablas */
+/* ==================================================================*/
+.contenedorTablas {
+  width: 100%;
+  max-width: 1000px;  /* Puede ser más grande si es necesario */
+  margin: 20px auto;
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  height: auto;
+}
+
+/* ==================================================================*/
+/* Estilos para la tabla de actividades */
+/* ==================================================================*/
+#tablaActividad {
+  width: 100%;
+  border-collapse: collapse; /* Asegura que las celdas se fusionen correctamente */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#tablaActividad th,
+#tablaActividad td {
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  color: #333; /* Color oscuro para el texto */
+}
+
+#tablaActividad th {
+  background-color: #007BFF; /* Azul brillante */
+  color: white; /* Texto blanco para los encabezados */
+  font-weight: bold;
+}
+
+#tablaActividad tbody tr:nth-child(odd) {
+  background-color: #e6f7ff; /* Fondo azul muy claro para filas impares */
+}
+
+#tablaActividad tbody tr:nth-child(even) {
+  background-color: #f2faff; /* Fondo azul suave para filas pares */
+}
+
+#tablaActividad tbody tr:hover {
+  background-color: #cce0ff; /* Azul suave para el hover */
+}
+
+/* ==================================================================*/
+/* Estilos para la información debajo de la tabla */
+/* ==================================================================*/
+#infoTabla {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333; /* Color para el texto debajo de la tabla */
+}
+
+
+
+/* ==================================================================*/
+/* fin de estilos de tabla */
+/* ==================================================================*/
+
+
+
+
+
+
+
+/* ==================================================================*/
+/* estilos del nino */
+/* ==================================================================*/
+.hijo {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.contenedor-hijo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Estilo de la imagen */
+.divFotoHijo {
+  /* display: flex; */
+  justify-content: center;
+  width: 100%;
+}
+
+#imagenHijo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+  object-fit: cover; /* Esto asegura que la imagen se ajuste bien dentro del círculo */
+}
+
+/* Información */
+.divInformacionHijo {
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  padding: 10px 15px;
+  background-color: #f7f7f7; /* Fondo gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  margin-top: 10px; /* Espacio superior */
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #eaeaea;
+  color: #333; /* Color de texto más oscuro */
+}
+
+.label {
+  font-weight: bold;
+  color: #555;
+}
+
+/* Botón */
+.boton-container {
+  width: 100%;
+  text-align: center;
+}
+
+button#modificar {
+  width: 80%;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+button#modificar:hover {
+  background: #388E3C;
+}
+#selectHijo select {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+  width: auto;
+}
+
+/*Responsivo */
+@media (min-width: 600px) {
+  .contenedor-hijo {
+      flex-direction: row;
+      align-items: flex-start;
+  }
+
+  #tituloHijo{
+    display: block;
+  }
+
+  #imagenHijo img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    border: 3px solid #ddd;
+    object-fit: cover; /* Esto asegura que la imagen se ajuste bien dentro del círculo */
+  }
+
+  .divFotoHijo {
+      flex: 1;
+  }
+
+  .divInformacionHijo {
+      flex: 2;
+      padding: 10px;
+  }
+
+  button#modificar {
+      width: 100%;
+  }
+
+
+  
 }
 
-#nombrePadres {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 10px;
+
+/* ==================================================================*/
+/* fin de estilos del nino */
+/* ==================================================================*/
+
+/* ==================================================================*/
+/* Responsive */
+/* ==================================================================*/
+.contenedorPrincipal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-#correoPadres {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 15px;
+/* Estilos generales */
+.padres, .hijo, .contenedorTablas {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: initial;
 }
 
-/* Estilos para el select de hijos */
-#selectHijo {
-    margin: 10px auto;
-    position: relative;
-    display: inline-block;
+/* Diseño para pantallas grandes (Ordenador) */
+@media (min-width: 768px) {
+  .contenedorPrincipal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+          "padre hijo"
+          "tabla tabla";
+      gap: 20px;
+  }
+
+  .padres {
+      grid-area: padre;
+  }
+
+  .hijo {
+      grid-area: hijo;
+  }
+
+  .contenedorTablas {
+      grid-area: tabla;
+  }
+
+
+  #tituloHijo{
+    display: block;
+  }
+
+  #imagenHijo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    object-fit: cover; /* Esto asegura que la imagen se ajuste bien dentro del círculo */
+  }
+
+
 }
 
-#selectHijo select {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 2px solid #800080;
-    border-radius: 5px;
-    background-color: white;
-    color: #333;
-    cursor: pointer;
-    appearance: none; /* Oculta el estilo nativo del navegador */
-}
+/* Diseño para pantallas pequeñas (Móvil) */
+@media (max-width: 599px) {
+  .contenedorPrincipal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
 
-#selectHijo::after {
-    content: "▼";
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #800080;
-    font-size: 12px;
-}
+  .padres, .hijo, .contenedorTablas {
+      width: 90%;
+  }
 
-#tablaPadres {
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    overflow-x: auto;
-    color: #333;  /*color del texto*/
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ccc;
-}
-
-th {
-    background-color: #b300b3;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.hijo {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #e6ccff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-}
-
-.divFotoHijo img {
-    width: 120px;
-    height: 120px;
-    border-radius: 10px;
-    margin-right: 20px;
-}
-
-.divInformacionHijo {
-    font-size: 16px;
-}
-
-.divInformacionHijo div {
-    font-weight: bold;
-}
-
-.oculto {
+  #tituloHijo{
     display: none;
   }
+
+  #imagenHijo img {
+    border-radius: 2px;
+    width: 200px;
+    height: auto;
+    margin-top: -50px;
+    animation: slideUp 2s ease-in-out;
+  }
+  #hijodiv{
+    margin-top: 20px;
+  }
+ 
+}
+
+/* ==================================================================*/
+/* fin de Responsive */
+/* ==================================================================*/
+
+/* ==================================================================*/
+/* Animaciones */
+/* ==================================================================*/
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
