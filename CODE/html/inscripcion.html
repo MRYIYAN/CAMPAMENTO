@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styleInscripcion.css" />
+    <title>Inscripcion al Campamento</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title"><h1>Inscripción del campamento</h1></div>
+    
+    <form method="post" id="formularioInscripcion">
+      <h2>Datos del representante legal</h2>
+
+      <label for="nombre">Nombre completo</label>
+      <input type="text" name="nombre" id="nombre" />
+      <div id="errornombre"></div> 
+      <br />
+
+      <label for="correo">Correo electrónico</label>
+      <input type="email" name="correo" id="correo" />
+      <div id="errorcorreo"></div>
+      <br />
+
+      <label for="telefono">Teléfono</label>
+      <input type="text" name="telefono" id="telefono" />
+      <div id="errortelefono"></div>
+      <br />
+
+      <label for="DNI">DNI / NIF</label>
+      <input type="text" name="DNI" id="DNI" />
+      <div id="errorDNI"></div>
+      <br />
+
+      <h4>Datos del niño</h4>
+
+      <label for="nombre_nino">Nombre del niño</label>
+      <input type="text" name="nombre_nino" id="nombre_nino" />
+      <div id="errornombre_nino"></div>
+      <br />
+
+      <label for="fecha_nacimiento">Fecha de nacimiento</label>
+      <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" />
+      <div id="errorfecha_nacimiento"></div>
+      <br />
+
+      <label for="alergiaNew">Alergias</label>
+      <input type="radio" name="alergiaNew" value="si" id="alergiaNew_si" required /> Si
+      <input type="radio" name="alergiaNew" value="no" id="alergiaNew_no" /> No
+      <div id="espacioInputAlergiaNew"></div>
+      <div id="errorAlergiaNew"></div>
+      <br />
+      <label for="observaciones">Observaciones</label>
+      <textarea
+        name="observaciones"
+        id="observaciones"
+        cols="30"
+        rows="10"
+      ></textarea>
+      <div id="errorobservaciones"></div>
+      <br />
+
+      <label for="plan">Seleccione un Plan</label>
+      <div id="plan"></div>
+      <div id="errorPlan"></div>
+      <div id="precioPlan"></div>
+      <div id="infoPlan"></div>
+<div class="mensaje">
+      <p>
+        *Para actualizar tu perfil, haz clic en el botón "Modificar" después de la inscripción.
+      </p>
+</div>
+<div class="button-container">
+  <input type="submit" value="Inscribir" id="enviar"/>
+  <button type="button" id="volver">Volver</button>
+</div>
+<div id="errorEnviar"></div>
+</form>
+<div id="infoForm"></div>
+<script src="../JS/operarInscripcion.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styleModificarNino.css" />
+    <title>Modificacion de datos</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title"><h1>Modifcación de datos</h1></div>
+    
+    <form method="post" id="formularioModificacion">
+     
+      <label for="nombre_nino">Nombre del niño</label>
+      <input type="text" name="nombre_nino" id="nombre_nino" />
+      <div id="errornombre_nino"></div>
+      <br />
+
+
+      <label for="fecha_nacimiento">Fecha de nacimiento</label>
+      <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" />
+      <div id="errorfecha_nacimiento"></div>
+      <br />
+
+      
+      <label for="alergiaNew">Alergias</label>
+      <input type="radio" name="alergiaNew" value="si" id="alergiaNew_si" required /> Si
+      <input type="radio" name="alergiaNew" value="no" id="alergiaNew_no" /> No
+      <div id="espacioInputAlergiaNew"></div>
+      <div id="errorAlergiaNew"></div>
+      <br />
+
+      <label for="observaciones">Observaciones</label>
+      <textarea
+        name="observaciones"
+        id="observaciones"
+        cols="30"
+        rows="10"
+      ></textarea>
+      <div id="errorobservaciones"></div>
+      <br />
+
+      <label for="avatar">Sube aqui el avatar:</label>
+      <div id="vistaPreviaavatar">
+        <img id="vistaPrevia" src="" alt="Vista previa del avatar" style="display: none; width: 150px; height: 150px;">
+      </div>
+      <input type="file" name="avatar" id="avatar"><br><br>
+
+
+
+      <input type="submit" value="Modificar" id="enviar"/>
+      <div id="errorEnviar"></div>
+    </form>
+    <script src="../JS/operarModificarNino.js"></script>
+    </div>
+  </body>
+</html>

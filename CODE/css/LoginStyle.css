@@ -1,0 +1,165 @@
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para el cuerpo de la página (background, alineación y tamaño) */
+/*--------------------------------------------------------------------------------------------*/
+body {
+    margin: 0; /* Elimina el margen predeterminado */
+    padding: 0; /* Elimina el padding predeterminado */
+    display: flex; /* Utiliza Flexbox para centrar los elementos */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+    font-family: 'Jost', sans-serif; /* Establece la fuente de texto */
+
+
+    /* Cambiar la imagen al html y asignarle una clase, utilizar propiedades: mask(filtro negro) y opacity(bajar opacidad) */
+    background-size: cover; /* La imagen cubre todo el fondo, adaptándose al tamaño */
+    background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para el contenedor principal del login */
+/*--------------------------------------------------------------------------------------------*/
+.main {
+    width: 350px; /* Define el ancho del contenedor */
+    height: 500px; /* Define la altura del contenedor */
+    background: #0f80cb; /* Color de fondo del contenedor */
+    overflow: hidden; /* Esconde cualquier contenido que se desborde */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 5px 20px 50px #000; /* Sombra alrededor del contenedor */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* El checkbox oculto para alternar entre el formulario de login y signup */
+/*--------------------------------------------------------------------------------------------*/
+#chk {
+    display: none; /* El checkbox no se muestra */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para la sección de signup (Crear cuenta) */
+/*--------------------------------------------------------------------------------------------*/
+.signup {
+    position: relative; /* Posiciona de manera relativa dentro de su contenedor */
+    width: 100%; /* Ocupa el 100% del ancho */
+    height: 100%; /* Ocupa el 100% de la altura */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para las etiquetas del formulario (en este caso los títulos) */
+/*--------------------------------------------------------------------------------------------*/
+label {
+    color: #fff; /* Color blanco para el texto */
+    font-size: 2.3em; /* Tamaño de fuente grande */
+    justify-content: center; /* Centra el texto */
+    display: flex; /* Utiliza flexbox para centrar el texto */
+    margin: 60px; /* Espaciado alrededor de la etiqueta */
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: .5s ease-in-out; /* Efecto de transición */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para los campos de entrada (input) */
+/*--------------------------------------------------------------------------------------------*/
+input {
+    width: 60%; /* El campo de entrada ocupa el 60% del ancho */
+    height: 20px; /* La altura del campo de entrada */
+    background: #e0dede; 
+    justify-content: center; /* Centra el contenido dentro del campo */
+    display: flex; /* Utiliza flexbox */
+    margin: 20px auto; 
+    padding: 10px; 
+    border: none; 
+    outline: none; 
+    border-radius: 5px; 
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para los botones (iniciar sesión y crear cuenta) */
+/*--------------------------------------------------------------------------------------------*/
+button {
+    width: 60%; 
+    height: 40px; 
+    margin: 10px auto; 
+    justify-content: center; 
+    display: block; 
+    color: #fff; /* Color del texto en el botón */
+    background: #573b8a; /* Color de fondo del botón */
+    font-size: 1em; 
+    font-weight: bold; 
+    margin-top: 20px; 
+    outline: none; /* Elimina el contorno */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: .2s ease-in; /* Efecto de transición suave */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para el efecto hover sobre el botón */
+/*--------------------------------------------------------------------------------------------*/
+button:hover {
+    background: #6d44b8; /* Cambia el fondo del botón al pasar el cursor */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para el contenedor de login */
+/*--------------------------------------------------------------------------------------------*/
+.login {
+    height: 460px; /* Altura del contenedor de login */
+    background: #eee; /* Color de fondo del login */
+    border-radius: 60% / 10%; /* Bordes redondeados en un patrón elíptico */
+    transform: translateY(-180px); /* Desplaza el contenedor hacia arriba */
+    transition: .8s ease-in-out; /* Efecto de transición suave */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para la etiqueta dentro del contenedor de login (cambia al hacer interactuar con el formulario) */
+/*--------------------------------------------------------------------------------------------*/
+.login label {
+    color: #573b8a; /* Color del texto en el formulario de login */
+    transform: scale(.6); /* Reduce el tamaño del texto cuando está en login */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Efecto cuando el checkbox está marcado, transforma el login hacia arriba */
+/*--------------------------------------------------------------------------------------------*/
+#chk:checked ~ .login {
+    transform: translateY(-500px); /* Desplaza el contenedor aún más arriba */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para la etiqueta dentro del login cuando el checkbox está marcado (escala de nuevo) */
+/*--------------------------------------------------------------------------------------------*/
+#chk:checked ~ .login label {
+    transform: scale(1); /* Escala el texto a su tamaño original */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para la etiqueta dentro del signup cuando el checkbox está marcado (reduce el tamaño) */
+/*--------------------------------------------------------------------------------------------*/
+#chk:checked ~ .signup label {
+    transform: scale(.6); /* Escala el texto hacia abajo */
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para el icono de error (por ejemplo, cuando se muestra un mensaje de error) */
+/*--------------------------------------------------------------------------------------------*/
+#errorIcon {
+    margin-right: 5px; /* Espacio a la derecha del icono */
+}
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* Estilo para colocar la imagen del logo */
+/*--------------------------------------------------------------------------------------------*/
+.logo{
+    width: 200px;
+    height: 200px;
+    rotate: 320deg;
+    position: relative;
+   
+    margin-right: -100px;
+    margin-top: -450px;
+
+}

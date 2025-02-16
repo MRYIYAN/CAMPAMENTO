@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../css/LoginStyle.css">
+  <title>Iniciar Sesion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="logo">
+    <img src="../assets/logo/Logo1.png" alt="" width="200" height="200">
+  </div>
+  <script>
+    // Ejecutar Conexion.php cuando la página se carga
+    window.onload = function() {
+      fetch("../Server/Conexion.php")
+        .then(response => response.text())
+        .then(data => console.log(data)) // Muestra los mensajes en la consola
+        .catch(error => console.error("Error al ejecutar Conexion.php:", error));
+    };
+  </script>
+  
+  <div class="main">   
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <!-- Formulario de Registro -->
+    <div class="signup">
+      <form id="signupForm">
+        <label for="chk" aria-hidden="true">Crear Cuenta</label>
+        <input type="email" name="email" placeholder="Email" id="reg_email" required>
+        <input type="password" name="pswd" placeholder="Password" id="reg_pswd" required>
+        <button type="submit">Crear Cuenta</button>
+      </form>
+    </div>
+
+    <!-- Formulario de Login -->
+    <div class="login">
+      <form id="loginForm">
+        <label for="chk" aria-hidden="true">Login</label>
+        <input type="email" name="email" placeholder="Email" id="email" required>
+        <input type="password" name="pswd" placeholder="Password" id="pswd" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+  <script src="../JS/operarLogin.js"></script>
+  <script src="../JS/operarRegistro.js"></script>
+</body>
+</html>

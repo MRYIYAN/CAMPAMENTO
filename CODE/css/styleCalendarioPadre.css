@@ -1,0 +1,427 @@
+ /* =====================================================================================================================================================*/
+                                                                       /* ESTILO GENERAL BODY*/
+  /* =====================================================================================================================================================*/
+
+  /* =================================================================*/
+  /* Definición de tonos de azul */
+  /* =================================================================*/
+  :root {
+    --color-nav-bg: #0A5780; 
+    --color-item: #E2E9F4; 
+    --color-primary: #3E99E3;
+    --color-dropdown-hover: #678ba3;
+    --color-underline: #B8D3EF;
+  }
+  
+  /* =================================================================*/
+    /* Estilos generales */
+  /* =================================================================*/
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body::-webkit-scrollbar {
+    width: 15px;
+  }
+  body::-webkit-scrollbar-thumb {
+    background: #3E99E3;
+    border-radius: 10px;
+  }
+  body::-webkit-scrollbar-thumb:hover {
+      background: #B8D3EF;
+  } 
+
+  body {
+    font-family: "Euclid Circular A", "Poppins";
+    background: linear-gradient(225deg, #ffffff, #3E99E3);
+    color: white;
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    justify-items: center; /* Centra horizontalmente */
+    align-items: start;    /* Ubica el contenido al inicio (arriba) */
+    margin: 0;
+    background-attachment: fixed;
+    
+  }
+  /* =====================================================================/*
+                            TRANSICIÓN CON GSAP
+  /*======================================================================== */
+.transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000; /* Valor alto para que cubra todo */
+    pointer-events: none;
+  }
+  
+  .transition-row {
+    flex: 1;
+    display: flex;
+  }
+  
+  /* Ajuste: Usamos .row1 y .row2, de acuerdo a tu HTML */
+  .transition-row.row1 .block {
+    transform-origin: top;
+  }
+  
+  .transition-row.row2 .block {
+    transform-origin: bottom;
+  }
+  
+  .block {
+    flex: 1;
+    background-color: #2788c0; /* Puedes ajustar el color si lo deseas */
+    transform: scaleY(1);
+    will-change: transform;
+  }
+  
+
+  /* =====================================================================================================================================================*/
+                                                                       /* NAVBAR */
+  /* =====================================================================================================================================================*/
+  /* Estilo del navbar */
+* {
+    box-sizing: border-box;
+    border-radius: 8px;
+  }
+  button {
+    background-color: #3E99E3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    }
+
+    button:hover {
+    background-color: #0F80CB;
+    border-radius: 10px;
+    }
+    nav {
+        border-radius: 10px;
+        position: fixed;
+        background: var(--color-nav-bg);
+        font-weight: 400;
+        font-size: 0;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        width: 95%;
+        z-index: 1000; /* Valor alto para que el navbar esté encima */
+      }
+
+  /* =================================================================*/
+  /* El logo se posiciona de forma absoluta (como pegatina) */
+  /* =================================================================*/
+  nav .logo {
+    position: absolute;
+    top: 50%;           /* Centrado verticalmente en el navbar */
+    left: 20px;         /* Distancia desde el borde izquierdo */
+    transform: translateY(-50%); /* Centrado vertical */
+    height: 50px;        
+    width: auto;
+    z-index: 10;
+  }
+
+  /* =================================================================*/
+  /* Contenedor de elementos de navegación */
+  /* =================================================================*/
+  nav .nav-container {
+    display: flex;
+    position: relative;
+    flex: 1;
+    margin-left: 80px;  /* Ajusta este valor según el ancho del logo y el espacio deseado */
+  }
+  
+  /* =================================================================*/
+    /* Items de navegación */
+  /* =================================================================*/
+  /* Estilo de los items del navbar */
+  /* NOTA: Se usa flex-grow para que los items se expandan y ocupen todo el espacio disponible */
+  /*=================================================================*/
+  nav .item {
+    font-size: 0.8rem;
+    display: inline-block;
+    position: relative;
+    padding: 0 15px;
+    cursor: pointer;
+    z-index: 5;
+    min-width: 20%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: var(--color-item);
+  }
+
+  /* Dropdown (submenú) */
+  .dropdown {
+    overflow: hidden;
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    width: 100%;
+    left: 0;
+    top: 62px;
+  }
+  
+  /* Oculto inicialmente y se muestra al hacer hover */
+  .dropdown > div {
+    translate: 0 -100%;
+    transition: all 0.5s 0.1s;
+    position: relative;
+  }
+  
+  /* Enlaces del dropdown */
+  .dropdown a {
+    display: block;
+    padding: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: var(--color-primary);
+    color: rgb(117, 21, 96);
+    text-decoration: none;
+  }
+  
+  /* Hover en los enlaces del dropdown */
+  .dropdown a:hover {
+    background: var(--color-dropdown-hover);
+  }
+  
+  /* Línea inferior (underline) */
+  .underline {
+    height: 6px;
+    background: var(--color-underline);
+    position: absolute;
+    bottom: 0;
+    width: 20%;
+    z-index: 2;
+    pointer-events: none;
+    transition: 0.35s;
+  }
+  
+  /* Mostrar el dropdown al hacer hover sobre su item */
+  nav .item:hover > .dropdown > div {
+    translate: 0;
+  }
+  
+    /* =================================================================*/
+  /* Movimiento de la underline según el item (NOTA: esto funciona correctamente
+     porque solo se cuentan los hijos dentro de .nav-container) */
+     /* =================================================================*/
+  nav .item:nth-child(1):hover ~ .underline {
+    translate: 0;
+  }
+  
+  nav .item:nth-child(2):hover ~ .underline {
+    translate: 100%;
+  }
+  
+  nav .item:nth-child(3):hover ~ .underline {
+    translate: 200%;
+  }
+  
+  nav .item:nth-child(4):hover ~ .underline {
+    translate: 300%;
+  }
+  nav .item:nth-child(5):hover ~ .underline {
+    translate: 400%;
+  }
+
+  .botonNavbar{
+    width: 100%;
+    height: 100%;
+  }
+
+  /* espaciador para el navbar y el contenido, para que no se superpongan */
+  .espaciador{
+    height: 100px;
+  }
+  /* -------------------------------------------------------------------------------------------------- */
+  /* overlay para cerrar sesion */
+  /* -------------------------------------------------------------------------------------------------- */
+    /* Estilo para el overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s;
+      color: #333;  /* Color del texto */
+  }
+
+  /* Estilo para la ventana emergente */
+  .overlay-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+      position: relative;
+  }
+
+  /* Botón de cierre */
+  .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+  }
+
+  .close-btn:hover {
+      background: #cc0000;
+  }
+
+  /* Clase para mostrar el overlay */
+  .overlay.activeOverlay {
+      visibility: visible;
+      opacity: 1;
+  }
+
+  /* Botón para abrir */
+  .open-btn {
+      padding: 10px 15px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+
+  .open-btn:hover {
+      background: #0056b3;
+  }
+  /* -------------------------------------------------------------------------------------------------- */
+
+
+/* =====================================================================================================================================================*/
+                                                            /* FOOTER */        
+/* =====================================================================================================================================================*/
+
+/* ==================================================================*/
+/* Estilos generales */
+/* ==================================================================*/
+.background {
+    position: absolute;
+    z-index: -1; /* Detrás de todo */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos del footer */
+  /* ==================================================================*/
+  ul {
+    display: flex;
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos de los elementos */
+  /* ==================================================================*/
+  
+  .socials {
+    gap: 20px;
+  }
+  
+  .socials a {
+    font-size: 24px;
+  }
+  
+  .links {
+    gap: 10px;
+  }
+  
+  .legal {
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos de la onda */
+  /* ==================================================================*/
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Ocupa todo el alto */
+    transform: scaleY(3) scaleX(2.25); /* Escala la onda */
+    transform-origin: bottom;
+    box-sizing: border-box;
+    display: block; /* Quita el espacio extra */
+    pointer-events: none;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos del footer - Cambio de position */
+  /* ==================================================================*/
+  footer {
+    position: fixed; /* Se fija al fondo */
+    left: 0;
+    bottom: 0; /* Ajusta al fondo de la página */
+    display: flex;
+    justify-content: center; /* Centra el contenido en el footer */
+    width: 100%; /* Ocupa todo el ancho */
+    height: 350px; /* Altura del footer */
+    overflow-x: hidden;
+    z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
+  }
+  
+  /* ==================================================================*/
+  /* Estilos del contenido dentro del footer */
+  /* ==================================================================*/
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 30px;
+    padding-bottom: 80px; /* Ajusta este valor según el alto de la onda */
+    padding-left: 60px; /* Ajusta este valor según el ancho de la onda */
+    width: 100%;
+  }
+  
+  @media (min-width: 420px) {
+    section {
+      align-items: center; /* Centra horizontalmente */
+      padding-left: 0;
+      gap: 20px; /* Ajusta este valor según el espacio deseado */
+    }
+  
+    .links {
+      gap: 20px;
+    }
+  }
+  
+    /* =====================================================================================================================================================*/
+                                                                         /*HTML CONTENIDO*/
+    /* =====================================================================================================================================================*/

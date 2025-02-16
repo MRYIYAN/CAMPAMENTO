@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styleModificarPadre.css" />
+    <title>Modificacion de datos</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title"><h1>Modifcación de datos</h1></div>
+    
+    
+      <form method="post" id="formularioModificacion">
+    
+      <label for="nombre_tutor">Nombre del tutor</label>
+      <input type="text" name="nombre_tutor" id="nombre_tutor" />
+      <div id="errorNombre_Tutor"></div>
+      <br />
+
+
+      <label for="dni">dni</label>
+      <input type="text" name="dni" id="dni" />
+      <div id="errorDni"></div>
+      <br />
+
+      
+      <label for="telefono">Telefono</label>
+      <input type="text" name="telefono" id="telefono" />
+      <div id="errorTelefono"></div>
+      <br />
+
+      <label for="email">Email *(Campo fijo, no se puede cambiar)</label>
+      <input type="email" name="email" id="email" disabled/>
+      <div id="errorEmail"></div>
+      <br />
+
+      <label for="cambiarContrasenia">Quieres Modificar Contraseña ?</label>
+      <input type="radio" name="cambiarContrasenia" id="cambiarContrasenia" value="si">Si
+      <input type="radio" name="cambiarContrasenia" id="cambiarContrasenia" value="no" checked>No
+      <div id="espacioContrasenia"></div>
+      <div id="errorContrasenia"></div>
+
+      <label for="avatar">Sube aqui el avatar:</label>
+      <div id="vistaPreviaavatar">
+        <img id="vistaPrevia" src="" alt="Vista previa del avatar" style="display: none; width: 150px; height: 150px;">
+      </div>
+      <input type="file" name="avatar" id="avatar"><br><br>
+      <label for="contraseniaAntigua">Introduce la Contraseña</label>
+      <input type="text" name="contraseniaAntigua" id="contraseniaAntigua">
+      <div id="errorContraseniaAntigua"></div>
+
+
+      <input type="submit" value="Modificar" id="enviar"/>
+      <div id="errorEnviar"></div>
+      </form>
+      <script src="../JS/operarModificarPadre.js"></script>
+    </div>
+
+  </body>
+</html>

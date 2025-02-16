@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styleCalendarioPadre.css">
+    <title>calendario</title>
+</head>
+<body>
+    <!-- CONTENEDOR DE TRANSICIÓN -->
+    <div class="transition">
+      <div class="transition-row row1">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+      <div class="transition-row row2">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+    </div>
+  
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                                                                      <!-- NAVBAR -->
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <nav>
+        <img class="logo" src="../assets/logo/Logo1.png" alt="Logo">
+  
+        <!--------------------------------------------------------------->
+        <!-- Contenedor exclusivo para los elementos de navegación -->
+        <!--------------------------------------------------------------->
+        <div class="nav-container">
+            <!-- Enlace a la sección de actividades -->
+            <!-- Enlace con un menú desplegable -->
+            <div class="item">
+                Actividades
+                <div class="dropdown">
+                    <div>
+                        <!-- Opciones del menú desplegable -->
+                        <a><button type="button" class="botonNavbar" id="btnCalendario">Calendario</button></a>
+                        <a><button type="button" class="botonNavbar" id="btnInfoActividades">Informacion de Actividades</button></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Enlace a la sección de servicios -->
+            <!-- Enlace con un menú desplegable -->
+            <div class="item">
+                Servicios
+                <div class="dropdown">
+                    <div>
+                        <!-- Opciones del menú desplegable -->
+                        <a><button type="button" class="botonNavbar" id="btnComedor">Comedor</button></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Enlace con un menú desplegable -->
+            <div class="item">
+                Sobre nosotros
+                <div class="dropdown">
+                    <div>
+                        <!-- Opciones del menú desplegable -->
+                        <a><button type="button" class="botonNavbar" id="btnContacto">Contacto</button></a>
+                        <a><button type="button" class="botonNavbar" id="btnMonitor">Monitor</button></a>
+                        <a><button type="button" class="botonNavbar" id="btnPolitica">Politicas</button></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Enlace a la sección de servicios -->
+            <a class="item">idiomas</a>
+            <!-- <div id="google_translate_element" class="google"></div> -->
+  
+            <!-- Enlace al perfil del usuario -->
+            <!-- Enlace con un menú desplegable -->
+            <div class="item">
+                Perfil
+                <div class="dropdown">
+                    <div>
+                        <!-- Opciones del menú desplegable -->
+                        <a><button type="button" class="botonNavbar" id="btnNotificaciones">Notificaciones</button></a>
+                        <a><button type="button" class="botonNavbar" id="btnModificarDatosPadre">Modificar Datos</button></a>
+                        <a><button type="button" class="botonNavbar" id="btnCerrarSesion">Cerrar Sesion</button></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Elemento decorativo para subrayar la navegación -->
+            <div class="underline"></div>
+        </div>
+    </nav>
+  
+    <!-- Ventana Overlay Para cerrar sesion -->
+    <div class="overlay" id="overlay">
+        <div class="overlay-content">
+            <button class="close-btn" id="cerrarOverlayCerrarSesion">×</button>
+            <h2>¿Estas seguro que quieres cerrar sesión?</h2>
+            <button type="button" id="volverOverlayCerrarSesion">Volver</button>
+            <button type="button" id="cerrarSesionOverlayCerrarSesion">Cerrar Sesion</button>
+        </div>
+    </div>
+  
+    <div class="espaciador"></div>
+     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                                                              <!-- INICIO CONTENIDO HTML -->
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+   
+     
+   
+     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                                                                              <!-- FOOTER -->
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <footer>
+        <!-- Contenedor de fondo animado -->
+        <div class="background">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 1600 900">
+                <defs>
+                    <!-- Definición de la forma de la onda -->
+                    <path id="wave" fill="rgba(black)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0 s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
+                </defs>
+                <g>
+                    <!-- Animación de las ondas -->
+                    <use xlink:href="#wave" opacity=".4">
+                        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="8s" calcMode="spline" values="270 230; -334 180; 270 230" keyTimes="0; .5; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0" repeatCount="indefinite" />
+                    </use>
+                    <use xlink:href="#wave" opacity=".6">
+                        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="6s" calcMode="spline" values="-270 230;243 220;-270 230" keyTimes="0; .6; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0" repeatCount="indefinite" />
+                    </use>
+                    <use xlink:href="#wave" opacty=".9">
+                        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="4s" calcMode="spline" values="0 230;-140 200;0 230" keyTimes="0; .4; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0" repeatCount="indefinite" />
+                    </use>
+                </g>
+            </svg>
+        </div>
+        <section>
+            <!-- Redes sociales -->
+            <ul class="socials">
+                <li><a class="fa-brands fa-x-twitter"></a></li>
+                <li><a class="fa-brands fa-facebook"></a></li>
+                <li><a class="fa-brands fa-linkedin"></a></li>
+            </ul>
+            <!-- Enlaces de navegación adicionales -->
+            <ul class="links">
+                <li><a>Campamento</a></li>
+                <li><a>Sobre Nosotros</a></li>
+                <li><a>Direcciones</a></li>
+                <li><a>Redes Sociales</a></li>
+                <li><a>Trabajo</a></li>
+            </ul>
+            <!-- Información legal -->
+            <p class="legal">© 2025 Derechos Reservados</p>
+        </section>
+    </footer>
+    <script src="../js/operarCalendarioPadre.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+</body>
+
+</html>
