@@ -426,8 +426,9 @@ section {
 
 
 /* ==================================================================*/
-/* Targetas de actividades */
+/* Tarjetas de actividades con efecto de giro */
 /* ==================================================================*/
+/* Contenedor principal para las tarjetas */
 #tarjetasActividades {
   display: flex;
   flex-wrap: wrap;
@@ -435,99 +436,86 @@ section {
   justify-content: center;
   padding: 20px;
 }
-
-.contenedorActividad {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 280px;
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 380px;
-}
-
-.contenedorActividad:hover {
-  transform: scale(1.05);
-}
-
-.imagenActividad img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-bottom: 2px solid #ddd;
-}
-
-.textActividad {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-}
-
-.tituloActividad h1 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.descripcionActividad {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;  /* Esto asegura que el espacio restante se ocupe por el botón */
-}
-
-.descripcionActividad p {
-  font-size: 1rem;
-  color: #666;
-  line-height: 1.4;
-  margin-top: 0;
-}
-
-.verMasBtn {
-  align-self: flex-start;
-  margin-top: auto; /* Empuja el botón hacia abajo */
+.card{
   position: relative;
+  width: 300px;
+  height: 350px;
+  /*aplicar margenes con resto de cartas*/
+  margin: 20px;
+}
+.card .face{
+  position: absolute;
   width: 100%;
+  height: 100%;
+  /*Determinar la cara trasero*/
+  /*determina si la cara posterior de un elemento es visible de frente
+  a1 usuario.
+  La cara posterior de un elemento siempre es un fondo transparente,
+  permitiendo,
+  cuando es visible, que se muestre una imagen de espejo de la cara frontal.
+  iene la propiedad visible: significa que la cara posterior es visible,
+  permitiendo que la cara frontal se muestre invertida.
+  hidden: significa que la cara posterior no es visible,
+  ocultando la cara frontal */
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.5s;
+
 }
-
-/* Responsive design */
-
-/* Pantallas pequeñas (móviles) */
-@media (max-width: 600px) {
-  #tarjetasActividades {
-    padding: 10px;
-  }
-
-  .contenedorActividad {
-    width: 100%;
-  }
-
-  .tituloActividad h1 {
-    font-size: 1.1rem;
-  }
-
-  .descripcionActividad p {
-    font-size: 0.9rem;
-  }
+.card .front{
+  transform: perspective(600px) rotateY(0deg);
+  box-shadow: 0px 5px 10px #000;
 }
-
-/* Pantallas medianas (tabletas) */
-@media (max-width: 900px) {
-  .contenedorActividad {
-    width: 45%;
-  }
+.card .front img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /*indica como el contenido de un elemento debera ser redimensionado para ajustarse en su contenedor */
+  object-fit: cover;
 }
-
-/* Pantallas grandes (escritorio) */
-@media (min-width: 901px) {
-  .contenedorActividad {
-    width: 280px;
-  }
+.card .front h3{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  color: #fff;
+  background: rgb(0, 0, 0, 0.4);
+  text-align: center;
+}
+.card .back{
+  transform: perspective(600px) rotateY(180deg);
+  background: rgb(3, 35, 54);
+  padding: 15px;
+  color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  box-shadow: 0px 5px 10px #000;
+}
+.card .back .link {
+  border-top: 1px solid #f3f3f3;
+  height: 50px;
+  line-height: 50px;
+}
+.card .back .link a {
+  color: #f3f3f3;
+}
+.card .back h3{
+  font-size: 30px;
+  margin-top: 20px;
+  letter-spacing: 2px;
+}
+.card .back p{
+  letter-spacing: 1px;
+}
+.card:hover .front{
+  transform: perspective(600px) rotateY(180deg);
+}
+.card:hover .back{
+  transform: perspective(600px) rotateY(360deg);
 }
 
 

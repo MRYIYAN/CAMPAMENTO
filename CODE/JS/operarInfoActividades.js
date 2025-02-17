@@ -210,20 +210,19 @@ fetch("../Server/GestionarInfoActividades.php", {
             }
 
             return `
-                <div class="contenedorActividad">
-                    <div class="imagenActividad">
-                        <img src="${imagen_src}" alt="Actividad ${actividad.titulo}">
-                    </div>
-                    <div class="textActividad">
-                        <div class="tituloActividad">
-                            <h1>${actividad.titulo}</h1>
-                        </div>
-                        <div class="descripcionActividad">
-                            <p>${descripcionTruncada}</p>
-                            <button class="verMasBtn" onclick="mostrarOverlay('${actividad.descripcion}') ">Ver más</button>
-                        </div>
-                    </div>
+              <div class="card">
+                <!-- Cara delantera -->
+                <div class="face front">
+                    <img src="${imagen_src}" alt="">
+                    <h3>${actividad.titulo}</h3>
                 </div>
+                  <!-- Cara trasera -->
+                    <div class="face back">
+                        <h3>${actividad.titulo}</h3>
+                        <p>${descripcionTruncada}</p>
+                      <button class="verMasBtn" onclick="mostrarOverlay('${actividad.descripcion}') ">Ver más</button>
+                    </div>
+              </div>
             `;
           })
           .join(""); //quitar coma
