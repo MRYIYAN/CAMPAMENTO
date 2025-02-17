@@ -54,20 +54,22 @@ fetch("../Server/GestionarIndexPadre.php", {
         // Manejar la selección de hijos
         if (data.infoHijos.length === 0) {
             // No hay hijos matriculados
-            selectHijo.innerHTML = "Aun no tienes ningun hijos matriculado"; // Mostrar mensaje
-            document.getElementById('hijodiv').classList.add('oculto'); // Ocultar el div de hijos
+            document.getElementById('hijoNoMatriculado').innerHTML = "Aun no tienes ningun hijos matriculado"; // Mostrar mensaje
+            document.getElementById('esconderHijo').classList.add('oculto'); // Ocultar el div de hijos
             document.getElementById('tablaPadres').classList.add('oculto'); // Ocultar la tabla de padres
         } else if (data.infoHijos.length === 1) {
             // Un solo hijo matriculado
-            document.getElementById('hijodiv').classList.remove('oculto'); // Mostrar el div de hijos
+            document.getElementById('hijoNoMatriculado').innerHTML ="";
+            document.getElementById('esconderHijo').classList.remove('oculto'); // Mostrar el div de hijos
             document.getElementById('tablaPadres').classList.remove('oculto'); // Mostrar la tabla de padres
             hijoSeleccionado = data.infoHijos[0]['id_nino']; // Asignar el ID del hijo seleccionado
             console.log(hijoSeleccionado); // Mostrar en consola el ID del hijo seleccionado
             document.getElementById('divParaSeleccionar').classList.add('oculto'); // Ocultar el div para seleccionar
         } else {
+            document.getElementById('hijoNoMatriculado').innerHTML ="";
             // Varios hijos matriculados
             $arrayHijos = data.infoHijos; // Asignar la información de los hijos a una variable
-            document.getElementById('hijodiv').classList.remove('oculto'); // Mostrar el div de hijos
+            document.getElementById('esconderHijo').classList.remove('oculto'); // Mostrar el div de hijos
             document.getElementById('tablaPadres').classList.remove('oculto'); // Mostrar la tabla de padres
             document.getElementById('divParaSeleccionar').classList.remove('oculto'); // Mostrar el div para seleccionar
             selectHijo.innerHTML = `<select name="hijoSelect" id="hijoSelect">
@@ -163,10 +165,19 @@ function mostarDatosNino(id_nino) {
                     celda2.innerHTML = `${actividad.hora} - ${actividad.hora_fin}`; // Introducir información en la segunda celda
 
                     const celda3 = nuevaFila.insertCell(); // Crear la tercera celda
-                    celda3.innerHTML = `${actividad.descripcion}`; // Introducir información en la tercera celda
+                    //creamos un boton donde al hacer el clic envia el descripcion que quiere imprimir en el overlay
+                    celda3.innerHTML = `<button class="verMasBtn" onclick="mostrarOverlay('${actividad.descripcion}') ">Ver más</button>`; // Introducir información en la tercera celda
 
                     const celda4 = nuevaFila.insertCell(); // Crear la cuarta celda
-                    celda4.innerHTML = `${actividad.dia}`; // Introducir información en la cuarta celda
+                    celda4.innerHTML = `${actividad.dia}`; // Introducir información en la cuarta celda                    
+                    //================================================================================================//
+                    //                               Funcion cerrar overlay
+                    //================================================================================================//
+                    // Función para cerrar el overlay
+                    document.querySelector(".closeBtnDefinicion").addEventListener("click", function () {
+                        document.getElementById("overlayDefinicion").classList.remove("activeOverlayDefinicion"); // Añadir clase para mostrar el overlay
+                    });
+
                 });
             } else {
                 document.getElementById('tablaActividad').classList.add('oculto'); // Ocultar la tabla de actividades
@@ -210,6 +221,28 @@ function mostarDatosNino(id_nino) {
         }
     });
 }
+
+
+//================================================================================================//
+//                              funcion para el overlay
+//================================================================================================//
+// Función para mostrar el overlay con la descripción completa
+function mostrarOverlay(descripcionCompleta) {
+    //asignamos datos en el overlay
+  console.log(descripcionCompleta);
+  document.getElementById("descripcionCompleta").innerHTML =`
+  <h1>Descripcion: </h1>
+  ${descripcionCompleta}
+  `
+    ;
+    //hacemos que el overlay sea visible
+  document
+    .getElementById("overlayDefinicion")
+    .classList.add("activeOverlayDefinicion"); // Añadir clase para mostrar el overlay
+}
+//================================================================================================//
+//                              fin funcion para el overlay
+//================================================================================================//
 
 // Cuando se presiona el botón de inscribir un niño
 document.getElementById('suscribirse').addEventListener('click', function() {
@@ -367,3 +400,4 @@ document.addEventListener("DOMContentLoaded", () => {
 //-----------------------------------------------------------------------------------------------------------//
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
+

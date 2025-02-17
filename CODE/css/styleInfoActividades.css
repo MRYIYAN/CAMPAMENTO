@@ -318,7 +318,6 @@ body::-webkit-scrollbar {
   }
   /* -------------------------------------------------------------------------------------------------- */
 
-
 /* =====================================================================================================================================================*/
                                                             /* FOOTER */        
 /* =====================================================================================================================================================*/
@@ -327,100 +326,275 @@ body::-webkit-scrollbar {
 /* Estilos generales */
 /* ==================================================================*/
 .background {
-    position: absolute;
-    z-index: -1; /* Detrás de todo */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  z-index: -1; /* Detrás de todo */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ==================================================================*/
+/* Estilos del footer */
+/* ==================================================================*/
+ul {
+  display: flex;
+  list-style: none; /* Quita los puntos de la lista */
+  padding: 0;
+  margin: 0;
+}
+
+/* ==================================================================*/
+/* Estilos de los elementos */
+/* ==================================================================*/
+
+.socials {
+  gap: 20px;
+}
+
+.socials a {
+  font-size: 24px;
+}
+
+.links {
+  gap: 10px;
+}
+
+.legal {
+  font-size: 12px;
+  margin: 0;
+}
+
+/* ==================================================================*/
+/* Estilos de la onda */
+/* ==================================================================*/
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Ocupa todo el alto */
+  transform: scaleY(3) scaleX(2.25); /* Escala la onda */
+  transform-origin: bottom;
+  box-sizing: border-box;
+  display: block; /* Quita el espacio extra */
+  pointer-events: none;
+}
+
+/* ==================================================================*/
+/* Estilos del footer - Cambio de position */
+/* ==================================================================*/
+footer {
+  position: relative; /* Se fija al fondo */
+  left: 0;
+  bottom: 0; /* Ajusta al fondo de la página */
+  display: flex;
+  justify-content: center; /* Centra el contenido en el footer */
+  width: 100%; /* Ocupa todo el ancho */
+  height: 350px; /* Altura del footer */
+  overflow-x: hidden;
+  z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
+}
+
+/* ==================================================================*/
+/* Estilos del contenido dentro del footer */
+/* ==================================================================*/
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 30px;
+  padding-bottom: 80px; /* Ajusta este valor según el alto de la onda */
+  padding-left: 60px; /* Ajusta este valor según el ancho de la onda */
+  width: 100%;
+}
+
+@media (min-width: 420px) {
+  section {
+    align-items: center; /* Centra horizontalmente */
+    padding-left: 0;
+    gap: 20px; /* Ajusta este valor según el espacio deseado */
   }
-  
-  /* ==================================================================*/
-  /* Estilos del footer */
-  /* ==================================================================*/
-  ul {
-    display: flex;
-    list-style: none; /* Quita los puntos de la lista */
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* ==================================================================*/
-  /* Estilos de los elementos */
-  /* ==================================================================*/
-  
-  .socials {
+
+  .links {
     gap: 20px;
   }
-  
-  .socials a {
-    font-size: 24px;
+}
+/* =====================================================================================================================================================*/
+                                                                      /*HTML CONTENIDO*/
+/* =====================================================================================================================================================*/
+
+
+/* ==================================================================*/
+/* Targetas de actividades */
+/* ==================================================================*/
+#tarjetasActividades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.contenedorActividad {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 280px;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 380px;
+}
+
+.contenedorActividad:hover {
+  transform: scale(1.05);
+}
+
+.imagenActividad img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-bottom: 2px solid #ddd;
+}
+
+.textActividad {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.tituloActividad h1 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.descripcionActividad {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;  /* Esto asegura que el espacio restante se ocupe por el botón */
+}
+
+.descripcionActividad p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.4;
+  margin-top: 0;
+}
+
+.verMasBtn {
+  align-self: flex-start;
+  margin-top: auto; /* Empuja el botón hacia abajo */
+  position: relative;
+  width: 100%;
+}
+
+/* Responsive design */
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+  #tarjetasActividades {
+    padding: 10px;
   }
-  
-  .links {
-    gap: 10px;
+
+  .contenedorActividad {
+    width: 100%;
   }
-  
-  .legal {
-    font-size: 12px;
-    margin: 0;
+
+  .tituloActividad h1 {
+    font-size: 1.1rem;
   }
-  
-  /* ==================================================================*/
-  /* Estilos de la onda */
-  /* ==================================================================*/
-  svg {
-    position: absolute;
+
+  .descripcionActividad p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Pantallas medianas (tabletas) */
+@media (max-width: 900px) {
+  .contenedorActividad {
+    width: 45%;
+  }
+}
+
+/* Pantallas grandes (escritorio) */
+@media (min-width: 901px) {
+  .contenedorActividad {
+    width: 280px;
+  }
+}
+
+
+/* ==================================================================*/
+/* Overlay para mostrar mas definicion */
+/* ==================================================================*/
+  /* Estilo para el overlay */
+  .overlayDefinicion {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Ocupa todo el alto */
-    transform: scaleY(3) scaleX(2.25); /* Escala la onda */
-    transform-origin: bottom;
-    box-sizing: border-box;
-    display: block; /* Quita el espacio extra */
-    pointer-events: none;
-  }
-  
-  /* ==================================================================*/
-  /* Estilos del footer - Cambio de position */
-  /* ==================================================================*/
-  footer {
-    position: fixed; /* Se fija al fondo */
-    left: 0;
-    bottom: 0; /* Ajusta al fondo de la página */
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center; /* Centra el contenido en el footer */
-    width: 100%; /* Ocupa todo el ancho */
-    height: 350px; /* Altura del footer */
-    overflow-x: hidden;
-    z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    color: #333;  /* Color del texto */
+    overflow: auto; /* Agrega desplazamiento si es necesario */
+    padding: 20px;  /* Evita que el contenido toque los bordes */
+}
+
+
+  /* Estilo para la ventana emergente */
+  .overlayContent2 {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    text-align: center;
+    position: relative;
+    max-height: 80%;
+    overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
+}
+
+
+  /* Botón de cierre */
+  .closeBtnDefinicion {
+    position: absolute;
+    font-size: large;
+    top: 10px;
+    right: 10px;
+    background: #ff4d4d00;
+    color: #007BFF;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
   }
-  
-  /* ==================================================================*/
-  /* Estilos del contenido dentro del footer */
-  /* ==================================================================*/
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 30px;
-    padding-bottom: 80px; /* Ajusta este valor según el alto de la onda */
-    padding-left: 60px; /* Ajusta este valor según el ancho de la onda */
-    width: 100%;
+
+  .closeBtnDefinicion:hover {
+    background: #cc000000;
   }
-  
-  @media (min-width: 420px) {
-    section {
-      align-items: center; /* Centra horizontalmente */
-      padding-left: 0;
-      gap: 20px; /* Ajusta este valor según el espacio deseado */
-    }
-  
-    .links {
-      gap: 20px;
-    }
+
+  /* Clase para mostrar el overlay */
+  .overlayDefinicion.activeOverlayDefinicion {
+    visibility: visible;
+    opacity: 1;
   }
-    /* =====================================================================================================================================================*/
-                                                                         /*HTML CONTENIDO*/
-    /* =====================================================================================================================================================*/
+
+
+/* ==================================================================*/
+/* fin de Overlay para mostrar mas definicion */
+/* ==================================================================*/
+

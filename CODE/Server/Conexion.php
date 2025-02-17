@@ -89,7 +89,7 @@ $sql_tables = "
 
 
 
-     CREATE TABLE IF NOT EXISTS ACTIVIDADES (
+    CREATE TABLE IF NOT EXISTS ACTIVIDADES (
     id_actividad INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(50) NOT NULL,
     descripcion TEXT,
@@ -98,6 +98,7 @@ $sql_tables = "
     dia DATE NOT NULL,
     id_grupo INT NOT NULL,
     id_plan INT NOT NULL,
+    imagen_src text, 
     FOREIGN KEY (id_grupo) REFERENCES grupos(id_grupo),
     FOREIGN KEY (id_plan) REFERENCES PLAN_FECHAS(id_plan)
 );
