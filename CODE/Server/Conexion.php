@@ -176,6 +176,48 @@ if (!usuarioExiste($conn, "ADMIN", "admin@ejemplo.com")) {
     $stmt->close();
 }
 
+// Insertar datos en la tabla PLAN_FECHAS
+    $stmt = $conn->prepare("INSERT INTO PLAN_FECHAS (fecha_inicio, fecha_fin, fecha_maxInscripcion, hora_maximaInscripcion, precio, definicion) VALUES (?, ?, ?, ?, ?, ?)");
+    $fecha_inicio = "2025-06-01";
+    $fecha_fin = "2025-06-15";
+    $fecha_maxInscripcion = "2025-05-25";
+    $hora_maximaInscripcion = "18:00:00";
+    $precio = "100.00";
+    $definicion = "Campamento de verano para niños de 6 a 12 años.";
+
+$stmt->bind_param("ssssss", $fecha_inicio, $fecha_fin, $fecha_maxInscripcion, $hora_maximaInscripcion, $precio, $definicion);
+if (!$stmt->execute()) {
+    error_log("Error al insertar Plan: " . $stmt->error);
+}
+$stmt->close();
+
+// Insertar datos en la tabla GRUPOS
+    $stmt = $conn->prepare("INSERT INTO GRUPOS (nombre, id_monitor) VALUES (?, ?)");
+    $nombre_grupo = "Grupo Ejemplo";
+    $id_monitor = 1; // Asegúrate de que este ID exista en la tabla MONITORES
+
+$stmt->bind_param("si", $nombre_grupo, $id_monitor);
+if (!$stmt->execute()) {
+    error_log("Error al insertar Grupo: " . $stmt->error);
+}
+$stmt->close();
+
+// Insertar datos en la tabla ACTIVIDADES
+    $stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $titulo = "Actividad Ejemplo";
+    $descripcion = "Descripción de la actividad ejemplo.";
+    $hora = "10:00:00";
+    $hora_fin = "12:00:00";
+    $dia = "2025-06-05";
+    $id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
+    $id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
+
+$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
+if (!$stmt->execute()) {
+    error_log("Error al insertar Actividad: " . $stmt->error);
+}
+$stmt->close();
+
 //----------------------------------------------------------------------------------------//
 // No se cierra la conexión para que se pueda usar en GestionarLogin.php IMPORTANTE
 //----------------------------------------------------------------------------------------//
