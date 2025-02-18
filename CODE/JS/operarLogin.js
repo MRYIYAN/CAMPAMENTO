@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert(data.error);
             } else if (data.redirect) {
                 window.location.href = data.redirect;
+            } else if (data.message) {
+                console.log(data.message);  // Manejar el mensaje de éxito si es necesario
             } else {
                 alert("Respuesta desconocida del servidor.");
             }

@@ -264,6 +264,11 @@ fetch("../Server/GestionarInscripcion.php", {
       console.log(`El id del padre es: ${data.id_Padre}`) //recogemos el dato
       idPadre = data.id_Padre;  //asignamos al varible
 
+      //comprobamos si hay contenido en informacion del padre
+      if (data.infoPadre['nombre'] == "" || data.infoPadre['email'] =="" || data.infoPadre['telefono'] =="" || data.infoPadre['dni'] ==""){
+        alert('Por favor, rellene los datos del padre')
+        window.location.href = "../html/modificarPadre.html"
+      }
       //rellenamos los datos del padre con el funcion rellenarInput
       rellenarInput(nombre, data.infoPadre['nombre']);
       rellenarInput(correo, data.infoPadre['email']);
