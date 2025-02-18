@@ -1,0 +1,444 @@
+/* Estilos generales */
+* {
+   
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Aplica la tipografía Poppins a todos los elementos */
+}
+
+body {
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+#myBtn {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    overflow: hidden;
+    z-index: 999;
+    cursor: pointer;
+    opacity: 0; /* Inicialmente oculto */
+    transition: all 0.4s ease-in;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fbfbfb;
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.18);
+}
+
+#myBtn:hover {
+    background-color: #009fc1;
+    color: #fff;
+}
+
+#myBtn img {
+    width: 24px; /* Ajusta el tamaño de la imagen según sea necesario */
+    height: 24px; /* Ajusta el tamaño de la imagen según sea necesario */
+}
+.espacio{
+    margin: 10px;
+}
+/* contenedor del menu */
+nav {
+    
+    color: #fff;
+    display: flex;
+    top: 10px; /* Asegura que el navbar esté en la parte superior */
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999999; /* Coloca por encima de otros elementos */
+    width: 100%;
+    height: 70px;
+}
+.espacio_menu {
+    height: 150px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px; /* Añadir margen para separación entre elementos */
+}
+
+nav ul li a {
+    text-decoration: none; /* Eliminar subrayado de los enlaces */
+    color: #fff;
+    padding: 10px 20px;
+    
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgb(45, 42, 71);
+}
+
+nav ul li a:active {
+    background-color: rgb(35, 32, 61);
+}
+
+/* Otros estilos */
+.titulo {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    text-align: center;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Eliminar padding */
+    height: 70vh; /* Altura del viewport */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    flex-direction: column;
+}
+
+.titulo h3 {
+    color: rgb(63, 82, 19);
+}
+
+.titulo > * {
+    margin: 10px; /* Añadir margen para separación entre elementos */
+}
+
+.inicio {
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Eliminar padding */
+    background-image: url(019_Camping_FrontCover_juegosdeCampamento.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.final {
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Eliminar padding */
+    background-image: url(tipos_de_campamentos_frimuEugen.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.subtitulo, .subtitulo2, .subtitulo3 {
+    margin: 0; /* Eliminar margen */
+    padding: 20px 0; /* Ajustar padding si es necesario */
+    text-align: center;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    background-color: #fff;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    text-align: center;
+    flex-direction: column;
+}
+
+.texto {
+    margin: 0; /* Eliminar margen */
+    padding: 20px 0; /* Ajustar padding si es necesario */
+    display: flex;
+    background-color: #fff;
+}
+
+.iconos {
+    margin: 0; /* Eliminar margen */
+    padding: 20px 0; /* Ajustar padding si es necesario */
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    background-color: #fff;
+    flex-wrap: wrap; /* Permitir que los elementos se ajusten en varias líneas si es necesario */
+}
+
+.icono {
+    display: flex;
+    flex-direction: column; /* Alinear elementos en columna */
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    margin: 10px; /* Añadir margen para separación entre iconos */
+    text-align: center; /* Centrar texto */
+}
+
+.icono img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px; /* Añadir margen inferior para separación entre imagen y texto */
+}
+
+.icono p {
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Eliminar padding */
+}
+
+h1 {
+    margin-top: 50px 0px;
+    text-align: center;
+    font-size: 70px;
+    display: block;
+    color: beige;
+}
+
+.fotos {
+    background-color: #fff;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.fotos {
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Eliminar padding */
+}
+
+.container::after {
+    /*para q el contenedor muestre elementos aunque estos sean flotantes*/
+    content: "";
+    display: block;
+    height: 0px;
+    clear: both;
+}
+
+.container {
+    width: 90%;
+    margin: 0 9%;
+}
+
+/*estructura de cada componente(la imagen mas descripcion)*/
+.container div {
+    width: 28%;
+    height: auto;
+    display: inline; /*bloques en linea*/
+    float: left;
+    margin: 0% 3% 0% 0%;
+    padding: 0px;
+}
+
+.container div img {
+    width: 100%;
+    height: 400px;
+    width: 300px;
+    box-shadow: 0 0 10px #666;
+    border: 5px solid #fff;
+}
+
+/*estructura de la descripcion, por defecto q no se muestre*/
+.container div img~span {
+    width: 300px;
+    display: flex; /* Usar Flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    opacity: 0;
+    margin: 0;
+    padding: 2px 5px;
+    color: azure;
+    background: rgb(40, 40, 40);
+    box-shadow: 0 0 10px #666;
+    text-align: center;
+    margin: 10px;
+}
+
+/*se muestre la descripcion al poner el raton encmia de la imagen*/
+.container div img:hover+span {
+    opacity: 1;
+}
+
+/*establecemos el comportamiento q tendran las imageners al posicionar el cursor encima del contenedor*/
+.container:hover div {
+    opacity: 0.2;
+    transform: scale(0.7);
+    transition: 2s;
+}
+
+/*espacificar el comportamiento que trandra la imagen seleccionado*/
+.container:hover div:hover {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.my-button {
+    padding: 20px 40px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+    text-decoration: none; /* Eliminar subrayado de los enlaces */
+    display: inline-block; /* Asegurarse de que se comporten como botones */
+    font-size: 16px; /* Ajustar el tamaño de la fuente */
+    text-align: center; /* Centrar el texto dentro del botón */
+}
+
+.my-button:hover {
+    background-color: #45a049;
+}
+
+.my-button:active {
+    background-color: #3e8e41;
+}
+
+.lenguajes {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    flex-wrap: wrap; /* Permitir que las cartas se ajusten en varias líneas si es necesario */
+    margin: 20px 0; /* Añadir margen superior e inferior */
+}
+
+.card {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 20px; /* Aplicar márgenes con el resto de cartas */
+}
+
+.card .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Determina si la cara posterior de un elemento es visible de frente al usuario */
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+}
+
+.card .front {
+    transform: perspective(600px) rotateY(0deg);
+    box-shadow: 0px 5px 10px #000;
+}
+
+.card .front img {
+    width: 100%;
+    height: 100%; /* Asegurarse de que la imagen ocupe toda la tarjeta */
+    object-fit: cover; /* Indica cómo el contenido de un elemento deberá ser redimensionado para ajustarse a su contenedor */
+}
+
+.card .front h3 {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.card .back {
+    transform: perspective(600px) rotateY(180deg);
+    background: rgb(3, 35, 54);
+    padding: 15px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center;
+    box-shadow: 0px 5px 10px #000;
+}
+
+.card .back .link {
+    border-top: 1px solid #f3f3f3;
+    height: 50px;
+    line-height: 50px;
+}
+
+.card .back .link a {
+    color: #f3f3f3;
+}
+
+.card .back .link h3 {
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.card .back .link p {
+    letter-spacing: 1px;
+}
+
+.card:hover .front {
+    transform: perspective(600px) rotateY(180deg);
+}
+
+.card:hover .back {
+    transform: perspective(600px) rotateY(360deg);
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 20px;
+        height: auto;
+        padding: 20px;
+    }
+
+    .titulo h3 {
+        font-size: 18px;
+    }
+
+    .titulo h1 {
+        font-size: 24px;
+    }
+
+    .container div {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .icono img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .icono p {
+        font-size: 14px;
+    }
+
+    .my-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .card-container {
+        flex-direction: column; /* Alinear las cartas en una columna en dispositivos móviles */
+    }
+
+    .card {
+        width: 100%;
+        margin: 10px 0; /* Ajustar márgenes para dispositivos móviles */
+    }
+}
