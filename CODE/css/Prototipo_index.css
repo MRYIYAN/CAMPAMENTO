@@ -105,7 +105,7 @@ nav ul li a:active {
     color: rgb(255, 255, 255);
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
-    height: 70vh; /* Altura del viewport */
+    height: 85vh; /* Altura del viewport */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -124,7 +124,7 @@ nav ul li a:active {
 .inicio {
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
-    background-image: url(019_Camping_FrontCover_juegosdeCampamento.jpg);
+    background-image: url(../assets/img/Fonfo1.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -134,14 +134,14 @@ nav ul li a:active {
 .final {
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
-    background-image: url(tipos_de_campamentos_frimuEugen.jpg);
+    background-image: url(../assets/img/Fondo3.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
     background-attachment: fixed;
 }
 
-.subtitulo, .subtitulo2, .subtitulo3 {
+.subtitulo {
     margin: 0; /* Eliminar margen */
     padding: 20px 0; /* Ajustar padding si es necesario */
     text-align: center;
@@ -153,6 +153,24 @@ nav ul li a:active {
     align-items: center; /* Centrar verticalmente */
     text-align: center;
     flex-direction: column;
+}
+
+.subtitulo2, .subtitulo3 {
+    margin: 0; /* Eliminar margen */
+    padding: 20px 0; /* Ajustar padding si es necesario */
+    text-align: center;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    background-image: url(../assets/img/Fondo2.jpg);
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    text-align: center;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 .texto {
