@@ -147,8 +147,13 @@ if (isset($data['id_nino'])) {
 
 
     //HACEMOS LA CONSULTA PARA VER TODO LOS ACTIVIDADES PENDIENTES(HOY O FUTURAS) QUE HAY CON EL MONITOR Y CON EL PLAN QUE PERTENECE EL NIÑO
-    $queryActividades = $conn->prepare("SELECT * FROM ACTIVIDADES WHERE id_grupo = ? AND id_plan = ? AND dia >= CURDATE()");   //sacamos todo los informaciones del actividad, dependiendo del monitor y el plan, por que no va a ser el mismo actividades en los diferentes plan 
-    $queryActividades->bind_param("ii", $id_grupo, $datoHijo['id_plan']);    //asignamos el valor de ?, es un i porque es un numero(integer)
+    $queryActividades = $conn->prepare("SELECT A.* 
+                                                    FROM ACTIVIDADES A
+                                                    JOIN GRUPO_NINOS GN ON A.id_grupo = GN.id_grupo
+                                                    WHERE GN.id_nino = ? 
+                                                    AND A.id_plan = ? 
+                                                    AND A.dia >= CURDATE();");   //sacamos todo los datos del actividad donde con el id_nino sacamos el id_grupo y con el idplan 
+    $queryActividades->bind_param("ii", $id_nino, $datoHijo['id_plan']);    //asignamos el valor de ?, es un i porque es un numero(integer)
     $queryActividades->execute();   //ejecutar en bbdd
     $result = $queryActividades->get_result();  //recoge el resultado de la consulta 
     // Comprobamos la respuesta de la consulta
@@ -183,5 +188,6 @@ echo json_encode([
     'profesorHijo' => $profesorNino,
     'idProfesorHijo' => $idProfesorNino,
     'actividades' => $actividades,
-    'datoInfoPlan' => $datoInfoPlan
+    'datoInfoPlan' => $datoInfoPlan,
+    '$id_grupo' => $id_grupo
 ]);

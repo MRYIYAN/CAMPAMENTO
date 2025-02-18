@@ -318,7 +318,6 @@ body::-webkit-scrollbar {
   }
   /* -------------------------------------------------------------------------------------------------- */
 
-
 /* =====================================================================================================================================================*/
                                                             /* FOOTER */        
 /* =====================================================================================================================================================*/
@@ -327,100 +326,263 @@ body::-webkit-scrollbar {
 /* Estilos generales */
 /* ==================================================================*/
 .background {
-    position: absolute;
-    z-index: -1; /* Detrás de todo */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  z-index: -1; /* Detrás de todo */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ==================================================================*/
+/* Estilos del footer */
+/* ==================================================================*/
+ul {
+  display: flex;
+  list-style: none; /* Quita los puntos de la lista */
+  padding: 0;
+  margin: 0;
+}
+
+/* ==================================================================*/
+/* Estilos de los elementos */
+/* ==================================================================*/
+
+.socials {
+  gap: 20px;
+}
+
+.socials a {
+  font-size: 24px;
+}
+
+.links {
+  gap: 10px;
+}
+
+.legal {
+  font-size: 12px;
+  margin: 0;
+}
+
+/* ==================================================================*/
+/* Estilos de la onda */
+/* ==================================================================*/
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Ocupa todo el alto */
+  transform: scaleY(3) scaleX(2.25); /* Escala la onda */
+  transform-origin: bottom;
+  box-sizing: border-box;
+  display: block; /* Quita el espacio extra */
+  pointer-events: none;
+}
+
+/* ==================================================================*/
+/* Estilos del footer - Cambio de position */
+/* ==================================================================*/
+footer {
+  position: relative; /* Se fija al fondo */
+  left: 0;
+  bottom: 0; /* Ajusta al fondo de la página */
+  display: flex;
+  justify-content: center; /* Centra el contenido en el footer */
+  width: 100%; /* Ocupa todo el ancho */
+  height: 350px; /* Altura del footer */
+  overflow-x: hidden;
+  z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
+}
+
+/* ==================================================================*/
+/* Estilos del contenido dentro del footer */
+/* ==================================================================*/
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 30px;
+  padding-bottom: 80px; /* Ajusta este valor según el alto de la onda */
+  padding-left: 60px; /* Ajusta este valor según el ancho de la onda */
+  width: 100%;
+}
+
+@media (min-width: 420px) {
+  section {
+    align-items: center; /* Centra horizontalmente */
+    padding-left: 0;
+    gap: 20px; /* Ajusta este valor según el espacio deseado */
   }
-  
-  /* ==================================================================*/
-  /* Estilos del footer */
-  /* ==================================================================*/
-  ul {
-    display: flex;
-    list-style: none; /* Quita los puntos de la lista */
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* ==================================================================*/
-  /* Estilos de los elementos */
-  /* ==================================================================*/
-  
-  .socials {
+
+  .links {
     gap: 20px;
   }
-  
-  .socials a {
-    font-size: 24px;
-  }
-  
-  .links {
-    gap: 10px;
-  }
-  
-  .legal {
-    font-size: 12px;
-    margin: 0;
-  }
-  
-  /* ==================================================================*/
-  /* Estilos de la onda */
-  /* ==================================================================*/
-  svg {
-    position: absolute;
+}
+/* =====================================================================================================================================================*/
+                                                                      /*HTML CONTENIDO*/
+/* =====================================================================================================================================================*/
+
+
+/* ==================================================================*/
+/* Tarjetas de actividades con efecto de giro */
+/* ==================================================================*/
+/* Contenedor principal para las tarjetas */
+#tarjetasActividades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+.card{
+  position: relative;
+  width: 300px;
+  height: 350px;
+  /*aplicar margenes con resto de cartas*/
+  margin: 20px;
+}
+.card .face{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /*Determinar la cara trasero*/
+  /*determina si la cara posterior de un elemento es visible de frente
+  a1 usuario.
+  La cara posterior de un elemento siempre es un fondo transparente,
+  permitiendo,
+  cuando es visible, que se muestre una imagen de espejo de la cara frontal.
+  iene la propiedad visible: significa que la cara posterior es visible,
+  permitiendo que la cara frontal se muestre invertida.
+  hidden: significa que la cara posterior no es visible,
+  ocultando la cara frontal */
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.5s;
+
+}
+.card .front{
+  transform: perspective(600px) rotateY(0deg);
+  box-shadow: 0px 5px 10px #000;
+}
+.card .front img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /*indica como el contenido de un elemento debera ser redimensionado para ajustarse en su contenedor */
+  object-fit: cover;
+}
+.card .front h3{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  color: #fff;
+  background: rgb(0, 0, 0, 0.4);
+  text-align: center;
+}
+.card .back{
+  transform: perspective(600px) rotateY(180deg);
+  background: rgb(3, 35, 54);
+  padding: 15px;
+  color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  box-shadow: 0px 5px 10px #000;
+}
+.card .back .link {
+  border-top: 1px solid #f3f3f3;
+  height: 50px;
+  line-height: 50px;
+}
+.card .back .link a {
+  color: #f3f3f3;
+}
+.card .back h3{
+  font-size: 30px;
+  margin-top: 20px;
+  letter-spacing: 2px;
+}
+.card .back p{
+  letter-spacing: 1px;
+}
+.card:hover .front{
+  transform: perspective(600px) rotateY(180deg);
+}
+.card:hover .back{
+  transform: perspective(600px) rotateY(360deg);
+}
+
+
+/* ==================================================================*/
+/* Overlay para mostrar mas definicion */
+/* ==================================================================*/
+  /* Estilo para el overlay */
+  .overlayDefinicion {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Ocupa todo el alto */
-    transform: scaleY(3) scaleX(2.25); /* Escala la onda */
-    transform-origin: bottom;
-    box-sizing: border-box;
-    display: block; /* Quita el espacio extra */
-    pointer-events: none;
-  }
-  
-  /* ==================================================================*/
-  /* Estilos del footer - Cambio de position */
-  /* ==================================================================*/
-  footer {
-    position: fixed; /* Se fija al fondo */
-    left: 0;
-    bottom: 0; /* Ajusta al fondo de la página */
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center; /* Centra el contenido en el footer */
-    width: 100%; /* Ocupa todo el ancho */
-    height: 350px; /* Altura del footer */
-    overflow-x: hidden;
-    z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    color: #333;  /* Color del texto */
+    overflow: auto; /* Agrega desplazamiento si es necesario */
+    padding: 20px;  /* Evita que el contenido toque los bordes */
+}
+
+
+  /* Estilo para la ventana emergente */
+  .overlayContent2 {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    text-align: center;
+    position: relative;
+    max-height: 80%;
+    overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
+}
+
+
+  /* Botón de cierre */
+  .closeBtnDefinicion {
+    position: absolute;
+    font-size: large;
+    top: 10px;
+    right: 10px;
+    background: #ff4d4d00;
+    color: #007BFF;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
   }
-  
-  /* ==================================================================*/
-  /* Estilos del contenido dentro del footer */
-  /* ==================================================================*/
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 30px;
-    padding-bottom: 80px; /* Ajusta este valor según el alto de la onda */
-    padding-left: 60px; /* Ajusta este valor según el ancho de la onda */
-    width: 100%;
+
+  .closeBtnDefinicion:hover {
+    background: #cc000000;
   }
-  
-  @media (min-width: 420px) {
-    section {
-      align-items: center; /* Centra horizontalmente */
-      padding-left: 0;
-      gap: 20px; /* Ajusta este valor según el espacio deseado */
-    }
-  
-    .links {
-      gap: 20px;
-    }
+
+  /* Clase para mostrar el overlay */
+  .overlayDefinicion.activeOverlayDefinicion {
+    visibility: visible;
+    opacity: 1;
   }
-    /* =====================================================================================================================================================*/
-                                                                         /*HTML CONTENIDO*/
-    /* =====================================================================================================================================================*/
+
+
+/* ==================================================================*/
+/* fin de Overlay para mostrar mas definicion */
+/* ==================================================================*/
+
