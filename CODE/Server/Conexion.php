@@ -209,13 +209,61 @@ $stmt->close();
     $descripcion = "Descripción de la actividad ejemplo.";
     $hora = "10:00:00";
     $hora_fin = "12:00:00";
-    $dia = "2025-06-05";
+    $dia = "2025-10-05";
     $id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
     $id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
 
 $stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
 if (!$stmt->execute()) {
     error_log("Error al insertar Actividad: " . $stmt->error);
+}
+$stmt->close();
+
+// Insertar datos en la tabla ACTIVIDADES
+$stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$titulo = "Actividad Ejemplo2";
+$descripcion = "Descripción de la actividad ejemplo.2";
+$hora = "10:00:00";
+$hora_fin = "12:00:00";
+$dia = "2025-10-06";
+$id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
+$id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
+
+$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
+if (!$stmt->execute()) {
+error_log("Error al insertar Actividad: " . $stmt->error);
+}
+$stmt->close();
+
+// Insertar datos en la tabla ACTIVIDADES
+$stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$titulo = "Actividad Ejemplo3";
+$descripcion = "Descripción de la actividad ejemplo.3";
+$hora = "10:00:00";
+$hora_fin = "12:00:00";
+$dia = "2025-10-07";
+$id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
+$id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
+
+$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
+if (!$stmt->execute()) {
+error_log("Error al insertar Actividad: " . $stmt->error);
+}
+$stmt->close();
+
+// Insertar datos en la tabla ACTIVIDADES
+$stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$titulo = "Actividad Ejemplo4";
+$descripcion = "Descripción de la actividad ejemplo.4";
+$hora = "10:00:00";
+$hora_fin = "12:00:00";
+$dia = "2025-10-08";
+$id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
+$id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
+
+$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
+if (!$stmt->execute()) {
+error_log("Error al insertar Actividad: " . $stmt->error);
 }
 $stmt->close();
 
