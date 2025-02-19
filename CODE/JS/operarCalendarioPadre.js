@@ -146,209 +146,147 @@ document.addEventListener("DOMContentLoaded", () => {
 //                                         CALENDARIO DINAMICO
 //=======================================================================================================//
 
-let calendar = document.querySelector('.calendar')
+let calendar = document.querySelector('.calendar');
 
-const month_names = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+const month_names = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
 isLeapYear = (year) => {
-    return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)
-}
+    return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0);
+};
 
 getFebDays = (year) => {
-    return isLeapYear(year) ? 29 : 28
-}
+    return isLeapYear(year) ? 29 : 28;
+};
 
 generateCalendar = (month, year) => {
+    let calendar_days = calendar.querySelector('.calendar-days');
+    let calendar_header_year = calendar.querySelector('#year');
+    let days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    calendar_days.innerHTML = '';
 
-    let calendar_days = calendar.querySelector('.calendar-days')
-    let calendar_header_year = calendar.querySelector('#year')
+    let currDate = new Date();
+    if (!month) month = currDate.getMonth();
+    if (!year) year = currDate.getFullYear();
 
-    let days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    let curr_month = `${month_names[month]}`;
+    month_picker.innerHTML = curr_month;
+    calendar_header_year.innerHTML = year;
 
-    calendar_days.innerHTML = ''
-
-    let currDate = new Date()
-    if (!month) month = currDate.getMonth()
-    if (!year) year = currDate.getFullYear()
-
-    let curr_month = `${month_names[month]}`
-    month_picker.innerHTML = curr_month
-    calendar_header_year.innerHTML = year
-
-    // get first day of month
-
-    let first_day = new Date(year, month, 1)
+    // Obtener el primer día del mes
+    let first_day = new Date(year, month, 1);
 
     for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
-        let day = document.createElement('div')
+        let day = document.createElement('div');
         if (i >= first_day.getDay()) {
             let dayNumber = i - first_day.getDay() + 1;
-            day.classList.add('calendar-day-hover')
-            day.innerHTML = dayNumber;
-            day.innerHTML += `<span></span><span></span><span></span><span></span>`
-
-            // Agregar un ID a cada día que se corresponderá con el día de la fecha
+            day.classList.add('calendar-day-hover');
+            // Usa backticks para plantillas literales:
+            day.innerHTML = `${dayNumber}<span></span><span></span><span></span><span></span>`;
             day.setAttribute('data-day', dayNumber);
 
-            // Si el día es el actual, le añadimos una clase especial
             if (dayNumber === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
-                day.classList.add('curr-date')
+                day.classList.add('curr-date');
             }
-
-            // Evento de hover para mostrar el card
             day.addEventListener('mouseover', function() {
-                let eventInfo = getEventInfo(dayNumber);
-                if (eventInfo) {
-                    // Crear un overlay o card con la información
-                    let overlay = document.createElement('div');
-                    overlay.classList.add('overlay');
-                    overlay.innerHTML = eventInfo;
-                    document.body.appendChild(overlay);
-
-                    // Posicionar el overlay cerca del día
-                    let rect = day.getBoundingClientRect();
-                    overlay.style.top = rect.top + window.scrollY + 30 + 'px'; // Ajuste para posicionar
-                    overlay.style.left = rect.left + window.scrollX + 'px';
-                }
+                let selectedYear = parseInt(calendar.querySelector('#year').innerText, 10);
+                let selectedMonth = month_names.indexOf(month_picker.innerText); // Se obtiene el índice del mes actual
+            
+                getEventInfo(dayNumber, selectedMonth, selectedYear).then(eventInfo => {
+                    if (eventInfo) {
+                        let overlay = document.createElement('div');
+                        overlay.classList.add('event-overlay');
+                        overlay.innerHTML = eventInfo;
+                        document.body.appendChild(overlay);
+            
+                        let rect = day.getBoundingClientRect();
+                        overlay.style.top = rect.top + window.scrollY + 30 + 'px';
+                        overlay.style.left = rect.left + window.scrollX + 'px';
+                        overlay.style.display = 'block';
+                    }
+                });
             });
-
-            // Evento para eliminar el overlay cuando el mouse sale
+            
             day.addEventListener('mouseout', function() {
-                let overlays = document.querySelectorAll('.overlay');
-                overlays.forEach(overlay => overlay.remove());
+                let overlay = document.querySelector('.event-overlay');
+                if (overlay) overlay.remove();
             });
         }
-        calendar_days.appendChild(day)
+        calendar_days.appendChild(day);
     }
-}
+};
 
-let month_list = calendar.querySelector('.month-list')
+let month_list = calendar.querySelector('.month-list');
 
 month_names.forEach((e, index) => {
-    let month = document.createElement('div')
-    month.innerHTML = `<div data-month="${index}">${e}</div>`
-    month.querySelector('div').onclick = () => {
-        month_list.classList.remove('show')
-        curr_month.value = index
-        generateCalendar(index, curr_year.value)
-    }
-    month_list.appendChild(month)
-})
+    let monthElem = document.createElement('div');
+    monthElem.innerHTML = `<div data-month="${index}">${e}</div>`;
+    monthElem.querySelector('div').onclick = () => {
+        month_list.classList.remove('show');
+        curr_month.value = index;
+        generateCalendar(index, curr_year.value);
+    };
+    month_list.appendChild(monthElem);
+});
 
-let month_picker = calendar.querySelector('#month-picker')
+let month_picker = calendar.querySelector('#month-picker');
 
 month_picker.onclick = () => {
-    month_list.classList.add('show')
-}
+    month_list.classList.add('show');
+};
 
-let currDate = new Date()
+let currDate = new Date();
+let curr_month = { value: currDate.getMonth() };
+let curr_year = { value: currDate.getFullYear() };
 
-let curr_month = {value: currDate.getMonth()}
-let curr_year = {value: currDate.getFullYear()}
-
-generateCalendar(curr_month.value, curr_year.value)
+generateCalendar(curr_month.value, curr_year.value);
 
 document.querySelector('#prev-year').onclick = () => {
-    --curr_year.value
-    generateCalendar(curr_month.value, curr_year.value)
-}
+    --curr_year.value;
+    generateCalendar(curr_month.value, curr_year.value);
+};
 
 document.querySelector('#next-year').onclick = () => {
-    ++curr_year.value
-    generateCalendar(curr_month.value, curr_year.value)
-}
+    ++curr_year.value;
+    generateCalendar(curr_month.value, curr_year.value);
+};
 
-let dark_mode_toggle = document.querySelector('.dark-mode-switch')
+let dark_mode_toggle = document.querySelector('.dark-mode-switch');
 
 dark_mode_toggle.onclick = () => {
-    document.querySelector('body').classList.toggle('light')
-    document.querySelector('body').classList.toggle('dark')
-}
-
-
+    document.querySelector('body').classList.toggle('light');
+    document.querySelector('body').classList.toggle('dark');
+};
 
 //=======================================================================================================//
 // FUNCIÓN PARA MOSTRAR CARD OVERLAY EN EL CALENDARIO SEGÚN EL DÍA
 //=======================================================================================================//
-getEventInfo = async (day) => {
+getEventInfo = async (day, month, year) => {
     try {
         const response = await fetch('../Server/GestionarCalendarioPadre.php');
         const data = await response.json();
-        const event = data.find(event => new Date(event.fecha_inicio).getDate() === day);
+
+        // Verificar que haya eventos que coincidan exactamente con el día, mes y año
+        const event = data.find(event => {
+            let eventDate = new Date(event.fecha_inicio);
+            return (
+                eventDate.getDate() === day &&
+                eventDate.getMonth() === month && // Mes en JavaScript es 0-indexed (Enero = 0, Febrero = 1...)
+                eventDate.getFullYear() === year
+            );
+        });
 
         if (event) {
             return `
                 <div class="card-content">
-                    <h3>Evento para el día ${day}</h3>
+                    <h3>Evento para el día ${day}/${month + 1}/${year}</h3>
                     <p><strong>Precio:</strong> ${event.precio}</p>
                     <p><strong>Definición:</strong> ${event.definicion}</p>
                 </div>
             `;
         }
-        return ''; // Si no hay evento para ese día, devolver vacío
+        return ''; // No hay eventos en esa fecha
     } catch (error) {
         console.error('Error al obtener eventos:', error);
+        return '';
     }
 };
-
-// Modificar la función generateCalendar para añadir el hover sobre cada día
-generateCalendar = (month, year) => {
-    let calendar_days = calendar.querySelector('.calendar-days')
-    let calendar_header_year = calendar.querySelector('#year')
-
-    let days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-    calendar_days.innerHTML = ''
-
-    let currDate = new Date()
-    if (!month) month = currDate.getMonth()
-    if (!year) year = currDate.getFullYear()
-
-    let curr_month = `${month_names[month]}`
-    month_picker.innerHTML = curr_month
-    calendar_header_year.innerHTML = year
-
-    let first_day = new Date(year, month, 1)
-
-    for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
-        let day = document.createElement('div')
-        if (i >= first_day.getDay()) {
-            let dayNumber = i - first_day.getDay() + 1;
-            day.classList.add('calendar-day-hover')
-            day.innerHTML = dayNumber;
-            day.innerHTML += `<span></span><span></span><span></span><span></span>`
-
-            // Agregar un ID a cada día que se corresponderá con el día de la fecha
-            day.setAttribute('data-day', dayNumber);
-
-            // Si el día es el actual, le añadimos una clase especial
-            if (dayNumber === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
-                day.classList.add('curr-date')
-            }
-
-            // Evento de hover para mostrar el card
-            day.addEventListener('mouseover', function() {
-                let eventInfo = getEventInfo(dayNumber);
-                if (eventInfo) {
-                    // Crear un overlay o card con la información
-                    let overlay = document.createElement('div');
-                    overlay.classList.add('overlay');
-                    overlay.innerHTML = eventInfo;
-                    document.body.appendChild(overlay);
-
-                    // Posicionar el overlay cerca del día
-                    let rect = day.getBoundingClientRect();
-                    overlay.style.top = rect.top + window.scrollY + 30 + 'px'; // Ajuste para posicionar
-                    overlay.style.left = rect.left + window.scrollX + 'px';
-                }
-            });
-
-            // Evento para eliminar el overlay cuando el mouse sale
-            day.addEventListener('mouseout', function() {
-                let overlays = document.querySelectorAll('.overlay');
-                overlays.forEach(overlay => overlay.remove());
-            });
-        }
-        calendar_days.appendChild(day)
-    }
-}
