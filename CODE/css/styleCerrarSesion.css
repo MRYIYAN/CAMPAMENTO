@@ -1,0 +1,65 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f8f8;
+    margin: 0;
+}
+.container {
+    text-align: center;
+    position: relative;
+}
+.logo {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150px;
+}
+.message-box {
+    background-color: #b3d4fc;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+p {
+    font-size: 18px;
+    color: #555;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+#progresoCuentaAtras{
+    width: 100%;
+    background-color: #ddd;
+    height: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+
+}
+#progreso{
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    width: 0%;
+    background-color: #4CAF50;
+    height: 10px;
+    border-radius: 5px;
+    animation: progreso 10s linear infinite;
+    transition: width  1s ease-out;     /* Animación de transición para el cambio de ancho */
+}
