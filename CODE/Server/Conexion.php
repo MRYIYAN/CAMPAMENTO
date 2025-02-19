@@ -127,7 +127,11 @@ function usuarioExiste($conn, $tabla, $email) {
     return $result['count'] > 0;
 }
 
-// Insertar Monitor si no existe
+
+// ----- 1. MONITORES -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Funcion para crear datos en la tabla monitores con un id asignado ademas de su contraseña "hasheada".
+// ------------------------------------------------------------------------------------------------------------------------------------//
 if (!usuarioExiste($conn, "MONITORES", "monitor@ejemplo.com")) {
     $stmt = $conn->prepare("INSERT INTO MONITORES (nombre, email, contrasenia) VALUES (?, ?, ?)");
     $nombre = "Monitor Ejemplo";
@@ -143,8 +147,10 @@ if (!usuarioExiste($conn, "MONITORES", "monitor@ejemplo.com")) {
     $stmt->close();
 }
 
-// Insertar Tutor si no existe
-
+// ----- 3. TUTORES -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Insertar Tutor si no existe en la base de datos. 
+// ------------------------------------------------------------------------------------------------------------------------------------//
 if (!usuarioExiste($conn, "TUTORES", "tutor@ejemplo.com")) {
     $stmt = $conn->prepare("INSERT INTO TUTORES (nombre, dni, telefono, email, contrasenia) VALUES (?, ?, ?, ?, ?)");
     $nombre = "Tutor Ejemplo";
@@ -161,8 +167,10 @@ if (!usuarioExiste($conn, "TUTORES", "tutor@ejemplo.com")) {
     }
     $stmt->close();
 }
-
-// Insertar Admin si no existe
+// ----- 4. ADMIN -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Insertar datos en ADMIN si no existe en la base de datos con una contraseña "hasheada".
+// ------------------------------------------------------------------------------------------------------------------------------------//
 if (!usuarioExiste($conn, "ADMIN", "admin@ejemplo.com")) {
     $stmt = $conn->prepare("INSERT INTO ADMIN (email, contrasenia) VALUES (?, ?)");
     $email = "admin@ejemplo.com";
@@ -177,97 +185,101 @@ if (!usuarioExiste($conn, "ADMIN", "admin@ejemplo.com")) {
     $stmt->close();
 }
 
-// Insertar datos en la tabla PLAN_FECHAS
+// ----- 5. PLAN_FECHAS -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Función para verificar si ya existe un plan en base a fechas 
+// ------------------------------------------------------------------------------------------------------------------------------------//
+function planExiste($conn, $fecha_inicio, $fecha_fin) {
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM PLAN_FECHAS WHERE fecha_inicio = ? AND fecha_fin = ?");
+    $stmt->bind_param("ss", $fecha_inicio, $fecha_fin);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result['count'] > 0;
+}
+
+// Valores a insertar en PLAN_FECHAS
+$fecha_inicio           = "2025-06-01";
+$fecha_fin              = "2025-06-15";
+$fecha_maxInscripcion   = "2025-05-25";
+$hora_maximaInscripcion = "18:00:00";
+$precio                 = "100.00";
+$definicion             = "Campamento de verano para niños de 6 a 12 años.";
+
+// Insertar el plan solo si no existe
+if (!planExiste($conn, $fecha_inicio, $fecha_fin)) {
     $stmt = $conn->prepare("INSERT INTO PLAN_FECHAS (fecha_inicio, fecha_fin, fecha_maxInscripcion, hora_maximaInscripcion, precio, definicion) VALUES (?, ?, ?, ?, ?, ?)");
-    $fecha_inicio = "2025-06-01";
-    $fecha_fin = "2025-06-15";
-    $fecha_maxInscripcion = "2025-05-25";
-    $hora_maximaInscripcion = "18:00:00";
-    $precio = "100.00";
-    $definicion = "Campamento de verano para niños de 6 a 12 años.";
-
-$stmt->bind_param("ssssss", $fecha_inicio, $fecha_fin, $fecha_maxInscripcion, $hora_maximaInscripcion, $precio, $definicion);
-if (!$stmt->execute()) {
-    error_log("Error al insertar Plan: " . $stmt->error);
+    $stmt->bind_param("ssssss", $fecha_inicio, $fecha_fin, $fecha_maxInscripcion, $hora_maximaInscripcion, $precio, $definicion);
+    if (!$stmt->execute()) {
+        error_log("Error al insertar Plan: " . $stmt->error);
+    }
+    $stmt->close();
+} else {
+    // Opcional: echo "El plan ya existe.<br>"; USAMOS AJAX Y AL ESPERAR JSON EL ECHO ROMPE LA ESTRUCUTRA
 }
-$stmt->close();
 
-// Insertar datos en la tabla GRUPOS
+
+// ----- 6. GRUPOS -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Función para verificar si ya existe un grupo con un nombre dado y un monitor asignado
+// ------------------------------------------------------------------------------------------------------------------------------------//
+function grupoExiste($conn, $nombre_grupo, $id_monitor) {
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM GRUPOS WHERE nombre = ? AND id_monitor = ?");
+    $stmt->bind_param("si", $nombre_grupo, $id_monitor);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result['count'] > 0;
+}
+
+// Valores a insertar en GRUPOS
+$nombre_grupo = "Grupo Ejemplo";
+$id_monitor   = 1; // Asegúrate de que este ID exista en la tabla MONITORES
+
+// Insertar el grupo solo si no existe
+if (!grupoExiste($conn, $nombre_grupo, $id_monitor)) {
     $stmt = $conn->prepare("INSERT INTO GRUPOS (nombre, id_monitor) VALUES (?, ?)");
-    $nombre_grupo = "Grupo Ejemplo";
-    $id_monitor = 1; // Asegúrate de que este ID exista en la tabla MONITORES
-
-$stmt->bind_param("si", $nombre_grupo, $id_monitor);
-if (!$stmt->execute()) {
-    error_log("Error al insertar Grupo: " . $stmt->error);
+    $stmt->bind_param("si", $nombre_grupo, $id_monitor);
+    if (!$stmt->execute()) {
+        error_log("Error al insertar Grupo: " . $stmt->error);
+    }
+    $stmt->close();
+} else {
+    // Opcional: echo "El grupo ya existe.<br>";
 }
-$stmt->close();
 
-// Insertar datos en la tabla ACTIVIDADES
+//
+// ----- 7. ACTIVIDADES -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Función para verificar si ya existe una actividad con el mismo título y asociada al mismo grupo y plan
+// ------------------------------------------------------------------------------------------------------------------------------------//
+function actividadExiste($conn, $titulo, $id_grupo, $id_plan) {
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM ACTIVIDADES WHERE titulo = ? AND id_grupo = ? AND id_plan = ?");
+    $stmt->bind_param("sii", $titulo, $id_grupo, $id_plan);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result['count'] > 0;
+}
+
+// Valores a insertar para una actividad
+$titulo      = "Actividad Ejemplo";
+$descripcion = "Descripción de la actividad ejemplo.";
+$hora        = "10:00:00";
+$hora_fin    = "12:00:00";
+$dia         = "2025-10-05";
+$id_grupo    = 1; // Debe existir en GRUPOS
+$id_plan     = 1; // Debe existir en PLAN_FECHAS
+
+// Insertar la actividad solo si no existe
+if (!actividadExiste($conn, $titulo, $id_grupo, $id_plan)) {
     $stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $titulo = "Actividad Ejemplo";
-    $descripcion = "Descripción de la actividad ejemplo.";
-    $hora = "10:00:00";
-    $hora_fin = "12:00:00";
-    $dia = "2025-10-05";
-    $id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
-    $id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
-
-$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
-if (!$stmt->execute()) {
-    error_log("Error al insertar Actividad: " . $stmt->error);
+    $stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
+    if (!$stmt->execute()) {
+        error_log("Error al insertar Actividad: " . $stmt->error);
+    }
+    $stmt->close();
+} else {
+    // Opcional: echo "La actividad ya existe.<br>";
 }
-$stmt->close();
-
-// Insertar datos en la tabla ACTIVIDADES
-$stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$titulo = "Actividad Ejemplo2";
-$descripcion = "Descripción de la actividad ejemplo.2";
-$hora = "10:00:00";
-$hora_fin = "12:00:00";
-$dia = "2025-10-06";
-$id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
-$id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
-
-$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
-if (!$stmt->execute()) {
-error_log("Error al insertar Actividad: " . $stmt->error);
-}
-$stmt->close();
-
-// Insertar datos en la tabla ACTIVIDADES
-$stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$titulo = "Actividad Ejemplo3";
-$descripcion = "Descripción de la actividad ejemplo.3";
-$hora = "10:00:00";
-$hora_fin = "12:00:00";
-$dia = "2025-10-07";
-$id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
-$id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
-
-$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
-if (!$stmt->execute()) {
-error_log("Error al insertar Actividad: " . $stmt->error);
-}
-$stmt->close();
-
-// Insertar datos en la tabla ACTIVIDADES
-$stmt = $conn->prepare("INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$titulo = "Actividad Ejemplo4";
-$descripcion = "Descripción de la actividad ejemplo.4";
-$hora = "10:00:00";
-$hora_fin = "12:00:00";
-$dia = "2025-10-08";
-$id_grupo = 1; // Asegúrate de que este ID exista en la tabla GRUPOS
-$id_plan = 1; // Asegúrate de que este ID exista en la tabla PLAN_FECHAS
-
-$stmt->bind_param("sssssss", $titulo, $descripcion, $hora, $hora_fin, $dia, $id_grupo, $id_plan);
-if (!$stmt->execute()) {
-error_log("Error al insertar Actividad: " . $stmt->error);
-}
-$stmt->close();
-
-//----------------------------------------------------------------------------------------//
-// No se cierra la conexión para que se pueda usar en GestionarLogin.php IMPORTANTE
-//----------------------------------------------------------------------------------------//
 ?>

@@ -732,3 +732,25 @@ body::-webkit-scrollbar {
       opacity: 1;
       }
   }
+/* Estilo para el overlay de eventos */
+.overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-width: 200px;
+  font-size: 14px;
+  display: none; /* Ocultar inicialmente */
+  transform: translate(-50%, 0); /* Centrar */
+}
+
+.overlay h3 {
+  margin-top: 0;
+}
+
+.overlay p {
+  margin: 5px 0;
+}
