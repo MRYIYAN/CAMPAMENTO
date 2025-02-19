@@ -1,6 +1,6 @@
 <?php
 // Conectar a la base de datos
-include("conexion.php"); // Incluye tu archivo de conexión a la base de datos
+include("conexion.php");
 
 // Verificar la conexión
 if ($conn->connect_error) {
@@ -9,14 +9,11 @@ if ($conn->connect_error) {
 }
 
 session_start(); // Inicia o reanuda la sesión
-$login = "no";
 
 // Comprobar si el usuario está logueado
 if (!isset($_SESSION["login"])) {
     echo json_encode(['noLogin' => '../html/noLogeado.html']);
     exit();
-} else {
-    $login = "ok";
 }
 
 // Comprobar si el ID de usuario está disponible en la sesión

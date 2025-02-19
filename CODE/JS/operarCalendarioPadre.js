@@ -273,7 +273,9 @@ generateCalendar = (month, year) => {
 getEventInfo = async (day, month, year) => {
     try {
         const response = await fetch('../Server/GestionarCalendarioPadre.php');
-        const data = await response.json();
+        const data = await response.json(); // Trata de convertir la respuesta en JSON
+
+        console.log('Respuesta del servidor:', data); // Añadimos una consola para depuración
 
         // Verificar que haya eventos que coincidan exactamente con el día, mes y año
         const event = data.find(event => {
