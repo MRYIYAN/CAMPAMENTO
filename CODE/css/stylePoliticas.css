@@ -1,4 +1,4 @@
- /* =====================================================================================================================================================*/
+/* =====================================================================================================================================================*/
                                                                        /* ESTILO GENERAL BODY*/
   /* =====================================================================================================================================================*/
 
@@ -386,7 +386,7 @@ body::-webkit-scrollbar {
   /* Estilos del footer - Cambio de position */
   /* ==================================================================*/
   footer {
-    position: fixed; /* Se fija al fondo */
+    position: relative; /* Se fija al fondo */
     left: 0;
     bottom: 0; /* Ajusta al fondo de la página */
     display: flex;
@@ -424,3 +424,94 @@ body::-webkit-scrollbar {
     /* =====================================================================================================================================================*/
                                                                          /*HTML CONTENIDO*/
     /* =====================================================================================================================================================*/
+/* Contenedor principal de políticas */
+.politicas-container {
+  max-width: 800px;
+  margin: 20px 0;
+  padding: 10px;
+  text-align: left; /* Alinear al lado izquierdo */
+  margin-right: 800px; /* Alinear al lado izquierdo */
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centrar verticalmente */
+}
+
+.accordion {
+  flex: 1;
+}
+
+.image-container {
+  position: absolute; /* Cambiar a posición absoluta */
+  right: 20px; /* Mover más hacia la derecha */
+  top: 250px; /* Ajustar la posición vertical */
+  width: 180px; /* Hacer la imagen más pequeña */
+}
+
+.image-container img {
+  position: absolute; /* Cambiar a posición relativa */
+  width: 100%;
+  height: auto;
+  right: 200px; /* Mover más hacia la derecha */
+  width: 500px; /* Hacer la imagen más pequeña */
+}
+
+/* Estilos para el acordeón */
+details {
+  border: 1px solid #007acc;
+  border-radius: 4px;
+  margin: 10px 0;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  position: relative; /* Para posicionar el signo */
+  background: #f5812f; /* Color del resumen sin abrir */
+}
+
+details:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+details summary {
+  padding: 12px 16px;
+  font-size: 1.1em;
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  position: relative; /* Para posicionar el signo */
+  padding-right: 50px; /* Espacio vacío hacia la derecha */
+}
+
+details summary::after {
+  content: "+"; /* Signo por defecto */
+  position: absolute;
+  right: 10px; /* Margen derecho */
+  font-size: 1.5em;
+  color: white;
+}
+
+details[open] summary::after {
+  content: "-"; /* Signo cuando está abierto */
+}
+
+details summary:hover {
+  background: #0ad6fa;
+  color: #3E99E3;
+}
+
+details[open] summary {
+  background: #13b7e0;
+}
+
+/* Tarjeta para el contenido desplegable */
+.card {
+  padding: 16px;
+  background: #3E99E3; /* Color del contenido abierto */
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

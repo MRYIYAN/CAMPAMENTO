@@ -180,34 +180,44 @@ generateCalendar = (month, year) => {
         if (i >= first_day.getDay()) {
             let dayNumber = i - first_day.getDay() + 1;
             day.classList.add('calendar-day-hover');
-            // Usa backticks para plantillas literales:
             day.innerHTML = `${dayNumber}<span></span><span></span><span></span><span></span>`;
             day.setAttribute('data-day', dayNumber);
 
             if (dayNumber === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
                 day.classList.add('curr-date');
             }
+
+            // Variable para almacenar el timeout para el overlay
+            let overlayTimeout;
+
+            // Evento para mostrar el overlay con retraso
             day.addEventListener('mouseover', function() {
                 let selectedYear = parseInt(calendar.querySelector('#year').innerText, 10);
-                let selectedMonth = month_names.indexOf(month_picker.innerText); // Se obtiene el índice del mes actual
-            
-                getEventInfo(dayNumber, selectedMonth, selectedYear).then(eventInfo => {
-                    if (eventInfo) {
-                        let overlay = document.createElement('div');
-                        overlay.classList.add('event-overlay');
-                        overlay.innerHTML = eventInfo;
-                        document.body.appendChild(overlay);
-            
-                        let rect = day.getBoundingClientRect();
-                        overlay.style.top = rect.top + window.scrollY + 30 + 'px';
-                        overlay.style.left = rect.left + window.scrollX + 'px';
-                        overlay.style.display = 'block';
-                    }
-                });
+                let selectedMonth = month_names.indexOf(month_picker.innerText); // Índice del mes actual
+
+                overlayTimeout = setTimeout(() => {
+                    getEventInfo(dayNumber, selectedMonth, selectedYear).then(eventInfo => {
+                        if (eventInfo) {
+                            let overlay = document.createElement('div');
+                            overlay.classList.add('event-overlay');
+                            overlay.innerHTML = eventInfo;
+                            document.body.appendChild(overlay);
+
+                            let rect = day.getBoundingClientRect();
+                            overlay.style.top = rect.top + window.scrollY + 30 + 'px';
+                            overlay.style.left = rect.left + window.scrollX + 'px';
+                            overlay.style.display = 'block';
+                            // Asignamos un id para poder eliminarlo fácilmente
+                            overlay.setAttribute('id', 'active-overlay');
+                        }
+                    });
+                }, 1000); // Retraso de 1 segundo
             });
-            
+
+            // Evento para cancelar y eliminar el overlay al retirar el mouse
             day.addEventListener('mouseout', function() {
-                let overlay = document.querySelector('.event-overlay');
+                clearTimeout(overlayTimeout);
+                let overlay = document.querySelector('#active-overlay');
                 if (overlay) overlay.remove();
             });
         }
@@ -215,47 +225,47 @@ generateCalendar = (month, year) => {
     }
 };
 
-let month_list = calendar.querySelector('.month-list');
+    let month_list = calendar.querySelector('.month-list');
 
-month_names.forEach((e, index) => {
-    let monthElem = document.createElement('div');
-    monthElem.innerHTML = `<div data-month="${index}">${e}</div>`;
-    monthElem.querySelector('div').onclick = () => {
-        month_list.classList.remove('show');
-        curr_month.value = index;
-        generateCalendar(index, curr_year.value);
+    month_names.forEach((e, index) => {
+        let monthElem = document.createElement('div');
+        monthElem.innerHTML = `<div data-month="${index}">${e}</div>`;
+        monthElem.querySelector('div').onclick = () => {
+            month_list.classList.remove('show');
+            curr_month.value = index;
+            generateCalendar(index, curr_year.value);
+        };
+        month_list.appendChild(monthElem);
+    });
+
+    let month_picker = calendar.querySelector('#month-picker');
+
+    month_picker.onclick = () => {
+        month_list.classList.add('show');
     };
-    month_list.appendChild(monthElem);
-});
 
-let month_picker = calendar.querySelector('#month-picker');
+    let currDate = new Date();
+    let curr_month = { value: currDate.getMonth() };
+    let curr_year = { value: currDate.getFullYear() };
 
-month_picker.onclick = () => {
-    month_list.classList.add('show');
-};
-
-let currDate = new Date();
-let curr_month = { value: currDate.getMonth() };
-let curr_year = { value: currDate.getFullYear() };
-
-generateCalendar(curr_month.value, curr_year.value);
-
-document.querySelector('#prev-year').onclick = () => {
-    --curr_year.value;
     generateCalendar(curr_month.value, curr_year.value);
-};
 
-document.querySelector('#next-year').onclick = () => {
-    ++curr_year.value;
-    generateCalendar(curr_month.value, curr_year.value);
-};
+    document.querySelector('#prev-year').onclick = () => {
+        --curr_year.value;
+        generateCalendar(curr_month.value, curr_year.value);
+    };
 
-let dark_mode_toggle = document.querySelector('.dark-mode-switch');
+    document.querySelector('#next-year').onclick = () => {
+        ++curr_year.value;
+        generateCalendar(curr_month.value, curr_year.value);
+    };
 
-dark_mode_toggle.onclick = () => {
-    document.querySelector('body').classList.toggle('light');
-    document.querySelector('body').classList.toggle('dark');
-};
+    let dark_mode_toggle = document.querySelector('.dark-mode-switch');
+
+    dark_mode_toggle.onclick = () => {
+        document.querySelector('body').classList.toggle('light');
+        document.querySelector('body').classList.toggle('dark');
+    };
 
 //=======================================================================================================//
 // FUNCIÓN PARA MOSTRAR CARD OVERLAY EN EL CALENDARIO SEGÚN EL DÍA

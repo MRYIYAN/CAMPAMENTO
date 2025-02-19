@@ -87,8 +87,6 @@ $sql_tables = "
         FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
     );
 
-
-
     CREATE TABLE IF NOT EXISTS ACTIVIDADES (
     id_actividad INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(50) NOT NULL,

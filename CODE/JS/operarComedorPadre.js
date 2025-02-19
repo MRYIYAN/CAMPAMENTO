@@ -136,3 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
 //-----------------------------------------------------------------------------------------------------------//
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".card-hover__link").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+            let card = this.closest(".card-hover");
+            card.classList.toggle("active"); // Alterna la clase "active"
+        });
+    });
+});
