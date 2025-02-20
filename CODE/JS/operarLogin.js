@@ -230,3 +230,32 @@ correoSignup.addEventListener('blur', function () {
 contrasenaSignup.addEventListener('blur', function () {
     validarCampos(contrasenaSignup, errorContrasenaSignup, validarContrasena); // Valida la contraseña de signup al perder el foco
 });
+
+
+//--------------------------------------------------------------------------------------------//
+//                             INICIAR SESION CON GOOGLE 
+//--------------------------------------------------------------------------------------------//
+
+// Autenticación con Google
+document.getElementById("googleLogin").addEventListener("click", function() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then(result => console.log("Usuario autenticado:", result.user))
+        .catch(error => console.error("Error en autenticación:", error));
+});
+
+// Autenticación con Facebook
+document.getElementById("facebookLogin").addEventListener("click", function() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then(result => console.log("Usuario autenticado:", result.user))
+        .catch(error => console.error("Error en autenticación:", error));
+});
+
+// Autenticación con Twitter
+document.getElementById("twitterLogin").addEventListener("click", function() {
+    const provider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then(result => console.log("Usuario autenticado:", result.user))
+        .catch(error => console.error("Error en autenticación:", error));
+});
