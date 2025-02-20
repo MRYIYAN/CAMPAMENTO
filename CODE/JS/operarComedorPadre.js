@@ -137,11 +137,53 @@ document.addEventListener("DOMContentLoaded", () => {
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
 document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".card-hover__link").forEach(link => {
-        link.addEventListener("click", function(event) {
-            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
-            let card = this.closest(".card-hover");
-            card.classList.toggle("active"); // Alterna la clase "active"
+    // Hacer la petición fetch para obtener los datos
+    fetch('../Server/GestionarComedor.php')
+        .then(response => response.json()) // Convertir la respuesta a JSON
+        .then(data => {
+            const cardsContainer = document.querySelector('.campamento-cards'); // Seleccionar el contenedor de las tarjetas
+            if (!cardsContainer) {
+                console.error("El contenedor de cards no se encuentra."); // Mostrar error si no se encuentra el contenedor
+                return;
+            }
+            if (data.length > 0) {
+                data.forEach(plan => {
+                    const card = document.createElement('div'); // Crear un nuevo div para la tarjeta
+                    card.classList.add('card-hover'); // Añadir la clase 'card-hover' al div
+                    card.innerHTML = `
+                        <div class="card-hover__content">
+                            <h3 class="card-hover__title">${plan.nombre_plan}</h3> <!-- Título del plan -->
+                            <p class="card-hover__text">${plan.descripcion}</p> <!-- Descripción del plan -->
+                            <a href="#" class="card-hover__link">
+                                <span>Ver más</span> <!-- Enlace para ver más detalles del plan -->
+                            </a>
+                        </div>
+                        <div class="card-hover__extra">
+                            <br><h4>Obtén un <span>${plan.descuento || 40}%</span> de descuento!</h4> <!-- Descuento del plan -->
+                            <p>Precio: ${plan.precio}€</p> <!-- Precio del plan -->
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1586511925558-a4c6376fe65f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=60" alt=""> <!-- Imagen del plan -->
+                    `;
+                    cardsContainer.appendChild(card); // Añadir la tarjeta al contenedor
+                });
+            } else {
+                cardsContainer.innerHTML = "<p>No hay planes disponibles.</p>"; // Mensaje si no hay planes disponibles
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar los datos:', error); // Manejar errores en la carga de datos y mostrar un mensaje en la consola
         });
+        
+    // Usamos delegación de eventos en el contenedor para manejar el clic en "Ver más"
+    document.querySelector('.campamento-cards').addEventListener('click', function(event) {
+        // Buscamos si el clic proviene de un elemento con la clase .card-hover__link (o dentro de él)
+        const link = event.target.closest('.card-hover__link');
+        if (link) { // Si se encuentra un enlace con la clase .card-hover__link
+            event.preventDefault(); // Prevenir la acción por defecto del enlace
+            const card = link.closest('.card-hover'); // Encontrar el elemento padre con la clase .card-hover
+            if (card) { // Si se encuentra el elemento padre
+                card.classList.toggle('active'); // Alternar la clase 'active' en el elemento padre
+            }
+        }
     });
 });

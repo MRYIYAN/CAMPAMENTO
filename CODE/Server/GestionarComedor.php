@@ -13,19 +13,23 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
 $sql = "SELECT * FROM PLAN_COMEDOR";
 $result = $conn->query($sql);
 
-// Verificar si hay resultados
+// Crear un array de los resultados
+$plans = [];
 if ($result->num_rows > 0) {
-    // Crear las cards dinámicamente
-    while($row = $result->fetch_assoc()) {
-        echo "<div class='card'>
-                <h3>" . $row['nombre_plan'] . "</h3>
-                <p>" . $row['descripcion'] . "</p>
-                <p>Precio: " . $row['precio'] . "€</p>
-              </div>";
+    while ($row = $result->fetch_assoc()) {
+        $plans[] = [
+            'nombre_plan' => $row['nombre_plan'],
+            'descripcion' => $row['descripcion'],
+            'precio' => $row['precio'],
+            'descuento' => isset($row['descuento']) ? $row['descuento'] : 40
+        ];
     }
 } else {
-    echo "<p>No hay planes disponibles.</p>";
+    $plans = [];
 }
+
+// Devolver los datos como JSON
+echo json_encode($plans);
 
 // Cerrar la conexión
 $conn->close();
