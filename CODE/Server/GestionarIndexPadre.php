@@ -16,7 +16,13 @@ if (!isset($_SESSION["login"])){
     echo json_encode(['noLogin' => '../html/noLogeado.html']);
     exit(); //detenerse
 }else{
-    $login= "ok";
+    //comprobar si es perfil del admin o no 
+    if ($_SESSION["tipo"] !== "TUTOR"){
+        echo json_encode(['noLogin' => '../html/noLogeado.html']);
+        exit();
+    }else{
+        $login= "ok"; 
+    }
 }
 
 
