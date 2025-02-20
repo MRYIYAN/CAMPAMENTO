@@ -137,3 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
 
+const swiper = new Swiper(".signup", {
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    speed: 600,
+  });

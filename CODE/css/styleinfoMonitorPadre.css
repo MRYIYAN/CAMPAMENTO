@@ -266,7 +266,6 @@ body::-webkit-scrollbar {
       opacity: 0;
       transition: opacity 0.3s ease, visibility 0.3s;
       color: #333;  /* Color del texto */
-      z-index: 1000; /* Valor alto para que esté por encima de otros elementos */
   }
 
   /* Estilo para la ventana emergente */
@@ -619,7 +618,7 @@ table tr td:nth-child(3) {
 /* ========================= */
 /* Ajuste para la segunda tabla: mover el contenido de la tercera columna a la izquierda */
 .tables-inner table:nth-child(2) tr td:nth-child(3) {
-  margin: auto;
+  padding-right: 100px; /* Ajusta este valor según sea necesario */
 }
 
 /* ========================= */
