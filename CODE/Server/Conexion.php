@@ -87,8 +87,6 @@ $sql_tables = "
         FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
     );
 
-
-
     CREATE TABLE IF NOT EXISTS ACTIVIDADES (
     id_actividad INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(50) NOT NULL,
@@ -108,9 +106,21 @@ $sql_tables = "
         email VARCHAR(50) NOT NULL UNIQUE,
         contrasenia text NOT NULL
     );
-
     
+    CREATE TABLE IF NOT EXISTS PLAN_COMEDOR (
+    id_plan_comedor INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_plan VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    id_tutor INT NOT NULL,  
+    id_nino INT NOT NULL,   
+    FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor),   
+    FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino)        
+    );
 ";
+
 $conn->multi_query($sql_tables);  // Se ejecuta la creación de todas las tablas
 while ($conn->more_results() && $conn->next_result()) {}  // Espera a que terminen todas las consultas
 
@@ -281,5 +291,105 @@ if (!actividadExiste($conn, $titulo, $id_grupo, $id_plan)) {
     $stmt->close();
 } else {
     // Opcional: echo "La actividad ya existe.<br>";
+}
+// ----- 8. NINOS -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Función para verificar si ya existe un niño con el mismo nombre y tutor
+// ------------------------------------------------------------------------------------------------------------------------------------//
+function ninoExiste($conn, $nombre, $id_tutor) {
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM NINOS WHERE nombre = ? AND id_tutor = ?");
+    $stmt->bind_param("si", $nombre, $id_tutor);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result['count'] > 0;
+}
+
+// Valores a insertar en NINOS
+$nombre_nino = "Niño Ejemplo";
+$id_tutor    = 1; // Debe existir en TUTORES
+$alergias    = "Ninguna";
+$observaciones = "Ninguna";
+$fecha_nacimiento = "2015-05-20";
+$id_plan     = 1; // Debe existir en PLAN_FECHAS
+$pagado      = true;
+$avatar_src  = "avatar.png";
+
+// Insertar el niño solo si no existe
+if (!ninoExiste($conn, $nombre_nino, $id_tutor)) {
+    $stmt = $conn->prepare("INSERT INTO NINOS (nombre, alergias, observaciones, fecha_nacimiento, id_tutor, id_plan, pagado, avatar_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssisiis", $nombre_nino, $alergias, $observaciones, $fecha_nacimiento, $id_tutor, $id_plan, $pagado, $avatar_src);
+    if (!$stmt->execute()) {
+        error_log("Error al insertar Niño: " . $stmt->error);
+    } else {
+        echo "Niño insertado correctamente.<br>";
+    }
+    $stmt->close();
+} else {
+    // Opcional: echo "El niño ya existe.<br>";
+}
+
+// ----- 9. GRUPO_NINOS -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Función para verificar si ya existe una relación entre grupo y niño
+// ------------------------------------------------------------------------------------------------------------------------------------//
+function grupoNinoExiste($conn, $id_grupo, $id_nino) {
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM GRUPO_NINOS WHERE id_grupo = ? AND id_nino = ?");
+    $stmt->bind_param("ii", $id_grupo, $id_nino);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result['count'] > 0;
+}
+
+// Valores a insertar en GRUPO_NINOS
+$id_grupo = 1; // Debe existir en GRUPOS
+$id_nino  = 1; // Debe existir en NINOS
+
+// Insertar la relación solo si no existe
+if (!grupoNinoExiste($conn, $id_grupo, $id_nino)) {
+    $stmt = $conn->prepare("INSERT INTO GRUPO_NINOS (id_grupo, id_nino) VALUES (?, ?)");
+    $stmt->bind_param("ii", $id_grupo, $id_nino);
+    if (!$stmt->execute()) {
+        error_log("Error al insertar relación Grupo-Niño: " . $stmt->error);
+    } else {
+        echo "Relación Grupo-Niño insertada correctamente.<br>";
+    }
+    $stmt->close();
+} else {
+    // Opcional: echo "La relación Grupo-Niño ya existe.<br>";
+}
+
+
+// ----- 10. PLAN_COMEDOR -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Función para verificar si ya existe un plan comedor con el mismo nombre, tutor y niño
+// ------------------------------------------------------------------------------------------------------------------------------------//
+function planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino) {
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM PLAN_COMEDOR WHERE nombre_plan = ? AND id_tutor = ? AND id_nino = ?");
+    $stmt->bind_param("sii", $nombre_plan, $id_tutor, $id_nino);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result['count'] > 0;
+}
+
+// Valores a insertar en PLAN_COMEDOR
+$nombre_plan = "Plan Comedor Ejemplo";
+$id_tutor    = 1; // Debe existir en TUTORES
+$id_nino     = 1; // Debe existir en NINOS
+$descripcion = "Descripción del plan comedor ejemplo.";
+$precio      = 50.00;
+
+// Insertar el plan comedor solo si no existe
+if (!planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)) {
+    $stmt = $conn->prepare("INSERT INTO PLAN_COMEDOR (nombre_plan, descripcion, precio, id_tutor, id_nino) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssdii", $nombre_plan, $descripcion, $precio, $id_tutor, $id_nino);
+    if (!$stmt->execute()) {
+        error_log("Error al insertar Plan Comedor: " . $stmt->error);
+    }
+    $stmt->close();
+} else {
+    // Opcional: echo "El plan comedor ya existe.<br>";
 }
 ?>
