@@ -1,4 +1,4 @@
- /* =====================================================================================================================================================*/
+/* =====================================================================================================================================================*/
                                                                        /* ESTILO GENERAL BODY*/
   /* =====================================================================================================================================================*/
 
@@ -48,7 +48,8 @@ body::-webkit-scrollbar {
     background-attachment: fixed;
     
   }
-  /* =====================================================================/*
+
+/* =====================================================================/*
                             TRANSICIÓN CON GSAP
   /*======================================================================== */
 .transition {
@@ -386,7 +387,7 @@ body::-webkit-scrollbar {
   /* Estilos del footer - Cambio de position */
   /* ==================================================================*/
   footer {
-    position: fixed; /* Se fija al fondo */
+    position: relative; /* Se fija al fondo */
     left: 0;
     bottom: 0; /* Ajusta al fondo de la página */
     display: flex;
@@ -424,3 +425,209 @@ body::-webkit-scrollbar {
     /* =====================================================================================================================================================*/
                                                                          /*HTML CONTENIDO*/
     /* =====================================================================================================================================================*/
+/* ========================= */
+/* TIPOGRAFÍA Y MÁRGENES      */
+/* ========================= */
+/* Se eliminan márgenes por defecto y se establecen estilos básicos para h2, h3 y h4 */
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 18px;  /* Tamaño de fuente para h2 */
+}
+
+h3 {
+  font-size: 14px;  /* Tamaño de fuente para h3 */
+}
+
+h4 {
+  opacity: 0.5;     /* Opacidad para h4 */
+  font-size: 12px;  /* Tamaño de fuente para h4 */
+  margin: 0 0 4px;  /* Margen inferior */
+}
+
+/* ========================= */
+/* ESTILOS PARA LAS TABLAS   */
+/* ========================= */
+/* La tabla ocupa el 100% del contenedor y se colapsan los bordes */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Fuerza distribución fija de columnas */
+}
+
+/* Celdas de la tabla: se centran y se añade padding en la parte superior */
+table tr td {
+  padding: 10px 0 0;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* ========================= */
+/* ESTILOS PARA LA CARD      */
+/* ========================= */
+/* Estilos generales para la tarjeta */
+.card {
+  border-radius: 10px; /* Bordes redondeados */
+  background: #26263c; /* Fondo oscuro */
+  box-shadow: 0 30px 50px rgb(0 0 0 / 12%); /* Sombra */
+  width: 500px; /* Ancho fijo */
+  padding: 20px; /* Espacio interno */
+}
+
+/* Estilos para la cabecera de la tarjeta */
+.card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 10px;
+}
+
+.card header h2 {
+  opacity: 0.66;
+  font-size: 24px; /* Fuente más grande para el título */
+}
+
+.card header button {
+  font-size: 16px;
+}
+
+/* ========================= */
+/* AVATARES Y ESTRELLAS       */
+/* ========================= */
+/* Estilos para las imágenes de avatar */
+.avatar {
+  width: 40px;         /* Tamaño fijo */
+  height: 40px;
+  background: rgb(255 255 255 / 8%);
+  border-radius: 50%;    /* Circular */
+  padding: 5px;
+  display: block;
+  margin: 0 auto;        /* Centrado horizontal */
+}
+
+/* Contenedor de estrellas: se usa flex y gap para espaciar */
+.stars {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stars img {
+  width: 20px; /* Tamaño fijo para cada estrella */
+  height: 20px;
+}
+
+/* ========================= */
+/* ÍCONOS SOCIALES           */
+/* ========================= */
+/* Tamaño y alineación para íconos sociales */
+.social {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+}
+
+/* ========================= */
+/* BOTONES DE NAVEGACIÓN      */
+/* ========================= */
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  opacity: 0.5;
+  display: grid;
+  place-items: center;
+  padding: 14px 16px;   /* Padding aumentado */
+  border-radius: 6px;
+  transition: opacity 0.25s;
+  font-size: 16px;
+}
+
+.buttons button.active {
+  background: #685cf6;
+  opacity: 1;
+}
+
+/* ========================= */
+/* CONTENEDOR DE TABLAS       */
+/* ========================= */
+.tables {
+  position: relative;
+  overflow: hidden;
+  height: 250px; /* Altura fija para el contenedor de tablas */
+}
+
+/* ========================= */
+/* CONTENEDOR INTERNO (LISTAS)*/
+/* ========================= */
+/* Se utiliza flex para distribuir uniformemente las tablas (listas) */
+.tables-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1500px;        /* Ancho total, ajustable según el número de listas */
+  display: flex;
+  transition: 0.5s;
+}
+
+/* Se aplica margen horizontal a cada tabla para separarlas */
+table {
+  margin: 0 20px 0;  /* Márgenes horizontales */
+  opacity: 0;
+  transition: 0.5s;
+}
+
+table.active {
+  opacity: 1;
+}
+
+/* ========================= */
+/* ANCHOS FIJOS PARA COLUMNAS */
+/* ========================= */
+/* Primera columna: avatar */
+table tr td:nth-child(1) {
+  width: 80px;
+}
+
+/* Segunda columna: nombres y títulos */
+table tr td:nth-child(2) {
+  width: 150px;
+}
+
+/* Tercera columna: espacio adicional */
+table tr td:nth-child(3) {
+  padding-left: 30px;
+}
+
+/* ========================= */
+/* AJUSTES ESPECÍFICOS       */
+/* ========================= */
+/* Ajuste para la segunda tabla: mover el contenido de la tercera columna a la izquierda */
+.tables-inner table:nth-child(2) tr td:nth-child(3) {
+  padding-right: 100px; /* Ajusta este valor según sea necesario */
+}
+
+/* ========================= */
+/* ESPACIADO ADICIONAL       */
+/* ========================= */
+.card-section {
+  margin-top: 500px; /* Espacio superior para la sección de tarjetas */
+}
+
+.spacer {
+  height: 120px; /* Espacio adicional */
+}
