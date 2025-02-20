@@ -869,7 +869,7 @@ formularioOperar.onsubmit = async function (event) {
 //                            UPDATE DE BBDD DEL ACTIVIDAD
 //================================================================================================//
 function actualizarActividad() {
-  console.log(`id_actividadSeleccionado = ${id_actividadSeleccionada}`);
+  console.log(`id_actividadSeleccionado PARA ACTUALIZAR ES  = ${id_actividadSeleccionada}`);
   console.log(`titulo: ${document.getElementById("titulo").value}`);
   console.log(`Hora inicio: ${document.getElementById("hora_inicio").value}`);
   console.log(`Hora fin: ${document.getElementById("hora_fin").value}`);

@@ -245,7 +245,7 @@ body::-webkit-scrollbar {
 
   /* espaciador para el navbar y el contenido, para que no se superpongan */
   .espaciador{
-    height: 100px;
+    height: 15em;
   }
   /* -------------------------------------------------------------------------------------------------- */
   /* overlay para cerrar sesion */
@@ -265,6 +265,7 @@ body::-webkit-scrollbar {
       opacity: 0;
       transition: opacity 0.3s ease, visibility 0.3s;
       color: #333;  /* Color del texto */
+      z-index: 1000; /* Valor alto para que esté por encima de otros elementos */
   }
 
   /* Estilo para la ventana emergente */

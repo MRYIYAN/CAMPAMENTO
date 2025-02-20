@@ -245,7 +245,7 @@ body::-webkit-scrollbar {
 
   /* espaciador para el navbar y el contenido, para que no se superpongan */
   .espaciador{
-    height: 100px;
+    height: 15em;
   }
   /* -------------------------------------------------------------------------------------------------- */
   /* overlay para cerrar sesion */

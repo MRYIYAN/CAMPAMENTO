@@ -184,7 +184,7 @@ if (!usuarioExiste($conn, "TUTORES", "tutor@ejemplo.com")) {
 if (!usuarioExiste($conn, "ADMIN", "admin@ejemplo.com")) {
     $stmt = $conn->prepare("INSERT INTO ADMIN (email, contrasenia) VALUES (?, ?)");
     $email = "admin@ejemplo.com";
-    $admin_hashed_password = '$2y$10$RVcnfes4zNR150gzv5ZfluPaxB1fzxJtyBSM1Nxj0VBWm5yadTRxW'; 
+    $admin_hashed_password = '$2y$10$FPQ0ATriO3ybhUFxwS3O0.2yDubZGQ0KniiwvRRAB95dEFZ045IL.'; 
     $stmt->bind_param("ss", $email, $admin_hashed_password);
     
     if ($stmt->execute()) {
