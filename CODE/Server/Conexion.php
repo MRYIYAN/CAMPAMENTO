@@ -69,6 +69,7 @@ $sql_tables = "
         nombre VARCHAR(50) NOT NULL,
         email VARCHAR(50) NOT NULL UNIQUE,
         contrasenia text NOT NULL,
+        descripcion TEXT,
         avatar_src text
     );
 
@@ -119,6 +120,14 @@ $sql_tables = "
     FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor),   
     FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino)        
     );
+    CREATE TABLE IF NOT EXISTS LISTA_MONITORES (
+    id_lista_monitor INT PRIMARY KEY AUTO_INCREMENT,
+    id_monitor INT NOT NULL,
+    nombre_monitor VARCHAR(50) NOT NULL,
+    descripcion_monitor TEXT,
+    FOREIGN KEY (id_monitor) REFERENCES MONITORES(id_monitor) ON DELETE CASCADE
+);
+
 ";
 
 $conn->multi_query($sql_tables);  // Se ejecuta la creación de todas las tablas
@@ -143,11 +152,12 @@ function usuarioExiste($conn, $tabla, $email) {
 // Funcion para crear datos en la tabla monitores con un id asignado ademas de su contraseña "hasheada".
 // ------------------------------------------------------------------------------------------------------------------------------------//
 if (!usuarioExiste($conn, "MONITORES", "monitor@ejemplo.com")) {
-    $stmt = $conn->prepare("INSERT INTO MONITORES (nombre, email, contrasenia) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO MONITORES (nombre, email, contrasenia, descripcion) VALUES (?, ?, ?, ?)");
     $nombre = "Monitor Ejemplo";
     $email = "monitor@ejemplo.com";
     $hashed_password = '$2y$10$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu';  
-    $stmt->bind_param("sss", $nombre, $email, $hashed_password);
+    $descripcion = "Monitor de ejemplo para el campamento.";
+    $stmt->bind_param("ssss", $nombre, $email, $hashed_password, $descripcion);
     
     if ($stmt->execute()) {
         echo "Monitor insertado correctamente.<br>";
@@ -391,5 +401,37 @@ if (!planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)) {
     $stmt->close();
 } else {
     // Opcional: echo "El plan comedor ya existe.<br>";
+}
+
+// ----- 11. LISTA_MONITORES -----
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// Función para verificar si ya existe un monitor en la lista de monitores
+// ------------------------------------------------------------------------------------------------------------------------------------//
+function monitorExiste($conn, $id_monitor, $nombre_monitor, $descripcion_monitor) {
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM LISTA_MONITORES WHERE id_monitor = ? AND nombre_monitor = ? AND descripcion_monitor = ?");
+    $stmt->bind_param("iss", $id_monitor, $nombre_monitor, $descripcion_monitor);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result['count'] > 0;
+}
+
+// Valores a insertar en LISTA_MONITORES
+$id_monitor = 1; // Asegúrate de que este ID exista en la tabla MONITORES
+$nombre_monitor = "Monitor Ejemplo";
+$descripcion_monitor = "Monitor de audio y video.";
+
+// Insertar el monitor solo si no existe
+if (!monitorExiste($conn, $id_monitor, $nombre_monitor, $descripcion_monitor)) {
+    $stmt = $conn->prepare("INSERT INTO LISTA_MONITORES (id_monitor, nombre_monitor, descripcion_monitor) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $id_monitor, $nombre_monitor, $descripcion_monitor);
+    if (!$stmt->execute()) {
+        error_log("Error al insertar Monitor: " . $stmt->error);
+    } else {
+        echo "Monitor insertado correctamente.<br>";
+    }
+    $stmt->close();
+} else {
+    // Opcional: echo "El monitor ya existe.<br>";
 }
 ?>
