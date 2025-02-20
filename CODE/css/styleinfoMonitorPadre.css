@@ -619,7 +619,7 @@ table tr td:nth-child(3) {
 /* ========================= */
 /* Ajuste para la segunda tabla: mover el contenido de la tercera columna a la izquierda */
 .tables-inner table:nth-child(2) tr td:nth-child(3) {
-  padding-right: 100px; /* Ajusta este valor según sea necesario */
+  margin: auto;
 }
 
 /* ========================= */
