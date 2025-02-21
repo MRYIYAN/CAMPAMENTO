@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/stylechat.css">
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-md-4 col-xl-3 chat">
+                <div class="card mb-sm-3 mb-md-0 contacts_card">
+                    <div class="card-header">
+                        <div class="input-group">
+                            <!-- ------------------------------------- -->
+                            <!-- SECCION PARA BUSCAR USUARIOS -->
+                            <input type="text" placeholder="Buscar..." name="" class="form-control search">
+                            <!-- ------------------------------------- -->
+                            <div class="input-group-prepend">
+                                <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--                                                          SECCION DE USUARIOS -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
+                    <div class="card-body contacts_body">
+                        <ul class="contacts">
+                            <li class="active">
+                                <div class="d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
+                                        <span class="online_icon"></span>
+                                    </div>
+                                    <div class="user_info">
+                                        <span>Usuario 1</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
+                                        <span class="online_icon"></span>
+                                    </div>
+                                    <div class="user_info">
+                                        <span>Usuario 2</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
+                                        <span class="online_icon"></span>
+                                    </div>
+                                    <div class="user_info">
+                                        <span>Usuario 3</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
+                                        <span class="online_icon"></span>
+                                    </div>
+                                    <div class="user_info">
+                                        <span>Usuario 4</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
+                                        <span class="online_icon"></span>
+                                    </div>
+                                    <div class="user_info">
+                                        <span>Usuario 5</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--                                                          INDICADOR DE USUARIO-->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
+            </div>
+            <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                    <div class="card-header msg_head">
+                        <div class="d-flex bd-highlight">
+                            <div class="img_cont">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info">
+                                <span>Usuario 1</span>
+                            </div>
+                            <div class="video_cam">
+                            </div>
+                        </div>
+                        <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                        <div class="action_menu">
+                            <ul>
+                                <li><i class="fas fa-user-circle"></i> Informar Problema</li>
+                                <li><i class="fas fa-plus"></i> Añadir al grupo</li>
+                                <li><i class="fas fa-ban"></i> Bloquear</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
+                    <!--                                                          MENSAJES SECCION DE CHAT -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
+
+                    <div class="card-body msg_card_body">
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                                Hola, ¿cómo estás?
+                                
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_cotainer_send">
+                                Hola, estoy bien, ¿y tú?
+                                
+                            </div>
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                                Estoy bien también, gracias.
+                               
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_cotainer_send">
+                                De nada
+                                
+                            </div>
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
+                            </div>
+                            <div class="msg_cotainer">
+                                Adios
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                            </div>
+                            <textarea name="" class="form-control type_msg" placeholder="Escribe tu mensaje..."></textarea>
+                            <div class="input-group-append">
+                                <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../JS/operarNotificacionesPadre.js"></script>
+</body>
+</html>

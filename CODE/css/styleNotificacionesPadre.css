@@ -1,4 +1,4 @@
- /* =====================================================================================================================================================*/
+/* =====================================================================================================================================================*/
                                                                        /* ESTILO GENERAL BODY*/
   /* =====================================================================================================================================================*/
 
@@ -37,7 +37,7 @@ body::-webkit-scrollbar {
 
   body {
     font-family: "Euclid Circular A", "Poppins";
-    background: linear-gradient(225deg, #ffffff, #3E99E3);
+    background: linear-gradient(225deg, #ffffff, #3E99E3); /* Ajusta este color según sea necesario */
     color: white;
     margin: 0;
     height: 100vh;
@@ -245,7 +245,7 @@ body::-webkit-scrollbar {
 
   /* espaciador para el navbar y el contenido, para que no se superpongan */
   .espaciador{
-    height: 100px;
+    height: 180px; /* Aumenta este valor según sea necesario */
   }
   /* -------------------------------------------------------------------------------------------------- */
   /* overlay para cerrar sesion */
@@ -386,7 +386,7 @@ body::-webkit-scrollbar {
   /* Estilos del footer - Cambio de position */
   /* ==================================================================*/
   footer {
-    position: fixed; /* Se fija al fondo */
+    position: relative; /* Se fija al fondo */
     left: 0;
     bottom: 0; /* Ajusta al fondo de la página */
     display: flex;
@@ -395,6 +395,7 @@ body::-webkit-scrollbar {
     height: 350px; /* Altura del footer */
     overflow-x: hidden;
     z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
+    background: linear-gradient(225deg, #ffffff, #3E99E3); /* Ajusta este color según sea necesario */
   }
   
   /* ==================================================================*/
