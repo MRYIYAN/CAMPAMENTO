@@ -434,4 +434,7 @@ if (!monitorExiste($conn, $id_monitor, $nombre_monitor, $descripcion_monitor)) {
 } else {
     // Opcional: echo "El monitor ya existe.<br>";
 }
+
+
 ?>
+

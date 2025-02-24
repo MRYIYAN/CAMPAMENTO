@@ -47,7 +47,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 //=========================================================================================================================
 
 // Preparar la consulta para evitar inyección SQL
-//SACAR TODOS INFORMACION DEL ADMIN
+// SACAR TODA INFORMACION DEL ADMIN
 $queryInfo = $conn->prepare("SELECT * FROM ADMIN WHERE id_admin = ?");
 $queryInfo->bind_param("i", $_SESSION['id']);    //asignamos el valor de ?, es un i porque es un numero(integer)
 $queryInfo->execute();   //ejecutar en bbdd
@@ -217,9 +217,6 @@ if (isset($_POST['id_actividadSeleccionado']) && isset($_POST['titulo']) && isse
         exit();
     }
 
-
-
-
 }
 //===============================================================================================================================================================================================================
 //                                                      FIN DE ACTUALIZAR TABLA
@@ -251,14 +248,6 @@ if (isset($data['id_actividadSeleccionadaParaBorrar'])){
         exit();
     }
 }
-
-
-
-
-
-
-
-
 
 //=========================================================================================================================
 //                       ENVIO DE DATOS
