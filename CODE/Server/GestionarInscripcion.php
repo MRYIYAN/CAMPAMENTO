@@ -64,22 +64,13 @@ while ($row = $result->fetch_assoc()) {
 if (isset($data['nombre_nino']) && isset($data['nacimiento_nino']) && isset($data['id_plan']) && isset($data['alergia']) && isset($data['observaciones'])) {
     //RUPA DE AVATAR DEFAULT 
     $avatar_default_src="../assets/img/avatar.png"; //cuando creamos el niño hay que asignar un avatar default sino sale blanco
-    $queryInsertNiño = $conn->prepare("INSERT INTO ninos (nombre, fecha_nacimiento, alergias, observaciones, id_tutor, avatar_src) VALUES (?, ?, ?, ?, ?, ?)");
-    $queryInsertNiño->bind_param("ssssis", $data['nombre_nino'], $data['nacimiento_nino'], $data['alergia'], $data['observaciones'], $_SESSION['id'], $avatar_default_src);
+    $queryInsertNiño = $conn->prepare("INSERT INTO ninos (nombre, fecha_nacimiento, id_plan, alergias, observaciones, id_tutor, avatar_src) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $queryInsertNiño->bind_param("sssssis", $data['nombre_nino'], $data['nacimiento_nino'], $data['id_plan'], $data['alergia'], $data['observaciones'], $_SESSION['id'], $avatar_default_src);
     if ($queryInsertNiño->execute()) { //comprobamos la ejecucion
         if ($queryInsertNiño->affected_rows > 0) { // Si se inserta al menos un registro
-            $id_ninoAutomatico = $conn->insert_id; // OBTENEMOS EL ID DEL NIÑO INSERTADO
-            $queryInsertNiñoPlan = $conn->prepare("INSERT INTO plan_ninos (id_plan, id_nino) VALUES (?, ?)");
-            $queryInsertNiñoPlan->bind_param("ii", $data['id_plan'], $id_ninoAutomatico);
-            if ($queryInsertNiñoPlan->execute()) { //comprobamos la ejecucion
-                echo json_encode(['registrado' => '../html/inscripcionNinoExitosa.html']);
-                $queryInsertNiñoPlan->close();   
-                exit();
-            } else{
-                echo json_encode(['noRegistrado' => '../html/inscripcionNinoFallada.html']);
-                $queryInsertNiño->close();   
-                exit(); 
-            }
+            echo json_encode(['registrado' => '../html/inscripcionNinoExitosa.html']);
+            $queryInsertNiño->close();   
+            exit();
         } else {
             echo json_encode(['noRegistrado' => '../html/inscripcionNinoFallada.html']);
             $queryInsertNiño->close();   

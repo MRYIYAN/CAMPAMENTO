@@ -425,10 +425,6 @@ body::-webkit-scrollbar {
                                                                          /*HTML CONTENIDO*/
     /* =====================================================================================================================================================*/
 
-    .body-fondo-bloqueado {
-      pointer-events: none;  /* Bloquea todas las interacciones con el fondo */
-      overflow: hidden;  /* Bloquea el desplazamiento de la página */
-    }
     
 /* ==================================================================*/
 /* Overlay para mostrar mas definicion */
@@ -450,7 +446,6 @@ body::-webkit-scrollbar {
     color: #333;  /* Color del texto */
     overflow: auto; /* Agrega desplazamiento si es necesario */
     padding: 20px;  /* Evita que el contenido toque los bordes */
-    z-index: 998;
 }
 
 
@@ -519,7 +514,6 @@ body::-webkit-scrollbar {
     color: #444;  /* Color de texto más suave */
     overflow: auto; /* Agrega desplazamiento si es necesario */
     padding: 20px;  /* Evita que el contenido toque los bordes */
-    z-index: 998;
 }
 
 /* Estilo para la ventana emergente */
@@ -639,7 +633,6 @@ label {
     color: #333;  /* Color del texto */
     overflow: auto; /* Agrega desplazamiento si es necesario */
     padding: 20px;  /* Evita que el contenido toque los bordes */
-    z-index: 999;
 }
 
 
@@ -687,156 +680,7 @@ label {
 /* Fin de Overlay para mostrar mas seguro borrar */
 /* ==================================================================*/
 
-/* ==================================================================*/
-/* Overlay añadir Grupos */
-/* ==================================================================*/
-  /* Estilo para el overlay */
-  .overlayAñadirGrupo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s;
-    color: #333;  /* Color del texto */
-    overflow: auto; /* Agrega desplazamiento si es necesario */
-    padding: 20px;  /* Evita que el contenido toque los bordes */
-    z-index: 998;
-}
 
-
-  /* Estilo para la ventana emergente */
-  .overlayContenidoAñadirGrupo {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    text-align: center;
-    position: relative;
-    max-height: 80%;
-    overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
-}
-
-
-  /* Botón de cierre */
-  .closeBtnAñadirGrupo {
-    position: absolute;
-    font-size: large;
-    top: 10px;
-    right: 10px;
-    background: #ff4d4d00;
-    color: #007BFF;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    pointer-events: auto;  /* Habilita la interacción con el overlay */
-  }
-
-  .closeBtnAñadirGrupo:hover {
-    background: #cc000000;
-  }
-
-  /* Clase para mostrar el overlay */
-  .overlayAñadirGrupo.activeOverlayAñadirGrupo {
-    visibility: visible;
-    opacity: 1;
-  }
-
-
-/* ==================================================================*/
-/* fin de Overlay añadir grupos*/
-/* ==================================================================*/
-
-/* -------------------------------- */
-.mensajeFeedback{
-  z-index: 999;
-  background-color: #333;
-}
-.mensajeFeedbackPlan{
-  z-index: 999;
-  background-color: #333;
-}
-/* -------------------------------- */
-
-/* ==================================================================*/
-/* Overlay añadir Plan */
-/* ==================================================================*/
-  /* Estilo para el overlay */
-  .overlayAñadirPlan {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s;
-    color: #333;  /* Color del texto */
-    overflow: auto; /* Agrega desplazamiento si es necesario */
-    padding: 20px;  /* Evita que el contenido toque los bordes */
-    z-index: 998;
-    pointer-events: auto;  /* Habilita la interacción con el overlay */
-
-}
-
-
-  /* Estilo para la ventana emergente */
-  .overlayContenidoAñadirPlan {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    text-align: center;
-    position: relative;
-    max-height: 80%;
-    overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
-    z-index: 998;
-}
-
-
-  /* Botón de cierre */
-  .closeBtnAñadirPlan {
-    position: absolute;
-    font-size: large;
-    top: 10px;
-    right: 10px;
-    background: #ff4d4d00;
-    color: #007BFF;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  .closeBtnAñadirPlan:hover {
-    background: #cc000000;
-  }
-
-  /* Clase para mostrar el overlay */
-  .overlayAñadirPlan.activeOverlayAñadirPlan {
-    visibility: visible;
-    opacity: 1;
-  }
-
-
-/* ==================================================================*/
-/* fin de Overlay añadir grupos*/
-/* ==================================================================*/
 
     
 /* ==================================================================*/

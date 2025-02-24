@@ -33,7 +33,6 @@ $sql_tables = "
 
  CREATE TABLE IF NOT EXISTS PLAN_FECHAS (
     id_plan INT PRIMARY KEY AUTO_INCREMENT,
-    nombre  VARCHAR(40) NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
     fecha_maxInscripcion DATE NOT null,
@@ -58,9 +57,11 @@ $sql_tables = "
     observaciones TEXT,
     fecha_nacimiento DATE NOT NULL,
     id_tutor INT NOT NULL,
+    id_plan INT NOT NULL,
     pagado BOOLEAN NOT NULL,
     avatar_src text,
-    FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor)
+    FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor),
+    FOREIGN KEY (id_plan) REFERENCES PLAN_FECHAS(id_plan)
 );
 
     CREATE TABLE IF NOT EXISTS MONITORES (
@@ -84,13 +85,6 @@ $sql_tables = "
         id_nino INT NOT NULL,
         PRIMARY KEY (id_grupo, id_nino),
         FOREIGN KEY (id_grupo) REFERENCES GRUPOS(id_grupo) ON DELETE CASCADE,
-        FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
-    );
-      CREATE TABLE IF NOT EXISTS PLAN_NINOS (
-        id_plan INT NOT NULL,
-        id_nino INT NOT NULL,
-        PRIMARY KEY (id_plan, id_nino),
-        FOREIGN KEY (id_plan) REFERENCES PLAN_FECHAS(id_plan) ON DELETE CASCADE,
         FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
     );
 
@@ -333,8 +327,8 @@ $avatar_src  = "avatar.png";
 
 // Insertar el niño solo si no existe
 if (!ninoExiste($conn, $nombre_nino, $id_tutor)) {
-    $stmt = $conn->prepare("INSERT INTO NINOS (nombre, alergias, observaciones, fecha_nacimiento, id_tutor,  pagado, avatar_src) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssiis", $nombre_nino, $alergias, $observaciones, $fecha_nacimiento, $id_tutor, $pagado, $avatar_src);
+    $stmt = $conn->prepare("INSERT INTO NINOS (nombre, alergias, observaciones, fecha_nacimiento, id_tutor, id_plan, pagado, avatar_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssisiis", $nombre_nino, $alergias, $observaciones, $fecha_nacimiento, $id_tutor, $id_plan, $pagado, $avatar_src);
     if (!$stmt->execute()) {
         error_log("Error al insertar Niño: " . $stmt->error);
     } else {
