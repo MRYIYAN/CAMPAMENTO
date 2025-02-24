@@ -148,7 +148,7 @@ function mostarDatosNino(id_nino) {
             }
 
             // Mostrar la tabla de actividades
-            console.log(`id del monitor del grupo ${data.profesorHij} es: ${data.idProfesorHijo}`); // Mostrar en consola el ID del profesor
+            console.log(`id del monitor del grupo ${data.profesorHijo} es: ${data.idProfesorHijo}`); // Mostrar en consola el ID del profesor
             console.log(`Actividades con el monitor ${data.idProfesorHijo} es: ${data.actividades}`); // Mostrar en consola las actividades
             console.log(data.actividades); // Mostrar en consola las actividades
             const tabla = document.getElementById('tablaActividad').getElementsByTagName('tbody')[0]; // Obtener el cuerpo de la tabla
@@ -213,8 +213,15 @@ function mostarDatosNino(id_nino) {
             }
 
             // Mostrar el plan del niño
-            console.log(data.datoHijo['id_plan']); // Mostrar en consola el ID del plan
-            planHijo.innerHTML = `${data.datoHijo['id_plan']} : ${data.datoInfoPlan['fecha_inicio']} a ${data.datoInfoPlan['fecha_fin']}`; // Mostrar el plan del niño
+            console.log("plannnnnnnnn" +data.planHijo); // Mostrar en consola el ID del plan
+            console.log(data.planHijo); // Mostrar en consola el ID del plan
+
+            if (data.planHijo && Object.keys(data.planHijo).length > 0) {   //vertifica si es nulo o indefined y luedo comprueba si tiene datos o no
+                planHijo.innerHTML = `${data.planHijo.id_plan} : ${data.planHijo.fecha_inicio} a ${data.planHijo.fecha_fin}`;
+            } else {
+                planHijo.innerHTML = "Hay Modificación de Plan, Estamos preparando para ello";
+            }
+            
 
             // Actualización de avatar del niño
             document.getElementById('imagenHijo').innerHTML = `<img src="${data.datoHijo['avatar_src']}" alt="${data.datoHijo['nombre']}" width="100px" />`; // Mostrar el avatar del niño

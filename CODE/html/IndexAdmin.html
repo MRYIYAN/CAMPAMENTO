@@ -36,24 +36,37 @@
         <!-- Enlace a la sección de actividades -->
         <!-- Enlace con un menú desplegable -->
         <div class="item">
-          Actividades
+          Gestion
           <div class="dropdown">
             <div>
               <!-- Opciones del menú desplegable -->
               <a
-                ><button type="button" class="botonNavbar" id="btnCalendario">
-                  Calendario
+                ><button
+                  type="button"
+                  class="botonNavbar"
+                  id="btnGestionGrupos"
+                >
+                  Gestionar Grupos
                 </button></a
               >
               <a
                 ><button
                   type="button"
                   class="botonNavbar"
-                  id="btnInfoActividades"
+                  id="btnGestionarPlan"
                 >
-                  Informacion de Actividades
+                  Gestionar Planes
                 </button></a
               >
+              <a
+              ><button
+                type="button"
+                class="botonNavbar"
+                id="btnGestionarNinos"
+              >
+                Gestionar Ninos
+              </button></a
+            >
             </div>
           </div>
         </div>
@@ -159,6 +172,8 @@
       <!-- =================================================================================================================================== -->
       <!-- OBERLAYS -->
       <!-- =================================================================================================================================== -->
+       <!-- mensaje de exito -->
+     
       <!-- El overlay se oculta por defecto y se mostrará cuando se haga clic en el botón -->
       <div id="overlayDefinicion" class="overlayDefinicion">
         <div class="overlayContenido">
@@ -167,34 +182,135 @@
         </div>
       </div>
 
+      <!-- El overlay para añadir grupo -->
+      <div id="overlayAñadirGrupo" class="overlayAñadirGrupo">
+        <div class="overlayContenidoAñadirGrupo">
+          <p id="descripcionCompletaAñadirGrupo">
+            <form method="post" id="formAñadirGrupo">
+              <label for="nombreGrupo">
+                Nombre:
+                <input type="text" name="nombreGrupo" id="nombreGrupo" />
+                <div id="errorNombreGrupo"></div>
+              </label>
+              
+              <label for="monitorAsignado">
+                Monitor:
+                <select name="monitorAsignado" id="monitorAsignado">
+                  <option value="0" id="monitorSeleccionadoGrupo">Selecciona un monitor</option>
+                </select>
+                <div id="errorMonitorAsignado"></div>
+              </label>
+
+              <div id="mensajeFeedback" style="display: none;"></div>
+              
+              <button type="button" id="btnVolverAñadirGrupo">Volver</button>
+              <button type="submit" id="btnCrearGrupoConfirmar">Crear</button>
+              <div id="errorCrearGrupo"></div>
+            </form>
+          </p>
+          <button class="closeBtnAñadirGrupo">X</button>
+        </div>
+      </div>
+
+
+      <!-- El overlay para añadir plan -->
+      <div id="overlayAñadirPlan" class="overlayAñadirPlan">
+        <div class="overlayContenidoAñadirPlan">
+          <p id="descripcionCompletaAñadirPlan">
+            <form method="post" id="formAñadirPlan">
+              <label for="nombrePlan">
+                Nombre:
+                <input type="text" name="nombrePlan" id="nombrePlan" />
+                <div id="errorNombrePlan"></div>
+              </label>
+              <label for="fechaInicioCrearPlan">
+                Fecha de inicio:
+                <input type="date" name="fechaInicioCrearPlan" id="fechaInicioCrearPlan">
+                <div id="errorFechaInicioCrearPlan"></div>
+              </label>
+              <label for="fechaInicioCrearPlan">
+                Fecha de fin:
+                <input type="date" name="fechaFinCrearPlan" id="fechaFinCrearPlan">
+                <div id="errorFechaCrearPlan"></div>
+              </label>
+              <label for="fechaMaximaIncribcionCrearPlan">
+                Fecha maxima de inscripcion:
+                <input type="date" name="fechaMaximaIncribcionCrearPlan" id="fechaMaximaIncribcionCrearPlan">
+                <div id="errorFechaMaximaIncribcionCrearPlan"></div>
+              </label>
+              <label for="horaMaximaInscribcionCrearPlan">
+                Hora maxima de inscripcion:
+                <input type="time" name="horaMaximaInscribcionCrearPlan" id="horaMaximaInscribcionCrearPlan">
+                <div id="errorHoraMaximaInscribcionCrearPlan"></div>
+              </label>
+              <label for="precioCrearPlan">
+                Precio:
+                <input type="number" name="precioCrearPlan" id="precioCrearPlan" min="0">
+                <div id="errorPrecioCrearPlan"></div>
+              </label>
+              <label for="descripcionCrearPlan">
+                Descripcion:
+                <textarea name="descripcionCrearPlan" id="descripcionCrearPlan"></textarea>
+                <div id="errorDescripcionCrearPlan"></div>
+              </label>
+
+              <div id="mensajeFeedbackPlan" style="display: none;"></div>
+              <button type="button" id="btnVolverAñadirPlan">Volver</button>
+              <button type="submit" id="btnCrearPlanConfirmar">Crear</button>
+              <div id="errorCrearPlan"></div>
+            </form>
+          </p>
+          <button class="closeBtnAñadirPlan">X</button>
+        </div>
+      </div>
+
+      <!-- overlay para operar con actividades -->
       <div id="overlayOperar" class="overlayOperar">
         <div class="overlayContenidoOperar">
           <p id="descripcionCompletaOperar"></p>
           <form method="post" id="formularioOperarActividad">
             <div id="informacionGeneral">
-              <label for="id_activiadad">ID:</label>
-              <input
-                type="text"
-                name="id_activiadad"
-                id="id_activiadad"
-                disabled
-              />
-              <label for="titulo">Nombre: </label>
-              <input type="text" name="titulo" id="titulo" />
+              <label for="id_activiadad"
+                >ID:
+                <input
+                  type="text"
+                  name="id_activiadad"
+                  id="id_activiadad"
+                  disabled
+                />
+              </label>
+
+              <label for="titulo"
+                >Nombre:
+                <input type="text" name="titulo" id="titulo" />
+              </label>
               <div id="errorTitulo"></div>
-              <label for="hora_inicio">Hora: </label>
-              <input type="time" name="hora_inicio" id="hora_inicio" />
+
+              <label for="hora_inicio"
+                >Hora:
+                <input type="time" name="hora_inicio" id="hora_inicio" />
+              </label>
               <div id="errorHora"></div>
-              <label for="hora_fin">Hora fin: </label>
-              <input type="time" name="hora_fin" id="hora_fin" />
+
+              <label for="hora_fin"
+                >Hora fin:
+                <input type="time" name="hora_fin" id="hora_fin" />
+              </label>
               <div id="errorHoraFin"></div>
-              <label for="descripcion">Descripcion: </label>
-              <textarea name="descripcion" id="descripcion"></textarea>
+
+              <label for="descripcion"
+                >Descripcion:
+                <textarea name="descripcion" id="descripcion"></textarea>
+              </label>
               <div id="errorDescripcion"></div>
-              <label for="fecha">Fecha: </label>
-              <input type="date" name="fecha" id="fecha" />
+
+              <label for="fecha"
+                >Fecha:
+                <input type="date" name="fecha" id="fecha" />
+              </label>
               <div id="errorFecha"></div>
-              <label for="avatar">Fotos de actividad</label>
+
+              <label for="avatar">Fotos de actividad:</label>
               <div id="vistaPreviaavatar">
                 <img
                   id="vistaPrevia"
@@ -205,40 +321,61 @@
               </div>
               <input type="file" name="avatar" id="avatar" />
               <div id="errorFoto"></div>
-              <label for="cambiarGrupo">Quieres Cambiar de grupo?</label>
-              <input
-                type="radio"
-                name="cambiarGrupo"
-                id="cambiarGrupoNo"
-                value="no"
-                checked
-              />No
-              <input
-                type="radio"
-                name="cambiarGrupo"
-                id="cambiarGrupoSi"
-                value="si"
-              />Si
-              <div id="espacioCambiarGrupo"></div>
-              <div id="errorCambiarGrupo"></div>
-              <label for="cambiarPlan">Quieres Cambiar a otro plan?</label>
-              <input
-                type="radio"
-                name="cambiarPlan"
-                id="cambiarPlanNo"
-                value="no"
-                checked
-              />No
-              <input
-                type="radio"
-                name="cambiarPlan"
-                id="cambiarPlanSi"
-                value="si"
-              />Si
-              <div id="espacioCambiarPlan"></div>
-              <div id="errorCambiarPlan"></div>
+
+              <div class="contenedorBotones">
+                <label
+                  >Quieres Cambiar de grupo?
+                  <input
+                    type="radio"
+                    name="cambiarGrupo"
+                    id="cambiarGrupoNo"
+                    value="no"
+                    checked
+                  />
+                  No
+                  <input
+                    type="radio"
+                    name="cambiarGrupo"
+                    id="cambiarGrupoSi"
+                    value="si"
+                  />
+                  Sí
+                </label>
+                <div id="espacioCambiarGrupo"></div>
+                <div id="errorCambiarGrupo"></div>
+
+                <label
+                  >Quieres Cambiar a otro plan?
+                  <input
+                    type="radio"
+                    name="cambiarPlan"
+                    id="cambiarPlanNo"
+                    value="no"
+                    checked
+                  />
+                  No
+                  <input
+                    type="radio"
+                    name="cambiarPlan"
+                    id="cambiarPlanSi"
+                    value="si"
+                  />
+                  Sí
+                </label>
+                <div id="espacioCambiarPlan"></div>
+                <div id="errorCambiarPlan"></div>
+              </div>
+
+              <!-- Botones -->
               <button type="submit" id="btnModificarActividad">
                 Modificar Actividad
+              </button>
+              <button
+                type="button"
+                id="btnInsertarActividad"
+                onclick="insertBBDDActividad()"
+              >
+                Crear
               </button>
               <div id="errorModificar"></div>
               <button type="button" id="btnEliminarActividad">
@@ -253,7 +390,9 @@
               </button>
             </div>
           </form>
-          <button class="closeBtnOperar">X</button>
+          <button class="closeBtnOperar" onclick="cerrarOverlayOperar()">
+            X
+          </button>
         </div>
       </div>
 
@@ -278,13 +417,17 @@
             Grupo:
             <div id="selectGrupo"><select name="a" id="a"></select></div>
             <div id="errorSelectGrupo"></div>
+            <button type="button" id="btnCrearGrupo">+ Crear un Grupo</button>
             Plan:
             <div id="selectPlan"><select name="b" id="b"></select></div>
             <div id="errorSelectPlan"></div>
+            <button type="button" id="btnCrearPlan">+ Crear un Plan</button>
+
             <button type="button" id="btnConsultarTabla">Buscar</button>
           </div>
           <div>
             <table id="tablaActividad" border="1" class="oculto">
+              <div id="contenedorBotonAgregaractividad"></div>
               <thead>
                 <tr>
                   <th>Nombre de Actividad</th>
@@ -303,6 +446,7 @@
       </div>
     </div>
 
+    <div class="espaciador"></div>
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- FOOTER -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
