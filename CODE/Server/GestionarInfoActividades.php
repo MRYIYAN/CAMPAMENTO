@@ -46,6 +46,15 @@ if ($result->num_rows > 0) {    //comprueba si hay resultado o no
 }
 //cerramos e query
 $queryActividades->close();
+
+
+
+
+
+
+
+
+
 //este echo hay que estar abajo del todo SINO SE PETA
 echo json_encode([
     'login' => $login,

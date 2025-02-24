@@ -32,5 +32,5 @@ if ($result->num_rows > 0) {
 echo json_encode($plans);
 
 // Cerrar la conexión
-//$conn->close();
+$conn->close();
 ?>
