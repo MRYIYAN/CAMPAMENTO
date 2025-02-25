@@ -123,27 +123,29 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("cerrarSesionOverlayCerrarSesion")
     .addEventListener("click", cerrarSesionSeguro); // Evento para cerrar sesión
 
-  function cerrarSesionSeguro() {
-    fetch("../Server/quitarSesion.php", {
-      // Conexión con el servidor para quitar la sesión
-      method: "POST", // Método de la solicitud
-      headers: {
-        "Content-type": "application/json", // Tipo de contenido de la solicitud
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
-        }
-        return response.json(); // Convertir la respuesta a JSON
-      })
-      .then((data) => {
-        if (data.logout) {
-          window.location.href = data.logout; // Redirigir a la URL proporcionada para logout
-        }
-      });
-  }
+
 });
+
+function cerrarSesionSeguro() {
+  fetch("../Server/quitarSesion.php", {
+    // Conexión con el servidor para quitar la sesión
+    method: "POST", // Método de la solicitud
+    headers: {
+      "Content-type": "application/json", // Tipo de contenido de la solicitud
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+      }
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      if (data.logout) {
+        window.location.href = data.logout; // Redirigir a la URL proporcionada para logout
+      }
+    });
+}
 //-----------------------------------------------------------------------------------------------------------//
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
@@ -153,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //-----------------------------------------------------------------------------------------------------------//
 
 //CONEXION CON EL BBDD
+let id_adminGlobal = null
 // Conexión con el servidor para obtener datos del admin
 fetch("../Server/GestionarIndexAdmin.php", {
   method: "POST", // Método de la solicitud
@@ -176,6 +179,7 @@ fetch("../Server/GestionarIndexAdmin.php", {
       console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
     } else {
       console.log(`idAdmin: ${data.id_admin}`);
+      id_adminGlobal = data.id_admin; //asignamos al variable global
       document.getElementById("idAdmin").innerHTML = data.info["id_admin"];
       document.getElementById("emailAdmin").innerHTML = data.info["email"];
       console.log(data.info);
@@ -1811,12 +1815,296 @@ formularioCrearPlan.onsubmit = async function (event) {
 
 }
 
-
-
-
-
-
-
 //================================================================================================//
 //                    FIN DE OVERLAY DE AÑADIR PLAN
 //================================================================================================//
+
+
+//================================================================================================//
+//                    OVERLAY DE MODIFICAR DATOS DEL ADMIN
+//================================================================================================//
+//cerrar overlay de modificar datos
+document.getElementById('btnVolverModificarContrasenia').addEventListener('click', ()=>{
+  document.getElementById('overlayCambiarContraseña').classList.remove('activeOverlayCambiarContraseña')
+  document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+})
+document.querySelector('.closeBtnEliminarContrasenia').addEventListener('click', () =>{
+  document.getElementById('overlayCambiarContraseña').classList.remove('activeOverlayCambiarContraseña')
+  document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+})
+//activar overlay de modificar datos del admin
+document.getElementById('modificarPadre').addEventListener('click', ()=>{
+  limpiarFormularioCambiarContrasenia()
+  document.getElementById('overlayCambiarContraseña').classList.add('activeOverlayCambiarContraseña')
+  document.body.classList.add("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+})
+
+
+
+//validanos los campos 
+function validarContrasenia1 (){
+  //comprobamos si es vacio o no
+  if(document.getElementById('contrasenia1').value.trim() == ""){
+      mostrarError(document.getElementById('errorContrasenia1'), "La Contraseña no puede ser vacia")
+  }else{
+      mostrarError(document.getElementById('errorContrasenia1'), "");
+      //comprobar con el expresion regular
+      if (/^\d{6}$/.test(document.getElementById('contrasenia1').value) == true){
+          mostrarError(document.getElementById('errorContrasenia1'), "");
+      }else{
+          mostrarError(document.getElementById('errorContrasenia1'), "El pin debe tener 6 digitos");
+      }
+  }
+  //comprobamos si ha asignado el segundo contraseña o no, en principio no
+  if(document.getElementById('contrasenia2').value){
+      if (document.getElementById('contrasenia1').value !== document.getElementById('contrasenia2').value){
+          mostrarError(document.getElementById('errorContrasenia2'), "No coinciden la contraseña")
+      }else{
+          mostrarError(document.getElementById('errorContrasenia2'), "")
+           //comprobar con el expresion regular
+      if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true){
+          mostrarError(document.getElementById('errorContrasenia2'), "");
+      }else{
+          mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
+      }
+      }
+  }
+}
+function validarContrasenia2 (){
+  //comprobamos si es vacio o no
+  if(document.getElementById('contrasenia2').value.trim() == ""){
+      mostrarError(document.getElementById('errorContrasenia2'), "La Contraseña no puede ser vacia")
+  }else{
+      mostrarError(document.getElementById('errorContrasenia2'), "");
+       //comprobar con el expresion regular
+       if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true){
+          mostrarError(document.getElementById('errorContrasenia2'), "");
+      }else{
+          mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
+      }
+  }
+  //comprobamos si ha asignado el primer contraseña o no, en principio si
+  if(document.getElementById('contrasenia1').value){
+      if (document.getElementById('contrasenia2').value !== document.getElementById('contrasenia1').value){
+          mostrarError(document.getElementById('errorContrasenia2'), "No coinciden la contraseña")
+      }else{
+          mostrarError(document.getElementById('errorContrasenia2'), "")
+           //comprobar con el expresion regular
+          if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true){
+              mostrarError(document.getElementById('errorContrasenia2'), "");
+          }else{
+              mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
+          }
+      }
+  }
+}
+
+//validacion de contraseña antigua
+async function validarContraseniaAntigua (){
+  //compruba si la contraseña esta vacia o no
+  if (document.getElementById('contraseniaAntigua').value.trim()==""){
+    //en caso de estar vacio
+    mostrarError(document.getElementById('errorContraseniaAntigua'), "La contraseña no puede estar vacio")
+  }else{
+    //en caso si no esta vacia
+    mostrarError(document.getElementById('errorContraseniaAntigua'), "")
+    //comprueba en bbdd si la contraseña es corecta o no
+    // Comprobar en BBDD si la contraseña es correcta
+    const esCorrecta = await comprobarContraseniaBBDD(document.getElementById('contraseniaAntigua').value);
+    if (esCorrecta) {
+      mostrarError(document.getElementById('errorContraseniaAntigua'), "");
+    } else {
+      mostrarError(document.getElementById('errorContraseniaAntigua'), "¡La contraseña es errónea!");
+    }
+  }
+}
+
+//funcion para comprobar la contraseña si esta corecta o no en bbdd
+// Función para comprobar la contraseña en la base de datos
+async function comprobarContraseniaBBDD(contraseniaTXT) {
+  try {
+    const response = await fetch("../Server/GestionarIndexAdmin.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idAdminParaComprobarContraseña: id_adminGlobal,
+        contraseniaTXTParaComprobar: contraseniaTXT,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al obtener datos del servidor.");
+    }
+
+    const data = await response.json();
+
+    if (data.error) {
+      console.error("Error:", data.error);
+      return false;
+    }
+
+    return data.comprobacionContraseña === "ok";
+  } catch (error) {
+    console.error("Error en la verificación:", error);
+    return false;
+  }
+}
+
+//inicializaos los comprobacion 
+document.getElementById('contrasenia1').onblur = validarContrasenia1;
+document.getElementById('contrasenia2').onblur = validarContrasenia2;
+document.getElementById('contraseniaAntigua').oninput = function() {  //eliminar error cuando escribe contraseña antigua
+  document.getElementById('errorContraseniaAntigua').innerHTML = "";
+};
+//comprobacion live
+document.getElementById('contrasenia1').oninput = validarContrasenia1;
+document.getElementById('contrasenia2').oninput = validarContrasenia2;
+
+//cuando recibe un submit
+let formularioCambiarContra = document.getElementById("formularioCambiarContraseña");
+formularioCambiarContra.onsubmit = async function (event) {
+    // Prevenir el envío del formulario al inicio
+    event.preventDefault();
+
+    //validamos por si acaso
+    validarContrasenia1();
+    validarContrasenia2();
+    await validarContraseniaAntigua();
+
+    //comprobamos si hay error de validacion
+  if (
+    checkError(document.getElementById("errorContrasenia1")) &&
+    checkError(document.getElementById("errorContrasenia2")) &&
+    checkError(document.getElementById("errorContraseniaAntigua"))
+  ) {
+    mostrarError(document.getElementById('errorModificarContraseniaGeneral'), "")
+    //SIGUIENTE PASO
+    //abrimos el overlay de comprobacion de modificar 
+    document.getElementById('overlayComprobarContraseña').classList.add('activeOverlayComprobarContraseña')
+    document.body.classList.add("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+
+  }else{
+    mostrarError(document.getElementById('errorModificarContraseniaGeneral'), "El formulario contiene error")
+  }
+}
+
+//funcion que limpia el formulario
+function limpiarFormularioCambiarContrasenia() {
+  document.getElementById("formularioCambiarContraseña").reset(); // Resetea todos los campos del formulario
+
+  // Opcional: También limpia los mensajes de error si existen
+  document.getElementById("errorContrasenia1").textContent = "";
+  document.getElementById("errorContrasenia2").textContent = "";
+  document.getElementById("errorContraseniaAntigua").textContent = "";
+  document.getElementById("errorModificarContraseniaGeneral").textContent = "";
+}
+
+
+//Comprobar el cambio de contraseña 
+document.getElementById('volverOverlayComprobarContraseña').addEventListener('click', ()=>{
+  document.getElementById('overlayComprobarContraseña').classList.remove('activeOverlayComprobarContraseña')
+  document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+})
+document.querySelector('#cerrarOverlayComprobarContraseña').addEventListener('click', () =>{
+  document.getElementById('overlayComprobarContraseña').classList.remove('activeOverlayComprobarContraseña')
+  document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+})
+
+document.getElementById('cerrarComprobarContraseña').addEventListener('click', async ()=>{
+  await actualizarContraseña()  //actualizamos la contraseña
+
+})
+
+
+async function actualizarContraseña(){
+  //hace el borado
+  await fetch("../Server/GestionarIndexAdmin.php", {
+      method: "POST", // Método de la solicitud
+      headers: {
+          "Content-type": "application/json", // Tipo de contenido de la solicitud
+      },
+      body: JSON.stringify({
+          //enviamos datos para la consulta
+          contraseñaParaCambiar2: document.getElementById('contrasenia2').value,
+          idAdminCambiarContrasenia :id_adminGlobal
+      }),
+  })
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
+          }
+          return response.json(); // Convertir la respuesta a JSON
+      })
+      .then((data) => {
+          let mensajeFeedbackOperar = document.getElementById(
+              "mensajeFeedbackComprobarModificarContrasenia"
+          ); //sacamos el div del html
+          // Comprobar si hay un error en la respuesta
+          if (data.error) {
+              console.log("2Error: " + data.error); // Mostrar en consola el error
+          } else {
+              if (data.contraseniaAdminCambiado) {
+                  if (data.contraseniaAdminCambiado == "ok") {
+                      // Éxito
+                      document.getElementById(
+                          "errorModificarContraseniaGeneral"
+                      ).innerHTML = "";
+                      mensajeFeedbackOperar.style.display = "block";
+                      mensajeFeedbackOperar.style.color = "green";
+                      mensajeFeedbackOperar.innerText =
+                          "Contraseña modificado con éxito 🎉";
+                      // Deshabilitamos el botón
+                      document.getElementById(
+                          "cerrarComprobarContraseña"
+                      ).disabled = true;
+                      document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+                      // cerrar el overlay despues de 2s
+                      setTimeout(() => {
+                          mensajeFeedbackOperar.style.display =
+                              "none";
+                          document
+                              .getElementById("overlayCambiarContraseña")
+                              .classList.remove("activeOverlayCambiarContraseña"); // Quitar clase para ocultar el overlay
+                          // habilitamos de nuevo el botón
+                          document.getElementById(
+                              "cerrarComprobarContraseña"
+                          ).disabled = false;
+
+                          cerrarSesionSeguro()  //cerramos el sesion 
+                      }, 2000);
+                  } else {
+                     // fallo
+                     document.getElementById(
+                      "errorModificarContraseniaGeneral"
+                  ).innerHTML = "";
+                  mensajeFeedbackOperar.style.display = "block";
+                  mensajeFeedbackOperar.style.color = "red";
+                  mensajeFeedbackOperar.innerText =
+                      "Contraseña no modificado";
+                  // Deshabilitamos el botón
+                  document.getElementById(
+                      "cerrarComprobarContraseña"
+                  ).disabled = true;
+                  document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+                  // cerrar el overlay despues de 2s
+                  setTimeout(() => {
+                      mensajeFeedbackOperar.style.display =
+                          "none";
+                      document
+                          .getElementById("overlayCambiarContraseña")
+                          .classList.remove("activeOverlayCambiarContraseña"); // Quitar clase para ocultar el overlay
+                      // habilitamos de nuevo el botón
+                      document.getElementById(
+                          "cerrarComprobarContraseña"
+                      ).disabled = false;
+                  }, 2000);
+                  }
+              
+              }
+
+          }
+      })
+}
+

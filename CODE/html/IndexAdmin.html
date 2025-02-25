@@ -165,7 +165,7 @@
         <span class="label">Correo: </span>
         <div id="emailAdmin">Correo</div>
         <button type="button" id="modificarPadre">
-          Modificar datos del Admin</button
+          Modificar Contraseña</button
         ><br />
       </div>
 
@@ -445,6 +445,50 @@
         </div>
       </div>
     </div>
+
+    <!-- overlay para eliminar persona en la  lista de persona en el grupo-->
+    <div id="overlayCambiarContraseña" class="overlayCambiarContraseña">
+      <div class="overlayContenidoCambiarContraseña">
+          <p id="descripcionCompletaCambiarContraseña"> 
+              <form method="get" id="formularioCambiarContraseña">
+                  <label for="contrasenia1">
+                      Introduce la contraseña nueva:
+                      <input type="password" name="contrasenia1" id="contrasenia1">
+                      <div id="errorContrasenia1"></div>
+                  </label>
+                  <label for="contrasenia2">
+                      Repite la contraseña nueva:
+                      <input type="password" name="contrasenia2" id="contrasenia2">
+                      <div id="errorContrasenia2"></div>
+                  </label>
+                  <label for="contraseniaAntigua">
+                      Introduce la contraseña antigua:
+                      <input type="password" name="contraseniaAntigua" id="contraseniaAntigua">
+                      <div id="errorContraseniaAntigua"></div>
+                  </label>
+                  
+                  <button type="button" id="btnVolverModificarContrasenia">Volver</button>
+                  <button type="submit" id="btnConfirmarModificarContrasenia">Modificar</button>
+                  <div id="errorModificarContraseniaGeneral"></div>
+              </form>
+          </p>
+          <button class="closeBtnEliminarContrasenia">X</button>
+      </div>
+      </div>
+      <!-- overlay comprobacionCambairContraseña -->
+      <div class="overlayComprobarContraseña" id="overlayComprobarContraseña">
+        <div class="overlay-contentComprobarContraseña">
+          <button class="close-btn" id="cerrarOverlayComprobarContraseña">×</button>
+          <h2>¿Estas seguro de quieres cambiar la contraseña?</h2>
+          <div id="mensajeFeedbackComprobarModificarContrasenia" style="display: none;"></div>
+
+          <button type="button" id="volverOverlayComprobarContraseña">Volver</button>
+          <button type="button" id="cerrarComprobarContraseña">
+            Cambiar y Volverme a Conectarme
+          </button>
+        </div>
+      </div>
+    
 
     <div class="espaciador"></div>
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
