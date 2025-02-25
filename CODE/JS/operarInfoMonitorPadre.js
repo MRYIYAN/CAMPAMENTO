@@ -140,27 +140,40 @@ document.addEventListener("DOMContentLoaded", () => {
 //-----------------------------------------------------------------------------------------------------------//
 //                                               INICIO DE JS DE INFO MONITOR
 //-----------------------------------------------------------------------------------------------------------//
-
-const buttons = document.querySelectorAll(".buttons button");
-
-const tables = document.querySelectorAll(".tables table");
-
-const tablesInner = document.querySelector(".tables-inner");
-
-const selectList = (element, index = 0) => {
-  tablesInner.style.translate = `${index === 0 ? 0 : 0 - index * 500}px 0`;
-
-  tables.forEach((table) => table.classList.remove("active"));
-  tables[index].classList.add("active");
-
-  if (element) {
-    buttons.forEach((button) => button.classList.remove("active"));
-    element.classList.add("active");
-  }
-};
-
-selectList();
-
 //------------------------------------------------------------------------------------------------// 
 //                             GESTION DE BD PARA INFORMACIÓN DEL MONITOR
 //------------------------------------------------------------------------------------------------//
+document.addEventListener("DOMContentLoaded", () => {
+    // Función para actualizar los datos de los monitores
+    function actualizarMonitores() {
+        fetch('../Server/GestionarMonitorPadre.php')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.infoMonitores){
+                    document.getElementById('tablaMonitores').innerHTML = data.infoMonitores.map((monitor) => `
+                                    <tr>
+                  <td>
+                    <img class="avatar" src="../assets/icons/001-boy.svg" />
+                  </td>
+                  <td>
+                    <h3>${monitor.nombre}</h3>
+                    <h4>Monitora de Arte</h4>
+                  </td>
+                  <td>
+                    <div class="stars">
+                        <img src="../assets/icons/star-1.svg" />
+                        <img src="../assets/icons/star-1.svg" />
+                        <img src="../assets/icons/star-0.svg" />
+                        <img src="../assets/icons/star-0.svg" />
+                        <img src="../assets/icons/star-0.svg" />
+                    </div>
+                  </td>
+                </tr>
+                    `)
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+})
