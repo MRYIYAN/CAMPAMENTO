@@ -1,5 +1,6 @@
 let planesDisponibles;
 let gruposDisponibles;
+
 //-----------------------------------------------------------------------------------------------------------//
 //                                               INICIO DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
@@ -83,14 +84,18 @@ document.addEventListener("DOMContentLoaded", () => {
     redirectWithTransition("../html/comedorAdmin.html"); // Redirigir a la página de comedor
   });
 
-  document.getElementById("btnCalendario").addEventListener("click", () => {
-    redirectWithTransition("../html/calendarioAdmin.html"); // Redirigir a la página de calendario
+  document.getElementById("btnGestionGrupos").addEventListener("click", () => {
+    redirectWithTransition("../html/gestionGruposAdmin.html"); // Redirigir a la página de calendario
+  });
+
+  document.getElementById("btnGestionarNinos").addEventListener("click", () => {
+    redirectWithTransition("../html/gestionNinosAdmin.html"); // Redirigir a la página de calendario
   });
 
   document
-    .getElementById("btnInfoActividades")
+    .getElementById("btnGestionarPlan")
     .addEventListener("click", () => {
-      redirectWithTransition("../html/infoActividadesAdmin.html"); // Redirigir a la página de actividades
+      redirectWithTransition("../html/gestionPlanAdmin.html"); // Redirigir a la página de actividades
     });
 
   /* ================================================================
@@ -148,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //-----------------------------------------------------------------------------------------------------------//
 
 //CONEXION CON EL BBDD
-// Conexión con el servidor para obtener datos del padre y sus hijos
+// Conexión con el servidor para obtener datos del admin
 fetch("../Server/GestionarIndexAdmin.php", {
   method: "POST", // Método de la solicitud
   headers: {
@@ -199,7 +204,7 @@ fetch("../Server/GestionarIndexAdmin.php", {
             ${arrayPlanFecha
               .map(
                 (plan) => `
-                <option value="${plan["id_plan"]}">${plan["fecha_inicio"]} - ${plan["fecha_fin"]}</option>
+                <option value="${plan["id_plan"]}">${plan.nombre}(${plan["fecha_inicio"]} - ${plan["fecha_fin"]})</option>
             `
               )
               .join("")}
@@ -230,6 +235,7 @@ document.getElementById("btnConsultarTabla").addEventListener("click", () =>{
     btnConsultarEnTabla()
 });
 
+let planSeleccionado;
 function btnConsultarEnTabla(){
   //COMPROBACION SI ESTA TODO BIEN
   let okGrupo = false;
@@ -375,7 +381,7 @@ function btnConsultarEnTabla(){
           if (data.datosTabla.length == 0) {
             //en caso si es vacio
             document.getElementById("tablaActividad").classList.add("oculto"); // Ocultar el tabla
-
+            document.getElementById('contenedorBotonAgregaractividad').innerHTML=`<button type="button" id="botonAgregaractividad" onclick = "agregarActividad()">Agregar Actividad</button>`;
             document.getElementById("infoTabla").innerText =
               "No tiene ningun actividad";
           } else {
@@ -384,6 +390,7 @@ function btnConsultarEnTabla(){
               .getElementById("tablaActividad")
               .classList.remove("oculto"); // mostramos la tabla
             document.getElementById("infoTabla").innerText = "";
+            document.getElementById('contenedorBotonAgregaractividad').innerHTML=`<button type="button" id="botonAgregaractividad" onclick = "agregarActividad()">Agregar Actividad</button>`;
 
             //imprimimos la lista de actividades
             const tabla = document
@@ -450,6 +457,9 @@ document
 //                              FUNCION PARA MOSTRAR OVERLAY DE OPERAR
 //================================================================================================//
 
+//sacamos los fecjas 
+let fechaInicioBBDD;
+let fechaFinBBDD;
 let fodoActividad = "../assets/actividad/uploads/defaultActividad.png";
 
 // Función para mostrar el overlay con la OPERAR
@@ -478,18 +488,20 @@ function mostrarOverlayOperar(id_actividad) {
       if (data.error) {
         console.log("2Error: " + data.error); // Mostrar en consola el error
       } else {
+
+        //sacamos los fecjas 
+        fechaInicioBBDD = data.fechaActiviad['fecha_inicio']
+        fechaFinBBDD = data.fechaActiviad['fecha_fin'];
+        console.log(`Fecha Inicio = ${data.fechaActiviad['fecha_inicio']}`)
+        console.log(`Fecha Fin = ${data.fechaActiviad['fecha_fin']}`)
         //asignamos a un variable que esta fuera la ruta de fotode actividad la ruta de avatar que esta en bbdd
         if (data.infoActividad["imagen_src"]) {
           //comprobamos si existe el avatar en bbdd o no, en caso de que sea nulo, no asignaria y usaria el default
           fodoActividad = data.infoActividad["imagen_src"]; //en caso de que si existiera avatar en bbdd se asignaria en bbdd
         }
 
-        fecha_inicio = data.fechaActiviad["fecha_inicio"];
-        fecha_fin = data.fechaActiviad["fecha_fin"];
-
-        console.log("Fechas :" + data.fechaActiviad);
-        console.log(data.fechaActiviad);
-
+        //receteamos el formulario
+        vaciarCamposFormulario();
         //RECIBIENDO RESPUESTA DE BBDD
         console.log(data.infoActividad);
 
@@ -534,6 +546,11 @@ function mostrarOverlayOperar(id_actividad) {
 
   //hacemos que el overlay sea visible
   document.getElementById("overlayOperar").classList.add("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+  document.getElementById('btnEliminarActividad').classList.remove("oculto")
+  document.getElementById('btnModificarActividad').classList.remove("oculto") //mostramos el boton de modificar
+  document.getElementById('btnInsertarActividad').classList.add("oculto") //quitamos el boton de modificar
+  document.querySelector('.contenedorBotones').classList.remove("oculto")
+
 
   // Función para cerrar el overlay
   document
@@ -585,13 +602,13 @@ function verificarFecha() {
     mostrarError(errorFecha, "");
     // Convertimos las fechas a objetos Date
     let fechaSeleccionada = new Date(inputFecha);
-    let fechaInicio = new Date(fecha_inicio);
-    let fechaFin = new Date(fecha_fin);
+    let fechaInicio = new Date(fechaInicioBBDD);
+    let fechaFin = new Date(fechaFinBBDD);
     // Comprobamos si está en el intervalo de tiempo o no
     if (fechaSeleccionada >= fechaInicio && fechaSeleccionada <= fechaFin) {
       mostrarError(errorFecha, "");
     } else {
-      mostrarError(errorFecha, `Intervalo de ${fecha_inicio} - ${fecha_fin}`);
+      mostrarError(errorFecha, `Intervalo de ${fechaInicioBBDD} - ${fechaFinBBDD}`);
     }
   } else {
     mostrarError(errorFecha, "La fecha no puede estar vacía");
@@ -713,7 +730,7 @@ document.addEventListener("change", function (event) {
                     ${planesDisponibles
                       .map(
                         (plan) =>
-                          `<option value="${plan.id_plan}">${plan.fecha_inicio} - ${plan.fecha_fin}</option>`
+                          `<option value="${plan.id_plan}">${plan.nombre} = ${plan.fecha_inicio} - ${plan.fecha_fin}</option>`
                       )
                       .join("")}
                 </select>
@@ -820,7 +837,7 @@ formularioOperar.onsubmit = async function (event) {
       if (checkError(document.getElementById("errorCambiarPlan"))) {
         //PASO SIGUIENTE
 
-        mostrarError(document.getElementById("errorModificar"), "");
+        arError(document.gmostretElementById("errorModificar"), "");
         actualizarActividad();
       } else {
         mostrarError(
@@ -1018,3 +1035,788 @@ function borrarActividadBBDD(){
       }
     });
 }
+//================================================================================================//
+//                            FIN DE BORRAR UN ACTIVIDAD EN BBDD
+//================================================================================================//
+
+//================================================================================================//
+//                            FUNCION PARA AGREGAR ACTIVIDAD EN BBDD mostrar overlay
+//================================================================================================//
+function agregarActividad(){
+  sacarFechas();
+  //abrir el overlay de operar
+  document.getElementById("overlayOperar").classList.add("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+  document.getElementById('btnInsertarActividad').classList.remove("oculto") //aparecemos el boton de borrar
+  document.getElementById('btnEliminarActividad').classList.add("oculto") //quitamos el boton de borrar
+  document.getElementById('btnModificarActividad').classList.add("oculto") //quitamos el boton de modificar
+  document.querySelector('.contenedorBotones').classList.add("oculto")
+  //RESEAMOS TODO LOS CONTENIDO QUE HAY EN EL OVERLAY 
+  vaciarCamposFormulario();
+
+  document.getElementById("vistaPrevia").src = fodoActividad; //modificamos el src de del img vacio en el html, con avatarbbdd podemos sacar la ruta del avatar que esta en bbdd
+  document.getElementById("vistaPrevia").style.display = "block"; //mostramos el img para la vista previa que esta en html como un bloqu
+  document
+    .getElementById("avatar")
+    .addEventListener("change", function (event) {
+      //escogemos el archivo seleccionado
+      const file = event.target.files[0];
+      // comprobamos si existe o no el archivo
+      if (file) {
+        //en caso de existir (adjuntado)
+        document.getElementById("vistaPrevia").src =
+          URL.createObjectURL(file); //modificamos el src de del img vacio en el html, con URL.createObjectURL(file) podemos sacar la ruta del archivo adjuntado
+        document.getElementById("vistaPrevia").style.display = "block"; //mostramos el img para la vista previa que esta en html como un bloqu
+      } else {
+        //en caso si no existe el archivo (no ha adjuntado)
+        document.getElementById("vistaPrevia").src = avatarbbdd; //modificamos el src de del img vacio en el html, con avatarbbdd podemos sacar la ruta del avatar que esta en bbdd
+        document.getElementById("vistaPrevia").style.display = "block"; //mostramos el img para la vista previa que esta en html como un bloqu
+      }
+    })
+
+  
+
+  //COMPROBAMOS LOS CAMPOS 
+  
+  //comprobacion en live cuando escribimos
+  document.getElementById("titulo").oninput = vertificarNombre;
+  document.getElementById("hora_inicio").oninput = vertificarHoraInicio;
+  document.getElementById("hora_fin").oninput = vertificarHoraFin;
+  document.getElementById("descripcion").oninput = vertificarDescripcion;
+  document.getElementById("fecha").oninput = verificarFecha;
+
+  //comprobacion cuando perdemos el foco
+  document.getElementById("titulo").onblur = vertificarNombre;
+  document.getElementById("hora_inicio").onblur = vertificarHoraInicio;
+  document.getElementById("hora_fin").onblur = vertificarHoraFin;
+  document.getElementById("descripcion").onblur = vertificarDescripcion;
+  document.getElementById("fecha").onblur = verificarFecha;
+}
+
+function insertBBDDActividad(){
+
+  //hacemos la comprobacion 
+  vertificarNombre();
+  vertificarHoraInicio();
+  vertificarHoraFin();
+  vertificarDescripcion();
+  verificarFecha();
+
+  if (
+    checkError(document.getElementById("errorTitulo")) &&
+    checkError(document.getElementById("errorHora")) &&
+    checkError(document.getElementById("errorHoraFin")) &&
+    checkError(document.getElementById("errorDescripcion")) &&
+    checkError(document.getElementById("errorFecha")) &&
+    checkError(document.getElementById("errorFoto"))
+  ) {
+    //hacemos el envio 
+    //creamos un formada
+  let formDataInsert = new FormData();
+  //cogemos los inputs
+  let inputTitulo = document.getElementById('titulo').value;
+  let inputHoraInicio = document.getElementById('hora_inicio').value;
+  let inputHoraFin = document.getElementById('hora_fin').value;
+  let inputDescripcion = document.getElementById('descripcion').value;
+  let inputFecha = document.getElementById('fecha').value;
+
+  //asignamos en el variable en formdata
+  formDataInsert.append("titulo", inputTitulo);
+  formDataInsert.append("hora_inicio", inputHoraInicio);
+  formDataInsert.append("hora_fin", inputHoraFin);
+  formDataInsert.append("descripcion", inputDescripcion);
+  formDataInsert.append("fecha", inputFecha);
+  formDataInsert.append("planSeleccionado", planSeleccionado);
+  formDataInsert.append("grupoSeleccionado", grupoSeleccionado);
+
+  // Solo agregar el avatar si hay uno seleccionado
+  let avatarInput = document.getElementById("avatar");
+  if (avatarInput.files.length > 0) {
+    //en caso si hay contenido en el input
+    formDataInsert.append("foto", avatarInput.files[0]); //pasamos el file al php
+    formDataInsert.append("cambiarfoto", true); //pasamos un booleano dicidendo que hay que modificar el perfil
+  } else {
+    //en caso si no hay nada en el input
+    formDataInsert.append("fodoActividad", fodoActividad); //pasamos la ruta de avatar que esta en el bbdd
+    formDataInsert.append("cambiarFoto", false); //pasamos un boleano para decir que no hay que cambiar nada
+  }
+
+
+    //FETCH PARA ENVIAR LOS MODIFICACIONES AL BBDD
+    fetch("../Server/GestionarIndexAdmin.php", {
+      method: "POST",
+      //enviamos los datos
+      body: formDataInsert,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener datos del servidor.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        //comprobar si es un error o no
+        if (data.error) {
+          //en caso de si tener error
+          console.log("Error: " + data.error);
+        } else {
+          if (data.insertado){
+            alert('insertado')
+              if (data.insertado == "ok"){
+                  console.log("insertado")
+                  btnConsultarEnTabla()
+                  //cerrar el overlay de operar
+                  document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+              }else{
+                  console.log('no insertado')
+              }
+          }
+        }
+      });
+  }else{
+    mostrarError(
+      document.getElementById("errorModificar"),
+      "El formulario contiene errores"
+    );
+  }
+
+
+}
+
+//================================================================================================//
+//                            FIN DE FUNCION PARA ACTIVIDAD EN BBDD
+//================================================================================================//
+
+//================================================================================================//
+//                            FUNCION PARA RECETEAR EL FORM
+//================================================================================================//
+function vaciarCamposFormulario() {
+  document.getElementById("id_activiadad").value = "";
+  document.getElementById("titulo").value = "";
+  document.getElementById("hora_inicio").value = "";
+  document.getElementById("hora_fin").value = "";
+  document.getElementById("descripcion").value = "";
+  document.getElementById("fecha").value = "";
+  document.getElementById("avatar").value = ""; // Borra el archivo seleccionado
+
+
+  // Resetear radios a su valor por defecto
+  document.getElementById("cambiarGrupoNo").checked = true;
+  document.getElementById("cambiarGrupoSi").checked = false;
+  document.getElementById("cambiarPlanNo").checked = true;
+  document.getElementById("cambiarPlanSi").checked = false;
+
+  // Limpiar errores
+  let errores = ["errorTitulo", "errorHora", "errorHoraFin", "errorDescripcion", "errorFecha", "errorFoto", "errorCambiarGrupo", "errorCambiarPlan", "errorModificar"];
+  errores.forEach(id => {
+      document.getElementById(id).innerHTML = "";
+  });
+
+  console.log("Formulario limpiado correctamente.");
+}
+
+//================================================================================================//
+//                            FIN DE FUNCION PARA RECETEAR EL FORM
+//================================================================================================//
+
+
+//================================================================================================//
+//                    CONSULTA DE FECHA INICIO Y FECHA FIN CON EL ID DEL PLAN PARA INSERTS DE ACTIVIDAD
+//================================================================================================//
+function sacarFechas(){
+  console.log(`id_plan seleccionado ${planSeleccionado}`)
+  fetch("../Server/GestionarIndexAdmin.php", {
+    method: "POST", // Método de la solicitud
+    headers: {
+      "Content-type": "application/json", // Tipo de contenido de la solicitud
+    },
+    body: JSON.stringify({
+      //enviamos datos para la consulta
+      planSeleccionadoParaInsert: planSeleccionado
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
+      }
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      // Comprobar si hay un error en la respuesta
+      if (data.error) {
+        console.log("2Error: " + data.error); // Mostrar en consola el error
+      } else {
+        //asignamos las fechas al variables globales
+        fechaInicioBBDD = data.fechaPlanInserts['fecha_inicio']
+        fechaFinBBDD = data.fechaPlanInserts['fecha_fin']
+        console.log(`Fecha inicio: ${fechaInicioBBDD} Fecha fin: ${fechaFinBBDD}`)
+      }
+    });
+}
+
+
+//================================================================================================//
+//                    FIN CONSULTA DE FECHA INICIO Y FECHA FIN CON EL ID DEL PLAN PARA INSERTS DE ACTIVIDAD
+//================================================================================================//
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+
+
+//================================================================================================//
+//                    OVERLAY DE AÑADIR GRUPO
+//================================================================================================//
+//cuando hacemos click el boton de añadir grupo
+document.getElementById('btnCrearGrupo').addEventListener('click', ()=>{
+  limpiarFormularioAñadirGrupo()  //limpiamos el formulario 
+  //mostramos el overlay
+  document.getElementById("overlayAñadirGrupo").classList.add("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
+  document.body.classList.add('body-fondo-bloqueado');  // bloqua el fondo y el desplazamiento
+
+});
+//cuando hacemos click el boton de cerrar de añadir grupo
+document.querySelector('.closeBtnAñadirGrupo').addEventListener('click', ()=>{
+  //mostramos el overlay
+  document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
+  document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+
+});
+//cuando hacemos click el boton de volver de añadir grupo
+document.getElementById('btnVolverAñadirGrupo').addEventListener('click', ()=>{
+  //mostramos el overlay
+  document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
+  document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+
+});
+
+//CONEXION AL BBDD
+//conectar con el bbd para sacar los monitores que existen 
+fetch("../Server/GestionarIndexAdmin.php", {
+  method: "POST", // Método de la solicitud
+  headers: {
+    "Content-type": "application/json", // Tipo de contenido de la solicitud
+  },
+  body: JSON.stringify({
+    //enviamos datos para la consulta
+    consultarMonitorDisponible: "monitor"
+  }),
+})
+.then((response) => {
+  if (!response.ok) {
+    throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
+  }
+  return response.json(); // Convertir la respuesta a JSON
+})
+.then((data) => {
+  // Comprobar si hay un error en la respuesta
+  if (data.error) {
+    console.log("2Error: " + data.error); // Mostrar en consola el error
+  } else {
+    if (data.monitoresDisponible){
+      document.getElementById('monitorAsignado').innerHTML = `
+        <option value="0" id="monitorSeleccionadoGrupo">Selecciona un monitor</option>
+        ${data.monitoresDisponible.map((monitor) => `
+          <option value="${monitor['id_monitor']}" id="monitorSeleccionadoGrupo">${monitor['nombre']}</option>
+        `).join('')}
+      `;
+    }
+  }
+});
+//FIN DE CONEXION AL BBDD
+
+//creamos los funciones para comprobar los variables si es valido o no
+//validar el nombre
+function validarNombreGrupo(){
+  //comprobar si es vacio o no 
+  if (document.getElementById('nombreGrupo').value.trim() == ""){
+    mostrarError(document.getElementById('errorNombreGrupo'), "El no puede estar vacio")
+  }else{
+    mostrarError(document.getElementById('errorNombreGrupo'), "") //quitamos el error
+  }
+}
+//validar el select del monitor
+function validarSelectMonitorGrupo(){
+  console.log(document.getElementById("monitorAsignado").value)
+  //comprobar si es 0 o no
+  if (document.getElementById("monitorAsignado").value == 0){
+    mostrarError(document.getElementById('errorMonitorAsignado'), "Por favor, elige un monitor")
+  }else{
+    mostrarError(document.getElementById('errorMonitorAsignado'), "") //quitamos el error
+  }
+}
+
+//comprobacion de cuando se pierde el foco
+document.getElementById('nombreGrupo').onblur = validarNombreGrupo;
+document.getElementById('monitorAsignado').onblur = validarSelectMonitorGrupo;
+
+//comprobbacion en live
+document.getElementById('nombreGrupo').oninput = validarNombreGrupo;
+document.getElementById('monitorAsignado').oninput = validarSelectMonitorGrupo;
+
+//funcion para limpiar el formulario 
+function limpiarFormularioAñadirGrupo() {
+  document.getElementById("nombreGrupo").value = ""; // Limpiar input de texto
+  document.getElementById("monitorAsignado").value = "0"; // Reiniciar el select al valor por defecto
+
+  // Limpiar mensajes de error
+  document.getElementById("errorNombreGrupo").innerHTML = "";
+  document.getElementById("errorMonitorAsignado").innerHTML = "";
+  document.getElementById("errorCrearGrupo").innerHTML = "";
+}
+
+
+//cuando hace el envio del formulario
+formularioCrearGrupo = document.getElementById('formAñadirGrupo');
+formularioCrearGrupo.onsubmit = async function (event) {
+  // Prevenir el envío del formulario al inicio
+  event.preventDefault();
+
+  //validamos por si acaso 
+  validarNombreGrupo();
+  validarSelectMonitorGrupo();
+
+  //comprobamos si hay error
+  if (checkError(document.getElementById('errorNombreGrupo')) && checkError(document.getElementById('errorMonitorAsignado'))){
+    //borramos el eror por si acaso 
+    mostrarError(document.getElementById('errorCrearGrupo'), "")
+    //SIGUIENTE PASO 
+    //hacemos el insert y pasamos el nombre y el id del monitor que esta en el input
+    console.log(`nombre para insertar : ${document.getElementById('nombreGrupo').value}`)
+    console.log(`idmonitor para insertar : ${document.getElementById('monitorAsignado')}.value`)
+    crearGrupo(document.getElementById('nombreGrupo').value, document.getElementById("monitorAsignado").value)
+  }else{
+    mostrarError(document.getElementById('errorCrearGrupo'), "Error de formulario")
+  }
+
+}
+
+
+//CONEXION CON EL BBDD PARA HACER EL INSERT 
+function crearGrupo(nombre, id_monitor){
+  fetch("../Server/GestionarIndexAdmin.php", {
+    method: "POST", // Método de la solicitud
+    headers: {
+      "Content-type": "application/json", // Tipo de contenido de la solicitud
+    },
+    body: JSON.stringify({
+      //enviamos datos para la consulta
+      nombreGrupoCrearGrupo: nombre,
+      idMonitoGrupoCrearGrupo: id_monitor
+    }),
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
+    }
+    return response.json(); // Convertir la respuesta a JSON
+  })
+  .then((data) => {
+    let mensajeFeedback = document.getElementById("mensajeFeedback"); //sacamos el div del html 
+    // Comprobar si hay un error en la respuesta
+    if (data.error) {
+      console.log("2Error: " + data.error); // Mostrar en consola el error
+    } else {
+      if (data.crearGrupo){
+        if (data.crearGrupo == 'ok'){
+          // Éxito
+          document.getElementById('errorCrearGrupo').innerHTML = "";
+          mensajeFeedback.style.display = "block";
+          mensajeFeedback.style.color = "green";
+          mensajeFeedback.innerText = "Grupo creado con éxito 🎉";
+          // Deshabilitamos el botón
+          document.getElementById('btnCrearGrupoConfirmar').disabled = true;
+          // cerrar el overlay despues de 2s
+          setTimeout(() => {
+            mensajeFeedback.style.display = "none";
+            document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
+            // habilitamos de nuevo el botón
+          document.getElementById('btnCrearGrupoConfirmar').disabled = false;
+          }, 2000);
+        }else{
+          // FALLO
+          document.getElementById('errorCrearGrupo').innerHTML = "";
+          mensajeFeedback.style.display = "block";
+          mensajeFeedback.style.color = "red";
+          mensajeFeedback.innerText = "Grupo no creado";
+                    // Deshabilitamos el botón
+                    document.getElementById('btnCrearGrupoConfirmar').disabled = true;
+
+          // cerrar el overlay despues de 3s
+          setTimeout(() => {
+            mensajeFeedback.style.display = "none";
+            document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
+                // habilitamos de nuevo el botón
+          document.getElementById('btnCrearGrupoConfirmar').disabled = false;
+          }, 3000);
+        }
+      }
+      
+    }
+  });
+}
+
+
+//================================================================================================//
+//                    FIN DE OVERLAY DE AÑADIR GRUPO
+//================================================================================================//
+
+//----------------------------------------------------------------------------------------------------------
+
+
+//================================================================================================//
+//                    OVERLAY DE AÑADIR PLAN
+//================================================================================================//
+//cuando hacemos click el boton de añadir plan
+document.getElementById('btnCrearPlan').addEventListener('click', ()=>{
+  limpiarFormularioAñadirPlan()  //limpiamos el formulario 
+  //mostramos el overlay
+  document.getElementById("overlayAñadirPlan").classList.add("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
+  document.body.classList.add('body-fondo-bloqueado');  // Bloquea interacciones con el fondo y el desplazamiento
+});
+//cuando hacemos click el boton de cerrar de añadir plan
+document.querySelector('.closeBtnAñadirPlan').addEventListener('click', ()=>{
+  //mostramos el overlay
+  document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
+  document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+
+});
+//cuando hacemos click el boton de volver de añadir plan
+document.getElementById('btnVolverAñadirPlan').addEventListener('click', ()=>{
+  //mostramos el overlay
+  document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
+  document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+
+});
+
+//VALIDACION DE CAMPO
+//validacion de fecha inicio
+function validaNombrePlan(){
+  if (document.getElementById('nombrePlan').value.trim()==""){
+    mostrarError(document.getElementById('errorNombrePlan'), "El nombre no puede estar vacio")
+  }else{
+    mostrarError(document.getElementById('errorNombrePlan'), "")
+  }
+}
+function validarFechaInicio (){
+  //comprobar si existe o no 
+  if (document.getElementById('fechaInicioCrearPlan').value){
+    mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "")
+    // Obtener la fecha ingresada
+    const fechaInput = new Date(document.getElementById('fechaInicioCrearPlan').value);
+    // Obtener la fecha actual
+    const fechaActual = new Date();
+      // Establecer las horas, minutos y segundos de la fecha actual a 00:00:00 para hacer la comparación sin horas
+    fechaActual.setHours(0, 0, 0, 0);
+
+     // Comparar las fechas
+    if (fechaInput < fechaActual) {
+      mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "La fecha no puede ser pasado")
+    } else if (fechaInput > fechaActual) {
+      //en caso de ser futuro
+      mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "")
+    } else {
+      //en caso si es hoy
+      mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "")
+    }
+  }else{
+    mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "La fecha no puede ser vacia")
+  }
+    
+}
+
+
+//validacion de fecha fin
+function validarFechaFin (){
+  if (document.getElementById('fechaFinCrearPlan').value){
+    mostrarError(document.getElementById('errorFechaCrearPlan'), "")
+    // Obtener la fecha ingresada
+    const fechaInput = new Date(document.getElementById('fechaFinCrearPlan').value);
+    // Obtener la fecha actual
+    const fechaActual = new Date();
+    // Establecer las horas, minutos y segundos de la fecha actual a 00:00:00 para hacer la comparación sin horas
+    fechaActual.setHours(0, 0, 0, 0);
+
+      // Comparar las fechas
+      if (fechaInput < fechaActual) {
+      mostrarError(document.getElementById('errorFechaCrearPlan'), "La fecha no puede ser pasado")
+    } else if (fechaInput > fechaActual) {
+      //en caso de ser futuro
+      mostrarError(document.getElementById('errorFechaCrearPlan'), "")
+      comprobarDuracionFechas();
+    } else {
+      //en caso si es hoy
+      mostrarError(document.getElementById('errorFechaCrearPlan'), "")
+      comprobarDuracionFechas();
+    }
+  }else{
+    mostrarError(document.getElementById('errorFechaCrearPlan'), "La fecha no puede ser vacia")
+  }
+
+   //funcion que comprueba si es los dos fechas tiene sentido o no 
+   function comprobarDuracionFechas(){
+    const fechaInicioInput = new Date(document.getElementById('fechaInicioCrearPlan').value);
+    const fechaFinInput = new Date(document.getElementById('fechaFinCrearPlan').value);
+
+    //comparamos los fechas
+    if(fechaInicioInput > fechaFinInput){
+      mostrarError(document.getElementById('errorFechaCrearPlan'), "La fecha puede finalizarse antes de iniciarse")
+    }else{
+      mostrarError(document.getElementById('errorFechaCrearPlan'), "")
+    }
+   }
+}
+
+//validar la fecha maxima de inscripcion 
+function validarFechaMaximaInscripcion(){
+  if (document.getElementById('fechaMaximaIncribcionCrearPlan').value){
+    mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
+
+      // Obtener la fecha ingresada
+    const fechaInput = new Date(document.getElementById('fechaMaximaIncribcionCrearPlan').value);
+    // Obtener la fecha actual
+    const fechaActual = new Date();
+    // Establecer las horas, minutos y segundos de la fecha actual a 00:00:00 para hacer la comparación sin horas
+    fechaActual.setHours(0, 0, 0, 0);
+
+      // Comparar las fechas
+    if (fechaInput < fechaActual) {
+      mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "La fecha maxima de inscripcion no puede ser pasado")
+    } else if (fechaInput > fechaActual) {
+      //en caso de ser futuro
+      mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
+      comprobarSiIniciaONo();
+
+    } else {
+      //en caso si es hoy
+      mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
+      comprobarSiIniciaONo();
+    }
+  }else{
+    mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "La fecha maxima de inscripcion no puede ser vacio")
+  }
+  
+
+  //funcion que se comprueba si se asignado el fecha de inicio tiene que ser menor que fecha de inicio
+  function comprobarSiIniciaONo(){
+    if (document.getElementById('fechaInicioCrearPlan')){
+      const fechaInicioInput = new Date(document.getElementById('fechaInicioCrearPlan').value);
+      const fechaMaximaInput = new Date(document.getElementById('fechaMaximaIncribcionCrearPlan').value);
+
+      if (fechaInicioInput < fechaMaximaInput){
+        mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "La fecha maxima de inscripcion no puede ser despues del inicio")
+      }else{
+        mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
+      }
+    }
+  }
+}
+
+//validar la hora maxima 
+function validarHoraMaximaInscripcion(){
+  const horaMaximaInput = document.getElementById('horaMaximaInscribcionCrearPlan').value;
+  const fechaMaximaInput = document.getElementById('fechaMaximaIncribcionCrearPlan').value;
+
+  if (horaMaximaInput) {
+    mostrarError(document.getElementById('errorHoraMaximaInscribcionCrearPlan'), "");
+
+    if (fechaMaximaInput) {
+      const fechaInput = new Date(fechaMaximaInput); // Obtenemos la fecha de la fecha máxima
+      const fechaActual = new Date(); // Obtenemos la fecha actual
+
+      // Comparar si las fechas son el mismo día
+      if (fechaInput.toDateString() === fechaActual.toDateString()) {
+        // Si la fecha es hoy, compara hora y minutos
+        const horaInput = parseInt(horaMaximaInput.split(':')[0], 10); // Hora de la fecha máxima
+        const minutoInput = parseInt(horaMaximaInput.split(':')[1], 10); // Minuto de la fecha máxima
+        const horaActual = fechaActual.getHours(); // Hora actual
+        const minutoActual = fechaActual.getMinutes(); // Minuto actual
+
+        // Compara si la hora máxima es menor que la hora actual
+        if (horaInput < horaActual || (horaInput === horaActual && minutoInput <= minutoActual)) {
+          mostrarError(document.getElementById('errorHoraMaximaInscribcionCrearPlan'), "La hora máxima de inscripción no puede ser anterior a la hora actual.");
+        } else {
+          mostrarError(document.getElementById('errorHoraMaximaInscribcionCrearPlan'), ""); // No hay error
+        }
+      }
+    }
+  } else {
+    mostrarError(document.getElementById('errorHoraMaximaInscribcionCrearPlan'), "La hora no puede estar vacía.");
+  }
+
+}
+
+//validacion de precio
+function validarPrecio(){
+  if (document.getElementById('precioCrearPlan').value.trim()==""){
+    mostrarError(document.getElementById('errorPrecioCrearPlan'), "El precio no puede ser nulo")
+  }else{
+    mostrarError(document.getElementById('errorPrecioCrearPlan'), "")
+  }
+}
+
+//validar Descripcion 
+function validarDescripcion(){
+  if (document.getElementById('descripcionCrearPlan').value.trim()==""){
+    mostrarError(document.getElementById('errorDescripcionCrearPlan'), "El definicion no puede estar vacio")
+  }else{
+    mostrarError(document.getElementById('errorDescripcionCrearPlan'), "")
+  }
+}
+
+
+//UTILIZAR LOS VALIDACIONES
+document.getElementById('nombrePlan').onblur =validaNombrePlan;
+document.getElementById('fechaInicioCrearPlan').onblur = validarFechaInicio;
+document.getElementById('fechaFinCrearPlan').onblur = validarFechaFin;
+document.getElementById('fechaMaximaIncribcionCrearPlan').onblur = validarFechaMaximaInscripcion;
+document.getElementById('horaMaximaInscribcionCrearPlan').onblur = validarHoraMaximaInscripcion;
+document.getElementById('precioCrearPlan').onblur = validarPrecio;
+document.getElementById('descripcionCrearPlan').onblur = validarDescripcion;
+
+document.getElementById('nombrePlan').oninput =validaNombrePlan;
+document.getElementById('fechaInicioCrearPlan').oninput = validarFechaInicio;
+document.getElementById('fechaFinCrearPlan').oninput = validarFechaFin;
+document.getElementById('fechaMaximaIncribcionCrearPlan').oninput = validarFechaMaximaInscripcion;
+document.getElementById('horaMaximaInscribcionCrearPlan').oninput = validarHoraMaximaInscripcion;
+document.getElementById('precioCrearPlan').oninput = validarPrecio;
+document.getElementById('descripcionCrearPlan').oninput = validarDescripcion;
+
+//funcion para limpiar los el formulario
+function limpiarFormularioAñadirPlan(){
+  // Limpiar todos los campos del formulario
+  document.getElementById('formAñadirPlan').reset();
+
+  // Limpiar los mensajes de error
+  const errores = document.querySelectorAll('[id^="error"]');
+  errores.forEach(error => {
+    error.innerHTML = ''; // Limpiar el contenido de cada mensaje de error
+  });
+
+  // Limpiar el mensaje de feedback
+  document.getElementById('mensajeFeedback').style.display = "none";
+
+}
+
+
+//CUADO DAMOS EL BOTON DE CREAR
+formularioCrearPlan = document.getElementById('formAñadirPlan');
+formularioCrearPlan.onsubmit = async function (event) {
+  // Prevenir el envío del formulario al inicio
+  event.preventDefault();
+
+  //validamos otra vez por si acaso 
+  validaNombrePlan();
+  validarFechaInicio();
+  validarFechaFin();
+  validarFechaMaximaInscripcion();
+  validarHoraMaximaInscripcion();
+  validarPrecio();
+  validarDescripcion();
+
+  //comprobamos si hay error o no 
+  if (
+    checkError(document.getElementById('errorNombrePlan')) && 
+    checkError(document.getElementById('errorFechaInicioCrearPlan')) && 
+    checkError(document.getElementById('errorFechaCrearPlan')) && 
+    checkError(document.getElementById('errorFechaMaximaIncribcionCrearPlan')) && 
+    checkError(document.getElementById('errorHoraMaximaInscribcionCrearPlan')) && 
+    checkError(document.getElementById('errorPrecioCrearPlan')) && 
+    checkError(document.getElementById('errorDescripcionCrearPlan'))) {
+    // Si no hay errores en ninguno de los campos, continuar con el proceso
+    // Aquí puedes agregar la lógica para enviar el formulario o mostrar un mensaje de éxito
+    mostrarError(document.getElementById('errorCrearPlan'), "")
+    //SIGUENTE PASO 
+    crearPlan(
+      document.getElementById('nombrePlan').value,
+      document.getElementById('fechaInicioCrearPlan').value, 
+      document.getElementById('fechaFinCrearPlan').value, 
+      document.getElementById('fechaMaximaIncribcionCrearPlan').value, 
+      document.getElementById('horaMaximaInscribcionCrearPlan').value, 
+      document.getElementById('precioCrearPlan').value, 
+      document.getElementById('descripcionCrearPlan').value, 
+    )
+  } else {
+    // Si hay algún error, evitar el envío y mostrar el mensaje de error
+    mostrarError(document.getElementById('errorCrearPlan'), "Hay campos del formulario no completado")
+  }
+
+  function crearPlan(nombre, fechaInicio, fechaFin, fechaMaxima, horaMaxima, precio, descripcion){
+    fetch("../Server/GestionarIndexAdmin.php", {
+      method: "POST", // Método de la solicitud
+      headers: {
+        "Content-type": "application/json", // Tipo de contenido de la solicitud
+      },
+      body: JSON.stringify({
+        //enviamos datos para la consulta
+        nombreAgregatPlan : nombre,
+        fechaInicioCrearPlan: fechaInicio,
+        fechaFinCrearPlan: fechaFin,
+        fechaMaximaCrearPlan: fechaMaxima,
+        horaMaximaCrearPlan: horaMaxima, 
+        precioCrearPlan: precio, 
+        descripcionCrearPlan: descripcion
+      }),
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+      }
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      let mensajeFeedbackPlan = document.getElementById("mensajeFeedbackPlan"); //sacamos el div del html 
+      // Comprobar si hay un error en la respuesta
+      if (data.error) {
+        console.log("2Error: " + data.error); // Mostrar en consola el error
+      } else {
+        if (data.crearPlan){
+          if (data.crearPlan == 'ok'){
+            // Éxito
+            document.getElementById('errorCrearPlan').innerHTML = "";
+            mensajeFeedbackPlan.style.display = "block";
+            mensajeFeedbackPlan.style.color = "green";
+            mensajeFeedbackPlan.innerText = "Plan creado con éxito 🎉";
+            // Deshabilitamos el botón
+            document.getElementById('btnCrearPlanConfirmar').disabled = true;
+            // cerrar el overlay despues de 2s
+            setTimeout(() => {
+              mensajeFeedbackPlan.style.display = "none";
+              document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
+              document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+              // habilitamos el botón
+              document.getElementById('btnCrearPlanConfirmar').disabled = false;
+            }, 2000);
+          }else{
+            // FALLO
+            document.getElementById('errorCrearPlan').innerHTML = "";
+            mensajeFeedbackPlan.style.display = "block";
+            mensajeFeedbackPlan.style.color = "red";
+            mensajeFeedbackPlan.innerText = "Plan no creado";
+            // Deshabilitamos el botón
+            document.getElementById('btnCrearPlanConfirmar').disabled = true;
+            // cerrar el overlay despues de 3s
+            setTimeout(() => {
+              mensajeFeedbackPlan.style.display = "none";
+              document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
+              document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+               // habilitamos el botón
+               document.getElementById('btnCrearPlanConfirmar').disabled = false;
+            }, 3000);
+          }
+        }
+        
+      }
+    });
+  }
+
+
+}
+
+
+
+
+
+
+
+//================================================================================================//
+//                    FIN DE OVERLAY DE AÑADIR PLAN
+//================================================================================================//

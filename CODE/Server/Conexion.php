@@ -33,6 +33,7 @@ $sql_tables = "
 
  CREATE TABLE IF NOT EXISTS PLAN_FECHAS (
     id_plan INT PRIMARY KEY AUTO_INCREMENT,
+    nombre  VARCHAR(40) NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
     fecha_maxInscripcion DATE NOT null,
@@ -57,11 +58,9 @@ $sql_tables = "
     observaciones TEXT,
     fecha_nacimiento DATE NOT NULL,
     id_tutor INT NOT NULL,
-    id_plan INT NOT NULL,
     pagado BOOLEAN NOT NULL,
     avatar_src text,
-    FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor),
-    FOREIGN KEY (id_plan) REFERENCES PLAN_FECHAS(id_plan)
+    FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor)
 );
 
     CREATE TABLE IF NOT EXISTS MONITORES (
@@ -85,6 +84,13 @@ $sql_tables = "
         id_nino INT NOT NULL,
         PRIMARY KEY (id_grupo, id_nino),
         FOREIGN KEY (id_grupo) REFERENCES GRUPOS(id_grupo) ON DELETE CASCADE,
+        FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
+    );
+      CREATE TABLE IF NOT EXISTS PLAN_NINOS (
+        id_plan INT NOT NULL,
+        id_nino INT NOT NULL,
+        PRIMARY KEY (id_plan, id_nino),
+        FOREIGN KEY (id_plan) REFERENCES PLAN_FECHAS(id_plan) ON DELETE CASCADE,
         FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
     );
 
@@ -120,24 +126,20 @@ $sql_tables = "
     FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor),   
     FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino)        
     );
-    CREATE TABLE IF NOT EXISTS LISTA_MONITORES (
-    id_lista_monitor INT PRIMARY KEY AUTO_INCREMENT,
-    id_monitor INT NOT NULL,
-    nombre_monitor VARCHAR(50) NOT NULL,
-    descripcion_monitor TEXT,
-    FOREIGN KEY (id_monitor) REFERENCES MONITORES(id_monitor) ON DELETE CASCADE
-);
+    
 
 ";
 
 $conn->multi_query($sql_tables);  // Se ejecuta la creación de todas las tablas
-while ($conn->more_results() && $conn->next_result()) {}  // Espera a que terminen todas las consultas
+while ($conn->more_results() && $conn->next_result()) {
+}  // Espera a que terminen todas las consultas
 
 //----------------------------------------------------------------------------------------//
 // Insertar datos de prueba usando consultas preparadas
 //----------------------------------------------------------------------------------------//
 // Función para verificar si un usuario ya existe
-function usuarioExiste($conn, $tabla, $email) {
+function usuarioExiste($conn, $tabla, $email)
+{
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM $tabla WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -155,10 +157,10 @@ if (!usuarioExiste($conn, "MONITORES", "monitor@ejemplo.com")) {
     $stmt = $conn->prepare("INSERT INTO MONITORES (nombre, email, contrasenia, descripcion) VALUES (?, ?, ?, ?)");
     $nombre = "Monitor Ejemplo";
     $email = "monitor@ejemplo.com";
-    $hashed_password = '$2y$10$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu';  
+    $hashed_password = '$2y$10$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu';
     $descripcion = "Monitor de ejemplo para el campamento.";
     $stmt->bind_param("ssss", $nombre, $email, $hashed_password, $descripcion);
-    
+
     if ($stmt->execute()) {
         echo "Monitor insertado correctamente.<br>";
     } else {
@@ -179,7 +181,7 @@ if (!usuarioExiste($conn, "TUTORES", "tutor@ejemplo.com")) {
     $email = "tutor@ejemplo.com";
     $tutor_hashed_password = '$2y$10$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu';
     $stmt->bind_param("sssss", $nombre, $dni, $telefono, $email, $tutor_hashed_password);
-    
+
     if ($stmt->execute()) {
         echo "Tutor insertado correctamente.<br>";
     } else {
@@ -194,9 +196,9 @@ if (!usuarioExiste($conn, "TUTORES", "tutor@ejemplo.com")) {
 if (!usuarioExiste($conn, "ADMIN", "admin@ejemplo.com")) {
     $stmt = $conn->prepare("INSERT INTO ADMIN (email, contrasenia) VALUES (?, ?)");
     $email = "admin@ejemplo.com";
-    $admin_hashed_password = '$2y$10$FPQ0ATriO3ybhUFxwS3O0.2yDubZGQ0KniiwvRRAB95dEFZ045IL.'; 
+    $admin_hashed_password = '$2y$10$FPQ0ATriO3ybhUFxwS3O0.2yDubZGQ0KniiwvRRAB95dEFZ045IL.';
     $stmt->bind_param("ss", $email, $admin_hashed_password);
-    
+
     if ($stmt->execute()) {
         echo "Admin insertado correctamente.<br>";
     } else {
@@ -209,7 +211,8 @@ if (!usuarioExiste($conn, "ADMIN", "admin@ejemplo.com")) {
 // ------------------------------------------------------------------------------------------------------------------------------------//
 // Función para verificar si ya existe un plan en base a fechas 
 // ------------------------------------------------------------------------------------------------------------------------------------//
-function planExiste($conn, $fecha_inicio, $fecha_fin) {
+function planExiste($conn, $fecha_inicio, $fecha_fin)
+{
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM PLAN_FECHAS WHERE fecha_inicio = ? AND fecha_fin = ?");
     $stmt->bind_param("ss", $fecha_inicio, $fecha_fin);
     $stmt->execute();
@@ -243,7 +246,8 @@ if (!planExiste($conn, $fecha_inicio, $fecha_fin)) {
 // ------------------------------------------------------------------------------------------------------------------------------------//
 // Función para verificar si ya existe un grupo con un nombre dado y un monitor asignado
 // ------------------------------------------------------------------------------------------------------------------------------------//
-function grupoExiste($conn, $nombre_grupo, $id_monitor) {
+function grupoExiste($conn, $nombre_grupo, $id_monitor)
+{
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM GRUPOS WHERE nombre = ? AND id_monitor = ?");
     $stmt->bind_param("si", $nombre_grupo, $id_monitor);
     $stmt->execute();
@@ -273,7 +277,8 @@ if (!grupoExiste($conn, $nombre_grupo, $id_monitor)) {
 // ------------------------------------------------------------------------------------------------------------------------------------//
 // Función para verificar si ya existe una actividad con el mismo título y asociada al mismo grupo y plan
 // ------------------------------------------------------------------------------------------------------------------------------------//
-function actividadExiste($conn, $titulo, $id_grupo, $id_plan) {
+function actividadExiste($conn, $titulo, $id_grupo, $id_plan)
+{
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM ACTIVIDADES WHERE titulo = ? AND id_grupo = ? AND id_plan = ?");
     $stmt->bind_param("sii", $titulo, $id_grupo, $id_plan);
     $stmt->execute();
@@ -306,7 +311,8 @@ if (!actividadExiste($conn, $titulo, $id_grupo, $id_plan)) {
 // ------------------------------------------------------------------------------------------------------------------------------------//
 // Función para verificar si ya existe un niño con el mismo nombre y tutor
 // ------------------------------------------------------------------------------------------------------------------------------------//
-function ninoExiste($conn, $nombre, $id_tutor) {
+function ninoExiste($conn, $nombre, $id_tutor)
+{
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM NINOS WHERE nombre = ? AND id_tutor = ?");
     $stmt->bind_param("si", $nombre, $id_tutor);
     $stmt->execute();
@@ -327,8 +333,8 @@ $avatar_src  = "avatar.png";
 
 // Insertar el niño solo si no existe
 if (!ninoExiste($conn, $nombre_nino, $id_tutor)) {
-    $stmt = $conn->prepare("INSERT INTO NINOS (nombre, alergias, observaciones, fecha_nacimiento, id_tutor, id_plan, pagado, avatar_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssisiis", $nombre_nino, $alergias, $observaciones, $fecha_nacimiento, $id_tutor, $id_plan, $pagado, $avatar_src);
+    $stmt = $conn->prepare("INSERT INTO NINOS (nombre, alergias, observaciones, fecha_nacimiento, id_tutor,  pagado, avatar_src) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssiis", $nombre_nino, $alergias, $observaciones, $fecha_nacimiento, $id_tutor, $pagado, $avatar_src);
     if (!$stmt->execute()) {
         error_log("Error al insertar Niño: " . $stmt->error);
     } else {
@@ -343,7 +349,8 @@ if (!ninoExiste($conn, $nombre_nino, $id_tutor)) {
 // ------------------------------------------------------------------------------------------------------------------------------------//
 // Función para verificar si ya existe una relación entre grupo y niño
 // ------------------------------------------------------------------------------------------------------------------------------------//
-function grupoNinoExiste($conn, $id_grupo, $id_nino) {
+function grupoNinoExiste($conn, $id_grupo, $id_nino)
+{
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM GRUPO_NINOS WHERE id_grupo = ? AND id_nino = ?");
     $stmt->bind_param("ii", $id_grupo, $id_nino);
     $stmt->execute();
@@ -375,7 +382,8 @@ if (!grupoNinoExiste($conn, $id_grupo, $id_nino)) {
 // ------------------------------------------------------------------------------------------------------------------------------------//
 // Función para verificar si ya existe un plan comedor con el mismo nombre, tutor y niño
 // ------------------------------------------------------------------------------------------------------------------------------------//
-function planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino) {
+function planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)
+{
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM PLAN_COMEDOR WHERE nombre_plan = ? AND id_tutor = ? AND id_nino = ?");
     $stmt->bind_param("sii", $nombre_plan, $id_tutor, $id_nino);
     $stmt->execute();
@@ -402,36 +410,3 @@ if (!planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)) {
 } else {
     // Opcional: echo "El plan comedor ya existe.<br>";
 }
-
-// ----- 11. LISTA_MONITORES -----
-// ------------------------------------------------------------------------------------------------------------------------------------//
-// Función para verificar si ya existe un monitor en la lista de monitores
-// ------------------------------------------------------------------------------------------------------------------------------------//
-function monitorExiste($conn, $id_monitor, $nombre_monitor, $descripcion_monitor) {
-    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM LISTA_MONITORES WHERE id_monitor = ? AND nombre_monitor = ? AND descripcion_monitor = ?");
-    $stmt->bind_param("iss", $id_monitor, $nombre_monitor, $descripcion_monitor);
-    $stmt->execute();
-    $result = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-    return $result['count'] > 0;
-}
-
-// Valores a insertar en LISTA_MONITORES
-$id_monitor = 1; // Asegúrate de que este ID exista en la tabla MONITORES
-$nombre_monitor = "Monitor Ejemplo";
-$descripcion_monitor = "Monitor de audio y video.";
-
-// Insertar el monitor solo si no existe
-if (!monitorExiste($conn, $id_monitor, $nombre_monitor, $descripcion_monitor)) {
-    $stmt = $conn->prepare("INSERT INTO LISTA_MONITORES (id_monitor, nombre_monitor, descripcion_monitor) VALUES (?, ?, ?)");
-    $stmt->bind_param("iss", $id_monitor, $nombre_monitor, $descripcion_monitor);
-    if (!$stmt->execute()) {
-        error_log("Error al insertar Monitor: " . $stmt->error);
-    } else {
-        echo "Monitor insertado correctamente.<br>";
-    }
-    $stmt->close();
-} else {
-    // Opcional: echo "El monitor ya existe.<br>";
-}
-?>
