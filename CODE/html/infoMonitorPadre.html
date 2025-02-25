@@ -108,194 +108,211 @@
                                                               <!-- INICIO CONTENIDO HTML -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="card">
-        <header>
-          <h2>Monitores</h2>
-          <div class="buttons">
-            <button class="active" onclick="selectList(this, 0)">Lista #1</button>
-            <button onclick="selectList(this, 1)">Lista #2</button>
-            <button onclick="selectList(this, 2)">Lista #3</button>
-          </div>
-        </header>
-        <div class="tables">
-          <div class="tables-inner">
-            <table class="active">
-              <tbody class="active" id="tablaMonitores">
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/001-boy.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 1</h3>
-                    <h4>Monitora de Arte</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
-                        <img src="../assets/icons/star-1.svg" />
-                        <img src="../assets/icons/star-1.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/014-girl-7.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 2</h3>
-                    <h4>Monitora de Física</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
-                        <img src="../assets/icons/star-1.svg" />
-                        <img src="../assets/icons/star-1.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/001-boy.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 3</h3>
-                    <h4>Monitor de Cocina</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
-                        <img src="../assets/icons/star-1.svg" />
-                        <img src="../assets/icons/star-1.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                        <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table>
-              <tbody class="active">
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/014-girl-7.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 4</h3>
-                    <h4>Monitora de Diseño</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
+      <header>
+        <h2>Monitores</h2>
+        <div class="buttons">
+          <button class="active" onclick="selectList(this, 0)">Lista #1</button>
+          <button onclick="selectList(this, 1)">Lista #2</button>
+          <button onclick="selectList(this, 2)">Lista #3</button>
+        </div>
+      </header>
+      <div class="tables">
+        <div class="tables-inner">
+          <table class="active">
+            <tbody class="active">
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/001-boy.svg" />
+                </td>
+                <td>
+                  <div id="usuario1">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
                       <img src="../assets/icons/star-1.svg" />
                       <img src="../assets/icons/star-1.svg" />
                       <img src="../assets/icons/star-0.svg" />
                       <img src="../assets/icons/star-0.svg" />
                       <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/014-girl-7.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 5</h3>
-                    <h4>Monitora de Diseño</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-0.svg" />
-                      <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/001-boy.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 6</h3>
-                    <h4>Monitor de Fotografía</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table>
-              <tbody class="active">
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/014-girl-7.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 7</h3>
-                    <h4>Monitora de Física</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/001-boy.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 8</h3>
-                    <h4>Monitor de Arte</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/014-girl-7.svg" />
+                </td>
+                <td>
+                  <div id="usuario2">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
                       <img src="../assets/icons/star-1.svg" />
                       <img src="../assets/icons/star-1.svg" />
                       <img src="../assets/icons/star-0.svg" />
                       <img src="../assets/icons/star-0.svg" />
                       <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img class="avatar" src="../assets/icons/014-girl-7.svg" />
-                  </td>
-                  <td>
-                    <h3>Usuario 9</h3>
-                    <h4>Monitora de Música</h4>
-                  </td>
-                  <td>
-                    <div class="stars">
-                      <img src="../assets/icons/star-1.svg" />
-                      <img src="../assets/icons/star-1.svg" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/001-boy.svg" />
+                </td>
+                <td>
+                  <div id="usuario3">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
                       <img src="../assets/icons/star-1.svg" />
                       <img src="../assets/icons/star-1.svg" />
                       <img src="../assets/icons/star-0.svg" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                      <img src="../assets/icons/star-0.svg" />
+                      <img src="../assets/icons/star-0.svg" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <tbody class="active">
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/014-girl-7.svg" />
+                </td>
+                <td>
+                  <div class="usuario4">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/014-girl-7.svg" />
+                </td>
+                <td>
+                  <div class="usuario5">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/001-boy.svg" />
+                </td>
+                <td>
+                  <div class="usuario6">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>  
+                </td>
+                <td>
+                  <div class="stars">
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <tbody class="active">
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/014-girl-7.svg" />
+                </td>
+                <td>
+                  <div class="usuario7">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/001-boy.svg" />
+                </td>
+                <td>
+                  <div class="usuario8">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="avatar" src="../assets/icons/014-girl-7.svg" />
+                </td>
+                <td>
+                  <div class="usuario9">
+                  <h3><!-- Aqui debe estar el nombre del monitor extraido de la bd --></h3>
+                  <h4><!-- Aqui debe mostrarse la descripcion del monitor extraido de la bd  --></h4>
+                </div>
+                </td>
+                <td>
+                  <div class="stars">
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-1.svg" />
+                    <img src="../assets/icons/star-0.svg" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-     
+    </div>
      <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                                                               <!-- FOOTER -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
