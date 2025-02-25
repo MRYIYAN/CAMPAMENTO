@@ -1,0 +1,948 @@
+/* =====================================================================================================================================================*/
+/* ESTILO GENERAL BODY*/
+/* =====================================================================================================================================================*/
+
+/* =================================================================*/
+/* Definición de tonos de azul */
+/* =================================================================*/
+:root {
+    --color-nav-bg: #0a5780;
+    --color-item: #e2e9f4;
+    --color-primary: #3e99e3;
+    --color-dropdown-hover: #678ba3;
+    --color-underline: #b8d3ef;
+  }
+  
+  /* =================================================================*/
+  /* Estilos generales */
+  /* =================================================================*/
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  body::-webkit-scrollbar {
+    width: 15px;
+  }
+  body::-webkit-scrollbar-thumb {
+    background: #3e99e3;
+    border-radius: 10px;
+  }
+  body::-webkit-scrollbar-thumb:hover {
+    background: #b8d3ef;
+  }
+  
+  body {
+    font-family: "Euclid Circular A", "Poppins";
+    background: linear-gradient(225deg, #ffffff, #3e99e3);
+    color: white;
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    justify-items: center; /* Centra horizontalmente */
+    align-items: start; /* Ubica el contenido al inicio (arriba) */
+    margin: 0;
+    background-attachment: fixed;
+  }
+  /* =====================================================================/*
+                              TRANSICIÓN CON GSAP
+    /*======================================================================== */
+  .transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000; /* Valor alto para que cubra todo */
+    pointer-events: none;
+  }
+  
+  .transition-row {
+    flex: 1;
+    display: flex;
+  }
+  
+  /* Ajuste: Usamos .row1 y .row2, de acuerdo a tu HTML */
+  .transition-row.row1 .block {
+    transform-origin: top;
+  }
+  
+  .transition-row.row2 .block {
+    transform-origin: bottom;
+  }
+  
+  .block {
+    flex: 1;
+    background-color: #2788c0; /* Puedes ajustar el color si lo deseas */
+    transform: scaleY(1);
+    will-change: transform;
+  }
+  
+  /* =====================================================================================================================================================*/
+  /* NAVBAR */
+  /* =====================================================================================================================================================*/
+  /* Estilo del navbar */
+  * {
+    box-sizing: border-box;
+    border-radius: 8px;
+  }
+  button {
+    background-color: #3e99e3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  button:hover {
+    background-color: #0f80cb;
+    border-radius: 10px;
+  }
+  nav {
+    border-radius: 10px;
+    position: fixed;
+    background: var(--color-nav-bg);
+    font-weight: 400;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    width: 95%;
+    z-index: 1000; /* Valor alto para que el navbar esté encima */
+  }
+  
+  /* =================================================================*/
+  /* El logo se posiciona de forma absoluta (como pegatina) */
+  /* =================================================================*/
+  nav .logo {
+    position: absolute;
+    top: 50%; /* Centrado verticalmente en el navbar */
+    left: 20px; /* Distancia desde el borde izquierdo */
+    transform: translateY(-50%); /* Centrado vertical */
+    height: 50px;
+    width: auto;
+    z-index: 10;
+  }
+  
+  /* =================================================================*/
+  /* Contenedor de elementos de navegación */
+  /* =================================================================*/
+  nav .nav-container {
+    display: flex;
+    position: relative;
+    flex: 1;
+    margin-left: 80px; /* Ajusta este valor según el ancho del logo y el espacio deseado */
+  }
+  
+  /* =================================================================*/
+  /* Items de navegación */
+  /* =================================================================*/
+  /* Estilo de los items del navbar */
+  /* NOTA: Se usa flex-grow para que los items se expandan y ocupen todo el espacio disponible */
+  /*=================================================================*/
+  nav .item {
+    font-size: 0.8rem;
+    display: inline-block;
+    position: relative;
+    padding: 0 15px;
+    cursor: pointer;
+    z-index: 5;
+    min-width: 20%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: var(--color-item);
+  }
+  
+  /* Dropdown (submenú) */
+  .dropdown {
+    overflow: hidden;
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    width: 100%;
+    left: 0;
+    top: 62px;
+  }
+  
+  /* Oculto inicialmente y se muestra al hacer hover */
+  .dropdown > div {
+    translate: 0 -100%;
+    transition: all 0.5s 0.1s;
+    position: relative;
+  }
+  
+  /* Enlaces del dropdown */
+  .dropdown a {
+    display: block;
+    padding: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: var(--color-primary);
+    color: rgb(117, 21, 96);
+    text-decoration: none;
+  }
+  
+  /* Hover en los enlaces del dropdown */
+  .dropdown a:hover {
+    background: var(--color-dropdown-hover);
+  }
+  
+  /* Línea inferior (underline) */
+  .underline {
+    height: 6px;
+    background: var(--color-underline);
+    position: absolute;
+    bottom: 0;
+    width: 20%;
+    z-index: 2;
+    pointer-events: none;
+    transition: 0.35s;
+  }
+  
+  /* Mostrar el dropdown al hacer hover sobre su item */
+  nav .item:hover > .dropdown > div {
+    translate: 0;
+  }
+  
+  /* =================================================================*/
+  /* Movimiento de la underline según el item (NOTA: esto funciona correctamente
+       porque solo se cuentan los hijos dentro de .nav-container) */
+  /* =================================================================*/
+  nav .item:nth-child(1):hover ~ .underline {
+    translate: 0;
+  }
+  
+  nav .item:nth-child(2):hover ~ .underline {
+    translate: 100%;
+  }
+  
+  nav .item:nth-child(3):hover ~ .underline {
+    translate: 200%;
+  }
+  
+  nav .item:nth-child(4):hover ~ .underline {
+    translate: 300%;
+  }
+  nav .item:nth-child(5):hover ~ .underline {
+    translate: 400%;
+  }
+  
+  .botonNavbar {
+    width: 100%;
+    height: 100%;
+  }
+  
+/* espaciador para el navbar y el contenido, para que no se superpongan */
+.espaciador {
+    height: 200px;
+  }
+  .espaciadorBajo {
+    height: 500px;
+  }
+  /* -------------------------------------------------------------------------------------------------- */
+  /* overlay para cerrar sesion */
+  /* -------------------------------------------------------------------------------------------------- */
+  /* Estilo para el overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    color: #333; /* Color del texto */
+  }
+  
+  /* Estilo para la ventana emergente */
+  .overlay-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Botón de cierre */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .close-btn:hover {
+    background: #cc0000;
+  }
+  
+  /* Clase para mostrar el overlay */
+  .overlay.activeOverlay {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* Botón para abrir */
+  .open-btn {
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .open-btn:hover {
+    background: #0056b3;
+  }
+  /* -------------------------------------------------------------------------------------------------- */
+  
+  /* =====================================================================================================================================================*/
+  /* FOOTER */
+  /* =====================================================================================================================================================*/
+  
+  /* ==================================================================*/
+  /* Estilos generales */
+  /* ==================================================================*/
+  .background {
+    position: absolute;
+    z-index: -1; /* Detrás de todo */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos del footer */
+  /* ==================================================================*/
+  ul {
+    display: flex;
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos de los elementos */
+  /* ==================================================================*/
+  
+  .socials {
+    gap: 20px;
+  }
+  
+  .socials a {
+    font-size: 24px;
+  }
+  
+  .links {
+    gap: 10px;
+  }
+  
+  .legal {
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos de la onda */
+  /* ==================================================================*/
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Ocupa todo el alto */
+    transform: scaleY(3) scaleX(2.25); /* Escala la onda */
+    transform-origin: bottom;
+    box-sizing: border-box;
+    display: block; /* Quita el espacio extra */
+    pointer-events: none;
+  }
+  
+  /* ==================================================================*/
+  /* Estilos del footer - Cambio de position */
+  /* ==================================================================*/
+  footer {
+    position: relative; /* Se fija al fondo */
+    left: 0;
+    bottom: 0; /* Ajusta al fondo de la página */
+    display: flex;
+    justify-content: center; /* Centra el contenido en el footer */
+    width: 100%; /* Ocupa todo el ancho */
+    height: 350px; /* Altura del footer */
+    overflow-x: hidden;
+    z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
+  }
+  
+  /* ==================================================================*/
+  /* Estilos del contenido dentro del footer */
+  /* ==================================================================*/
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 30px;
+    padding-bottom: 80px; /* Ajusta este valor según el alto de la onda */
+    padding-left: 60px; /* Ajusta este valor según el ancho de la onda */
+    width: 100%;
+  }
+  
+  @media (min-width: 420px) {
+    section {
+      align-items: center; /* Centra horizontalmente */
+      padding-left: 0;
+      gap: 20px; /* Ajusta este valor según el espacio deseado */
+    }
+  
+    .links {
+      gap: 20px;
+    }
+  }
+  
+  /* ==================================================================*/
+  /* estilo para esconder html*/
+  /* ==================================================================*/
+  .oculto {
+    display: none;
+  }
+  /* ==================================================================*/
+  /* fin de estilo para esconder html*/
+  /* ==================================================================*/
+  
+  .body-fondo-bloqueado {
+    pointer-events: none; /* Bloquea todas las interacciones con el fondo */
+    overflow: hidden; /* Bloquea el desplazamiento de la página */
+  }
+  
+  /* =====================================================================================================================================================*/
+  /*HTML CONTENIDO*/
+  /* =====================================================================================================================================================*/
+  
+  /* Estilos para el contenedor de tablas */
+/* Estilos para el contenedor de tablas */
+.contenedorTablas {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-x: auto; /* Permite scroll si es necesario */
+}
+
+/* Estilos de la tabla de monitores */
+#tablaAdmin {
+    width: 100%;
+}
+
+#tablaMonitores {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste de los avatares */
+#tablaMonitores td:first-child img {
+    width: 40px; /* Reducido */
+    height: 40px; /* Uniforme */
+    border-radius: 50%; /* Redondo */
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+/* Ajuste de celdas */
+#tablaMonitores th,
+#tablaMonitores td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+#tablaMonitores th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+#tablaMonitores tbody tr:nth-child(odd) {
+    background-color: #e6f7ff;
+}
+
+#tablaMonitores tbody tr:nth-child(even) {
+    background-color: #f2faff;
+}
+
+#tablaMonitores tbody tr:hover {
+    background-color: #cce0ff;
+}
+
+/* Ancho de la columna de acciones */
+#btnAcciones {
+    width: 12em;
+    text-align: center;
+}
+
+/* Botones dentro de la tabla */
+#tablaMonitores td button {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 2px;
+}
+
+/* Botón primario (por ejemplo, editar) */
+#tablaMonitores td button:first-child {
+    background-color: #17a2b8;
+    color: white;
+}
+
+#tablaMonitores td button:first-child:hover {
+    background-color: #138496;
+}
+
+/* Botón secundario (por ejemplo, eliminar) */
+#tablaMonitores td button:last-child {
+    background-color: #17a2b8;
+    color: white;
+}
+
+#tablaMonitores td button:last-child:hover {
+    background-color: #138496;
+}
+#eliminarMonitor{
+    background-color: #ff4d4d;
+    color: white;
+}
+.verMasBtnEliminar{
+    background-color: #ff4d4d;
+    color: white;
+}
+.verMasBtnEliminar:hover{
+    background-color: #cc0000;
+}
+
+
+
+/* OVERLAY */
+
+/* //---------------------------------------------------------------// */
+/* //CSS DE ELIMINAR EL NINO */
+/* //---------------------------------------------------------------// */
+/* Estilo para el overlay */
+.overlayComprobarEliminarPersona {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    color: #333;  /* Color del texto */
+    overflow: auto; /* Agrega desplazamiento si es necesario */
+    padding: 20px;  /* Evita que el contenido toque los bordes */
+    z-index: 998;
+    pointer-events: auto;  /* Habilita la interacción con el overlay */
+}
+
+
+  /* Estilo para la ventana emergente */
+  .overlayContenidoComprobarEliminarPersona {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    text-align: center;
+    position: relative;
+    max-height: 80%;
+    overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
+}
+
+
+  /* Botón de cierre */
+  .closeBtnComprobarEliminarPersona{
+    position: absolute;
+    font-size: large;
+    top: 10px;
+    right: 10px;
+    background: #ff4d4d00;
+    color: #007BFF;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .closeBtnComprobarEliminarPersona:hover {
+    background: #cc000000;
+  }
+
+  /* Clase para mostrar el overlay */
+  .overlayComprobarEliminarPersona.activeOverlayComprobarEliminarPersona {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .mensajeFeedbackComprobarEliminarPersona{
+    z-index: 999;
+    background-color: #333;
+  }
+
+/* //---------------------------------------------------------------// */
+
+
+/* //---------------------------------------------------------------// */
+/* //CSS DE MODIFICAR CONTRASEÑA */
+/* //---------------------------------------------------------------// */
+/* Estilos para el overlay de cambiar contraseña */
+.overlayCambiarContraseña {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Oculto por defecto */
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;  /* Habilita la interacción con el overlay */
+
+}
+
+/* Estilos para el contenido del overlay */
+.overlayContenidoCambiarContraseña {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Estilos para las etiquetas y campos de contraseña */
+.overlayContenidoCambiarContraseña label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.overlayContenidoCambiarContraseña input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.overlayContenidoCambiarContraseña input:focus {
+    border-color: #007bff;
+}
+
+#errorContrasenia1, #errorContrasenia2, #errorComprobarEliminarPersona {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+
+#btnVolverModificarContrasenia {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+#btnVolverModificarContrasenia:hover {
+    background-color: #e0e0e0;
+}
+
+#btnConfirmarModificarContrasenia {
+    background-color: #007bff;
+    color: white;
+}
+
+#btnConfirmarModificarContrasenia:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el botón de cerrar */
+.closeBtnEliminarContrasenia {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.closeBtnEliminarContrasenia:hover {
+    color: #007bff;
+}
+
+  /* Clase para mostrar el overlay */
+/* Agregar la propiedad display: flex cuando esté activo */
+.overlayCambiarContraseña.activeOverlayCambiarContraseña {
+    display: flex; /* Asegura que se muestra */
+    visibility: visible;
+    opacity: 1;
+}
+
+  .mensajeFeedbackComprobarModificarContrasenia{
+    z-index: 999;
+    background-color: #333;
+  }
+/* //---------------------------------------------------------------// */
+
+
+
+/* //---------------------------------------------------------------// */
+/* //CSS DE MODIFICAR MONITOR*/
+/* //---------------------------------------------------------------// */
+.overlayCambiarDatos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+/* Estilos para el contenido del overlay */
+.overlayContenidoCambiarDatos {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Estilos para las etiquetas y campos de contraseña */
+.overlayContenidoCambiarDatos label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.overlayContenidoCambiarDatos input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.overlayContenidoCambiarDatos input:focus {
+    border-color: #007bff;
+}
+
+#errorContrasenia1, #errorContrasenia2, #errorCambiarDatosGeneral {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#btnVolverCambiarDatos {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+#btnVolverCambiarDatos:hover {
+    background-color: #e0e0e0;
+}
+
+#btnConfirmarCambiarDatos {
+    background-color: #007bff;
+    color: white;
+}
+
+#btnConfirmarCambiarDatos:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el botón de cerrar */
+.closeBtnCambiarDatos {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.closeBtnCambiarDatos:hover {
+    color: #007bff;
+}
+
+/* Clase para mostrar el overlay */
+.overlayCambiarDatos.activeOverlayCambiarDatos {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+}
+
+.mensajeFeedbackComprobarModificarDatos {
+    z-index: 999;
+    background-color: #333;
+}
+
+
+/* //---------------------------------------------------------------// */
+
+
+
+/* //---------------------------------------------------------------// */
+/* //CSS DE CREAR MONITOR*/
+/* //---------------------------------------------------------------// */
+.overlayCrearMonitor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+/* Estilos para el contenido del overlay */
+.overlayContenidoCrearMonitor {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Estilos para las etiquetas y campos de entrada */
+.overlayContenidoCrearMonitor label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.overlayContenidoCrearMonitor input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.overlayContenidoCrearMonitor input:focus {
+    border-color: #007bff;
+}
+
+#errorNombreModificar, #errorDescripcionModificar, #errorCrearMonitorGeneral {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#btnVolverCrearMonitor {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+#btnVolverCrearMonitor:hover {
+    background-color: #e0e0e0;
+}
+
+#btnConfirmarCrearMonitor {
+    background-color: #007bff;
+    color: white;
+}
+
+#btnConfirmarCrearMonitor:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el botón de cerrar */
+.closeBtnCrearMonitor {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.closeBtnCrearMonitor:hover {
+    color: #007bff;
+}
+
+/* Clase para mostrar el overlay */
+.overlayCrearMonitor.activeOverlayCrearMonitor {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+}
+
+.mensajeFeedbackCrearMonitor {
+    z-index: 999;
+    background-color: #333;
+}
+/* //---------------------------------------------------------------// */
