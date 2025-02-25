@@ -164,3 +164,33 @@ selectList();
 //------------------------------------------------------------------------------------------------// 
 //                             GESTION DE BD PARA INFORMACIÓN DEL MONITOR
 //------------------------------------------------------------------------------------------------//
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Función para actualizar los datos de los monitores
+    function actualizarMonitores() {
+        fetch('../Server/GestionarMonitorPadre.php')
+            .then(response => {
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error('Error de red');
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(monitor => {
+                    const userDiv = document.querySelector(`#usuario${monitor.id}`);
+                    if (userDiv) {
+                        const h3 = userDiv.querySelector('h3');
+                        const h4 = userDiv.querySelector('h4');
+                        if (h3) h3.innerHTML = monitor.nombre;
+                        if (h4) h4.innerHTML = monitor.descripcion;
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Llamar a la función para actualizar los datos de los monitores
+    actualizarMonitores();
+});
+//-----------------------------------------------------------------------------------------------------------//
