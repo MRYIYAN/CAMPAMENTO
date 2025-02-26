@@ -102,13 +102,6 @@ $sql_tables = "
         FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
     );
 
-        CREATE TABLE IF NOT EXISTS COMIDA_NINO (
-        id_plan_comedor INT NOT NULL,
-        id_nino INT NOT NULL,
-        PRIMARY KEY (id_plan_comedor, id_nino),
-        FOREIGN KEY (id_plan_comedor) REFERENCES PLAN_COMEDOR(id_plan_comedor) ON DELETE CASCADE,
-        FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
-    );
 
     CREATE TABLE IF NOT EXISTS ACTIVIDADES (
     id_actividad INT PRIMARY KEY AUTO_INCREMENT,
