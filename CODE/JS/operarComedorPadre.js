@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <br><h4>Obtén un <span>${plan.descuento || 40}%</span> de descuento!</h4> <!-- Descuento del plan -->
                             <p>Precio: ${plan.precio}€</p> <!-- Precio del plan -->
                         </div>
-                        <img src="https://images.unsplash.com/photo-1586511925558-a4c6376fe65f?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=60" alt=""> <!-- Imagen del plan -->
+                        <img src="${plan.imagen_src}" alt=""> <!-- Imagen del plan -->
                     `;
                     cardsContainer.appendChild(card); // Añadir la tarjeta al contenedor
                 });
