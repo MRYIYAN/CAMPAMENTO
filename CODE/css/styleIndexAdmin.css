@@ -243,6 +243,13 @@ body::-webkit-scrollbar {
     height: 100%;
   }
 
+  
+
+  
+
+
+
+
   /* espaciador para el navbar y el contenido, para que no se superpongan */
   .espaciador{
     height: 100px;
@@ -852,130 +859,6 @@ label {
   /* ==================================================================*/
   
 
-/* Estilos generales del contenedor principal */
-.contenedorPrincipal {
-    width: 100%;
-    max-width: 1000px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-  }
-  
-  /* Estilos de la sección de admin */
-  .admin {
-    text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .admin h1 {
-    font-size: 20px;
-    color: #333;
-  }
-  
-  .label {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  #idAdmin,
-  #emailAdmin {
-    font-size: 16px;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  #modificarPadre {
-    width: 80%;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-  }
-  
-  #modificarPadre:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos para el contenedor de tablas */
-  .contenedorTablas {
-    width: 100%;
-    max-width: 1000px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  /* Estilos para el selector de grupo y plan */
-  #divParaSeleccionar {
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #333;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  #divParaSeleccionar div {
-    display: flex;
-    align-items: center;
-  }
-  
-  select {
-    margin-left: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  /* Estilos de la tabla de actividades */
-  #tablaActividad {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  #tablaActividad th,
-  #tablaActividad td {
-    padding: 12px 15px;
-    text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid #ddd;
-    color: #333;
-  }
-  
-  #tablaActividad th {
-    background-color: #007BFF;
-    color: white;
-    font-weight: bold;
-  }
-  
-  #tablaActividad tbody tr:nth-child(odd) {
-    background-color: #e6f7ff;
-  }
-  
-  #tablaActividad tbody tr:nth-child(even) {
-    background-color: #f2faff;
-  }
-  
-  #tablaActividad tbody tr:hover {
-    background-color: #cce0ff;
-  }
-
 
   
 /* //---------------------------------------------------------------// */
@@ -1086,8 +969,8 @@ label {
 /* //---------------------------------------------------------------// */
 
 /* -------------------------------------------------------------------------------------------------- */
-  /* overlay para cerrar sesion */
-  /* -------------------------------------------------------------------------------------------------- */
+/* overlay para cerrar sesion */
+/* -------------------------------------------------------------------------------------------------- */
   /* Estilo para el overlay */
   .overlayComprobarContraseña {
     position: fixed;
@@ -1144,3 +1027,173 @@ label {
   
   /* -------------------------------------------------------------------------------------------------- */
   
+
+
+  
+  
+  #avatar {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    color: #007bff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  #avatar:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+/* css del avatar del monitor */
+#avatarAdmin{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* Estilos generales del contenedor principal */
+.contenedorPrincipal {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+  }
+  
+  /* Estilos de la sección de admin */
+  .admin {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .admin h1 {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  #idAdmin,
+  #emailAdmin {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  #modificarPadre {
+    width: 80%;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  #modificarPadre:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para el contenedor de tablas */
+  .contenedorTablas {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* Estilos para el selector de grupo y plan */
+  #divParaSeleccionar {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #divParaSeleccionar div {
+    display: flex;
+    align-items: center;
+  }
+  
+  select {
+    /* margin-left: 10px; */
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Estilos de la tabla de actividades */
+  #tablaActividad {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  #tablaActividad th,
+  #tablaActividad td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+  }
+  
+  #tablaActividad th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+  }
+  
+  #tablaActividad tbody tr:nth-child(odd) {
+    background-color: #e6f7ff;
+  }
+  
+  #tablaActividad tbody tr:nth-child(even) {
+    background-color: #f2faff;
+  }
+  
+  #tablaActividad tbody tr:hover {
+    background-color: #cce0ff;
+  }
+
+#divParaSeleccionar{
+  display: flex;
+
+}
+#seleccionarGrupoSeleccionar, #seleccionarPlanSeleccionar{
+  display: flex;
+  flex-direction: column;
+}
+#btnCrearPlan, #selectPlanS{
+  width: 100%;
+}
+#btnCrearGrupo, #selectGrupoS{
+  width: 100%;
+}
