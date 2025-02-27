@@ -26,119 +26,53 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- NAVBAR -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
     <nav>
       <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" />
-
-      <!--------------------------------------------------------------->
-      <!-- Contenedor exclusivo para los elementos de navegación -->
-      <!--------------------------------------------------------------->
-      <div class="nav-container">
-        <!-- Enlace a la sección de actividades -->
-        <!-- Enlace con un menú desplegable -->
+    
+      
+    
+      <div class="nav-container" id="nav-container">
         <div class="item">
-          Gestion
+          Gestión
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionGrupos"
-                >
-                  Gestionar Grupos
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionarPlan"
-                >
-                  Gestionar Planes
-                </button></a
-              >
-              <a
-              ><button
-                type="button"
-                class="botonNavbar"
-                id="btnGestionarNinos"
-              >
-                Gestionar Ninos
-              </button></a
-            >
+              <a><button class="botonNavbar" id="btnGestionGrupos">Gestionar Grupos</button></a>
+              <a><button class="botonNavbar" id="btnGestionarPlan">Gestionar Planes</button></a>
+              <a><button class="botonNavbar" id="btnGestionarNinos">Gestionar Niños</button></a>
             </div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
           Servicios
           <div class="dropdown">
-            <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button type="button" class="botonNavbar" id="btnComedor">
-                  Comedor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnComedor">Comedor</button></a></div>
           </div>
         </div>
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
           Sobre nosotros
           <div class="dropdown">
-            <div>
-              <a
-                ><button type="button" class="botonNavbar" id="btnMonitor">
-                  Monitor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnMonitor">Monitor</button></a></div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <a class="item">idiomas</a>
-        <!-- <div id="google_translate_element" class="google"></div> -->
-
-        <!-- Enlace al perfil del usuario -->
-        <!-- Enlace con un menú desplegable -->
+    
+        <a class="item">Idiomas</a>
+    
         <div class="item">
           Perfil
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnNotificaciones"
-                >
-                  Notificaciones
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnModificarDatosPadre"
-                >
-                  Modificar Datos
-                </button></a
-              >
-              <a
-                ><button type="button" class="botonNavbar" id="btnCerrarSesion">
-                  Cerrar Sesion
-                </button></a
-              >
+              <a><button class="botonNavbar" id="btnNotificaciones">Notificaciones</button></a>
+              <a><button class="botonNavbar" id="btnModificarDatosPadre">Modificar Datos</button></a>
+              <a><button class="botonNavbar" id="btnCerrarSesion">Cerrar Sesión</button></a>
             </div>
           </div>
         </div>
-        <!-- Elemento decorativo para subrayar la navegación -->
-        <div class="underline"></div>
       </div>
     </nav>
+    
 
     <!-- Ventana Overlay Para cerrar sesion -->
     <div class="overlay" id="overlay">
@@ -160,12 +94,13 @@
     <div class="contenedorPrincipal">
       <div class="admin">
         <h1>Datos del Admin</h1>
-        <span class="label">ID: </span>
-        <div id="idAdmin">N</div>
+        <img src="../assets/img/avatar.png" id="avatarAdmin" alt="Avatar" />
+        <span class="label" style="display: none;">ID: </span>
+        <div id="idAdmin" style="display: none;">N</div>
         <span class="label">Correo: </span>
         <div id="emailAdmin">Correo</div>
         <button type="button" id="modificarPadre">
-          Modificar datos del Admin</button
+          Modificar Contraseña</button
         ><br />
       </div>
 
@@ -270,7 +205,7 @@
           <p id="descripcionCompletaOperar"></p>
           <form method="post" id="formularioOperarActividad">
             <div id="informacionGeneral">
-              <label for="id_activiadad"
+              <label for="id_activiadad" style="display: none;"
                 >ID:
                 <input
                   type="text"
@@ -310,7 +245,7 @@
               </label>
               <div id="errorFecha"></div>
 
-              <label for="avatar">Fotos de actividad:</label>
+              <label for="avatar">Fotos de actividad:
               <div id="vistaPreviaavatar">
                 <img
                   id="vistaPrevia"
@@ -319,7 +254,9 @@
                   style="display: none; width: 150px; height: 150px"
                 />
               </div>
-              <input type="file" name="avatar" id="avatar" />
+              <input type="file" name="avatar" id="avatar" accept="png"/>
+            </label>
+              
               <div id="errorFoto"></div>
 
               <div class="contenedorBotones">
@@ -414,19 +351,25 @@
         <div id="tablaAdmin">
           <!-- seleccionar grupo -->
           <div id="divParaSeleccionar">
-            Grupo:
-            <div id="selectGrupo"><select name="a" id="a"></select></div>
-            <div id="errorSelectGrupo"></div>
-            <button type="button" id="btnCrearGrupo">+ Crear un Grupo</button>
-            Plan:
-            <div id="selectPlan"><select name="b" id="b"></select></div>
-            <div id="errorSelectPlan"></div>
-            <button type="button" id="btnCrearPlan">+ Crear un Plan</button>
+            <div id="seleccionarGrupoSeleccionar">
+              Grupo:
+              <div id="selectGrupo"><select name="a" id="a"></select></div>
+              <div id="errorSelectGrupo"></div>
+              <button type="button" id="btnCrearGrupo">+ Crear un Grupo</button>
+            </div>
+            <div id="seleccionarPlanSeleccionar">
+              Plan:
+              <div id="selectPlan"><select name="b" id="b"></select></div>
+              <div id="errorSelectPlan"></div>
+              <button type="button" id="btnCrearPlan">+ Crear un Plan</button>
+            </div>
+           
 
             <button type="button" id="btnConsultarTabla">Buscar</button>
           </div>
           <div>
             <table id="tablaActividad" border="1" class="oculto">
+              <hr>
               <div id="contenedorBotonAgregaractividad"></div>
               <thead>
                 <tr>
@@ -445,6 +388,50 @@
         </div>
       </div>
     </div>
+
+    <!-- overlay para eliminar persona en la  lista de persona en el grupo-->
+    <div id="overlayCambiarContraseña" class="overlayCambiarContraseña">
+      <div class="overlayContenidoCambiarContraseña">
+          <p id="descripcionCompletaCambiarContraseña"> 
+              <form method="get" id="formularioCambiarContraseña">
+                  <label for="contrasenia1">
+                      Introduce la contraseña nueva:
+                      <input type="password" name="contrasenia1" id="contrasenia1">
+                      <div id="errorContrasenia1"></div>
+                  </label>
+                  <label for="contrasenia2">
+                      Repite la contraseña nueva:
+                      <input type="password" name="contrasenia2" id="contrasenia2">
+                      <div id="errorContrasenia2"></div>
+                  </label>
+                  <label for="contraseniaAntigua">
+                      Introduce la contraseña antigua:
+                      <input type="password" name="contraseniaAntigua" id="contraseniaAntigua">
+                      <div id="errorContraseniaAntigua"></div>
+                  </label>
+                  
+                  <button type="button" id="btnVolverModificarContrasenia">Volver</button>
+                  <button type="submit" id="btnConfirmarModificarContrasenia">Modificar</button>
+                  <div id="errorModificarContraseniaGeneral"></div>
+              </form>
+          </p>
+          <button class="closeBtnEliminarContrasenia">X</button>
+      </div>
+      </div>
+      <!-- overlay comprobacionCambairContraseña -->
+      <div class="overlayComprobarContraseña" id="overlayComprobarContraseña">
+        <div class="overlay-contentComprobarContraseña">
+          <button class="close-btn" id="cerrarOverlayComprobarContraseña">×</button>
+          <h2>¿Estas seguro de quieres cambiar la contraseña?</h2>
+          <div id="mensajeFeedbackComprobarModificarContrasenia" style="display: none;"></div>
+
+          <button type="button" id="volverOverlayComprobarContraseña">Volver</button>
+          <button type="button" id="cerrarComprobarContraseña">
+            Cambiar y Volverme a Conectarme
+          </button>
+        </div>
+      </div>
+    
 
     <div class="espaciador"></div>
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->

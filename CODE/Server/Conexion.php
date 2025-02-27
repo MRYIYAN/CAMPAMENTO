@@ -50,6 +50,14 @@ $sql_tables = "
         contrasenia text NOT NULL,
         avatar_src text
     );
+        
+    CREATE TABLE IF NOT EXISTS PLAN_COMEDOR (
+    id_plan_comedor INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_plan VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,   
+    imagenComida_src text
+    );
 
  CREATE TABLE IF NOT EXISTS NINOS (
     id_nino INT PRIMARY KEY AUTO_INCREMENT, 
@@ -93,6 +101,7 @@ $sql_tables = "
         FOREIGN KEY (id_plan) REFERENCES PLAN_FECHAS(id_plan) ON DELETE CASCADE,
         FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino) ON DELETE CASCADE
     );
+
 
     CREATE TABLE IF NOT EXISTS ACTIVIDADES (
     id_actividad INT PRIMARY KEY AUTO_INCREMENT,
@@ -389,31 +398,31 @@ if (!grupoNinoExiste($conn, $id_grupo, $id_nino)) {
 // ------------------------------------------------------------------------------------------------------------------------------------//
 // Función para verificar si ya existe un plan comedor con el mismo nombre, tutor y niño
 // ------------------------------------------------------------------------------------------------------------------------------------//
-function planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)
-{
-    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM PLAN_COMEDOR WHERE nombre_plan = ? AND id_tutor = ? AND id_nino = ?");
-    $stmt->bind_param("sii", $nombre_plan, $id_tutor, $id_nino);
-    $stmt->execute();
-    $result = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-    return $result['count'] > 0;
-}
+// function planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)
+// {
+//     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM PLAN_COMEDOR WHERE nombre_plan = ? AND id_tutor = ? AND id_nino = ?");
+//     $stmt->bind_param("sii", $nombre_plan, $id_tutor, $id_nino);
+//     $stmt->execute();
+//     $result = $stmt->get_result()->fetch_assoc();
+//     $stmt->close();
+//     return $result['count'] > 0;
+// }
 
-// Valores a insertar en PLAN_COMEDOR
-$nombre_plan = "Plan Comedor Ejemplo";
-$id_tutor    = 1; // Debe existir en TUTORES
-$id_nino     = 1; // Debe existir en NINOS
-$descripcion = "Descripción del plan comedor ejemplo.";
-$precio      = 50.00;
+// // Valores a insertar en PLAN_COMEDOR
+// $nombre_plan = "Plan Comedor Ejemplo";
+// $id_tutor    = 1; // Debe existir en TUTORES
+// $id_nino     = 1; // Debe existir en NINOS
+// $descripcion = "Descripción del plan comedor ejemplo.";
+// $precio      = 50.00;
 
-// Insertar el plan comedor solo si no existe
-if (!planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)) {
-    $stmt = $conn->prepare("INSERT INTO PLAN_COMEDOR (nombre_plan, descripcion, precio, id_tutor, id_nino) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssdii", $nombre_plan, $descripcion, $precio, $id_tutor, $id_nino);
-    if (!$stmt->execute()) {
-        error_log("Error al insertar Plan Comedor: " . $stmt->error);
-    }
-    $stmt->close();
-} else {
-    // Opcional: echo "El plan comedor ya existe.<br>";
-}
+// // Insertar el plan comedor solo si no existe
+// if (!planComedorExiste($conn, $nombre_plan, $id_tutor, $id_nino)) {
+//     $stmt = $conn->prepare("INSERT INTO PLAN_COMEDOR (nombre_plan, descripcion, precio, id_tutor, id_nino) VALUES (?, ?, ?, ?, ?)");
+//     $stmt->bind_param("ssdii", $nombre_plan, $descripcion, $precio, $id_tutor, $id_nino);
+//     if (!$stmt->execute()) {
+//         error_log("Error al insertar Plan Comedor: " . $stmt->error);
+//     }
+//     $stmt->close();
+// } else {
+//     // Opcional: echo "El plan comedor ya existe.<br>";
+// }

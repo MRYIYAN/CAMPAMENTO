@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
             'nombre_plan' => $row['nombre_plan'],
             'descripcion' => $row['descripcion'],
             'precio' => $row['precio'],
-            'descuento' => isset($row['descuento']) ? $row['descuento'] : 40
+            'imagen_src' => $row['imagenComida_src']
         ];
     }
 } else {

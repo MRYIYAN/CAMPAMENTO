@@ -514,7 +514,6 @@ if (isset($data['nombreAgregatPlan'])&& isset($data['fechaInicioCrearPlan']) && 
 
 
 
-}
 //===============================================================================================================================================================================================================
 //                                                      FIN DE CONSULTA PARA SACAR MONITORES DISPONIBLES
 //===============================================================================================================================================================================================================
@@ -583,11 +582,71 @@ if (isset($data['nombreAgregatPlan'])&& isset($data['fechaInicioCrearPlan']) && 
         
 }
 
-
-
 //===============================================================================================================================================================================================================
 //                                                       FIN CREAR PLAN
 //===============================================================================================================================================================================================================
+
+
+
+
+//===============================================================================================================================================================================================================
+//                                                       COMPROBAR LA CONTRASEÑA EN BBDD
+//===============================================================================================================================================================================================================
+if (isset($data['idAdminParaComprobarContraseña']) &&isset($data['contraseniaTXTParaComprobar'])){
+    //sacamos el hash del admin
+    $queryHashContraseña = $conn->prepare("SELECT contrasenia FROM admin WHERE id_admin = ?");
+    $queryHashContraseña->bind_param("i", $data['idAdminParaComprobarContraseña'] );
+    $queryHashContraseña->execute();   //ejecutar en bbdd
+    $result = $queryHashContraseña->get_result();  //recoge el resultado de la consulta 
+    // Comprobamos la respuesta de la consulta
+    $hashContraseña = 0;
+    if ($result->num_rows > 0) {    //comprueba si hay resultado o no 
+        $hashContraseña = $result->fetch_assoc()['contrasenia'];    //sacar la contrasenia que esta en bbdd (ya hasheada)
+    }
+    //cerramos e query
+    $queryHashContraseña->close();
+
+    //comprobamos la contraseña si esta bien o no 
+    if (password_verify($data['contraseniaTXTParaComprobar'], $hashContraseña)){
+        echo json_encode(['comprobacionContraseña' => 'ok']);
+        exit();
+    }else{
+        echo json_encode(['comprobacionContraseña' => 'noOk']);
+        exit();
+    }
+}
+//===============================================================================================================================================================================================================
+//                                                       FIN COMPROBAR LA CONTRASEÑA EN BBDD
+//===============================================================================================================================================================================================================
+
+
+//---------------------------------------------------------------//
+//CAMBAIR LA CONTRASEÑA
+//---------------------------------------------------------------//
+if(isset($data['contraseñaParaCambiar2']) && $data['idAdminCambiarContrasenia']){
+    $contraseniaHasheada = password_hash($data['contraseñaParaCambiar2'], PASSWORD_DEFAULT);
+     //insertamos la contraseña en bbdd
+     $queryCambiarContrasenia = $conn->prepare("UPDATE admin SET contrasenia = ? WHERE id_admin = ?");
+     $queryCambiarContrasenia->bind_param("si", $contraseniaHasheada, $data['idAdminCambiarContrasenia']);
+     if ($queryCambiarContrasenia->execute()) { //comprobamos la ejecucion
+         //comprobamos si se ha creado o no 
+         if ($queryCambiarContrasenia->affected_rows >= 0) { // Si se inserta al menos 1 o 0 registro
+             //en caso de si 
+             echo json_encode(['contraseniaAdminCambiado' => 'ok']);
+             $queryCambiarContrasenia->close();
+             exit();
+         } else {
+             //en caso de no 
+             echo json_encode(['contraseniaAdminCambiado' => 'noOk']);
+             $queryCambiarContrasenia->close();
+             exit();
+         }
+     }
+}
+
+
+//---------------------------------------------------------------//
+
 
 
 
