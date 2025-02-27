@@ -5,12 +5,12 @@
     <title>Chat</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <!-- Font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../css/stylechat.css">
 </head>
 <body>
+    
     <div class="container-fluid h-100">
         <div class="row justify-content-center h-100">
             <div class="col-md-4 col-xl-3 chat">
@@ -32,17 +32,6 @@
                     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
                     <div class="card-body contacts_body">
                         <ul class="contacts">
-                            <li class="active">
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Usuario 1</span>
-                                    </div>
-                                </div>
-                            </li>
                             <li>
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
@@ -50,43 +39,11 @@
                                         <span class="online_icon"></span>
                                     </div>
                                     <div class="user_info">
-                                        <span>Usuario 2</span>
+                                        <!--<span> Aqui debe cargar los usuarios dinamicamente de la BD </span> -->
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Usuario 3</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Usuario 4</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="../assets/img/avatar.png" class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Usuario 5</span>
-                                    </div>
-                                </div>
-                            </li>
+                            
                         </ul>
                     </div>
                     <div class="card-footer"></div>
@@ -104,7 +61,7 @@
                                 <span class="online_icon"></span>
                             </div>
                             <div class="user_info">
-                                <span>Usuario 1</span>
+                                <!-- <span> aqui debe cargar el nombre del usuario </span> -->
                             </div>
                             <div class="video_cam">
                             </div>
@@ -113,8 +70,6 @@
                         <div class="action_menu">
                             <ul>
                                 <li><i class="fas fa-user-circle"></i> Informar Problema</li>
-                                <li><i class="fas fa-plus"></i> Añadir al grupo</li>
-                                <li><i class="fas fa-ban"></i> Bloquear</li>
                             </ul>
                         </div>
                     </div>
@@ -125,50 +80,31 @@
 
                     <div class="card-body msg_card_body">
                         <div class="d-flex justify-content-start mb-4">
+
+                            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
                             <div class="img_cont_msg">
                                 <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
-                                Hola, ¿cómo estás?
-                                
+                                <!-- Aqui debe cargar los mensajes del Padre  -->
                             </div>
                         </div>
+
+                        <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
                         <div class="d-flex justify-content-end mb-4">
                             <div class="msg_cotainer_send">
-                                Hola, estoy bien, ¿y tú?
-                                
+                                <!-- Aqui debe cargar los Mensajes del Monitor  -->
                             </div>
                             <div class="img_cont_msg">
                                 <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
                             </div>
                         </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                Estoy bien también, gracias.
-                               
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                De nada
-                                
-                            </div>
-                            <div class="img_cont_msg">
-                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                Adios
-                            </div>
-                        </div>
+                        
+                        <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
                     </div>
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
+                     <!--                                                          SECCION DE ENVIAR MENSAJES -->
+                    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------->
                     <div class="card-footer">
                         <div class="input-group">
                             <div class="input-group-append">
@@ -185,7 +121,11 @@
         </div>
     </div>
     <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../JS/operarNotificacionesPadre.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    t>
+    
+    <script type="text/javascript" src="../JS/chatPadre.js
+    "></script>
+    
+      
 </body>
 </html>

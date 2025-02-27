@@ -289,3 +289,21 @@ html {
 		margin-bottom: 15px !important;
 	}
 }
+
+/* Estilo base para los elementos de la lista de contactos */
+.contacts li {
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	padding: 10px;
+  }
+  
+  /* Efecto hover: cambia el fondo al pasar el mouse */
+  .contacts li:hover {
+	background-color: #f0f0f034;
+  }
+  
+  /* Estado activo: fondo diferenciado para el elemento seleccionado */
+  .contacts li.active {
+	background-color: #1e6eca;  /* Ajusta el color según tu diseño */
+  }
+  
