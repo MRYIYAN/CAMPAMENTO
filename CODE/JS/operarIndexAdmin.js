@@ -64,6 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
        EVENTOS DEL NAVBAR ADAPTADOS PARA USAR LA TRANSICIÓN
     ================================================================= */
   // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
+  
+  document.getElementById("btnInicio").addEventListener("click", () => {
+    redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página Inndex
+  });
 
   document
     .getElementById("btnModificarDatosPadre")
@@ -148,15 +152,7 @@ function cerrarSesionSeguro() {
 }
 
 
-//menu hamburguesa
-document.addEventListener("DOMContentLoaded", () => {
-  const menuIcon = document.getElementById("menu-icon");
-  const navContainer = document.getElementById("nav-container");
 
-  menuIcon.addEventListener("click", () => {
-    navContainer.classList.toggle("active");
-  });
-});
 //-----------------------------------------------------------------------------------------------------------//
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//

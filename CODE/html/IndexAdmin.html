@@ -28,7 +28,7 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
     <nav>
-      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" />
+      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" id="btnInicio" />
     
       
     
@@ -57,9 +57,7 @@
             <div><a><button class="botonNavbar" id="btnMonitor">Monitor</button></a></div>
           </div>
         </div>
-    
-        <a class="item">Idiomas</a>
-    
+        
         <div class="item">
           Perfil
           <div class="dropdown">
@@ -70,6 +68,19 @@
             </div>
           </div>
         </div>
+
+
+        
+        <!-- Elemento decorativo para subrayar la navegación -->
+        <div class="underline"></div>
+
+        <div class="bienvenidoInfo">
+
+          <div id="contenedorBienvenido">
+            <p>Bienvenido, <span id="biembenidoNombre">Administrador</span></p>
+          </div>
+        </div>
+                      
       </div>
     </nav>
     
@@ -363,8 +374,6 @@
               <div id="errorSelectPlan"></div>
               <button type="button" id="btnCrearPlan">+ Crear un Plan</button>
             </div>
-           
-
             <button type="button" id="btnConsultarTabla">Buscar</button>
           </div>
           <div>

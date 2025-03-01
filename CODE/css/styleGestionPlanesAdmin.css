@@ -244,8 +244,48 @@ nav .item:nth-child(5):hover ~ .underline {
 
 /* espaciador para el navbar y el contenido, para que no se superpongan */
 .espaciador {
-  height: 100px;
+  height: 200px;
 }
+.espaciadorBajo{
+  height: 200px;
+}
+#btnInicio:hover{
+  cursor: pointer;
+}
+
+#contenedorBienvenido {
+  background-color: #e9ecef; /* Fondo suave y neutro */
+  padding: 5px 15px; /* Espaciado interno más pequeño */
+  border-radius: 20px; /* Bordes redondeados para un toque moderno */
+  display: flex; /* Flexbox para alineación */
+  align-items: center; /* Alineación vertical al centro */
+  justify-content: flex-start; /* Alineación a la izquierda */
+  font-family: 'Arial', sans-serif; /* Fuente sencilla y moderna */
+  max-width: 250px; /* Máximo ancho ajustado */
+  height: 30px; /* Altura fija para mantener el diseño uniforme */
+  margin-left: auto; /* Centrado automático a la derecha */
+
+}
+
+#contenedorBienvenido p {
+  margin: 0; /* Eliminar márgenes predeterminados */
+  font-size: 14px; /* Texto más pequeño */
+  color: #333; /* Color de texto oscuro */
+  
+}
+
+#biembenidoNombre {
+  font-weight: bold; /* Resaltar el nombre */
+  color: #007bff; /* Color azul para un toque moderno */
+}
+
+.bienvenidoInfo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
 /* overlay para cerrar sesion */
 /* -------------------------------------------------------------------------------------------------- */
@@ -439,6 +479,9 @@ section {
 /*HTML CONTENIDO*/
 /* =====================================================================================================================================================*/
 
+#btnCrearNuevoPlan{
+  margin: 10px 0px 30px;
+}
 /* Estilos para el contenedor de tablas */
 .contenedorTablas {
   width: 100%;
@@ -588,7 +631,7 @@ select {
   top: 12px;
   right: 12px;
   background: transparent;
-  color: #007bff;
+  color: #254d78ce;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -598,6 +641,20 @@ select {
 
 .closeBtnAñadirPlan:hover {
   background: rgba(0, 123, 255, 0.1);
+}
+
+#btnCrearPlanConfirmar, #btnVolverAñadirPlan{
+  margin: 5px;
+}
+
+#btnVolverAñadirPlan{
+  margin: 5px;
+  background-color: #ffffff; 
+  color: #333;
+  border: 1px solid #333;
+}
+#btnVolverAñadirPlan:hover{
+  background-color: #939393; 
 }
 
 /* Clase para mostrar el overlay */
@@ -645,6 +702,8 @@ select {
   z-index: 999;
   font-family: "Arial", sans-serif;
 }
+
+
 
 /* Estilo para los inputs y textarea */
 .overlayContenidoModificarPlan input,
@@ -695,6 +754,31 @@ select {
 .overlayModificarPlan.activeOverlayModificarPlan {
   visibility: visible;
   opacity: 1;
+}
+
+#btnVolverModificarPlan{
+  border: 1px solid #333;
+  background-color: #ffffff;
+  color: #333;
+  align-content: center;
+  width: 400px;
+  margin: 10px;
+}
+#btnVolverModificarPlan:hover{
+  background-color: #939393;
+}
+#btnEliminarPlan{
+  background-color: #dc3545;
+  color: white;
+  margin: 10px;
+  width: 35%;
+}
+#btnEliminarPlan:hover{
+  background-color: #982c37;
+}
+#btnCrearPlanConfirmarModificar{
+  margin: 10px;
+  width: 35%;
 }
 /* //---------------------------------------------------------------// */
 
@@ -884,6 +968,22 @@ select {
     font-weight: bold;
   }
 
+
+  #btnModificarDatosNino, #btnEliminarNino{
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+
+  #btnEliminarNino{
+    background-color: #dc3545;
+    color: white;
+    margin-left: 10px;
+  }
+  #btnEliminarNino:hover{
+    background-color: #982c37;
+  }
+
 /* //---------------------------------------------------------------// */
 
 
@@ -956,6 +1056,15 @@ select {
     background-color: #333;
   }
 
+  #btnEliminarComprobarEliminarPersona{
+    background-color: #dc3545;
+    color: white;
+    margin: 10px;
+  }
+  #btnEliminarComprobarEliminarPersona:hover{
+    background-color: #982c37;
+  }
+
 /* //---------------------------------------------------------------// */
 
 /* //---------------------------------------------------------------// */
@@ -989,7 +1098,7 @@ select {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 80%;
+  width: 400px;
   text-align: center;
   position: relative;
   max-height: 80%;
@@ -999,6 +1108,9 @@ select {
 #pagadoSi, #pagadoNo{
 margin-right: -100px;
 margin-left: -50px;
+}
+.pagado{
+  margin-right: -100px;
 }
 
 
@@ -1030,6 +1142,28 @@ margin-left: -50px;
 .mensajeFeedbackModificarNino{
   z-index: 999;
   background-color: #333;
+}
+#nombreNino, #planNino, #grupoNino{
+  margin: 10px;
+  margin-bottom: 20px;
+}
+#btnEliminarModificarNino{
+  background-color: #dc3545;
+  color: white;
+  margin: 10px;
+}
+#btnEliminarModificarNino:hover{
+  background-color: #982c37;
+}
+
+#btnVolverModificarNino{
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #333;
+  margin: 10px;
+}
+#btnVolverModificarNino:hover{
+  background-color: #939393;
 }
 /* //---------------------------------------------------------------// */
 
@@ -1181,7 +1315,6 @@ input[type="text"], select, input[type="radio"] {
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
-  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -1192,8 +1325,22 @@ input[type="text"], select, input[type="radio"] {
 }
 
 #btnVolverAñadirNinoAlGrupo {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: #ffffff;
+  color: #666;
+  border: 1px solid #666;
+}
+#btnVolverAñadirNinoAlGrupo:hover {
+  background-color: #ccc;
+
+}
+
+#btnVolverListaNinos{
+  background-color: #ffffff;
+  color: #666;
+  border: 1px solid #666;
+}
+#btnVolverListaNinos:hover{
+  background-color: #ccc;
 }
 
 button:hover {

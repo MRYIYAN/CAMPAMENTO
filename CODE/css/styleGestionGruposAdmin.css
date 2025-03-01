@@ -245,8 +245,48 @@ body::-webkit-scrollbar {
 
   /* espaciador para el navbar y el contenido, para que no se superpongan */
   .espaciador{
-    height: 100px;
+    height: 250px;
   }
+  .espaciadorBajo{
+    height: 450px;
+  }
+  #btnInicio:hover{
+    cursor: pointer;
+  }
+
+  #contenedorBienvenido {
+    background-color: #e9ecef; /* Fondo suave y neutro */
+    padding: 5px 15px; /* Espaciado interno más pequeño */
+    border-radius: 20px; /* Bordes redondeados para un toque moderno */
+    display: flex; /* Flexbox para alineación */
+    align-items: center; /* Alineación vertical al centro */
+    justify-content: flex-start; /* Alineación a la izquierda */
+    font-family: 'Arial', sans-serif; /* Fuente sencilla y moderna */
+    max-width: 250px; /* Máximo ancho ajustado */
+    height: 30px; /* Altura fija para mantener el diseño uniforme */
+    margin-left: auto; /* Centrado automático a la derecha */
+
+  }
+  
+  #contenedorBienvenido p {
+    margin: 0; /* Eliminar márgenes predeterminados */
+    font-size: 14px; /* Texto más pequeño */
+    color: #333; /* Color de texto oscuro */
+    
+  }
+  
+  #biembenidoNombre {
+    font-weight: bold; /* Resaltar el nombre */
+    color: #007bff; /* Color azul para un toque moderno */
+  }
+
+  .bienvenidoInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  
   /* -------------------------------------------------------------------------------------------------- */
   /* overlay para cerrar sesion */
   /* -------------------------------------------------------------------------------------------------- */
@@ -474,10 +514,11 @@ body::-webkit-scrollbar {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
+    width: 400px;
     text-align: center;
     position: relative;
-    max-height: 80%;
+    max-height: 500px;
+    padding: 25px;
     overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
 }
 
@@ -511,6 +552,150 @@ body::-webkit-scrollbar {
     z-index: 999;
     background-color: #333;
   }
+  /* ====== Estilos actualizados para los botones ====== */
+#btnVolverOperar {
+  border-color: #6c757d;
+  border: 1px solid #6c757d;
+  background-color: #ffffff; /* Gris oscuro */
+  color: #6c757d;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#btnVolverOperar:hover {
+  background-color: #bfc2c4; /* Gris más oscuro */
+}
+
+#btnModificarOperar {
+  background-color: #F98937; /* Verde */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#btnModificarOperar:hover {
+  background-color: #CC6F32; /* Verde más oscuro */
+}
+
+#btnEliminarOperar {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#btnEliminarOperar:hover {
+  background-color: #c82333; /* Rojo más oscuro */
+}
+
+/* ====== Espaciado actualizado ====== */
+.overlayContenidoOperar label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px; /* Mayor separación entre etiquetas */
+}
+
+.overlayContenidoOperar input,
+.overlayContenidoOperar select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px; /* Espaciado uniforme */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#contenedorProfesores {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+#mensajeFeedbackOperar {
+  margin-top: 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+#btnVolverOperar,
+#btnModificarOperar,
+#btnEliminarOperar {
+  width: 100%;
+  margin-top: 10px; /* Separación uniforme entre botones */
+  padding: 12px;
+  font-size: 16px;
+}
+.closeBtnOperar{
+  color: #6c757d;
+}
+.closeBtnOperar:hover{
+  color: #61686e;
+}
+
+
+
+  /* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+  .overlayContenidoOperar {
+      width: 90%;
+      padding: 20px;
+      font-size: 14px;
+  }
+
+  .closeBtnOperar {
+      font-size: 16px;
+      top: 8px;
+      right: 8px;
+  }
+
+  .overlayContenidoOperar input,
+  .overlayContenidoOperar select {
+      font-size: 14px;
+      padding: 8px;
+  }
+
+  #btnVolverOperar,
+  #btnModificarOperar,
+  #btnEliminarOperar {
+      font-size: 14px;
+      padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlayContenidoOperar {
+      width: 95%;
+      padding: 15px;
+      font-size: 13px;
+  }
+
+  .closeBtnOperar {
+      font-size: 14px;
+      top: 5px;
+      right: 5px;
+  }
+
+  .overlayContenidoOperar input,
+  .overlayContenidoOperar select {
+      font-size: 13px;
+      padding: 7px;
+  }
+
+  #btnVolverOperar,
+  #btnModificarOperar,
+  #btnEliminarOperar {
+      font-size: 12px;
+      padding: 8px;
+  }
+}
+
 
 /* ==================================================================*/
 /* fin de Overlay añadir grupos*/
@@ -578,6 +763,13 @@ body::-webkit-scrollbar {
   .overlayComprobarEliminar.activeOverlayComprobarEliminar {
     visibility: visible;
     opacity: 1;
+  }
+
+  #btnEliminarComprobarEliminar{
+    background-color: #dc3545;
+  }
+  #btnEliminarComprobarEliminar:hover{
+    background-color: #bb2a38;
   }
 
   .mensajeFeedbackComprobarEliminar{
@@ -706,6 +898,25 @@ body::-webkit-scrollbar {
   font-weight: bold;
 }
 
+
+#btnModificarDatosNino, #btnEliminarNino {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+#btnEliminarNino {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 10px;
+}
+#btnEliminarNino:hover {
+  background-color: #c91e2f;
+  color: white;
+  margin-left: 10px;
+}
+
+
+
 /* ==================================================================*/
 /* fin de Overlay lista niños */
 /* ==================================================================*/
@@ -714,76 +925,168 @@ body::-webkit-scrollbar {
 /* ==================================================================*/
 /* Overlay modificar niños */
 /* ==================================================================*/
-  /* Estilo para el overlay */
-  .overlayModificarNino {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s;
-    color: #333;  /* Color del texto */
-    overflow: auto; /* Agrega desplazamiento si es necesario */
-    padding: 20px;  /* Evita que el contenido toque los bordes */
-    z-index: 998;
-    pointer-events: auto;  /* Habilita la interacción con el overlay */
+/* Estilo para el overlay */
+.overlayModificarNino {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Sombra más oscura para enfoque */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  color: #333;  /* Color del texto */
+  overflow: auto;
+  padding: 20px;
+  z-index: 999;
+  pointer-events: none; /* Deshabilita interacción cuando está invisible */
+}
+
+/* Estilo para la ventana emergente */
+.overlayContenidoModificarNino {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 500px;
+  text-align: left;
+  position: relative;
+  max-height: 80%;
+  overflow-y: auto;
+  font-family: 'Arial', sans-serif;
+  color: #444;
+}
+
+/* Estilo para las etiquetas */
+.overlayContenidoModificarNino label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 8px;
+
+}
+
+/* Estilo para los inputs */
+.overlayContenidoModificarNino input[type="text"],
+.overlayContenidoModificarNino select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Estilo para los radio buttons */
+#pagadoSi, #pagadoNo {
+  margin: -120px;
 }
 
 
-  /* Estilo para la ventana emergente */
-  .overlayContenidoModificarNino {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    text-align: center;
-    position: relative;
-    max-height: 80%;
-    overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
+
+/* Botón de cierre */
+.closeBtnModificarNino {
+  position: absolute;
+  font-size: 18px;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: #007BFF;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-#pagadoSi, #pagadoNo{
-margin-right: -100px;
-margin-left: -50px;
+.closeBtnModificarNino:hover {
+  background: rgba(0, 123, 255, 0.1);
+  color: #0056b3;
 }
 
+/* Botones dentro del overlay */
+#btnVolverModificarNino {
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  color: #6c757d;
+  border: 1px solid #6c757d;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
 
-  /* Botón de cierre */
-  .closeBtnModificarNino{
-    position: absolute;
-    font-size: large;
-    top: 10px;
-    right: 10px;
-    background: #ff4d4d00;
-    color: #007BFF;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
+#btnVolverModificarNino:hover {
+  background-color: #92969a;
+}
 
-  .closeBtnModificarNino:hover {
-    background: #cc000000;
-  }
+/* Botón Modificar */
+#btnModificarModificarNino {
+  width: 100%;
+  padding: 12px;
+  background-color: #F98937;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
 
-  /* Clase para mostrar el overlay */
-  .overlayModificarNino.activeOverlayModificarNino {
-    visibility: visible;
-    opacity: 1;
-  }
+#btnModificarModificarNino:hover {
+  background-color: #e87a28;
+}
 
-  .mensajeFeedbackModificarNino{
-    z-index: 999;
-    background-color: #333;
-  }
+/* Botón Eliminar */
+#btnEliminarModificarNino {
+  width: 100%;
+  padding: 12px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+#btnEliminarModificarNino:hover {
+  background-color: #c82333;
+}
+
+/* Clase para mostrar el overlay */
+.overlayModificarNino.activeOverlayModificarNino {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all; /* Permite la interacción cuando es visible */
+}
+
+/* Retroalimentación y errores */
+.mensajeFeedbackModificarNino {
+  background-color: #333;
+  color: white;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#errorModificarModificarNino {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
 
 /* ==================================================================*/
 /* fin de Overlay modifiar niños */
@@ -936,7 +1239,6 @@ input[type="text"], select, input[type="radio"] {
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
-  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -947,9 +1249,21 @@ input[type="text"], select, input[type="radio"] {
 }
 
 #btnVolverAñadirNinoAlGrupo {
-  background-color: #dc3545;
-  color: #fff;
+  background-color: white;
+  border: 1px solid #bcbaba;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+  margin: 10px;
 }
+
+#btnVolverAñadirNinoAlGrupo:hover {
+  background-color: #bcbaba;
+}
+
 
 button:hover {
   background-color: #007BFF;
@@ -966,73 +1280,122 @@ button:hover {
 
 
 
-  /* Estilos para el contenedor de tablas */
-  .contenedorTablas {
-    width: 100%;
-    max-width: 1000px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  /* Estilos para el selector de grupo y plan */
-  #divParaSeleccionar {
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #333;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  #divParaSeleccionar div {
-    display: flex;
-    align-items: center;
-  }
-  
-  select {
-    margin-left: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  /* Estilos de la tabla de actividades */
-  #tablaActividad {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
+ /* Estilos para el contenedor de tablas */
+.contenedorTablas {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow-x: auto;
+}
+
+/* Botón de agregar nuevo grupo */
+#contenedorBotonAgregarGrupo {
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+#contenedorBotonAgregarGrupo:hover {
+  background-color: #005ab9;
+}
+
+/* Estilos de la tabla de actividades */
+#tablaActividad {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   }
-  
-  #tablaActividad th,
-  #tablaActividad td {
-    padding: 12px 15px;
-    text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid #ddd;
-    color: #333;
-  }
-  
-  #tablaActividad th {
-    background-color: #007BFF;
-    color: white;
-    font-weight: bold;
-  }
-  
-  #tablaActividad tbody tr:nth-child(odd) {
-    background-color: #e6f7ff;
-  }
-  
-  #tablaActividad tbody tr:nth-child(even) {
-    background-color: #f2faff;
-  }
-  
-  #tablaActividad tbody tr:hover {
-    background-color: #cce0ff;
-  }
+
+#tablaActividad th,
+#tablaActividad td {
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+#tablaActividad th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+#tablaActividad tbody tr:nth-child(odd) {
+  background-color: #e6f7ff;
+}
+
+#tablaActividad tbody tr:nth-child(even) {
+  background-color: #f2faff;
+}
+
+#tablaActividad tbody tr:hover {
+  background-color: #cce0ff;
+}
+
+/* Estilo de la columna de acciones (operar) */
+#tablaActividad th:nth-child(3), 
+#tablaActividad td:nth-child(3) {
+  text-align: center;
+}
+
+/* Botones dentro de la tabla */
+#tablaActividad td button {
+  /* padding: 6px 10px; */
+  font-size: 12px;
+  /* border-radius: 5px; */
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 2px;
+}
+
+/* Botón primario (por ejemplo, editar) */
+/* #tablaActividad td button:first-child {
+  background-color: #007bff;
+  color: white;
+} */
+
+#tablaActividad td button:first-child:hover {
+  background-color: #005ab9;
+}
+
+/* Botón secundario (por ejemplo, eliminar) */
+/* #tablaActividad td button:last-child {
+  background-color: #007bff;
+  color: white;
+} */
+
+#tablaActividad td button:last-child:hover {
+  background-color: #005ab9;
+}
+
+#eliminarGrupo {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.verMasBtnEliminar {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.verMasBtnEliminar:hover {
+  background-color: #cc0000;
+}
+
   
   /* ==================================================================*/
 /* Overlay eliminar persona */
@@ -1102,6 +1465,10 @@ button:hover {
     z-index: 999;
     background-color: #333;
   }
+  
+  #btnEliminarComprobarEliminarPersona{
+    background-color: #dc3545;
+  }
 
 /* ==================================================================*/
 /* fin de Overlay eliminar*/
@@ -1111,66 +1478,129 @@ button:hover {
 /* ==================================================================*/
 /* Overlay añadir Grupos */
 /* ==================================================================*/
-  /* Estilo para el overlay */
-  .overlayAñadirGrupo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s;
-    color: #333;  /* Color del texto */
-    overflow: auto; /* Agrega desplazamiento si es necesario */
-    padding: 20px;  /* Evita que el contenido toque los bordes */
-    z-index: 998;
-    pointer-events: auto;  /* Habilita la interacción con el overlay */
+/* Estilo para el overlay */
+.overlayAñadirGrupo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  color: #333;
+  overflow: auto;
+  padding: 20px;
+  z-index: 998;
+  pointer-events: auto;
 }
 
+/* Estilo para la ventana emergente */
+.overlayContenidoAñadirGrupo {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+  position: relative;
+  max-height: 80%;
+  overflow-y: auto;
+}
 
-  /* Estilo para la ventana emergente */
+/* Botón de cierre */
+.closeBtnAñadirGrupo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: #007BFF;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.closeBtnAñadirGrupo:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Clase para mostrar el overlay */
+.overlayAñadirGrupo.activeOverlayAñadirGrupo {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Botón de volver */
+#btnVolverAñadirGrupo {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+  margin: 10px;
+}
+#btnCrearGrupoConfirmar{
+
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+  margin: 10px;
+}
+
+#btnVolverAñadirGrupo:hover {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para el formulario */
+#formAñadirGrupo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+  color: #333;
+}
+
+input[type="text"], select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
   .overlayContenidoAñadirGrupo {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    text-align: center;
-    position: relative;
-    max-height: 80%;
-    overflow-y: auto; /* Habilita el scroll si el contenido excede el 80% */
+      width: 100%;
+      max-width: 90%;
+      padding: 15px;
+  }
+  #formAñadirGrupo {
+      margin: 10px;
+  }
 }
 
-
-  /* Botón de cierre */
-  .closeBtnAñadirGrupo {
-    position: absolute;
-    font-size: large;
-    top: 10px;
-    right: 10px;
-    background: #ff4d4d00;
-    color: #007BFF;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  .closeBtnAñadirGrupo:hover {
-    background: #cc000000;
-  }
-
-  /* Clase para mostrar el overlay */
-  .overlayAñadirGrupo.activeOverlayAñadirGrupo {
-    visibility: visible;
-    opacity: 1;
-  }
 
 
 /* ==================================================================*/

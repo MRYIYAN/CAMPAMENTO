@@ -243,6 +243,45 @@ body::-webkit-scrollbar {
     height: 100%;
   }
 
+  #btnInicio:hover{
+    cursor: pointer;
+  }
+
+  #contenedorBienvenido {
+    background-color: #e9ecef; /* Fondo suave y neutro */
+    padding: 5px 15px; /* Espaciado interno más pequeño */
+    border-radius: 20px; /* Bordes redondeados para un toque moderno */
+    display: flex; /* Flexbox para alineación */
+    align-items: center; /* Alineación vertical al centro */
+    justify-content: flex-start; /* Alineación a la izquierda */
+    font-family: 'Arial', sans-serif; /* Fuente sencilla y moderna */
+    max-width: 250px; /* Máximo ancho ajustado */
+    height: 30px; /* Altura fija para mantener el diseño uniforme */
+    margin-left: auto; /* Centrado automático a la derecha */
+
+  }
+  
+  #contenedorBienvenido p {
+    margin: 0; /* Eliminar márgenes predeterminados */
+    font-size: 14px; /* Texto más pequeño */
+    color: #333; /* Color de texto oscuro */
+    
+  }
+  
+  #biembenidoNombre {
+    font-weight: bold; /* Resaltar el nombre */
+    color: #007bff; /* Color azul para un toque moderno */
+  }
+
+  .bienvenidoInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  
+  
+  
   
 
   
@@ -1133,10 +1172,16 @@ label {
     display: flex;
     justify-content: space-between;
   }
+  #seleccionarGrupoSeleccionar, #seleccionarPlanSeleccionar{
+    width: 100%;
+  }
   
   #divParaSeleccionar div {
     display: flex;
     align-items: center;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
   }
   
   select {

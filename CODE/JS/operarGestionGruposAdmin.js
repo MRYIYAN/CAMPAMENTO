@@ -62,6 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
             ================================================================= */
     // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
 
+    document.getElementById("btnInicio").addEventListener("click", () => {
+        redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página Inndex
+      });
+    
     document
         .getElementById("btnModificarDatosPadre")
         .addEventListener("click", () => {

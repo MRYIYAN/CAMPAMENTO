@@ -64,6 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
                EVENTOS DEL NAVBAR ADAPTADOS PARA USAR LA TRANSICIÓN
             ================================================================= */
     // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
+    
+    document.getElementById("btnInicio").addEventListener("click", () => {
+      redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página Inndex
+    });
+
 
     document
         .getElementById("btnModificarDatosPadre")
@@ -953,6 +958,8 @@ function mostrarOverlayOperarActividad(id_actividad) {
   document.getElementById('btnModificarActividad').classList.remove("oculto") //mostramos el boton de modificar
   document.getElementById('btnInsertarActividad').classList.add("oculto") //quitamos el boton de modificar
   document.querySelector('.contenedorBotones').classList.remove("oculto")
+  document.body.classList.add('body-fondo-bloqueado');  // Bloquea interacciones con el fondo y el desplazamiento
+
 
 
   // Función para cerrar el overlay
@@ -1421,6 +1428,8 @@ function agregarActividad(){
     document.getElementById('btnEliminarActividad').classList.add("oculto") //quitamos el boton de borrar
     document.getElementById('btnModificarActividad').classList.add("oculto") //quitamos el boton de modificar
     document.querySelector('.contenedorBotones').classList.add("oculto")
+    document.body.classList.add('body-fondo-bloqueado');  // Bloquea interacciones con el fondo y el desplazamiento
+
     //RESEAMOS TODO LOS CONTENIDO QUE HAY EN EL OVERLAY 
     vaciarCamposFormulario();
   
