@@ -427,6 +427,8 @@ function mostrarOverlayOperar(idGrupoSeleccionado) {
                                 "Grupo actualizado con éxito 🎉";
                             // Deshabilitamos el botón
                             document.getElementById("btnModificarOperar").disabled = true;
+                            pintarTabla()
+                            
                             // cerrar el overlay despues de 2s
                             setTimeout(() => {
                                 mensajeFeedbackOperar.style.display = "none";

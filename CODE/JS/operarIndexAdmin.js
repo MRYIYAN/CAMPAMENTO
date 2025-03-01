@@ -163,6 +163,8 @@ function cerrarSesionSeguro() {
 
 //CONEXION CON EL BBDD
 let id_adminGlobal = null
+repintarListaSelect();
+function repintarListaSelect() {
 // Conexión con el servidor para obtener datos del admin
 fetch("../Server/GestionarIndexAdmin.php", {
   method: "POST", // Método de la solicitud
@@ -223,6 +225,8 @@ fetch("../Server/GestionarIndexAdmin.php", {
         `;
     }
   });
+}
+
 
 //funcion para mostrar el eror
 function mostrarError(lugar, mensaje) {
@@ -1433,6 +1437,8 @@ function crearGrupo(nombre, id_monitor){
           mensajeFeedback.style.display = "block";
           mensajeFeedback.style.color = "green";
           mensajeFeedback.innerText = "Grupo creado con éxito 🎉";
+          repintarListaSelect();
+          document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
           // Deshabilitamos el botón
           document.getElementById('btnCrearGrupoConfirmar').disabled = true;
           // cerrar el overlay despues de 2s
@@ -1786,6 +1792,9 @@ formularioCrearPlan.onsubmit = async function (event) {
             mensajeFeedbackPlan.style.display = "block";
             mensajeFeedbackPlan.style.color = "green";
             mensajeFeedbackPlan.innerText = "Plan creado con éxito 🎉";
+            repintarListaSelect();
+            document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+
             // Deshabilitamos el botón
             document.getElementById('btnCrearPlanConfirmar').disabled = true;
             // cerrar el overlay despues de 2s

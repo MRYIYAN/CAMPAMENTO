@@ -296,7 +296,7 @@ function pintarTablaNinos() {
                             celda4.style.backgroundColor = "orange"; // Si grupo es null, naranja
                         }
                         if (nino.id_plan === null) {
-                            celda5.style.backgroundColor = "red"; // Si plan es null, rojo
+                            celda5.style.backgroundColor = "orange"; // Si plan es null, rojo
                         }
 
                         // Añadir los botones con la lógica de su click:
