@@ -1,9 +1,18 @@
 
+//-----------------------------------------------------------------------------------------------//
+//                                    MENU DE ACCIÓN                                             //
+//-----------------------------------------------------------------------------------------------//
 $(document).ready(function(){
     // Toggle del menú de acción
     $('#action_menu_btn').click(function(){
         $('.action_menu').toggle();
     });
+
+
+
+//-----------------------------------------------------------------------------------------------//
+//                                      OBTENER DEATOS DE MONITORES                              //
+//----------------------------------------------------------------------------------------------//
 
     // Realizamos la petición AJAX para obtener los monitores
     $.ajax({
@@ -12,16 +21,14 @@ $(document).ready(function(){
         data: { accion: "obtener_monitores" },
         dataType: "json",
         success: function (data) {
-            // Selecciona el contenedor de la lista de contactos
             var contactsList = $(".contacts");
-            contactsList.empty(); // Limpia cualquier contenido previo
+            contactsList.empty();
 
             if (data.length > 0) {
                 data.forEach(function (monitor) {
                     var avatar = monitor.avatar_src && monitor.avatar_src.trim() !== "" 
                                 ? monitor.avatar_src 
                                 : "../assets/img/avatar.png";
-                    // Genera el HTML para cada monitor, agregando data-nombre
                     var monitorHTML = `
                         <li data-id="${monitor.id_monitor}" data-nombre="${monitor.nombre}">
                             <div class="d-flex bd-highlight">
@@ -46,14 +53,125 @@ $(document).ready(function(){
         }
     });
 
+    var chatRefreshInterval; // Variable global para almacenar el intervalo
+
+    // Función para iniciar el refresco automático del chat
+    function iniciarChatRefresh(idMonitor) {
+    // Detener el intervalo actual si existe
+    if (chatRefreshInterval) clearInterval(chatRefreshInterval);
+    chatRefreshInterval = setInterval(function(){
+        // Se carga la lista de mensajes
+        cargarMensajes(idMonitor);
+    }, 5000); // Refrescar cada 5 segundos
+}
+
+    // ===============================================//
     // Delegar el evento de clic en los elementos <li> de la lista de contactos
+    //==========================================================================//
     $(document).on("click", ".contacts li", function(){
+        var idMonitor = $(this).data("id");
         var nombre = $(this).data("nombre");
-        // Remueve la clase active de todos los elementos
         $(this).siblings().removeClass('active');
-        // Agrega la clase active al elemento clickeado
         $(this).addClass('active');
-        // Actualiza el indicador de usuario con el nombre del monitor seleccionado
         $(".card-header.msg_head .user_info").html("<span>" + nombre + "</span>");
+        cargarMensajes(idMonitor);
+        iniciarChatRefresh(idMonitor);  // Cambiado: usar idMonitor en vez de idUsuario
+    });
+   //----------------------------------------------------------------------------------------------//
+   //                                      FUNCIÓN PARA ENVIAR MENSAJES                            //
+   //--------------------------------------------------------------------------------------------- //
+   function cargarMensajes(idMonitor) {
+    $.ajax({
+        url: "../Server/GestionarNotificacionesPadre.php",
+        type: "POST",
+        data: { accion: "obtener_mensajes", id_monitor: idMonitor },
+        dataType: "json",
+        success: function (mensajes) {
+            var chatBox = $(".msg_card_body");
+            chatBox.empty();
+            mensajes.forEach(function (msg) {
+                // Separa la fecha y la hora (formato esperado: "YYYY-MM-DD HH:MM:SS")
+                var datetime = msg.fecha || "";
+                var datePart = "";
+                var timePart = "";
+                if (datetime) {
+                    var parts = datetime.split(" ");
+                    datePart = parts[0];
+                    timePart = parts[1];
+                }
+                
+                var mensajeHTML = "";
+                if (msg.enviado_por === "tutor") {
+                    // Mensaje enviado por el padre (tutor), se muestra a la izquierda
+                    mensajeHTML = `
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg small_icon">
+                            </div>
+                            <div class="msg_container_wrapper">
+                                <div class="msg_cotainer tutor_msg">
+                                    ${msg.mensaje}
+                                </div>
+                                <div class="msg_footer" style="font-size: 0.75em; color: white; margin-top: 4px;">
+                                    <span class="msg_date">${datePart} / ${timePart}</span> 
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Mensaje enviado por el monitor, se muestra a la derecha
+                    mensajeHTML = `
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_container_wrapper">
+                                <div class="msg_cotainer monitor_msg">
+                                    ${msg.mensaje}
+                                </div>
+                                <div class="msg_footer" style="font-size: 0.75em; color: white; margin-top: 4px;">
+                                    <span class="msg_date">${datePart} / ${timePart}</span> 
+                                </div>
+                            </div>
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg small_icon">
+                            </div>
+                        </div>
+                    `;
+                }
+                chatBox.append(mensajeHTML);
+            });
+            chatBox.scrollTop(chatBox.prop("scrollHeight"));
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al obtener los mensajes:", error);
+        }
+    });
+}
+
+
+
+    // Función para accionar botón y enviar mensaje a Padre 
+    $(".send_btn").click(function(){
+        var idMonitor = $(".contacts .active").data("id");
+        var mensaje = $(".type_msg").val().trim();
+        // Si no se ha seleccionado un monitor o el mensaje está vacío, se retorna
+        if (!idMonitor || mensaje === "") return;
+
+        $.ajax({
+            url: "../Server/GestionarNotificacionesPadre.php",
+            type: "POST",
+            data: { accion: "enviar_mensaje", id_monitor: idMonitor, mensaje: mensaje },
+            dataType: "json",
+            success: function (response) {
+                if (response.mensaje) {
+                    // Limpia el campo del mensaje y recarga los mensajes
+                    $(".type_msg").val("");
+                    cargarMensajes(idMonitor);
+                } else {
+                    console.error("Error al enviar mensaje:", response.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la petición de envío:", error);
+            }
+        });
     });
 });

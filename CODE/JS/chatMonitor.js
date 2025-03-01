@@ -1,61 +1,166 @@
+
+//------------------------------------------------------------------------------------//
+//                                 FUNCIÓN PARA BOTONES
+//------------------------------------------------------------------------------------//
+
+// Función para mostrar la lista de contactos en el menú
 $(document).ready(function(){
     // Toggle del menú de acción en el header
     $('#action_menu_btn').click(function(){
         $('.action_menu').toggle();
     });
 
-    // Petición AJAX para obtener los padres (de la tabla TUTORES)
-    $.ajax({
-        url: "../Server/GestionarNotificacionesMonitor.php", // Asegúrate de que la ruta es correcta
-        type: "POST",
-        data: { accion: "obtener_padres" },
-        dataType: "json",
-        success: function(data) {
-            var contactsList = $(".contacts");
-            contactsList.empty(); // Limpia la lista antes de insertar
+//------------------------------------------------------------------------------------//
+//                               FUNCIÓN PARA CARGAR USUARIOS
+//------------------------------------------------------------------------------------//
 
-            if (data.length > 0) {
-                console.log(data);
-                data.forEach(function(padre) {
-                    // Si no hay imagen asignada, se usa la imagen predeterminada
-                    var avatar = padre.avatar_src && padre.avatar_src.trim() !== ""
-                                ? padre.avatar_src
-                                : "../assets/img/avatar.png";
-                    // Se genera el HTML para cada padre con atributos data-id y data-nombre
-                    var padreHTML = `
-                        <li data-id="${padre.id_tutor}" data-nombre="${padre.nombre}">
-                            <div class="d-flex bd-highlight">
-                                <div class="img_cont">
-                                    <img src="${avatar}" class="rounded-circle user_img">
-                                    <span class="online_icon"></span>
+    // Petición AJAX para obtener los padres (de la tabla TUTORES)
+    
+        $.ajax({
+            url: "../Server/GestionarNotifcacionesMonitor.php",
+            type: "POST",
+            data: { accion: "obtener_padres" },
+            dataType: "json",
+            success: function (data) {
+                var contactsList = $(".contacts");
+                contactsList.empty();
+    
+                if (data.length > 0) {
+                    console.log(data);
+                    data.forEach(function (padre) {
+                        var avatar = padre.avatar_src && padre.avatar_src.trim() !== ""
+                            ? padre.avatar_src
+                            : "../assets/img/avatar.png";
+    
+                        var padreHTML = `
+                            <li data-id="${padre.id_tutor}" data-nombre="${padre.nombre}">
+                                <div class="d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="${avatar}" class="rounded-circle user_img">
+                                        <span class="online_icon"></span>
+                                    </div>
+                                    <div class="user_info">
+                                        <span>${padre.nombre}</span>
+                                    </div>
                                 </div>
-                                <div class="user_info">
-                                    <span>${padre.nombre}</span>
-                                </div>
-                            </div>
-                        </li>
-                    `;
-                    contactsList.append(padreHTML);
-                });
-            } else {
-                contactsList.append("<li>No hay padres</li>");
+                            </li>
+                        `;
+                        contactsList.append(padreHTML);
+                    });
+                } else {
+                    contactsList.append("<li>No hay padres disponibles</li>");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al obtener los padres:", error);
             }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error al obtener los padres:", error);
-    console.error("Estado:", status);
-    console.error("Respuesta del servidor:", xhr.responseText);
-            console.error("Error al obtener los padres:", error);
-        }
+        
     });
+
+    var chatRefreshInterval; // Variable global para almacenar el intervalo
+
+    // Función para iniciar el refresco automático del chat
+    function iniciarChatRefresh(idTutor) {
+    // Detener el intervalo actual si existe
+    if (chatRefreshInterval) clearInterval(chatRefreshInterval);
+    chatRefreshInterval = setInterval(function(){
+        // Llama a la función para cargar los mensajes
+        cargarMensajes(idTutor);
+    }, 5000); // Cada 5 segundos
+}
+
 
     // Delegación de eventos para actualizar el indicador de usuario al hacer clic en un contacto
     $(document).on("click", ".contacts li", function(){
-        var nombre = $(this).data("nombre");
+        var idTutor = $(this).data("id");      // Capturamos el ID del padre
+        var nombre = $(this).data("nombre");     // Capturamos el nombre
         // Remueve la clase active de los demás y la añade al elemento clickeado
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
-        // Actualiza el indicador en el header del chat con el nombre del padre seleccionado
         $(".card-header.msg_head .user_info").html("<span>" + nombre + "</span>");
+        cargarMensajes(idTutor);  // Llama a la función para cargar el chat
+        iniciarChatRefresh(idTutor); 
+    });
+
+
+//------------------------------------------------------------------------------------//
+//                            FUNCION PARA MENSAJES
+//------------------------------------------------------------------------------------//
+
+ // Función para cargar los mensajes
+ function cargarMensajes(idTutor) {
+    $.ajax({
+        url: "../Server/GestionarNotifcacionesMonitor.php",
+        type: "POST",
+        data: { accion: "obtener_mensajes", id_tutor: idTutor },
+        dataType: "json",
+        success: function (mensajes) {
+            var chatBox = $(".msg_card_body");
+            chatBox.empty();
+            mensajes.forEach(function (msg) {
+                var datetime = msg.fecha || "";
+                var parts = datetime.split(" ");
+                var datePart = parts[0];
+                var timePart = parts[1];
+                var mensajeHTML = "";
+                if (msg.enviado_por === "monitor") {
+                    mensajeHTML = `
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="msg_container_wrapper">
+                                <div class="msg_cotainer monitor_msg">${msg.mensaje}</div>
+                                <div class="msg_footer" style="font-size: 0.75em; color: white; margin-top: 4px;">
+                                    <span class="msg_date">${datePart} / ${timePart}</span>
+                                </div>
+                            </div>
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg small_icon">
+                            </div>
+                        </div>`;
+                } else {
+                    mensajeHTML = `
+                        <div class="d-flex justify-content-start mb-4">
+                            <div class="img_cont_msg">
+                                <img src="../assets/img/avatar.png" class="rounded-circle user_img_msg small_icon">
+                            </div>
+                            <div class="msg_container_wrapper">
+                                <div class="msg_cotainer tutor_msg">${msg.mensaje}</div>
+                                <div class="msg_footer" style="font-size: 0.75em; color: white; margin-top: 4px;">
+                                    <span class="msg_date">${datePart} / ${timePart}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                chatBox.append(mensajeHTML);
+            });
+            chatBox.scrollTop(chatBox.prop("scrollHeight"));
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al obtener los mensajes:", error);
+        }
+    });
+}
+
+// Función para enviar mensaje a un padre
+    $(".send_btn").click(function(){
+    var idTutor = $(".contacts .active").data("id");
+    var mensaje = $(".type_msg").val().trim();
+    if (!idTutor || mensaje === "") return;
+    $.ajax({
+        url: "../Server/GestionarNotifcacionesMonitor.php",
+        type: "POST",
+        data: { accion: "enviar_mensaje", id_tutor: idTutor, mensaje: mensaje },
+        dataType: "json",
+        success: function (response) {
+            if (response.mensaje) {
+                $(".type_msg").val("");
+                cargarMensajes(idTutor);
+            } else {
+                console.error("Error al enviar mensaje:", response.error);
+            }
+        },
+            error: function (xhr, status, error) {
+                console.error("Error en la petición de envío:", error);
+            }
+         });
     });
 });

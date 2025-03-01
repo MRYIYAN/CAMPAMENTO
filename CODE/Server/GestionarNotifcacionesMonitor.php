@@ -1,6 +1,4 @@
 <?php
-file_put_contents("log.txt", print_r($_POST, true), FILE_APPEND);
-
 header('Content-Type: application/json; charset=utf-8');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -11,32 +9,82 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
     echo json_encode(["error" => "No logueado"]);
     exit();
 }
+require_once "conexion.php"; 
 
-require_once "conexion.php";
-
+//-----------------------------------------------------------------------------------------------//
+//                          OBTENER LISTADO DE PADRES DISPONIBLES
+//-----------------------------------------------------------------------------------------------//
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["accion"])) {
     if ($_POST["accion"] == "obtener_padres") {
-        // Consulta: obtenemos los padres (tutores) de la base de datos
-        $sql = "SELECT id_tutor, nombre, avatar_src FROM TUTORES";
+        $sql = "SELECT id_tutor, nombre FROM TUTORES";
         $result = $conn->query($sql);
-
-        if (!$result) {
-            echo json_encode(["error" => "Error en la consulta: " . $conn->error]);
-            exit;
-        }
-
-
         $padres = [];
-        if ($result && $result->num_rows > 0) {
+
+        if ($result->num_rows > 0) { 
             while ($row = $result->fetch_assoc()) {
                 $padres[] = $row;
             }
         }
+
         $conn->close();
         echo json_encode($padres);
-        var_dump($padres);
         exit;
     }
 
+    //-----------------------------------------------------------------------------------------------//
+    //                          OBTENER MENSAJES ENTRE MONITOR Y PADRE
+    //-----------------------------------------------------------------------------------------------//
+    if ($_POST["accion"] == "obtener_mensajes" && isset($_POST["id_tutor"])) {
+        $id_monitor = $_SESSION["id"];
+        $id_tutor = intval($_POST["id_tutor"]);
+
+        $sql = "SELECT mensaje, enviado_por, fecha 
+                FROM MENSAJES
+                WHERE id_monitor = ? AND id_tutor = ?
+                ORDER BY fecha ASC";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $id_monitor, $id_tutor);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $mensajes = [];
+        while ($row = $result->fetch_assoc()) {
+            $mensajes[] = $row;
+        }
+
+        $stmt->close();
+        $conn->close();
+        echo json_encode($mensajes);
+        exit;
+    }
+
+    //-----------------------------------------------------------------------------------------------//
+    //                          ENVIAR MENSAJE ENTRE MONITOR Y PADRE
+    //-----------------------------------------------------------------------------------------------//
+    if ($_POST["accion"] == "enviar_mensaje" && isset($_POST["id_tutor"], $_POST["mensaje"])) {
+        $id_monitor = $_SESSION["id"];
+        $id_tutor = intval($_POST["id_tutor"]);
+        $mensaje = trim($_POST["mensaje"]);
+        $enviado_por = "monitor";
+
+        if (empty($mensaje)) {
+            echo json_encode(["error" => "Mensaje vacío"]);
+            exit;
+        }
+
+        $sql = "INSERT INTO MENSAJES (id_monitor, id_tutor, mensaje, enviado_por) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iiss", $id_monitor, $id_tutor, $mensaje, $enviado_por);
+
+        if ($stmt->execute()) {
+            echo json_encode(["mensaje" => "Mensaje enviado"]);
+        } else {
+            echo json_encode(["error" => "Error al enviar mensaje"]);
+        }
+
+        $stmt->close();
+        $conn->close();
+        exit;
+    }
 }
-?>

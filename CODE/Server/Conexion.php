@@ -136,14 +136,17 @@ $sql_tables = "
     FOREIGN KEY (id_nino) REFERENCES NINOS(id_nino)        
     );
 
-    CREATE TABLE IF NOT EXISTS CHAT_NOTIFCACIONES (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_emisor INT NOT NULL,
-    id_receptor INT NOT NULL,
+    CREATE TABLE IF NOT EXISTS MENSAJES (
+    id_mensaje INT PRIMARY KEY AUTO_INCREMENT,
+    id_tutor INT NOT NULL,
+    id_monitor INT NOT NULL,
     mensaje TEXT NOT NULL,
-    fecha_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
-    leido TINYINT(1) DEFAULT 0
-    );
+    enviado_por ENUM('tutor', 'monitor') NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor) ON DELETE CASCADE,
+    FOREIGN KEY (id_monitor) REFERENCES MONITORES(id_monitor) ON DELETE CASCADE
+);
+
 ";
 
 $conn->multi_query($sql_tables);  // Se ejecuta la creación de todas las tablas
