@@ -56,7 +56,12 @@ fetch("../Server/GestionarIndexPadre.php", {
 
         // Mostrar avatar del padre si está disponible
         if (data.infoPadre['avatar_src']) {
-            document.getElementById('imagenPadres').innerHTML = `<img src="${data.infoPadre['avatar_src']}" alt="${data.infoPadre['nombre']}" width="100px" />`;
+            comprobarImagen(data.infoPadre['avatar_src']).then(existe => {  //usamos el metodo para la comprobacion
+                const imagen = existe ? data.infoPadre['avatar_src'] : '../assets/img/avatar.png';  //creamos un variable que guarda la ruta, y si el funcion del comprobacion devualve un false, asignamos la ruta predefinida del imagen, al contrario asignamos la ruta que esta en bbdd
+                document.getElementById('imagenPadres').innerHTML = `<img src="${imagen}" alt="${data.infoPadre['nombre']}" width="100px" />`;
+
+            });
+
         }
 
         let hijoSeleccionado = 0; // Inicializar variable para el hijo seleccionado
@@ -235,7 +240,10 @@ function mostarDatosNino(id_nino) {
             
 
             // Actualización de avatar del niño
-            document.getElementById('imagenHijo').innerHTML = `<img src="${data.datoHijo['avatar_src']}" alt="${data.datoHijo['nombre']}" width="100px" />`; // Mostrar el avatar del niño
+            comprobarImagen(data.datoHijo['avatar_src']).then(existe => {  //usamos el metodo para la comprobacion
+                const imagen = existe ? data.datoHijo['avatar_src'] : '../assets/img/avatar.png';  //creamos un variable que guarda la ruta, y si el funcion del comprobacion devualve un false, asignamos la ruta predefinida del imagen, al contrario asignamos la ruta que esta en bbdd
+                document.getElementById('imagenHijo').innerHTML = `<img src="${imagen}" alt="${data.datoHijo['nombre']}" width="100px" />`; // Mostrar el avatar del niño
+            });
         }
     });
 }
@@ -417,3 +425,9 @@ document.addEventListener("DOMContentLoaded", () => {
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
 
+// Función para comprobar si la imagen existe
+const comprobarImagen = (url) => {
+    return fetch(url, { method: 'HEAD' })   //se deja la ruta en el head para comprobar
+      .then(res => res.ok)  //si responde pasamo que es ok
+      .catch(() => false);  //si  no lo pasamos es false
+  };

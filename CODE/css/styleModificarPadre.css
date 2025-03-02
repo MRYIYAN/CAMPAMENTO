@@ -13,7 +13,10 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(225deg, #ffffff, #417ecf);}
+    background: linear-gradient(225deg, #ffffff, #417ecf);
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Hace que el fondo sea fijo */
+}
 
 .container {
     max-width: 800px;
@@ -50,7 +53,7 @@ label {
     color: #333;
 }
 
-input[type="text"], input[type="email"], input[type="date"], textarea {
+input[type="text"], input[type="email"], input[type="date"], textarea, input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
