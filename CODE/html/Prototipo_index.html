@@ -1,194 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/Prototipo_index.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <title>Document</title>
-    </head>
-<body><div class="inicio">
-    <div class="espacio">
-        
-    <nav>
-        <ul>
-            <li class="cantenerdor_logo">
-                <a href="index.html" class="uno">
-                    <img class="logo_img" src="icon/logoblanco.png" alt="">
-                </a>
-            </li>
-            <li class="menu">
-                <div class="iconmenu"><i class="fa fa-bars" style="font-size:24px"></i></div>
-            </li>
-            <li class="item_menu">
-                <a href="quines_somos.html">Quienes Somos</a>
-            </li>
-            <li class="item_menu">
-                <a href="Juegos_Expansiones.html">Juegos / Expansiones</a>
-            </li>
-            <li class="item_menu">
-                <a href="Productos.html">Productos</a>
-            </li>
-            <li class="item_menu">
-                <a href="Personaje.html">Personajes</a>
-            </li>
-            <li class="item_menu">
-                <a href="login.html">Área de clientes</a>
-            </li>
-        </ul>
-    </nav></div>
-    <script>
-        $(function(){
-            //Captura del evento para mostrar u ocultar el menu
-            $(".iconmenu").click(function(){
-                $(".item_menu").toggle();
-        });
-        $(window).resize(function(){
-             var anchura =$(this).width();
-             if (anchura > 993) {
-                $(".item_menu").show();
-             }
-        });
-        });
-    </script>
-    <!-- FIN DE MENU -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Prototipo_index.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Enlace al nuevo archivo CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <title>Document</title>
+</head>
+<div class="color_fondo">
+<body>
     
+    
+    <div class="inicio">
+        <div class="espacio">
+           
+        </div>
+        <script>
+            $(function(){
+                //Captura del evento para mostrar u ocultar el menu
+                $(".iconmenu").click(function(){
+                    $(".item_menu").toggle();
+                });
+                $(window).resize(function(){
+                    var anchura =$(this).width();
+                    if (anchura > 993) {
+                        $(".item_menu").show();
+                    }
+                });
+            });
+        </script>
+        <!-- FIN DE MENU -->
+        
         <div class="titulo">
-            <h3>WOKKIDUKI</h3>
+            <p>WOKKY DOOKKY</p>
             <div class="titulo2">
                 <h1>Campamento de verano</h1>
             </div>
             <div class="boton_inicio">
                 <input type="button" value="Iniciar sesión" class="my-button" onclick="window.location.href='login.html'">
-                <input type="button" value="Inscribirse" class="my-button">
             </div>
         </div>
-
+ </div>
+ <div class="recuadro">
         <div class="subtitulo">
-            <p class="tema">Pre made demos & content</p>
-            <h2>+12 Homepage Layouts!!</h2>
-            <p class="heading--desc">Steak In comes with a beautiful collection of modern, easily importable, and highly customizable homepage layouts. Create your website without any effort and adapt it to suit your needs quickly and easily.</p>
+            <h2>Caracteristicas principales</h2>
+            <p class="heading--desc">Un campamento ofrece una experiencia única en la naturaleza, 
+                brindando a los participantes la oportunidad de desconectar y disfrutar de actividades 
+                al aire libre. A continuación, se detallan algunas de las características más destacadas de 
+                un campamento exitoso.</p>
         </div>
-    </div>
+   </div>
     
     <section class="fotos">
         <div class="container">
-            <div><img src="imagen2/img1.jfif" alt=""><span>1</span></div>
-            <div><img src="imagen2/img2.jfif" alt=""><span>2</span></div>
-            <div><img src="imagen2/img3.jfif" alt=""><span>3</span></div>
-            <div><img src="imagen2/img4.jfif" alt=""><span>4</span></div>
-            <div><img src="imagen2/img5.jfif" alt=""><span>5</span></div>
-            <div><img src="imagen2/img6.jfif" alt=""><span>6</span></div>
-            <div><img src="imagen2/img7.jfif" alt=""><span>7</span></div>
-            <div><img src="imagen2/img8.jfif" alt=""><span>8</span></div>
-            <div><img src="imagen2/img9.jfif" alt=""><span>9</span></div>
+            <div><img src="../assets/img/naturaleza.jpg" alt=""><span>Armonía con la naturaleza</span></div>
+            <div><img src="../assets/img/equipo.jpg" alt=""><span>Cercania</span></div>
+            <div><img src="../assets/img/conectar.jpg" alt=""><span>Musicalidad</span></div>
+            <div><img src="../assets/img/iniciativa.jpg" alt=""><span>Entretenimiento</span></div>
+            <div><img src="../assets/img/cooperar.jpg" alt=""><span>Aprendizaje</span></div>
+            <div><img src="../assets/img/creatividad.jpg" alt=""><span>Colaboración</span></div>
         </div>
     </section>
 
-    <div class="subtitulo2">
-        <p class="tema">Pre made demos & content</p>
-        <h2>+12 Homepage Layouts!!</h2>
-        <p class="heading--desc">Steak In comes with more than 5 menu layouts including: Classic, Gallery, Grid, Board and simple menu layout to help create whatever style you want!!</p>
-    </div>
-
-    <section class="fotos">
-        <div class="container">
-            <div><img src="imagen2/img1.jfif" alt=""><span>1</span></div>
-            <div><img src="imagen2/img2.jfif" alt=""><span>2</span></div>
-            <div><img src="imagen2/img3.jfif" alt=""><span>3</span></div>
-            <div><img src="imagen2/img4.jfif" alt=""><span>4</span></div>
-            <div><img src="imagen2/img5.jfif" alt=""><span>5</span></div>
-            <div><img src="imagen2/img6.jfif" alt=""><span>6</span></div>
-        </div>
-    </section>
     
-    <div class="subtitulo3">
-        <p class="tema">Pre made demos & content</p>
-        <h2>+12 Homepage Layouts!!</h2>
-        <p class="heading--desc">Steak In comes with more than 5 menu layouts including: Classic, Gallery, Grid, Board and simple menu layout to help create whatever style you want!!</p>
+<!-- carrusel -->
+<h1>Novedades</h1>
+<div class="container2">
+    <div class="carousel">
+        <div class="carousel__face"><span>This is something</span></div>
+        <div class="carousel__face"><span>Very special</span></div>
+        <div class="carousel__face"><span>Special is the key</span></div>
+        <div class="carousel__face"><span>For you</span></div>
+        <div class="carousel__face"><span>Just give it</span></div>
+        <div class="carousel__face"><span>A try</span></div>
+        <div class="carousel__face"><span>And see</span></div>
+        <div class="carousel__face"><span>How it works</span></div>
+        <div class="carousel__face"><span>Out</span></div>
     </div>
-
+</div>
+<div class="recuadro2"><div class="subtitulo">
+    <h1>Ubicación</h1>
     <div class="lenguajes">
-        <div class="texto">Steak In incluye todo lo que necesita para un sitio web de negocios de la industria 
-            alimentaria. Puede estar seguro de que tiene todo lo que necesita. Desde elementos sorprendentes y 
-            plantillas de página totalmente flexibles hasta opciones potentes, diseños fácilmente personalizables y 
-            mucho más.</div>
         
-        <div class="iconos">
-            <div class="icono"><img src="html.png" alt="">
-                <p>Diseño y desarrollo web</p>
-            </div>
-            <div class="icono"><img src="css.png" alt="">
-                <p>Soporte y asistencia técnica</p>
-            </div>
-            <div class="icono"><img src="js.png" alt="">
-                <p>Diseño y desarrollo móvil</p>
-            </div>
-            <div class="icono"><img src="mysql.png" alt="">
-                <p>Diseño y desarrollo de sitios web</p>
+    </div>
+</div></div>
+<div class="recuadro">
+    <div class="subtitulo">
+        <h1>Ubicación</h1>
+        <div class="lenguajes">
+            <div class="texto">La ubicación de nuestro campamento se encuentra en una zona urbana, 
+                lo que proporciona un acceso cómodo a los servicios y las comodidades propias de una 
+                ciudad. Este entorno urbano ofrece una integración única entre las actividades del 
+                campamento y la dinámica de la vida citadina, permitiendo una experiencia enriquecedora 
+                en un contexto moderno y bien conectado.
             </div>
         </div>
     </div>
+</div>
 
-    <div class="subtitulo3">
-        <p class="tema">Pre made demos & content</p>
-        <h2>+12 Homepage Layouts!!</h2>
-        <p class="heading--desc">Steak In comes with more than 5 menu layouts including: Classic, Gallery, Grid, Board and simple menu layout to help create whatever style you want!!</p>
-    </div>
-
-    <div class="card-container">
-        <div class="card">
-            <div class="face front">
-                <img src="istockphoto-1377841262-612x612.jpg" alt="">
-                <h3>categoria</h3>
-            </div>
-            <div class="face back">
-                <img src="" alt="">
-                <h3>categoria</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus maxime possimus ipsum? Repellat eum doloremque numquam molestias repudiandae debitis tempora, itaque accusamus ducimus iusto distinctio, soluta harum accusantium dolore.</p>
-                <div class="link">
-                    <a href="#">Más información</a>
-                </div>
-            </div>
-        </div>
-        <!-- segunda carta -->
-        <div class="card">
-            <div class="face front">
-                <img src="imagen2.jpg" alt="">
-                <h3>categoria</h3>
-            </div>
-            <div class="face back">
-                <img src="" alt="">
-                <h3>categoria</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus maxime possimus ipsum? Repellat eum doloremque numquam molestias repudiandae debitis tempora, itaque accusamus ducimus iusto distinctio, soluta harum accusantium dolore.</p>
-                <div class="link">
-                    <a href="#">Más información</a>
-                </div>
-            </div>
-        </div>
-        <!-- tercera carta -->
-        <div class="card">
-            <div class="face front">
-                <img src="imagen3.jpg" alt="">
-                <h3>categoria</h3>
-            </div>
-            <div class="face back">
-                <img src="" alt="">
-                <h3>categoria</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus maxime possimus ipsum? Repellat eum doloremque numquam molestias repudiandae debitis tempora, itaque accusamus ducimus iusto distinctio, soluta harum accusantium dolore.</p>
-                <div class="link">
-                    <a href="#">Más información</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="mapa">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.182580786143!2d-4.038970323484117!3d40.65992554080125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4173738395d72b%3A0xfe13ae3e9475d794!2sColegio%20Mataespesa%20%7C%20Concertado!5e1!3m2!1ses!2ses!4v1740842913599!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+    
 
     <div class="final">
         <div class="titulo">
-            <h3>Best Solution For Food Industry Business</h3>
+         
         
             <div class="titulo2">
-                <h1>Steak In is a HTML5 Template suitable for Restaurants</h1>
+                <h1>Descarga nuestro juego gratuito!!!</h1>
             </div>
             <div class="boton">
                 <input type="button" value="boton" class="my-button">
@@ -213,8 +137,8 @@
             });
         });
     </script>
-<div id="myBtn" title="Subir">
-    <img src="../assets/icons/flecha-hacia-arriba.png" alt="Flecha hacia arriba">
-</div>
-</body>
+    <div id="myBtn" title="Subir">
+        <img src="../assets/icons/flecha-hacia-arriba.png" alt="Flecha hacia arriba">
+    </div>
+</body></div>
 </html>

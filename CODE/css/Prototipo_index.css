@@ -1,107 +1,134 @@
 /* Estilos generales */
 * {
-   
-    padding: 0;
+    
+    padding: 7px;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif; /* Aplica la tipografía Poppins a todos los elementos */
 }
 
-body {
-    background-color: #fff;
+body::-webkit-scrollbar {
+    width: 15px;
+  }
+  body::-webkit-scrollbar-thumb {
+    background: #3E99E3;
+    border-radius: 10px;
+  }
+  body::-webkit-scrollbar-thumb:hover {
+      background: #B8D3EF;
+  } 
+
+.color_fondo {
+    position: relative; /* Necesario para que el pseudo-elemento se posicione correctamente */
+}
+
+.color_fondo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/img/fondo_agua.png'); /* Ruta a tu imagen */
+   
+    background-position: center;
+    /* Ajusta el tamaño de la imagen para que se ajuste dentro del contenedor */
+    opacity: 0.1; /* Ajusta la opacidad para que se vea como una marca de agua */
+    z-index: -1; /* Asegura que la imagen esté detrás de todo el contenido */
+    pointer-events: none; /* Permite que los eventos pasen a través del pseudo-elemento */
+}
+
+html, body {
+    background-color: #fff; /* Establecer el color de fondo */
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% 100%;
+    background-size: cover;
     background-attachment: fixed;
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Eliminar padding */
+    height: 100%; /* Asegurar que el fondo cubra toda la altura */
 }
-#myBtn {
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-    overflow: hidden;
-    z-index: 999;
-    cursor: pointer;
-    opacity: 0; /* Inicialmente oculto */
-    transition: all 0.4s ease-in;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #fbfbfb;
-    color: #333;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.18);
-}
-
-#myBtn:hover {
-    background-color: #009fc1;
-    color: #fff;
-}
-
-#myBtn img {
-    width: 24px; /* Ajusta el tamaño de la imagen según sea necesario */
-    height: 24px; /* Ajusta el tamaño de la imagen según sea necesario */
-}
-.espacio{
+/* =====================================================================/*
+                              TRANSICIÓN CON GSAP
+    /*======================================================================== */
+    .transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        z-index: 1000; /* Valor alto para que cubra todo */
+        pointer-events: none;
+      }
+      
+      .transition-row {
+        flex: 1;
+        display: flex;
+      }
+      
+      /* Ajuste: Usamos .row1 y .row2, de acuerdo a tu HTML */
+      .transition-row.row1 .block {
+        transform-origin: top;
+      }
+      
+      .transition-row.row2 .block {
+        transform-origin: bottom;
+      }
+      
+      .block {
+        flex: 1;
+        background-color: #2788c0; /* Puedes ajustar el color si lo deseas */
+        transform: scaleY(1);
+        will-change: transform;
+      }
+      #myBtn {
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+        overflow: hidden;
+        z-index: 999;
+        cursor: pointer;
+        opacity: 0; /* Inicialmente oculto */
+        transition: all 0.4s ease-in;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #fbfbfb;
+        color: #333;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.18);
+        display: flex; /* Usar Flexbox para centrar el contenido */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */
+    }
+    
+    #myBtn:hover {
+        background-color: #009fc1;
+        color: #fff;
+    }
+    
+    #myBtn img {
+        width: 45px; /* Ajusta el tamaño de la imagen según sea necesario */
+        height: 45px; /* Ajusta el tamaño de la imagen según sea necesario */
+    }
+.espacio {
     margin: 10px;
 }
-/* contenedor del menu */
-nav {
-    
-    color: #fff;
-    display: flex;
-    top: 10px; /* Asegura que el navbar esté en la parte superior */
-    left: 0;
-    right: 0;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999999999; /* Coloca por encima de otros elementos */
-    width: 100%;
-    height: 70px;
-}
-.espacio_menu {
-    height: 150px;
-}
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    margin: 0 15px; /* Añadir margen para separación entre elementos */
-}
-
-nav ul li a {
-    text-decoration: none; /* Eliminar subrayado de los enlaces */
-    color: #fff;
-    padding: 10px 20px;
-    
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: rgb(45, 42, 71);
-}
-
-nav ul li a:active {
-    background-color: rgb(35, 32, 61);
-}
 
 /* Otros estilos */
 .titulo {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
     text-align: center;
-    font-size: 30px;
+    font-size: 100px;
     color: rgb(255, 255, 255);
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
@@ -113,18 +140,20 @@ nav ul li a:active {
     flex-direction: column;
 }
 
-.titulo h3 {
+.titulo p {
     color: rgb(63, 82, 19);
 }
 
-.titulo > * {
-    margin: 10px; /* Añadir margen para separación entre elementos */
-}
 
+body .recuadro {
+    background-color: #c8e6fa; /* Color de fondo */
+    border-radius: 10px;
+    margin: 10px auto; /* Centrar horizontalmente */
+    width: 80%;
+    position: relative;
+}
 .inicio {
-    margin: 0; /* Eliminar margen */
-    padding: 0; /* Eliminar padding */
-    background-image: url(../assets/img/Fonfo1.jpg);
+    background-image: url(../assets/img/Fondo_cabañas2.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -134,7 +163,7 @@ nav ul li a:active {
 .final {
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
-    background-image: url(../assets/img/Fondo3.jpg);
+    background-image: url(../assets/img/noche.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -147,7 +176,7 @@ nav ul li a:active {
     text-align: center;
     font-size: 20px;
     color: rgb(0, 0, 0);
-    background-color: #fff;
+
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
@@ -160,8 +189,7 @@ nav ul li a:active {
     padding: 20px 0; /* Ajustar padding si es necesario */
     text-align: center;
     font-size: 20px;
-    color: rgb(0, 0, 0);
-    background-image: url(../assets/img/Fondo2.jpg);
+    color: #000000;
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
@@ -172,21 +200,53 @@ nav ul li a:active {
     background-size: 100% 100%;
     background-attachment: fixed;
 }
-
+.mapa {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente si es necesario */
+    margin: 20px 0; /* Agregar margen superior e inferior si es necesario */
+}
 .texto {
     margin: 0; /* Eliminar margen */
     padding: 20px 0; /* Ajustar padding si es necesario */
     display: flex;
-    background-color: #fff;
+    text-align: center;
+    font-size: 20px;
+}
+.recuadro {
+    opacity: 0.5;
+    background-color: #c7c4c4;
+    border-radius: 10px;
+    margin: 10px auto; /* Centrar horizontalmente */
+    width: 80%;
+    position: relative;
+    margin-top: 500px; /* Agregar margen superior para separar del carrusel */
+}
+.recuadro2 {
+    background-color: #c7c4c4;
+    border-radius: 10px;
+    margin: 10px auto; /* Centrar horizontalmente */
+    width: 80%;
+    visibility: hidden;
+
+    position: relative;
+    margin-top: 500px; /* Agregar margen superior para separar del carrusel */
 }
 
+
+.mapa {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente si es necesario */
+    margin: 20px 0; /* Agregar margen superior e inferior si es necesario */
+}
 .iconos {
     margin: 0; /* Eliminar margen */
     padding: 20px 0; /* Ajustar padding si es necesario */
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
-    background-color: #fff;
+    background-color: #e4f0fa;
     flex-wrap: wrap; /* Permitir que los elementos se ajusten en varias líneas si es necesario */
 }
 
@@ -195,19 +255,20 @@ nav ul li a:active {
     flex-direction: column; /* Alinear elementos en columna */
     justify-content: center; /* Centrar verticalmente */
     align-items: center; /* Centrar horizontalmente */
-    margin: 10px; /* Añadir margen para separación entre iconos */
+    margin: 20px; /* Añadir margen para separación entre iconos */
     text-align: center; /* Centrar texto */
 }
 
 .icono img {
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 90px;
     margin-bottom: 10px; /* Añadir margen inferior para separación entre imagen y texto */
 }
 
 .icono p {
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
+    font-size: 20px;
 }
 
 h1 {
@@ -217,18 +278,104 @@ h1 {
     display: block;
     color: beige;
 }
+/* Carrusel */
 
-.fotos {
-    background-color: #fff;
+
+.container2 {
+    position: relative;
+    width: 320px;
+    margin: 100px auto 0 auto;
+    perspective: 1000px;
+    margin-bottom: 50px; /* Agregar margen inferior para separar del cuadro de ubicación */
+}
+
+.carousel {
+    position: absolute;
     width: 100%;
-    margin: 0 auto;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: rotate360 60s infinite forwards linear;
 }
 
-.fotos {
-    margin: 0; /* Eliminar margen */
-    padding: 0; /* Eliminar padding */
+.carousel__face {
+    position: absolute;
+    width: 300px;
+    height: 187px;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    background-size: cover;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+    display: flex;
 }
 
+span {
+    margin: auto;
+    font-size: 2rem;
+}
+
+.carousel__face:nth-child(1) {
+    background-image: url("../assets/img/fogata.jpg");
+    transform: rotateY(0deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(2) {
+    background-image: url("../assets/img/descubrir.jpg");
+    transform: rotateY(40deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(3) {
+    background-image: url("../assets/img/participacion.jpg");
+    transform: rotateY(80deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(4) {
+    background-image: url("../assets/img/cooperar.jpg");
+    transform: rotateY(120deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(5) {
+    background-image: url("../assets/img/nuevo_equipo.jpg");
+    transform: rotateY(160deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(6) {
+    background-image: url("../assets/img/cooperar.jpg");
+    transform: rotateY(200deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(7) {
+    background-image: url("../assets/img/picnic.jpg");
+    transform: rotateY(240deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(8) {
+    background-image: url("../assets/img/leer.jpg");
+    transform: rotateY(280deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(9) {
+    background-image: url("../assets/img/curiosidad.jpg");
+    transform: rotateY(320deg) translateZ(430px);
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(-360deg);
+    }
+}
+
+/* Cuadro de ubicación */
+.mapa {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente si es necesario */
+    margin: 20px 0; /* Agregar margen superior e inferior si es necesario */
+    margin-top: 50px; /* Agregar margen superior para separar del carrusel */
+}
 .container::after {
     /*para q el contenedor muestre elementos aunque estos sean flotantes*/
     content: "";
@@ -244,7 +391,7 @@ h1 {
 
 /*estructura de cada componente(la imagen mas descripcion)*/
 .container div {
-    width: 28%;
+    width: 30%;
     height: auto;
     display: inline; /*bloques en linea*/
     float: left;
@@ -256,13 +403,12 @@ h1 {
     width: 100%;
     height: 400px;
     width: 300px;
-    box-shadow: 0 0 10px #666;
     border: 5px solid #fff;
 }
 
 /*estructura de la descripcion, por defecto q no se muestre*/
 .container div img~span {
-    width: 300px;
+    width: 280px;
     display: flex; /* Usar Flexbox para centrar el contenido */
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
@@ -271,7 +417,6 @@ h1 {
     padding: 2px 5px;
     color: azure;
     background: rgb(40, 40, 40);
-    box-shadow: 0 0 10px #666;
     text-align: center;
     margin: 10px;
 }
@@ -417,19 +562,39 @@ h1 {
 }
 
 /* Media Queries para dispositivos móviles */
+/* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
+    /* Ajustes generales */
+    body {
+        padding: 5px;
+    }
+
+    /* Ajuste de títulos */
     .titulo {
-        font-size: 20px;
+        font-size: 32px;
         height: auto;
-        padding: 20px;
+        padding: 15px;
+    }
+
+    .titulo h1 {
+        font-size: 28px;
     }
 
     .titulo h3 {
         font-size: 18px;
     }
 
-    .titulo h1 {
-        font-size: 24px;
+    /* Ajuste de subtítulos */
+    .subtitulo, .subtitulo2, .subtitulo3 {
+        font-size: 18px;
+        padding: 10px 0;
+    }
+
+    /* Ajuste de contenedores */
+    .container {
+        width: 100%;
+        margin: 0;
+        flex-direction: column;
     }
 
     .container div {
@@ -437,26 +602,78 @@ h1 {
         margin: 10px 0;
     }
 
+    .container div img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Ajuste de iconos */
+    .iconos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .icono {
+        margin: 10px 0;
+    }
+
     .icono img {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }
 
     .icono p {
         font-size: 14px;
     }
 
+    /* Ajuste de botones */
     .my-button {
-        padding: 10px 20px;
+        padding: 12px 24px;
         font-size: 14px;
     }
 
+    /* Ajuste del recuadro */
+    .recuadro, .recuadro2 {
+        width: 95%;
+        margin-top: 50px;
+    }
+
+    /* Ajuste del carrusel */
+    .container2 {
+        width: 100%;
+        margin: 50px auto;
+    }
+
+    .carousel {
+        animation-duration: 30s; /* Ajuste de velocidad para mejor experiencia en móvil */
+    }
+
+    .carousel__face {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Ajuste de tarjetas */
     .card-container {
-        flex-direction: column; /* Alinear las cartas en una columna en dispositivos móviles */
+        flex-direction: column;
     }
 
     .card {
-        width: 100%;
-        margin: 10px 0; /* Ajustar márgenes para dispositivos móviles */
+        width: 90%;
+        margin: 15px 0;
+    }
+
+    /* Botón flotante */
+    #myBtn {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+
+    #myBtn img {
+        width: 30px;
+        height: 30px;
     }
 }

@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["tipo"] = "TUTOR";
             $_SESSION["id"] = $row["id_tutor"];
             $_SESSION["login"] = "OK";
-            echo json_encode(["redirect" => "../html/IndexPadre.html"]);
+            echo json_encode(["redirect" => "../html/Bienvenido_tutor.html"]);
             exit();
         }
     }
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["tipo"] = "MONITOR";
             $_SESSION["id"] = $row["id_monitor"];
             $_SESSION["login"] = "OK";
-            echo json_encode(["redirect" => "../html/IndexMonitor.html"]);
+            echo json_encode(["redirect" => "../html/Bienvenido_monitor.html"]);
             exit();
         }
     }
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["tipo"] = "ADMIN";
             $_SESSION["id"] = $row["id_admin"];
             $_SESSION["login"] = "OK";
-            echo json_encode(["redirect" => "../html/IndexAdmin.html"]);
+            echo json_encode(["redirect" => "../html/Bienvenido_admin.html"]);
             exit();
         }
     }
