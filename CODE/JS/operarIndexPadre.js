@@ -1,7 +1,6 @@
 //-----------------------------------------------------------------------------------------------------------//
 // Constantes para los elementos del HTML
 //-----------------------------------------------------------------------------------------------------------//
-
 const nombrePadre = document.getElementById('nombrePadres'); // Elemento para mostrar el nombre del padre
 const idPadre = document.getElementById('idPadre'); // Elemento para mostrar el ID del padre
 const emailPadres = document.getElementById('emailPadres'); // Elemento para mostrar el email del padre
@@ -228,27 +227,25 @@ function mostarDatosNino(id_nino) {
         }
     });
 }
-
-
 //================================================================================================//
 //                              funcion para el overlay
 //================================================================================================//
 // Función para mostrar el overlay con la descripción completa
 function mostrarOverlay(descripcionCompleta) {
-    //asignamos datos en el overlay
+    // Asignamos datos en el overlay
   console.log(descripcionCompleta);
   document.getElementById("descripcionCompleta").innerHTML =`
   <h1>Descripcion: </h1>
   ${descripcionCompleta}
   `
     ;
-    //hacemos que el overlay sea visible
+    // Hacemos que el overlay sea visible
   document
     .getElementById("overlayDefinicion")
     .classList.add("activeOverlayDefinicion"); // Añadir clase para mostrar el overlay
 }
 //================================================================================================//
-//                              fin funcion para el overlay
+//                              Fin Funcion para el overlay
 //================================================================================================//
 
 // Cuando se presiona el botón de inscribir un niño
