@@ -355,6 +355,34 @@ body::-webkit-scrollbar {
   }
   /* -------------------------------------------------------------------------------------------------- */
 
+
+
+  .introduccion {
+    width: 1000px;
+    height: 500px;
+    background-color: #9ed5ff;
+    display: flex;
+    flex-direction: row; /* Cambiar a fila para alinear la imagen y el texto en una fila */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    margin-top: -150px;
+    margin-bottom: 40px; /* Agregar margen inferior */
+}
+
+.introduccion img {
+    width: 400px;
+    height: auto;
+}
+
+.introduccion .texto {
+    max-width: 400px; /* Ajusta el ancho máximo del texto según sea necesario */
+    color: white; /* Asegúrate de que el texto sea legible */
+}
+
 /* =====================================================================================================================================================*/
                                                             /* FOOTER */        
 /* =====================================================================================================================================================*/
