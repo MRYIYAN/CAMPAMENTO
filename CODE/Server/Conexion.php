@@ -172,7 +172,8 @@ VALUES
 INSERT INTO PLAN_COMEDOR (nombre_plan, descripcion, precio, imagenComida_src)
 VALUES
 ('Plan Comedor Básico', 'Comida sencilla y saludable.', 15.00, 'comida_basica.jpg'),
-('Plan Comedor Premium', 'Comida gourmet con opciones veganas.', 25.00, 'comida_premium.jpg');
+('Plan Comedor Premium', 'Comida gourmet con opciones veganas.', 25.00, 'comida_premium.jpg'),
+('Plan Comedor Normal ', 'Comida gourmet con opciones veganas.', 25.00, 'comida_premium.jpg');
 
 -- Inserción en la tabla NINOS
 INSERT INTO NINOS (nombre, alergias, observaciones, fecha_nacimiento, id_tutor, pagado, avatar_src, asistencia, inasistencia)
