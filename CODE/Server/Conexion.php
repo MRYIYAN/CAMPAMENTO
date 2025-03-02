@@ -15,10 +15,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-
-
-
 $sql_check = "SHOW DATABASES LIKE '$dbname'";
 $result = $conn->query($sql_check);
 
