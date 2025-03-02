@@ -142,6 +142,22 @@ document.addEventListener("DOMContentLoaded", () => {
   //-----------------------------------------------------------------------------------------------------------//
 //                                CARGAR INFORMACIÓN DEL MONITOR
 //-----------------------------------------------------------------------------------------------------------//
+
+//================================================================//
+//                     VALIDACIONES 
+//================================================================//
+const estiloError = `
+    color: red; 
+    font-size: 12px; 
+    margin-top: 5px; 
+    display: flex; 
+    align-items: center;
+
+`;
+
+//================================================================//
+//                     CARGAR INFORMACIÓN DEL MONITOR
+//================================================================//
 document.addEventListener('DOMContentLoaded', function() {
   // 1. Cargar información del monitor
   fetch('../Server/GestionarInfoAcividadesMonitor.php', {
@@ -190,13 +206,35 @@ document.addEventListener('DOMContentLoaded', function() {
     console.error('Error al cargar grupos:', error);
   });
 
-  // 3. Función para buscar niños según grupo y mostrar en una tabla
-  document.getElementById('btnBuscarNinos').addEventListener('click', function() {
-    var grupoId = document.getElementById('grupoSelect').value;
-    if (!grupoId) {
-      alert('Por favor, seleccione un grupo');
-      return;
+  // Si el grupo vuelve a "Seleccione un grupo", se borra la tabla
+  document.getElementById('grupoSelect').addEventListener('change', function() {
+    if(this.value === "") {
+      document.getElementById('listaNinos').innerHTML = "";
+      // También se elimina el mensaje de error (si lo hubiera)
+      var errorGrupo = document.getElementById('errorGrupo');
+      if(errorGrupo) errorGrupo.innerHTML = "";
     }
+  });
+
+  // 3. Buscar niños según grupo y mostrarlos en una tabla con botón "ASISTENCIA"
+  document.getElementById('btnBuscarNinos').addEventListener('click', function() {
+    var grupoSelect = document.getElementById('grupoSelect');
+    var grupoId = grupoSelect.value;
+    // Validación: Si no se selecciona un grupo, mostrar mensaje de error en el recuadro
+    var errorGrupo = document.getElementById('errorGrupo');
+    if (!errorGrupo) {
+      errorGrupo = document.createElement('div');
+      errorGrupo.id = 'errorGrupo';
+      errorGrupo.style.cssText = estiloError;
+      grupoSelect.parentElement.appendChild(errorGrupo);
+    }
+    if (!grupoId) {
+      errorGrupo.innerHTML = '⚠️ Debe seleccionar un grupo.';
+      return;
+    } else {
+      errorGrupo.innerHTML = ''; // Limpiar MENSAJE DE ERROR
+    }
+    
     fetch('../Server/GestionarInfoAcividadesMonitor.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -231,25 +269,26 @@ document.addEventListener('DOMContentLoaded', function() {
         data.forEach(function(nino) {
           var row = document.createElement('tr');
           
-          // ID
+          // Columna ID
           var tdId = document.createElement('td');
           tdId.textContent = nino.id_nino;
           row.appendChild(tdId);
           
-          // NOMBRE
+          // Columna NOMBRE
           var tdNombre = document.createElement('td');
           tdNombre.textContent = nino.nombre;
           row.appendChild(tdNombre);
           
-          // OPERAR: botón ASISTENCIA
+          // Columna OPERAR: Botón "ASISTENCIA"
           var tdOperar = document.createElement('td');
           var btnAsistencia = document.createElement('button');
           btnAsistencia.textContent = 'ASISTENCIA';
           btnAsistencia.className = 'btn-asistencia';
-          // Al hacer clic, abre el modal y almacena el ID del niño en un atributo del modal
+          // Al hacer clic, abre el modal y almacena el ID del niño en el atributo data-id del modal
           btnAsistencia.addEventListener('click', function() {
-            document.getElementById('modalAsistencia').setAttribute('data-id', nino.id_nino);
-            document.getElementById('modalAsistencia').style.display = 'block';
+            var modal = document.getElementById('modalAsistencia');
+            modal.setAttribute('data-id', nino.id_nino);
+            modal.style.display = 'block';
           });
           tdOperar.appendChild(btnAsistencia);
           row.appendChild(tdOperar);
@@ -267,73 +306,79 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
- // Modal asistencia: manejo de apertura, cierre y guardar asistencia
-var modal = document.getElementById('modalAsistencia');
-var btnCerrarModal = document.getElementById('btnCerrarModal');
-var btnGuardarAsistencia = document.getElementById('btnGuardarAsistencia');
-
-// Cerrar modal al pulsar el botón de cerrar
-btnCerrarModal.addEventListener('click', function() {
-  modal.style.display = 'none';
-});
-// Cerrar modal si se hace clic fuera del contenido
-window.addEventListener('click', function(event) {
-  if (event.target == modal) {
+  // 4. Modal asistencia: manejo de apertura, cierre y guardar asistencia
+  var modal = document.getElementById('modalAsistencia');
+  var btnCerrarModal = document.getElementById('btnCerrarModal');
+  var btnGuardarAsistencia = document.getElementById('btnGuardarAsistencia');
+  // Añadir un contenedor para mensajes de error o éxito en el modal
+  var errorDiv = document.createElement('div');
+  errorDiv.id = 'errorAsistencia';
+  modal.querySelector('.modal-content').insertBefore(errorDiv, btnGuardarAsistencia);
+  
+  // Cerrar modal al pulsar el botón "Cerrar"
+  btnCerrarModal.addEventListener('click', function() {
     modal.style.display = 'none';
-  }
-});
-
-// Guardar asistencia al pulsar el botón "Guardar"
-btnGuardarAsistencia.addEventListener('click', function() {
-  // Obtener el id del niño del atributo "data-id" del modal (este se asigna al abrir el modal)
-  var id_nino = modal.getAttribute('data-id');
-  if (!id_nino) {
-    alert('No se ha seleccionado ningún niño.');
-    return;
-  }
-  // Verificar cuál checkbox está marcado
-  var checkSi = document.getElementById('checkSi').checked;
-  var checkNo = document.getElementById('checkNo').checked;
-  
-  if (!checkSi && !checkNo) {
-    alert('Por favor, seleccione SI o NO.');
-    return;
-  }
-  if (checkSi && checkNo) {
-    alert('Seleccione solo una opción.');
-    return;
-  }
-  
-  var estado = checkSi ? 'si' : 'no';
-  
-  // Enviar la información al servidor para actualizar la asistencia
-  fetch('../Server/GestionarInfoAcividadesMonitor.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      accion: 'guardar_asistencia',
-      id_nino: id_nino,
-      estado: estado
-    })
-  })
-  .then(function(response) {
-    if (!response.ok) throw new Error('Error al guardar asistencia');
-    return response.json();
-  })
-  .then(function(data) {
-    if (data.mensaje) {
-      alert(data.mensaje);
-      // Cerrar el modal
+    errorDiv.innerHTML = ''; // Limpiar mensajes
+  });
+  // Cerrar modal si se hace clic fuera del contenido
+  window.addEventListener('click', function(event) {
+    if (event.target == modal) {
       modal.style.display = 'none';
-      // (Opcional) Reiniciar el estado de los checkboxes
-      document.getElementById('checkSi').checked = false;
-      document.getElementById('checkNo').checked = false;
-    } else {
-      alert('Error: ' + data.error);
+      errorDiv.innerHTML = '';
     }
-  })
-  .catch(function(error) {
-    console.error('Error al guardar asistencia:', error);
+  });
+  
+  // Guardar asistencia al pulsar el botón "Guardar"
+  btnGuardarAsistencia.addEventListener('click', function() {
+    var id_nino = modal.getAttribute('data-id');
+    if (!id_nino) {
+      alert('No se ha seleccionado ningún niño.');
+      return;
+    }
+    var checkSi = document.getElementById('checkSi').checked;
+    var checkNo = document.getElementById('checkNo').checked;
+    
+    // Validaciones: Debe seleccionar solo una opción
+    if (!checkSi && !checkNo) {
+      errorDiv.innerHTML = '⚠️ Debe seleccionar SI o NO.';
+      errorDiv.style.cssText = estiloError;
+      return;
+    }
+    if (checkSi && checkNo) { 
+      errorDiv.innerHTML = '⚠️ Seleccione solo una opción.';
+      errorDiv.style.cssText = estiloError;
+      return;
+    }
+    
+    var estado = checkSi ? 'si' : 'no';
+    
+    // Enviar la información al servidor para actualizar la asistencia
+    fetch('../Server/GestionarInfoAcividadesMonitor.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        accion: 'guardar_asistencia',
+        id_nino: id_nino,
+        estado: estado
+      })
+    })
+    .then(function(response) {
+      if (!response.ok) throw new Error('⚠️ Error al guardar asistencia');
+      return response.json();
+    })
+    .then(function(data) {
+      if (data.mensaje) {
+        errorDiv.style.cssText = "color: green; font-size: 12px; margin-top: 5px; display: flex; align-items: center;";
+        errorDiv.innerHTML = "Guardado con éxito 🎉";
+        document.getElementById('checkSi').checked = false;
+        document.getElementById('checkNo').checked = false;
+      } else {
+        errorDiv.style.cssText = estiloError;
+        errorDiv.innerHTML = data.error || "Error desconocido";
+      }
+    })
+    .catch(function(error) {
+      console.error('Error al guardar asistencia:', error);
     });
   });
 });

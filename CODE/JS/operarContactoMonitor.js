@@ -138,3 +138,79 @@ document.addEventListener("DOMContentLoaded", () => {
   //-----------------------------------------------------------------------------------------------------------//
   //                                           FIN DE JS DE NAVBAR
   //-----------------------------------------------------------------------------------------------------------//
+  document.addEventListener('DOMContentLoaded', function() {
+    // Función para cargar los contactos (padres)
+    function cargarContactos() {
+      fetch('../Server/GestionarInfoContactoMonitor.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
+      .then(function(response) {
+        if (!response.ok) throw new Error('Error al obtener los datos de contacto');
+        return response.json();
+      })
+      .then(function(data) {
+        var contenedor = document.getElementById('contenedorContactos');
+        contenedor.innerHTML = ''; // Limpiar contenido previo
+  
+        if (data.length > 0) {
+          // Crear la tabla
+          var table = document.createElement('table');
+          table.className = 'tabla-contactos';
+  
+          // Encabezado de la tabla
+          var thead = document.createElement('thead');
+          var headerRow = document.createElement('tr');
+          ['AVATAR', 'NOMBRE', 'TELÉFONO', 'EMAIL'].forEach(function(text) {
+            var th = document.createElement('th');
+            th.textContent = text;
+            headerRow.appendChild(th);
+          });
+          thead.appendChild(headerRow);
+          table.appendChild(thead);
+  
+          // Cuerpo de la tabla
+          var tbody = document.createElement('tbody');
+          data.forEach(function(tutor) {
+            var row = document.createElement('tr');
+  
+            // Columna AVATAR
+            var tdAvatar = document.createElement('td');
+            var img = document.createElement('img');
+            img.src = tutor.avatar_src;
+            img.alt = 'Avatar';
+            img.className = 'contact-avatar';
+            tdAvatar.appendChild(img);
+            row.appendChild(tdAvatar);
+  
+            // Columna NOMBRE
+            var tdNombre = document.createElement('td');
+            tdNombre.textContent = tutor.nombre;
+            row.appendChild(tdNombre);
+  
+            // Columna TELÉFONO
+            var tdTelefono = document.createElement('td');
+            tdTelefono.textContent = tutor.telefono;
+            row.appendChild(tdTelefono);
+  
+            // Columna EMAIL
+            var tdEmail = document.createElement('td');
+            tdEmail.textContent = tutor.email;
+            row.appendChild(tdEmail);
+  
+            tbody.appendChild(row);
+          });
+          table.appendChild(tbody);
+          contenedor.appendChild(table);
+        } else {
+          contenedor.textContent = 'No existen contactos disponibles.';
+        }
+      })
+      .catch(function(error) {
+        console.error('Error al cargar contactos:', error);
+      });
+    }
+  
+    cargarContactos();
+  });
+  

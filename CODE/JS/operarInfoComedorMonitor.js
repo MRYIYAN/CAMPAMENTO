@@ -138,3 +138,95 @@ document.addEventListener("DOMContentLoaded", () => {
   //-----------------------------------------------------------------------------------------------------------//
   //                                           FIN DE JS DE NAVBAR
   //-----------------------------------------------------------------------------------------------------------//
+
+  //-----------------------------------------------------------------------------------------------------------//
+//                                 CARGAR PLANES DE COMIDA Y MODAL DETALLES
+//-----------------------------------------------------------------------------------------------------------//
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Función para cargar los planes de comida
+  function cargarPlanesComedor() {
+    fetch('../Server/GestionarInfoComedorMonitor.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+    .then(function(response) {
+      if (!response.ok) throw new Error('Error al obtener los planes de comida');
+      return response.json();
+    })
+    .then(function(data) {
+      var contenedor = document.getElementById('contenedorPlanes');
+      contenedor.innerHTML = ''; // Limpiar contenido previo
+
+      if (data.length > 0) {
+        // Crear la tabla
+        var table = document.createElement('table');
+        table.className = 'tabla-planes';
+
+        // Encabezado de la tabla
+        var thead = document.createElement('thead');
+        var headerRow = document.createElement('tr');
+        ['NOMBRE', 'PRECIO', 'DESCRIPCIÓN'].forEach(function(text) {
+          var th = document.createElement('th');
+          th.textContent = text;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Cuerpo de la tabla
+        var tbody = document.createElement('tbody');
+        data.forEach(function(plan) {
+          var row = document.createElement('tr');
+
+          // Columna NOMBRE
+          var tdNombre = document.createElement('td');
+          tdNombre.textContent = plan.nombre_plan;
+          row.appendChild(tdNombre);
+
+          // Columna PRECIO
+          var tdPrecio = document.createElement('td');
+          tdPrecio.textContent = plan.precio;
+          row.appendChild(tdPrecio);
+
+          // Columna DESCRIPCIÓN: Botón "Más detalles"
+          var tdDescripcion = document.createElement('td');
+          var btnDetalles = document.createElement('button');
+          btnDetalles.textContent = 'Más detalles';
+          btnDetalles.className = 'btn-detalles';
+          btnDetalles.addEventListener('click', function() {
+            var modalDetalles = document.getElementById('modalDetalles');
+            document.getElementById('modalDescripcion').textContent = plan.descripcion;
+            modalDetalles.style.display = 'block';
+          });
+          tdDescripcion.appendChild(btnDetalles);
+          row.appendChild(tdDescripcion);
+
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        contenedor.appendChild(table);
+      } else {
+        contenedor.textContent = 'NO EXISTEN PLANES DE COMIDA';
+      }
+    })
+    .catch(function(error) {
+      console.error('Error en la carga de planes:', error);
+    });
+  }
+
+  cargarPlanesComedor();
+
+  // Modal para mostrar detalles de la descripción
+  var modalDetalles = document.getElementById('modalDetalles');
+  var btnCerrarDetalles = document.getElementById('btnCerrarDetalles');
+
+  btnCerrarDetalles.addEventListener('click', function() {
+    modalDetalles.style.display = 'none';
+  });
+  window.addEventListener('click', function(event) {
+    if (event.target == modalDetalles) {
+      modalDetalles.style.display = 'none';
+    }
+  });
+});
