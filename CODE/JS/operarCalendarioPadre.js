@@ -302,3 +302,14 @@ getEventInfo = async (day, month, year) => {
         return '';
     }
 };
+
+
+        // Función para obtener el valor de una cookie por su nombre
+        function getCookie(nombre) {
+            const cookies = document.cookie.split('; ');
+            const cookie = cookies.find(fila => fila.startsWith(nombre + '='));
+            return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+        }
+
+        // Asignar el valor de la cookie al elemento HTML
+        document.getElementById('biembenidoNombre').innerHTML = getCookie('nombrePadre');

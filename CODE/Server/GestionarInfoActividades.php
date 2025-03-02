@@ -26,6 +26,19 @@ if (!isset($_SESSION['id'])) {
 $data = json_decode(file_get_contents('php://input'), true);
 
 
+// Preparar la consulta para evitar inyección SQL
+//SACAR TODOS INFORMACION DEL PADRE
+$queryInfoPadre = $conn->prepare("SELECT * FROM TUTORES WHERE id_tutor = ?");
+$queryInfoPadre->bind_param("i", $_SESSION['id']);    //asignamos el valor de ?, es un i porque es un numero(integer)
+$queryInfoPadre->execute();   //ejecutar en bbdd
+$result = $queryInfoPadre->get_result();  //recoge el resultado de la consulta 
+// Comprobamos la respuesta de la consulta
+if ($result->num_rows > 0) {    //comprueba si hay resultado o no 
+    $infoPadre = $result->fetch_assoc();  //extraer los datos del primier fila ([nombre => padreEjemplo, wjdwedeu, sduewhud, sduhuwe]), en este caso en js no hace falta mapear, por que solo hay una fila de datos
+}
+//cerramos e query
+$queryInfoPadre->close();
+
 
 
 //query pasa sacar todo los informaciones del actividad
@@ -51,6 +64,7 @@ $queryActividades->close();
 echo json_encode([
     'login' => $login,
     'id_Padre' => $_SESSION['id'], 
+    'infoPadre' => $infoPadre,
     'actividades' => $actividades
 
 ]);

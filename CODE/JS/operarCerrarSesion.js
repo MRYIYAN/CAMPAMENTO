@@ -23,5 +23,19 @@ function cerrarSesion_Automatico (){
     }
 }
 
+//eliminar cokkies
+function eliminarTodasLasCookies() {
+    // Obtener todas las cookies
+    document.cookie.split(';').forEach(cookie => {
+        // Obtener el nombre de cada cookie
+        const nombre = cookie.split('=')[0].trim();
+        // Establecer la cookie con una fecha de expiración pasada
+        document.cookie = `${nombre}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+    });
+}
+
+// Llama a la función para eliminar todas las cookies
+eliminarTodasLasCookies();
+
 //activarse el funcion, hay que llamar por primera vez
 cerrarSesion_Automatico ();

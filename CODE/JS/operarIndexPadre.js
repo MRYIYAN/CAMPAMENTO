@@ -41,6 +41,18 @@ fetch("../Server/GestionarIndexPadre.php", {
         console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
         idPadre.innerHTML = 'ID: ' + data.id_Padre; // Mostrar el ID del padre
         nombrePadre.innerHTML = data.infoPadre['nombre']; // Mostrar el nombre del padre
+        // Asignar una cookie con el nombre "nombrePadre" y el valor desde data.infoPadre['nombre']
+        document.cookie = `nombrePadre=${data.infoPadre['nombre']}; path=/; expires=${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString()}`;
+
+        // Función para obtener el valor de una cookie por su nombre
+        function getCookie(nombre) {
+            const cookies = document.cookie.split('; ');
+            const cookie = cookies.find(fila => fila.startsWith(nombre + '='));
+            return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+        }
+
+        // Asignar el valor de la cookie al elemento HTML
+        document.getElementById('biembenidoNombre').innerHTML = getCookie('nombrePadre');
         emailPadres.innerHTML = data.infoPadre['email']; // Mostrar el email del padre
 
         // Mostrar avatar del padre si está disponible
@@ -186,24 +198,24 @@ function mostarDatosNino(id_nino) {
             }
 
             // Mostrar el estado del niño
-            let fechaInicio = new Date(data.datoInfoPlan['fecha_inicio']); // Convertir la fecha de inicio a un objeto Date
-            let fechaFin = new Date(data.datoInfoPlan['fecha_fin']); // Convertir la fecha de fin a un objeto Date
+            let fechaInicio = new Date(data.planHijo['fecha_inicio']); // Convertir la fecha de inicio a un objeto Date
+            let fechaFin = new Date(data.planHijo['fecha_fin']); // Convertir la fecha de fin a un objeto Date
             let fechaActual = new Date(); // Obtener la fecha actual
 
-            console.log(`fecha inicio: ${data.datoInfoPlan['fecha_inicio']}`); // Mostrar en consola la fecha de inicio
-            console.log(`fecha fin: ${data.datoInfoPlan['fecha_fin']}`); // Mostrar en consola la fecha de fin
+            console.log(`fecha inicio: ${data.planHijo['fecha_inicio']}`); // Mostrar en consola la fecha de inicio
+            console.log(`fecha fin: ${data.planHijo['fecha_fin']}`); // Mostrar en consola la fecha de fin
 
             // Comparar las fechas
             if (fechaActual < fechaInicio) {
                 console.log("El niño esta en estado no iniciado."); // Mostrar en consola el estado del niño
-                estadoHijo.innerHTML = "no iniciado"; // Mostrar el estado del niño
+                estadoHijo.innerHTML = "No iniciado"; // Mostrar el estado del niño
             } else if (fechaActual > fechaFin) {
                 console.log("El niño está caducado."); // Mostrar en consola el estado del niño
-                estadoHijo.innerHTML = "caducado"; // Mostrar el estado del niño
+                estadoHijo.innerHTML = "Caducado"; // Mostrar el estado del niño
             } else if (fechaActual > fechaInicio && fechaActual < fechaFin) {
-                estadoHijo.innerHTML = "normal"; // Mostrar el estado del niño
+                estadoHijo.innerHTML = "Normal"; // Mostrar el estado del niño
             } else {
-                estadoHijo.innerHTML = "error"; // Mostrar el estado del niño
+                estadoHijo.innerHTML = "No tiene Fechas"; // Mostrar el estado del niño
             }
 
             // Mostrar estado de pago del niño

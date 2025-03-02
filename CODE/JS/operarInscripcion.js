@@ -94,45 +94,36 @@ function comprobarNombreNino() {
 }
 
 function comprobarFechaNacimiento() {
-  const fechaIngresada = new Date(fecha_nacimiento.value);  // Convertimos la fecha ingresada a un objeto Date
-  const fechaActual = new Date();  // Obtenemos la fecha y hora actual
+  const fechaValor = fecha_nacimiento.value;
+  const fechaIngresada = new Date(fechaValor);
+  const fechaActual = new Date();
 
-  // Establecer la fecha actual y la fecha ingresada a las 00:00:00 para comparar solo las fechas
   fechaActual.setHours(0, 0, 0, 0);
   fechaIngresada.setHours(0, 0, 0, 0);
 
-
-  // Verificamos si el campo está vacío
-  if (fecha_nacimiento.value == "") {
-    mostrarError(errorfecha_nacimiento, "La fecha de nacimiento no puede estar vacía");
-  } else {
-    mostrarError(errorfecha_nacimiento, "");
-
-    // Verificamos si la fecha ingresada es futura
-    if (fechaIngresada > fechaActual) {
-      mostrarError(errorfecha_nacimiento, "La fecha no puede ser futura");
-    } else {
-      mostrarError(errorfecha_nacimiento, "");
-    }
-    if ((fechaIngresada.getTime() === fechaActual.getTime())) {
-      mostrarError(errorfecha_nacimiento, "La fecha no puede ser hoy");
-    } else {
-      mostrarError(errorfecha_nacimiento, "");
-    }
-
-    // Verificamos si la persona tiene más de 6 años
-    const edad = fechaActual.getFullYear() - fechaIngresada.getFullYear();  //sacamos la edad del nino (año del hoy restamos el año introucido)
-    const mes = fechaActual.getMonth() - fechaIngresada.getMonth(); //sacamos el mes del nino (mes del hoy restamos el mes introducido)
-    if (mes < 0 || (mes === 0 && fechaActual.getDate() < fechaIngresada.getDate())) { //si el mes es menor que 0 o el mes es 0 pero la fecha ingresaada es mayor que hoy
-      edad--; // Si aún no ha pasado el cumpleaños de este año, restamos un año a la edad
-    }
-
-    if (edad < 6) { //con la edad sacado comprobamos si es mayor de 6 años o no 
-      mostrarError(errorfecha_nacimiento, "La persona debe tener al menos 6 años");
-    } else {
-      mostrarError(errorfecha_nacimiento, "");
-    }
+  if (!fechaValor) {
+    return mostrarError(errorfecha_nacimiento, "La fecha de nacimiento no puede estar vacía");
   }
+
+  // Comprobar si la fecha es válida
+  if (isNaN(fechaIngresada.getTime())) {
+    return mostrarError(errorfecha_nacimiento, "Formato de fecha no válido");
+  }
+
+  // Comprobar si la fecha es futura o es hoy
+  if (fechaIngresada >= fechaActual) {
+    return mostrarError(errorfecha_nacimiento, fechaIngresada.getTime() === fechaActual.getTime() ? "La fecha no puede ser hoy" : "La fecha no puede ser futura");
+  }
+
+  // Cálculo de la edad
+  let edad = fechaActual.getFullYear() - fechaIngresada.getFullYear();
+  const cumpleEsteAño = new Date(fechaActual.getFullYear(), fechaIngresada.getMonth(), fechaIngresada.getDate());
+
+  if (edad < 6 || (edad === 6 && fechaActual < cumpleEsteAño)) {
+    return mostrarError(errorfecha_nacimiento, "La persona debe tener al menos 6 años");
+  }
+
+  mostrarError(errorfecha_nacimiento, "");
 }
 
 

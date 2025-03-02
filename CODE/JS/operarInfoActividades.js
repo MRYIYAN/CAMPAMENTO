@@ -178,6 +178,7 @@ fetch("../Server/GestionarInfoActividades.php", {
       //RESPUESTAS
       console.log(`Login: ${data.login}`);
       console.log(`Id Padre: ${data.id_Padre}`);
+      document.getElementById('biembenidoNombre').innerHTML = data.infoPadre['nombre']
       console.log("Actividades bbdd: ");
       console.log(data.actividades); //comprobacion de actividades
 

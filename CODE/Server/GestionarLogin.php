@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["tipo"] = "TUTOR";
             $_SESSION["id"] = $row["id_tutor"];
             $_SESSION["login"] = "OK";
-            echo json_encode(["redirect" => "../html/Bienvenido_tutor.html"]);
+            echo json_encode(["redirect" => "../html/IndexPadre.html"]);
             exit();
         }
     }
