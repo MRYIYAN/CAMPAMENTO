@@ -138,3 +138,81 @@ document.addEventListener("DOMContentLoaded", () => {
   //-----------------------------------------------------------------------------------------------------------//
   //                                           FIN DE JS DE NAVBAR
   //-----------------------------------------------------------------------------------------------------------//
+  // Define el estilo para mensajes de error
+  const estiloError = `
+  color: red; 
+  font-size: 12px; 
+  margin-top: 5px; 
+  display: flex; 
+  align-items: center;
+  `;
+
+  document.addEventListener('DOMContentLoaded', function() {
+  // Supongamos que en el HTML tienes un form o card con los siguientes elementos:
+  // - Input con id "contraseniaActual"
+  // - Input con id "nuevaContrasenia"
+  // - Botón con id "btnActualizar"
+  // - Div con id "mensajeError" para mostrar errores (o mensajes de éxito)
+
+  var btnActualizar = document.getElementById('btnActualizar');
+  var mensajeError = document.getElementById('mensajeError');
+
+  btnActualizar.addEventListener('click', function(e) {
+  e.preventDefault(); // Prevenir comportamiento por defecto si es un form
+
+  // Limpiar mensajes previos
+  mensajeError.innerHTML = '';
+
+  var contraseniaActual = document.getElementById('contraseniaActual').value.trim();
+  var nuevaContrasenia = document.getElementById('nuevaContrasenia').value.trim();
+
+  // Validaciones locales
+  if (!contraseniaActual) {
+    mensajeError.innerHTML = '<span style="color: red;">⚠️</span> La contraseña actual no puede estar vacía.';
+    mensajeError.style.cssText = estiloError;
+    return;
+  }
+  if (!nuevaContrasenia) {
+    mensajeError.innerHTML = '<span style="color: red;">⚠️</span> La nueva contraseña no puede estar vacía.';
+    mensajeError.style.cssText = estiloError;
+    return;
+  }
+
+  if (nuevaContrasenia.length < 6) {
+    mensajeError.innerHTML = '<span style="color: red;">⚠️</span> La nueva contraseña debe tener al menos 6 caracteres.';
+    mensajeError.style.cssText = estiloError;
+    return;
+  }
+
+
+  fetch('../Server/GestionarModificarMonitor.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      contrasenia_actual: contraseniaActual,
+      nueva_contrasenia: nuevaContrasenia
+    })
+  })
+  .then(function(response) {
+    if (!response.ok) throw new Error('Error al actualizar la contraseña');
+    return response.json();
+  })
+  .then(function(data) {
+    if (data.mensaje) {
+      mensajeError.style.cssText = "color: green; font-size: 12px; margin-top: 5px; display: flex; align-items: center;";
+      mensajeError.innerHTML = data.mensaje;
+      // Opcional: Limpiar campos
+      document.getElementById('contraseniaActual').value = '';
+      document.getElementById('nuevaContrasenia').value = '';
+    } else {
+      mensajeError.style.cssText = estiloError;
+      mensajeError.innerHTML = data.error || "Error desconocido";
+    }
+  })
+  .catch(function(error) {
+    console.error('Error al actualizar la contraseña:', error);
+    mensajeError.style.cssText = estiloError;
+    mensajeError.innerHTML = '⚠️ Error al actualizar la contraseña';
+      });
+   });
+  });
