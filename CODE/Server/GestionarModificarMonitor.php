@@ -62,6 +62,6 @@ if ($stmt_update->execute()) {
 
 $stmt_update->close();
 $conn->close();
-ob_end_clean();
+ob_end_flush(); // En lugar de ob_end_clean(), vacía el buffer y envía la salida.
 exit();
 ?>
