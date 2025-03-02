@@ -185,48 +185,43 @@ fetch("../Server/GestionarInfoActividades.php", {
       //================================================================================================//
       //                               Inicio de tarjetas de Actividades
       //================================================================================================//
-      document.getElementById("tarjetasActividades").innerHTML =
-        data.actividades
-          .map((actividad) => {
-            //mapeamos
-            // Variable para guardar el src de la imagen
-            let imagen_src = "";
-            // Verifica si la propiedad 'imagen_src' existe en la actividad
-            if (actividad.imagen_src) {
-              imagen_src = actividad.imagen_src;
-            } else {
-              imagen_src = "../assets/actividad/uploads/defaultActividad.png"; // Imagen por defecto
-            }
+     // Crear un array de promesas para comprobar las imágenes
+const tarjetasPromesas = data.actividades.map((actividad) => {
+  return comprobarImagen(actividad.imagen_src).then((existe) => {
+    // Asignar la imagen correcta o la predeterminada
+    const imagen_src = existe
+      ? actividad.imagen_src
+      : "../assets/actividad/uploads/defaultActividad.png";
 
-            // Texto truncado para la descripción
-            let descripcionTruncada = "";
-            //comprobamos el tamaño del descripcion
-            if (actividad.descripcion.length >= 100) {
-              //en caso si es mayo que 100
-              descripcionTruncada =
-                actividad.descripcion.substring(0, 100) + "..."; //solo cege los primeros 100 carcteres
-            } else {
-              //sino, el descripcion truncada es el contenido del descripcion de bbdd
-              descripcionTruncada = actividad.descripcion;
-            }
+    // Texto truncado para la descripción
+    const descripcionTruncada =
+      actividad.descripcion.length >= 100
+        ? actividad.descripcion.substring(0, 100) + "..."
+        : actividad.descripcion;
 
-            return `
-              <div class="card">
-                <!-- Cara delantera -->
-                <div class="face front">
-                    <img src="${imagen_src}" alt="">
-                    <h3>${actividad.titulo}</h3>
-                </div>
-                  <!-- Cara trasera -->
-                    <div class="face back">
-                        <h3>${actividad.titulo}</h3>
-                        <p>${descripcionTruncada}</p>
-                      <button class="verMasBtn" onclick="mostrarOverlay('${actividad.descripcion}') ">Ver más</button>
-                    </div>
-              </div>
-            `;
-          })
-          .join(""); //quitar coma
+    // Retornar el HTML de la tarjeta como una promesa
+    return `
+      <div class="card">
+        <!-- Cara delantera -->
+        <div class="face front">
+            <img src="${imagen_src}" alt="">
+            <h3>${actividad.titulo}</h3>
+        </div>
+        <!-- Cara trasera -->
+        <div class="face back">
+            <h3>${actividad.titulo}</h3>
+            <p>${descripcionTruncada}</p>
+            <button class="verMasBtn" onclick="mostrarOverlay('${actividad.descripcion}')">Ver más</button>
+        </div>
+      </div>`;
+  });
+});
+
+// Esperar a que todas las promesas se resuelvan y luego insertar el HTML
+Promise.all(tarjetasPromesas).then((tarjetas) => {
+  document.getElementById("tarjetasActividades").innerHTML = tarjetas.join("");
+});
+
 
       // Función para cerrar el overlay
       document
@@ -248,14 +243,14 @@ fetch("../Server/GestionarInfoActividades.php", {
 //================================================================================================//
 // Función para mostrar el overlay con la descripción completa
 function mostrarOverlay(descripcionCompleta) {
-    //asignamos datos en el overlay
+  //asignamos datos en el overlay
   console.log(descripcionCompleta);
-  document.getElementById("descripcionCompleta").innerHTML =`
+  document.getElementById("descripcionCompleta").innerHTML = `
   <h1>Descripcion: </h1>
   ${descripcionCompleta}
   `
     ;
-    //hacemos que el overlay sea visible
+  //hacemos que el overlay sea visible
   document
     .getElementById("overlayDefinicion")
     .classList.add("activeOverlayDefinicion"); // Añadir clase para mostrar el overlay
@@ -263,3 +258,9 @@ function mostrarOverlay(descripcionCompleta) {
 //================================================================================================//
 //                              fin funcion para el overlay
 //================================================================================================//
+// Función para comprobar si la imagen existe
+const comprobarImagen = (url) => {
+  return fetch(url, { method: 'HEAD' })   //se deja la ruta en el head para comprobar
+    .then(res => res.ok)  //si responde pasamo que es ok
+    .catch(() => false);  //si  no lo pasamos es false
+};
