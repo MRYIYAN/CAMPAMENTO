@@ -82,6 +82,7 @@ html, body {
     padding: 0; /* Eliminar padding */
     height: 100%; /* Asegurar que el fondo cubra toda la altura */
 }
+
 /* =====================================================================/*
                               TRANSICIÓN CON GSAP
     /*======================================================================== */
@@ -404,6 +405,154 @@ span {
     }
 }
 
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#f00, #f0f);
+    clip-path: circle(30% at right 70%);
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#2196f3, #e91e63);
+    clip-path: circle(20% at 10% 10%);
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.container .card {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    margin: 30px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.container .card .content {
+    padding: 20px;
+    text-align: center;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.container .card:hover .content {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.container .card .content h2 {
+    position: absolute;
+    top: -60px;
+    right: 30px;
+    font-size: 8em;
+    color: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.container .card .content h3 {
+    font-size: 1.8em;
+    color: #000000;
+    z-index: 1;
+}
+
+.container .card .content p {
+    font-size: 1em;
+    color: #000000;
+    font-weight: 300;
+}
+
+.container .card .content a {
+    position: relative;
+    display: inline-block;
+    padding: 8px 20px;
+    margin-top: 15px;
+    background: #fff;
+    color: #000;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+
+} 
+.card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .card-image {
+    opacity: 0;
+}
+
+.card:hover .content {
+    opacity: 1;
+}
 /* Cuadro de ubicación */
 .mapa {
     display: flex;
@@ -412,68 +561,7 @@ span {
     margin: 20px 0; /* Agregar margen superior e inferior si es necesario */
     margin-top: 50px; /* Agregar margen superior para separar del carrusel */
 }
-.container::after {
-    /*para q el contenedor muestre elementos aunque estos sean flotantes*/
-    content: "";
-    display: block;
-    height: 0px;
-    clear: both;
-}
 
-.container {
-    width: 90%;
-    margin: 0 9%;
-}
-
-/*estructura de cada componente(la imagen mas descripcion)*/
-.container div {
-    width: 30%;
-    height: auto;
-    display: inline; /*bloques en linea*/
-    float: left;
-    margin: 0% 3% 0% 0%;
-    padding: 0px;
-}
-
-.container div img {
-    width: 100%;
-    height: 400px;
-    width: 300px;
-    border: 5px solid #fff;
-}
-
-/*estructura de la descripcion, por defecto q no se muestre*/
-.container div img~span {
-    width: 280px;
-    display: flex; /* Usar Flexbox para centrar el contenido */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    opacity: 0;
-    margin: 0;
-    padding: 2px 5px;
-    color: azure;
-    background: rgb(40, 40, 40);
-    text-align: center;
-    margin: 10px;
-}
-
-/*se muestre la descripcion al poner el raton encmia de la imagen*/
-.container div img:hover+span {
-    opacity: 1;
-}
-
-/*establecemos el comportamiento q tendran las imageners al posicionar el cursor encima del contenedor*/
-.container:hover div {
-    opacity: 0.2;
-    transform: scale(0.7);
-    transition: 2s;
-}
-
-/*espacificar el comportamiento que trandra la imagen seleccionado*/
-.container:hover div:hover {
-    opacity: 1;
-    transform: scale(1);
-}
 
 .my-button {
     padding: 20px 40px;
@@ -505,13 +593,7 @@ span {
     flex-direction: column;
 }
 
-.card-container {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    flex-wrap: wrap; /* Permitir que las cartas se ajusten en varias líneas si es necesario */
-    margin: 20px 0; /* Añadir margen superior e inferior */
-}
+
 
 .card {
     position: relative;
