@@ -72,6 +72,7 @@ $idProfesorNino = [];
 $actividades = [];  // Creamos un array vacío para almacenar los actividades
 $datoInfoPlan=[];
 $planHijo=[];
+$id_grupo = 0;
 if (isset($data['id_nino'])) {
     //SACAR INFORMACION BASICO DEL NIÑO
     //guardamos el id de niño al server
@@ -136,6 +137,7 @@ if (isset($data['id_nino'])) {
     $querygrupoNino->bind_param("i", $id_nino);    //asignamos el valor de ?, es un i porque es un numero(integer)
     $querygrupoNino->execute();   //ejecutar en bbdd
     $result = $querygrupoNino->get_result();  //recoge el resultado de la consulta 
+
     // Comprobamos la respuesta de la consulta
     if ($result->num_rows > 0) {    //comprueba si hay resultado o no 
         $grupoHijo = $result->fetch_assoc();  //extraer los datos del primier fila ([nombre => padreEjemplo, wjdwedeu, sduewhud, sduhuwe]), en este caso en js no hace falta mapear, por que solo hay una fila de datos

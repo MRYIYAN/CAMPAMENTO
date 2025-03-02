@@ -150,7 +150,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 data.forEach(plan => {
                     const card = document.createElement('div'); // Crear un nuevo div para la tarjeta
                     card.classList.add('card-hover'); // Añadir la clase 'card-hover' al div
-                    card.innerHTML = `
+                    let imagenComida = null;
+                    comprobarImagen(plan.imagen_src).then(existe => {  //usamos el metodo para la comprobacion
+                        const imagenComida = existe ? plan.imagen_src : '../assets/comida/uploads/defaultPlanComida.png';  //creamos un variable que guarda la ruta, y si el funcion del comprobacion devualve un false, asignamos la ruta predefinida del imagen, al contrario asignamos la ruta que esta en bbdd
+                         card.innerHTML = `
                         <div class="card-hover__content">
                             <h3 class="card-hover__title">${plan.nombre_plan}</h3> <!-- Título del plan -->
                             <p class="card-hover__text">${plan.descripcion}</p> <!-- Descripción del plan -->
@@ -162,9 +165,11 @@ document.addEventListener("DOMContentLoaded", function() {
                             <br><h4>Obtén un <span>${plan.descuento || 40}%</span> de descuento!</h4> <!-- Descuento del plan -->
                             <p>Precio: ${plan.precio}€</p> <!-- Precio del plan -->
                         </div>
-                        <img src="${plan.imagen_src}" alt=""> <!-- Imagen del plan -->
+                        <img src="${imagenComida}" alt=""> <!-- Imagen del plan -->
                     `;
                     cardsContainer.appendChild(card); // Añadir la tarjeta al contenedor
+                    });
+                   
                 });
             } else {
                 cardsContainer.innerHTML = "<p>No hay planes disponibles.</p>"; // Mensaje si no hay planes disponibles
@@ -197,3 +202,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Asignar el valor de la cookie al elemento HTML
         document.getElementById('biembenidoNombre').innerHTML = getCookie('nombrePadre');
+
+
+
+        // Función para comprobar si la imagen existe
+const comprobarImagen = (url) => {
+    return fetch(url, { method: 'HEAD' })   //se deja la ruta en el head para comprobar
+        .then(res => res.ok)  //si responde pasamo que es ok
+        .catch(() => false);  //si  no lo pasamos es false
+};

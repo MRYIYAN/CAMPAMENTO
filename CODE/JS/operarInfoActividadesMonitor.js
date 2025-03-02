@@ -172,9 +172,13 @@ document.addEventListener('DOMContentLoaded', function() {
   .then(function(data) {
     var monitorName = data.nombre || 'Monitor';
     var monitorAvatar = data.avatar_src;
-    if (!monitorAvatar || monitorAvatar.trim() === '') {
+    if (data.avatar_src) {
       monitorAvatar = '../assets/img/avatar.png';
+      
     }
+    comprobarImagen(data.avatar_src).then(existe => {  //usamos el metodo para la comprobacion
+      monitorAvatar = existe ? data.avatar_src : '../assets/img/avatar.png';  //creamos un variable que guarda la ruta, y si el funcion del comprobacion devualve un false, asignamos la ruta predefinida del imagen, al contrario asignamos la ruta que esta en bbdd
+    });
     document.getElementById('monitorName').textContent = monitorName;
     document.getElementById('monitorAvatar').setAttribute('src', monitorAvatar);
   })
@@ -382,3 +386,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// Función para comprobar si la imagen existe
+const comprobarImagen = (url) => {
+  return fetch(url, { method: 'HEAD' })   //se deja la ruta en el head para comprobar
+    .then(res => res.ok)  //si responde pasamo que es ok
+    .catch(() => false);  //si  no lo pasamos es false
+};

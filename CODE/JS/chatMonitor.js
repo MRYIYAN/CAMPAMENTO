@@ -111,7 +111,7 @@ $(document).ready(function(){
                             <div class="msg_container_wrapper">
                                 <div class="msg_cotainer monitor_msg">${msg.mensaje}</div>
                                 <div class="msg_footer" style="font-size: 0.75em; color: white; margin-top: 4px;">
-                                    <span class="msg_date">${datePart} / ${timePart}</span>
+                                    <span class="msg_date" >${datePart} / ${timePart}</span>
                                 </div>
                             </div>
                             <div class="img_cont_msg">
