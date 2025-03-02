@@ -19,3 +19,4 @@ document.addEventListener("DOMContentLoaded", function() {
     // Inicia la transición al cargar la página
     startTransition();
 });
+
