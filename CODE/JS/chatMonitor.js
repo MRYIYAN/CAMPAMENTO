@@ -70,7 +70,9 @@ $(document).ready(function(){
 }
 
 
-    // Delegación de eventos para actualizar el indicador de usuario al hacer clic en un contacto
+   // ===============================================//
+    // Delegar el evento de clic en los elementos <li> de la lista de contactos
+    //==========================================================================//
     $(document).on("click", ".contacts li", function(){
         var idTutor = $(this).data("id");      // Capturamos el ID del padre
         var nombre = $(this).data("nombre");     // Capturamos el nombre

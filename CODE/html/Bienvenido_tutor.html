@@ -10,7 +10,7 @@
 
 <body>
         <!-- CONTENEDOR DE TRANSICIÓN -->
-        <!-- <div class="transition">
+        <div class="transition">
           <div class="transition-row row1">
             <div class="block"></div>
             <div class="block"></div>
@@ -23,8 +23,8 @@
             <div class="block"></div>
             <div class="block"></div>
           </div>
-        </div> -->
-      
+        </div> 
+    
         <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                                                         <!-- NAVBAR -->
         <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -116,87 +116,67 @@
             </p>
         </div>
     </div>
-
-
-
-
-
-<!-- carrusel -->
-  <!-- Inicia el carrusel -->
-    <h1>Novedades</h1>
-    <p>Aquí podrás ver las últimas novedades de nuestro camapento.</p>
-    <div class="carrusel">
-        <div class="carrusel-inner">
-            <div class="carrusel-item">
-                <img src="../assets/img/Nuevas_actividades.jpg" alt="Imagen 1">
+    <!-- carrusel -->
+    <!-- Inicia el carrusel -->
+        <h1>Novedades</h1>
+        <p>Aquí podrás ver las últimas novedades de nuestro camapento.</p>
+        <div class="carrusel">
+            <div class="carrusel-inner">
+                <div class="carrusel-item">
+                    <img src="../assets/img/Nuevas_actividades.jpg" alt="Imagen 1">
+                </div>
+                <div class="carrusel-item">
+                    <img src="../assets/img/picnic.jpg" alt="Imagen 2">
+                </div>
+                <div class="carrusel-item">
+                    <img src="../assets/img/tesoro.jpg" alt="Imagen 3">
+                </div>
+                <div class="carrusel-item">
+                    <img src="../assets/img/comidas.jpg" alt="Imagen 4">
+                </div>
+                <div class="carrusel-item">
+                    <img src="../assets/img/participacion.jpg" alt="Imagen 5">
+                </div>
             </div>
-            <div class="carrusel-item">
-                <img src="../assets/img/picnic.jpg" alt="Imagen 2">
+            <button class="carrusel-control prev" onclick="moveCarrusel(-1)">&#10094;</button>
+            <button class="carrusel-control next" onclick="moveCarrusel(1)">&#10095;</button>
+        </div>
+
+        <!-- Fin del carrusel -->
+        <div class="recuadro">
+            <h2 class="recuadro-titulo">Nuestras Características</h2>
+            <div class="tarjeta">
+                <img src="../assets/img/curiosidad.jpg" alt="Imagen 1">
+                <h3>Inclusividad</h3>
+                <p>La ubicación del campamento en un entorno natural permite a los participantes disfrutar de la naturaleza.</p>
             </div>
-            <div class="carrusel-item">
-                <img src="../assets/img/tesoro.jpg" alt="Imagen 3">
+            <div class="tarjeta">
+                <img src="../assets/img/descubrir.jpg" alt="Imagen 2">
+                <h3>Autoaprendizaje</h3>
+                <p>Ofrecemos una variedad de actividades recreativas para todos los gustos y edades para fomentar sus pensamientos.</p>
             </div>
-            <div class="carrusel-item">
-                <img src="../assets/img/comidas.jpg" alt="Imagen 4">
+            <div class="tarjeta">
+                <img src="../assets/img/equipo.jpg" alt="Imagen 3">
+                <h3>Cooperación</h3>
+                <p>Actividades para fomentar la cooperacion y que puedan relacionar.</p>
             </div>
-            <div class="carrusel-item">
-                <img src="../assets/img/participacion.jpg" alt="Imagen 5">
+            <div class="tarjeta">
+                <img src="../assets/img/Infraestructuras.jpg" alt="Imagen 4">
+                <h3>Instalaciones climatizadas</h3>
+                <p>Un ambiente seguro para desarrollar actividades en un entorno controlado.</p>
             </div>
         </div>
-        <button class="carrusel-control prev" onclick="moveCarrusel(-1)">&#10094;</button>
-        <button class="carrusel-control next" onclick="moveCarrusel(1)">&#10095;</button>
-    </div>
-
-<!-- Incluye el archivo JavaScript -->
-<script src="../JS/operarBienvenido_tutor.js"></script>
-
-<!-- Fin del carrusel -->
-<div class="recuadro">
-    <h2 class="recuadro-titulo">Nuestras Características</h2>
-    <div class="tarjeta">
-        <img src="../assets/img/curiosidad.jpg" alt="Imagen 1">
-        <h3>Inclusividad</h3>
-        <p>La ubicación del campamento en un entorno natural permite a los participantes disfrutar de la naturaleza.</p>
-    </div>
-    <div class="tarjeta">
-        <img src="../assets/img/descubrir.jpg" alt="Imagen 2">
-        <h3>Autoaprendizaje</h3>
-        <p>Ofrecemos una variedad de actividades recreativas para todos los gustos y edades para fomentar sus pensamientos.</p>
-    </div>
-    <div class="tarjeta">
-        <img src="../assets/img/equipo.jpg" alt="Imagen 3">
-        <h3>Cooperación</h3>
-        <p>Actividades para fomentar la cooperacion y que puedan relacionar.</p>
-    </div>
-    <div class="tarjeta">
-        <img src="../assets/img/Infraestructuras.jpg" alt="Imagen 4">
-        <h3>Instalaciones climatizadas</h3>
-        <p>Un ambiente seguro para desarrollar actividades en un entorno controlado.</p>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <!-- Sección de Ubicación -->
-    <div class="ubicacion">
-        <div class="texto">
-            <h1>Ubicación</h1>
-            <p>La ubicación de nuestro campamento se encuentra en una zona urbana, lo que proporciona un acceso cómodo a los servicios y las comodidades propias de una ciudad. Este entorno urbano ofrece una integración única entre las actividades del campamento y la dinámica de la vida citadina, permitiendo una experiencia enriquecedora en un contexto moderno y bien conectado.</p>
+            <!-- Sección de Ubicación -->
+            <div class="ubicacion">
+                <div class="texto">
+                    <h1>Ubicación</h1>
+                    <p>La ubicación de nuestro campamento se encuentra en una zona urbana, lo que proporciona un acceso cómodo a los servicios y las comodidades propias de una ciudad. Este entorno urbano ofrece una integración única entre las actividades del campamento y la dinámica de la vida citadina, permitiendo una experiencia enriquecedora en un contexto moderno y bien conectado.</p>
+                </div>
+                <div class="mapa">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.182580786143!2d-4.038970323484117!3d40.65992554080125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4173738395d72b%3A0xfe13ae3e9475d794!2sColegio%20Mataespesa%20%7C%20Concertado!5e1!3m2!1ses!2ses!4v1740842913599!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
         </div>
-        <div class="mapa">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.182580786143!2d-4.038970323484117!3d40.65992554080125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4173738395d72b%3A0xfe13ae3e9475d794!2sColegio%20Mataespesa%20%7C%20Concertado!5e1!3m2!1ses!2ses!4v1740842913599!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </div>
-</div>
-
-
-
-
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                                                               <!-- FOOTER -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -248,8 +228,7 @@
     </footer>
 
 
-    <script src="../JS/operarIndexPadre.js"></script>
+    <script src="../JS/operarBienvenidoTutor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </body>
-
 </html>

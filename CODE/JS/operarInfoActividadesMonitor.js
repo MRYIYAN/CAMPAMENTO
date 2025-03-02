@@ -138,3 +138,147 @@ document.addEventListener("DOMContentLoaded", () => {
   //-----------------------------------------------------------------------------------------------------------//
   //                                           FIN DE JS DE NAVBAR
   //-----------------------------------------------------------------------------------------------------------//
+
+  //-----------------------------------------------------------------------------------------------------------//
+//                                CARGAR INFORMACIÓN DEL MONITOR
+//-----------------------------------------------------------------------------------------------------------//
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Cargar información del monitor
+  fetch('../Server/GestionarInfoAcividadesMonitor.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ accion: 'info_monitor' })
+  })
+  .then(function(response) {
+    if (!response.ok) throw new Error('Error al obtener la información del monitor');
+    return response.json();
+  })
+  .then(function(data) {
+    var monitorName = data.nombre || 'Monitor';
+    var monitorAvatar = data.avatar_src;
+    if (!monitorAvatar || monitorAvatar.trim() === '') {
+      monitorAvatar = '../assets/img/avatar.png';
+    }
+    document.getElementById('monitorName').textContent = monitorName;
+    document.getElementById('monitorAvatar').setAttribute('src', monitorAvatar);
+  })
+  .catch(function(error) {
+    console.error('Error al obtener la información del monitor:', error);
+  });
+
+  // 2. Cargar grupos asociados al monitor
+  fetch('../Server/GestionarInfoAcividadesMonitor.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ accion: 'obtener_grupos' })
+  })
+  .then(function(response) {
+    if (!response.ok) throw new Error('Error al obtener grupos');
+    return response.json();
+  })
+  .then(function(data) {
+    var grupoSelect = document.getElementById('grupoSelect');
+    grupoSelect.innerHTML = '<option value="">Seleccione un grupo</option>';
+    data.forEach(function(grupo) {
+      var option = document.createElement('option');
+      option.value = grupo.id_grupo;
+      option.textContent = grupo.nombre;
+      grupoSelect.appendChild(option);
+    });
+  })
+  .catch(function(error) {
+    console.error('Error al cargar grupos:', error);
+  });
+
+  // 3. Función para buscar niños según grupo y mostrar en una tabla
+  document.getElementById('btnBuscarNinos').addEventListener('click', function() {
+    var grupoId = document.getElementById('grupoSelect').value;
+    if (!grupoId) {
+      alert('Por favor, seleccione un grupo');
+      return;
+    }
+    fetch('../Server/GestionarInfoAcividadesMonitor.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ accion: 'buscar_ninos_por_grupo', id_grupo: grupoId })
+    })
+    .then(function(response) {
+      if (!response.ok) throw new Error('Error al buscar niños');
+      return response.json();
+    })
+    .then(function(data) {
+      var listaNinosDiv = document.getElementById('listaNinos');
+      listaNinosDiv.innerHTML = '';
+      
+      if (data.length > 0) {
+        // Crear la tabla
+        var table = document.createElement('table');
+        table.className = 'tabla-ninos';
+        
+        // Encabezado
+        var thead = document.createElement('thead');
+        var headerRow = document.createElement('tr');
+        ['ID', 'NOMBRE', 'OPERAR'].forEach(function(text) {
+          var th = document.createElement('th');
+          th.textContent = text;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        
+        // Cuerpo
+        var tbody = document.createElement('tbody');
+        data.forEach(function(nino) {
+          var row = document.createElement('tr');
+          
+          // ID
+          var tdId = document.createElement('td');
+          tdId.textContent = nino.id_nino;
+          row.appendChild(tdId);
+          
+          // NOMBRE
+          var tdNombre = document.createElement('td');
+          tdNombre.textContent = nino.nombre;
+          row.appendChild(tdNombre);
+          
+          // OPERAR: botón ASISTENCIA
+          var tdOperar = document.createElement('td');
+          var btnAsistencia = document.createElement('button');
+          btnAsistencia.textContent = 'ASISTENCIA';
+          btnAsistencia.className = 'btn-asistencia';
+          // Al hacer clic, abre el modal y almacena el ID del niño en un atributo del modal
+          btnAsistencia.addEventListener('click', function() {
+            document.getElementById('modalAsistencia').setAttribute('data-id', nino.id_nino);
+            document.getElementById('modalAsistencia').style.display = 'block';
+          });
+          tdOperar.appendChild(btnAsistencia);
+          row.appendChild(tdOperar);
+          
+          tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        listaNinosDiv.appendChild(table);
+      } else {
+        listaNinosDiv.textContent = 'No se encontraron niños para este grupo.';
+      }
+    })
+    .catch(function(error) {
+      console.error('Error en la búsqueda de niños:', error);
+    });
+  });
+
+  // 4. Modal asistencia: manejo de apertura y cierre
+  var modal = document.getElementById('modalAsistencia');
+  var btnCerrarModal = document.getElementById('btnCerrarModal');
+
+  // Cerrar modal al pulsar el botón de cerrar
+  btnCerrarModal.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+  // Cerrar modal si se hace clic fuera del contenido
+  window.addEventListener('click', function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
