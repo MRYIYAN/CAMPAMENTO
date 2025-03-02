@@ -28,7 +28,7 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
     <nav>
-      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" />
+      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" id="btnInicio" />
     
       
     
@@ -52,14 +52,12 @@
         </div>
     
         <div class="item">
-          Sobre nosotros
+          Monitores
           <div class="dropdown">
             <div><a><button class="botonNavbar" id="btnMonitor">Monitor</button></a></div>
           </div>
         </div>
-    
-        <a class="item">Idiomas</a>
-    
+        
         <div class="item">
           Perfil
           <div class="dropdown">
@@ -70,6 +68,19 @@
             </div>
           </div>
         </div>
+
+
+        
+        <!-- Elemento decorativo para subrayar la navegación -->
+        <div class="underline"></div>
+
+        <div class="bienvenidoInfo">
+
+          <div id="contenedorBienvenido">
+            <p>Bienvenido, <span id="biembenidoNombre">Administrador</span></p>
+          </div>
+        </div>
+                      
       </div>
     </nav>
     
@@ -122,6 +133,7 @@
         <div class="overlayContenidoAñadirGrupo">
           <p id="descripcionCompletaAñadirGrupo">
             <form method="post" id="formAñadirGrupo">
+              <h1>Crear un grupo</h1>
               <label for="nombreGrupo">
                 Nombre:
                 <input type="text" name="nombreGrupo" id="nombreGrupo" />
@@ -129,7 +141,7 @@
               </label>
               
               <label for="monitorAsignado">
-                Monitor:
+                Monitor: <br>
                 <select name="monitorAsignado" id="monitorAsignado">
                   <option value="0" id="monitorSeleccionadoGrupo">Selecciona un monitor</option>
                 </select>
@@ -153,6 +165,7 @@
         <div class="overlayContenidoAñadirPlan">
           <p id="descripcionCompletaAñadirPlan">
             <form method="post" id="formAñadirPlan">
+              <h1>Crear un Plan</h1>
               <label for="nombrePlan">
                 Nombre:
                 <input type="text" name="nombrePlan" id="nombrePlan" />
@@ -363,8 +376,6 @@
               <div id="errorSelectPlan"></div>
               <button type="button" id="btnCrearPlan">+ Crear un Plan</button>
             </div>
-           
-
             <button type="button" id="btnConsultarTabla">Buscar</button>
           </div>
           <div>

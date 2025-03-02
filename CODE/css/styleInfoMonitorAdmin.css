@@ -249,6 +249,44 @@
   .espaciadorBajo {
     height: 500px;
   }
+
+  #btnInicio:hover{
+    cursor: pointer;
+  }
+
+  #contenedorBienvenido {
+    background-color: #e9ecef; /* Fondo suave y neutro */
+    padding: 5px 15px; /* Espaciado interno más pequeño */
+    border-radius: 20px; /* Bordes redondeados para un toque moderno */
+    display: flex; /* Flexbox para alineación */
+    align-items: center; /* Alineación vertical al centro */
+    justify-content: flex-start; /* Alineación a la izquierda */
+    font-family: 'Arial', sans-serif; /* Fuente sencilla y moderna */
+    max-width: 250px; /* Máximo ancho ajustado */
+    height: 30px; /* Altura fija para mantener el diseño uniforme */
+    margin-left: auto; /* Centrado automático a la derecha */
+
+  }
+  
+  #contenedorBienvenido p {
+    margin: 0; /* Eliminar márgenes predeterminados */
+    font-size: 14px; /* Texto más pequeño */
+    color: #333; /* Color de texto oscuro */
+    
+  }
+  
+  #biembenidoNombre {
+    font-weight: bold; /* Resaltar el nombre */
+    color: #007bff; /* Color azul para un toque moderno */
+  }
+
+  .bienvenidoInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  
   /* -------------------------------------------------------------------------------------------------- */
   /* overlay para cerrar sesion */
   /* -------------------------------------------------------------------------------------------------- */
@@ -525,22 +563,22 @@
 
 /* Botón primario (por ejemplo, editar) */
 #tablaMonitores td button:first-child {
-    background-color: #17a2b8;
+    background-color: #007bff;
     color: white;
 }
 
 #tablaMonitores td button:first-child:hover {
-    background-color: #138496;
+    background-color: #0253a9;
 }
 
 /* Botón secundario (por ejemplo, eliminar) */
 #tablaMonitores td button:last-child {
-    background-color: #17a2b8;
+    background-color: #007bff;
     color: white;
 }
 
 #tablaMonitores td button:last-child:hover {
-    background-color: #138496;
+    background-color: #0253a9;
 }
 #eliminarMonitor{
     background-color: #ff4d4d;
@@ -690,12 +728,13 @@
 
 
 #btnVolverModificarContrasenia {
-    background-color: #f0f0f0;
+    background-color: #fff;
     color: #333;
+    border: 1px solid #333;
 }
 
 #btnVolverModificarContrasenia:hover {
-    background-color: #e0e0e0;
+    background-color: #ccc;
 }
 
 #btnConfirmarModificarContrasenia {
@@ -795,12 +834,13 @@
 }
 
 #btnVolverCambiarDatos {
-    background-color: #f0f0f0;
+    background-color: #fff;
     color: #333;
+    border: 1px solid #333;
 }
 
 #btnVolverCambiarDatos:hover {
-    background-color: #e0e0e0;
+    background-color: #ccc;
 }
 
 #btnConfirmarCambiarDatos {
@@ -901,12 +941,13 @@
 }
 
 #btnVolverCrearMonitor {
-    background-color: #f0f0f0;
+    background-color: #fff;
     color: #333;
+    border: 1px solid #333;
 }
 
 #btnVolverCrearMonitor:hover {
-    background-color: #e0e0e0;
+    background-color: #ccc;
 }
 
 #btnConfirmarCrearMonitor {

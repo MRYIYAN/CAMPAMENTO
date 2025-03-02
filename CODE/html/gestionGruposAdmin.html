@@ -26,117 +26,61 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- NAVBAR -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    
     <nav>
-      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" />
-
-      <!--------------------------------------------------------------->
-      <!-- Contenedor exclusivo para los elementos de navegación -->
-      <!--------------------------------------------------------------->
-      <div class="nav-container">
-        <!-- Enlace a la sección de actividades -->
-        <!-- Enlace con un menú desplegable -->
+      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" id="btnInicio" />
+    
+      
+    
+      <div class="nav-container" id="nav-container">
         <div class="item">
-          Gestion
+          Gestión
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionGrupos"
-                >
-                  Gestionar Grupos
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionarPlan"
-                >
-                  Gestionar Planes
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionarNinos"
-                >
-                  Gestionar Ninos
-                </button></a
-              >
+              <a><button class="botonNavbar" id="btnGestionGrupos">Gestionar Grupos</button></a>
+              <a><button class="botonNavbar" id="btnGestionarPlan">Gestionar Planes</button></a>
+              <a><button class="botonNavbar" id="btnGestionarNinos">Gestionar Niños</button></a>
             </div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
           Servicios
           <div class="dropdown">
-            <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button type="button" class="botonNavbar" id="btnComedor">
-                  Comedor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnComedor">Comedor</button></a></div>
           </div>
         </div>
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
-          Sobre nosotros
+          Monitores
           <div class="dropdown">
-            <div>
-              <a
-                ><button type="button" class="botonNavbar" id="btnMonitor">
-                  Monitor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnMonitor">Monitor</button></a></div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <a class="item">idiomas</a>
-        <!-- <div id="google_translate_element" class="google"></div> -->
-
-        <!-- Enlace al perfil del usuario -->
-        <!-- Enlace con un menú desplegable -->
+        
         <div class="item">
           Perfil
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnNotificaciones"
-                >
-                  Notificaciones
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnModificarDatosPadre"
-                >
-                  Modificar Datos
-                </button></a
-              >
-              <a
-                ><button type="button" class="botonNavbar" id="btnCerrarSesion">
-                  Cerrar Sesion
-                </button></a
-              >
+              <a><button class="botonNavbar" id="btnNotificaciones">Notificaciones</button></a>
+              <a><button class="botonNavbar" id="btnModificarDatosPadre">Modificar Datos</button></a>
+              <a><button class="botonNavbar" id="btnCerrarSesion">Cerrar Sesión</button></a>
             </div>
           </div>
         </div>
+
+
+        
         <!-- Elemento decorativo para subrayar la navegación -->
         <div class="underline"></div>
+
+        <div class="bienvenidoInfo">
+
+          <div id="contenedorBienvenido">
+            <p>Bienvenido, <span id="biembenidoNombre">Administrador</span></p>
+          </div>
+        </div>
+                      
       </div>
     </nav>
 
@@ -164,9 +108,10 @@
         <div class="overlayContenidoOperar">
           <p id="descripcionCompletaOpearar">
             <form method="post" id="formGrupo">
-              
+              <h1>Modificar Grupos</h1>
                 <label for="nombre">
                     Nombre del Grupo:
+                    <br>
                     <input type="text" id="nombre" name="nombre"/>
                     <div id="errorNombreGrupo"></div>
                 </label>
@@ -184,9 +129,10 @@
 
               <div id="mensajeFeedbackOperar" style="display: none;"></div>
               
-              <button type="button" id="btnVolverOperar">Volver</button>
+              
               <button type="submit" id="btnModificarOperar">Modificar</button>
               <button type="button" id="btnEliminarOperar">Eliminar</button>
+              <button type="button" id="btnVolverOperar">Volver</button>
               <div id="errorModificarGrupo"></div>
             </form>
           </p>
@@ -252,9 +198,10 @@
         <div class="overlayContenidoModificarNino">
           <p id="descripcionCompletaModificarNino">
             <form method="post" id="formModificarNino">
+              <h1>Modificar datos de Participante</h1>
                 <label for="nombreNino">
                     <input type="text" name="nombreNino" id="nombreNino" disabled>
-                </label><br>
+                </label>
                 <label for="pagado">
                     <input type="radio" name="padago" id="pagadoSi" value="1" required>Pagado
                     <input type="radio" name="padago" id="pagadoNo" value="0">No Pagado
@@ -282,9 +229,9 @@
 
               <div id="mensajeFeedbackModificarNino" style="display: none;"></div>
               
-              <button type="button" id="btnVolverModificarNino">Volver</button>
+              
               <button type="submit" id="btnModificarModificarNino">Modificar</button>
-              <button type="button" id="btnEliminarModificarNino">Eliminar</button>
+              <button type="button" id="btnVolverModificarNino">Volver</button>
               <div id="errorModificarModificarNino"></div>
             </form>
           </p>
@@ -317,6 +264,7 @@
         <div class="overlayContenidoAñadirGrupo">
           <p id="descripcionCompletaAñadirGrupo">
             <form method="post" id="formAñadirGrupo">
+              <h1>Crear un grupo</h1>
               <label for="nombreGrupo">
                 Nombre:
                 <input type="text" name="nombreGrupo" id="nombreGrupo" />
@@ -333,8 +281,9 @@
 
               <div id="mensajeFeedback" style="display: none;"></div>
               
-              <button type="button" id="btnVolverAñadirGrupo">Volver</button>
+              
               <button type="submit" id="btnCrearGrupoConfirmar">Crear</button>
+              <button type="button" id="btnVolverAñadirGrupo">Volver</button>
               <div id="errorCrearGrupo"></div>
             </form>
           </p>
@@ -349,7 +298,7 @@
         <div class="overlayContenidoAñadirNinoAlGrupo">
             <p id="descripcionCompletaAñadirNinoAlGrupo">
             <form method="post" id="formAñadirNinoAlGrupo">
-              <h2>Agregar un nino al grupo</h2>
+              <h2>Agregar un Participante al grupo</h2>
                 <label for="contenedorSeleccionarNinoParaAgregar">
                     <div id="contenedorSeleccionarNinoParaAgregar">
                       <select name="seleccionarNinoParaAgregar" id="seleccionarNinoParaAgregar">
@@ -407,6 +356,7 @@
 
 
     <div class="contenedorTablas">
+      <h1 style="color: #222222;">Gestion de Grupos</h1>
         <div id="tablaAdmin"> 
             <div>
                 <button type="button" id="contenedorBotonAgregarGrupo">Crear Un Grupo Nuevo</button>
@@ -428,7 +378,7 @@
     
 
 
-
+    <div class="espaciadorBajo"></div>
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- FOOTER -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->

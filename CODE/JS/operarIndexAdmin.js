@@ -64,6 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
        EVENTOS DEL NAVBAR ADAPTADOS PARA USAR LA TRANSICIÓN
     ================================================================= */
   // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
+  
+  document.getElementById("btnInicio").addEventListener("click", () => {
+    redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página Inndex
+  });
 
   document
     .getElementById("btnModificarDatosPadre")
@@ -148,15 +152,7 @@ function cerrarSesionSeguro() {
 }
 
 
-//menu hamburguesa
-document.addEventListener("DOMContentLoaded", () => {
-  const menuIcon = document.getElementById("menu-icon");
-  const navContainer = document.getElementById("nav-container");
 
-  menuIcon.addEventListener("click", () => {
-    navContainer.classList.toggle("active");
-  });
-});
 //-----------------------------------------------------------------------------------------------------------//
 //                                           FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
@@ -167,6 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //CONEXION CON EL BBDD
 let id_adminGlobal = null
+repintarListaSelect();
+function repintarListaSelect() {
 // Conexión con el servidor para obtener datos del admin
 fetch("../Server/GestionarIndexAdmin.php", {
   method: "POST", // Método de la solicitud
@@ -227,6 +225,8 @@ fetch("../Server/GestionarIndexAdmin.php", {
         `;
     }
   });
+}
+
 
 //funcion para mostrar el eror
 function mostrarError(lugar, mensaje) {
@@ -1437,6 +1437,8 @@ function crearGrupo(nombre, id_monitor){
           mensajeFeedback.style.display = "block";
           mensajeFeedback.style.color = "green";
           mensajeFeedback.innerText = "Grupo creado con éxito 🎉";
+          repintarListaSelect();
+          document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
           // Deshabilitamos el botón
           document.getElementById('btnCrearGrupoConfirmar').disabled = true;
           // cerrar el overlay despues de 2s
@@ -1790,6 +1792,9 @@ formularioCrearPlan.onsubmit = async function (event) {
             mensajeFeedbackPlan.style.display = "block";
             mensajeFeedbackPlan.style.color = "green";
             mensajeFeedbackPlan.innerText = "Plan creado con éxito 🎉";
+            repintarListaSelect();
+            document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+
             // Deshabilitamos el botón
             document.getElementById('btnCrearPlanConfirmar').disabled = true;
             // cerrar el overlay despues de 2s

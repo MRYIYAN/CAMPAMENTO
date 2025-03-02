@@ -62,6 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
             ================================================================= */
     // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
 
+    document.getElementById("btnInicio").addEventListener("click", () => {
+        redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página Inndex
+      });
+    
     document
         .getElementById("btnModificarDatosPadre")
         .addEventListener("click", () => {
@@ -423,6 +427,8 @@ function mostrarOverlayOperar(idGrupoSeleccionado) {
                                 "Grupo actualizado con éxito 🎉";
                             // Deshabilitamos el botón
                             document.getElementById("btnModificarOperar").disabled = true;
+                            pintarTabla()
+                            
                             // cerrar el overlay despues de 2s
                             setTimeout(() => {
                                 mensajeFeedbackOperar.style.display = "none";

@@ -26,117 +26,61 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- NAVBAR -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    
     <nav>
-      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" />
-
-      <!--------------------------------------------------------------->
-      <!-- Contenedor exclusivo para los elementos de navegación -->
-      <!--------------------------------------------------------------->
-      <div class="nav-container">
-        <!-- Enlace a la sección de actividades -->
-        <!-- Enlace con un menú desplegable -->
+      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" id="btnInicio" />
+    
+      
+    
+      <div class="nav-container" id="nav-container">
         <div class="item">
-          Gestion
+          Gestión
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionGrupos"
-                >
-                  Gestionar Grupos
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionarPlan"
-                >
-                  Gestionar Planes
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionarNinos"
-                >
-                  Gestionar Ninos
-                </button></a
-              >
+              <a><button class="botonNavbar" id="btnGestionGrupos">Gestionar Grupos</button></a>
+              <a><button class="botonNavbar" id="btnGestionarPlan">Gestionar Planes</button></a>
+              <a><button class="botonNavbar" id="btnGestionarNinos">Gestionar Niños</button></a>
             </div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
           Servicios
           <div class="dropdown">
-            <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button type="button" class="botonNavbar" id="btnComedor">
-                  Comedor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnComedor">Comedor</button></a></div>
           </div>
         </div>
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
-          Sobre nosotros
+          Monitores
           <div class="dropdown">
-            <div>
-              <a
-                ><button type="button" class="botonNavbar" id="btnMonitor">
-                  Monitor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnMonitor">Monitor</button></a></div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <a class="item">idiomas</a>
-        <!-- <div id="google_translate_element" class="google"></div> -->
-
-        <!-- Enlace al perfil del usuario -->
-        <!-- Enlace con un menú desplegable -->
+        
         <div class="item">
           Perfil
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnNotificaciones"
-                >
-                  Notificaciones
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnModificarDatosPadre"
-                >
-                  Modificar Datos
-                </button></a
-              >
-              <a
-                ><button type="button" class="botonNavbar" id="btnCerrarSesion">
-                  Cerrar Sesion
-                </button></a
-              >
+              <a><button class="botonNavbar" id="btnNotificaciones">Notificaciones</button></a>
+              <a><button class="botonNavbar" id="btnModificarDatosPadre">Modificar Datos</button></a>
+              <a><button class="botonNavbar" id="btnCerrarSesion">Cerrar Sesión</button></a>
             </div>
           </div>
         </div>
+
+
+        
         <!-- Elemento decorativo para subrayar la navegación -->
         <div class="underline"></div>
+
+        <div class="bienvenidoInfo">
+
+          <div id="contenedorBienvenido">
+            <p>Bienvenido, <span id="biembenidoNombre">Administrador</span></p>
+          </div>
+        </div>
+                      
       </div>
     </nav>
 
@@ -160,6 +104,7 @@
 
 
     <div class="contenedorTablas">
+        <h1 style="color: #222222;">Gestion de Planes</h1>
         <div id="tablaAdmin"> 
             <div>
                 <button type="button" id="btnCrearNuevoPlan">Crear Un Plan Nuevo</button>
@@ -192,8 +137,9 @@
         <div class="overlayContenidoAñadirPlan">
           <p id="descripcionCompletaAñadirPlan">
             <form method="post" id="formAñadirPlan">
+              <h1>Crear un nuevo Plan</h1>
               <label for="nombrePlan">
-                Nombre:
+                Nombre: <br>
                 <input type="text" name="nombrePlan" id="nombrePlan" />
                 <div id="errorNombrePlan"></div>
               </label>
@@ -244,8 +190,9 @@
         <div class="overlayContenidoModificarPlan">
           <p id="descripcionCompletaModificarPlan">
             <form method="post" id="formModificarPlan">
+              <h1>Modificar datos del Plan</h1>
               <label for="nombrePlanModificar">
-                Nombre:
+                Nombre: <br>
                 <input type="text" name="nombrePlanModificar" id="nombrePlanModificar" />
                 <div id="errorNombrePlanModificar"></div>
               </label>
@@ -281,11 +228,12 @@
               </label>
 
               <div id="mensajeFeedbackCrearPlanModificar" style="display: none;"></div>
-              <button type="button" id="btnVolverModificarPlan">Volver</button>
-              <button type="submit" id="btnCrearPlanConfirmarModificar">Crear</button>
+              
+              <button type="submit" id="btnCrearPlanConfirmarModificar">Modificar</button>
               <button type="button" id="btnEliminarPlan">Eliminar</button>
               <div id="errorModificarPlanModificar"></div>
             </form>
+            <button type="button" id="btnVolverModificarPlan">Volver</button>
           </p>
           <button class="closeBtnModificarPlan">X</button>
         </div>
@@ -368,11 +316,13 @@
         <div class="overlayContenidoModificarNino">
           <p id="descripcionCompletaModificarNino">
             <form method="post" id="formModificarNino">
+              <h1>Modificar Participante</h1>
                 <label for="nombreNino">
+                  Nombre: <br>
                     <input type="text" name="nombreNino" id="nombreNino" disabled>
                 </label><br>
                 <label for="pagado">
-                    <input type="radio" name="padago" id="pagadoSi" value="1" required>Pagado
+                    <input type="radio" name="padago" id="pagadoSi" value="1" required>Pagado <br>
                     <input type="radio" name="padago" id="pagadoNo" value="0">No Pagado
                 </label><br>
                 <label for="planNino">
@@ -401,6 +351,7 @@
               <button type="button" id="btnVolverModificarNino">Volver</button>
               <button type="submit" id="btnModificarModificarNino">Modificar</button>
               <button type="button" id="btnEliminarModificarNino">Eliminar</button>
+             
               <div id="errorModificarModificarNino"></div>
             </form>
           </p>
@@ -469,6 +420,7 @@
     
 
 
+    <div class="espaciadorBajo"></div>
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- FOOTER -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->

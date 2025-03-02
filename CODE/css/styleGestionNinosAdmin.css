@@ -247,8 +247,45 @@
     height: 200px;
   }
   .espaciadorBajo {
-    height: 500px;
+    height: 600px;
   }
+  #btnInicio:hover{
+    cursor: pointer;
+  }
+
+  #contenedorBienvenido {
+    background-color: #e9ecef; /* Fondo suave y neutro */
+    padding: 5px 15px; /* Espaciado interno más pequeño */
+    border-radius: 20px; /* Bordes redondeados para un toque moderno */
+    display: flex; /* Flexbox para alineación */
+    align-items: center; /* Alineación vertical al centro */
+    justify-content: flex-start; /* Alineación a la izquierda */
+    font-family: 'Arial', sans-serif; /* Fuente sencilla y moderna */
+    max-width: 250px; /* Máximo ancho ajustado */
+    height: 30px; /* Altura fija para mantener el diseño uniforme */
+    margin-left: auto; /* Centrado automático a la derecha */
+
+  }
+  
+  #contenedorBienvenido p {
+    margin: 0; /* Eliminar márgenes predeterminados */
+    font-size: 14px; /* Texto más pequeño */
+    color: #333; /* Color de texto oscuro */
+    
+  }
+  
+  #biembenidoNombre {
+    font-weight: bold; /* Resaltar el nombre */
+    color: #007bff; /* Color azul para un toque moderno */
+  }
+
+  .bienvenidoInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  
   /* -------------------------------------------------------------------------------------------------- */
   /* overlay para cerrar sesion */
   /* -------------------------------------------------------------------------------------------------- */
@@ -510,6 +547,14 @@
     background-color: #333;
   }
 
+  #btnEliminarComprobarEliminarPersona{
+    background-color: #ff4d4d;
+    color: white;
+  }
+  #btnEliminarComprobarEliminarPersona:hover{
+    background-color: #cc0000;
+  }
+
 /* //---------------------------------------------------------------// */
 
 /* //---------------------------------------------------------------// */
@@ -543,7 +588,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
+    width: 400px;
     text-align: center;
     position: relative;
     max-height: 80%;
@@ -579,6 +624,23 @@
   .mensajeFeedbackModificarNino{
     z-index: 999;
     background-color: #333;
+  }
+
+  #nombreNino, #planNino, #grupoNino{
+    width: 80%;
+  }
+
+  #btnVolverModificarNino{
+    background-color: #fff;
+    border: 1px solid #666;
+    color: #666;
+  }
+  #btnVolverModificarNino:hover{
+    background-color: #ccc;
+  }
+
+  #btnVolverModificarNino, #btnModificarModificarNino{
+    margin: 10px;
   }
   /* //---------------------------------------------------------------// */
 
@@ -636,9 +698,6 @@
   transition: color 0.2s ease;
 }
 
-.closeBtnActividadDeNino:hover {
-  color: #007BFF;
-}
 
 /* Clase para mostrar el overlay */
 .overlayActividadDeNino.activeOverlayActividadDeNino {
@@ -699,6 +758,21 @@
   text-align: center;
 }
 
+
+#btncolverActividadesDeNino{
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #666;
+}
+#btncolverActividadesDeNino:hover{
+  background-color: #ccc;
+}
+
+.verMasBtn{
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+}
 
 /* //---------------------------------------------------------------// */
 
@@ -892,6 +966,25 @@ label {
   display: block;
   color: #444;
 }
+
+#btnInsertarActividad, #btnRegresarActividad{
+  margin: 10px;
+}
+#btnRegresarActividad{
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #666;
+}
+#btnRegresarActividad:hover{
+  background-color: #ccc;
+}
+#btnEliminarActividad{
+  background-color: #ff4d4d;
+  color: white;
+}
+#btnEliminarActividad:hover{
+  background-color: #cc0000;
+}
 /* ==================================================================*/
 /* Cerrar Overlay para mostrar más operar */
 /* ==================================================================*/
@@ -1060,4 +1153,20 @@ select {
 
 #btnAcciones {
   width: 14em;
+}
+
+
+#btneliminarNinos, #btnVerActividadesDelNino, #btnOperar{
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  margin: 10px 0px 0px 10px;
+}
+
+#btneliminarNinos{
+  background-color: #ff4d4d;
+  color: white;
+}
+#btneliminarNinos:hover{
+  background-color: #cc0000;
 }

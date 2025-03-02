@@ -62,6 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
          EVENTOS DEL NAVBAR ADAPTADOS PARA USAR LA TRANSICIÓN
       ================================================================= */
     // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
+    
+    document.getElementById("btnInicio").addEventListener("click", () => {
+        redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página Inndex
+    });
+
 
     document
         .getElementById("btnModificarDatosPadre")
@@ -648,8 +653,8 @@ function mostrarOverlayModificarPlanComida(id_planDeComidaSeleccionadoModificar)
                     document.getElementById('precioComidaModificar').value = data.planComidabbdd['precio'];
 
                     //comprobamos el imagen si existe en bbdd o no 
-                    comprobarImagen(data.planComidabbdd).then(existe => {  //usamos el metodo para la comprobacion
-                        let imagen = existe ? data.planComidabbdd : '../assets/comida/uploads/defaultPlanComida.png';  //creamos un variable que guarda la ruta, y si el funcion del comprobacion devualve un false, asignamos la ruta predefinida del imagen, al contrario asignamos la ruta que esta en bbdd
+                    comprobarImagen(data.planComidabbdd['imagenComida_src']).then(existe => {  //usamos el metodo para la comprobacion
+                        let imagen = existe ? data.planComidabbdd['imagenComida_src'] : '../assets/comida/uploads/defaultPlanComida.png';  //creamos un variable que guarda la ruta, y si el funcion del comprobacion devualve un false, asignamos la ruta predefinida del imagen, al contrario asignamos la ruta que esta en bbdd
                         document.getElementById('vistaPreviaModificar').src = imagen;
                     });
                 }

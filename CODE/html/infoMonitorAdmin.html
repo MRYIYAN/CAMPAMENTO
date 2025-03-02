@@ -26,117 +26,61 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <!-- NAVBAR -->
     <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <nav>
-      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" />
 
-      <!--------------------------------------------------------------->
-      <!-- Contenedor exclusivo para los elementos de navegación -->
-      <!--------------------------------------------------------------->
-      <div class="nav-container">
-        <!-- Enlace a la sección de actividades -->
-        <!-- Enlace con un menú desplegable -->
+    <nav>
+      <img class="logo" src="../assets/logo/Logo1.png" alt="Logo" id="btnInicio" />
+    
+      
+    
+      <div class="nav-container" id="nav-container">
         <div class="item">
-          Gestion
+          Gestión
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionGrupos"
-                >
-                  Gestionar Grupos
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnGestionarPlan"
-                >
-                  Gestionar Planes
-                </button></a
-              >
-              <a
-              ><button
-                type="button"
-                class="botonNavbar"
-                id="btnGestionarNinos"
-              >
-                Gestionar Ninos
-              </button></a
-            >
+              <a><button class="botonNavbar" id="btnGestionGrupos">Gestionar Grupos</button></a>
+              <a><button class="botonNavbar" id="btnGestionarPlan">Gestionar Planes</button></a>
+              <a><button class="botonNavbar" id="btnGestionarNinos">Gestionar Niños</button></a>
             </div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
           Servicios
           <div class="dropdown">
-            <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button type="button" class="botonNavbar" id="btnComedor">
-                  Comedor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnComedor">Comedor</button></a></div>
           </div>
         </div>
-        <!-- Enlace con un menú desplegable -->
+    
         <div class="item">
           Sobre nosotros
           <div class="dropdown">
-            <div>
-              <a
-                ><button type="button" class="botonNavbar" id="btnMonitor">
-                  Monitor
-                </button></a
-              >
-            </div>
+            <div><a><button class="botonNavbar" id="btnMonitor">Monitor</button></a></div>
           </div>
         </div>
-        <!-- Enlace a la sección de servicios -->
-        <a class="item">idiomas</a>
-        <!-- <div id="google_translate_element" class="google"></div> -->
-
-        <!-- Enlace al perfil del usuario -->
-        <!-- Enlace con un menú desplegable -->
+        
         <div class="item">
           Perfil
           <div class="dropdown">
             <div>
-              <!-- Opciones del menú desplegable -->
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnNotificaciones"
-                >
-                  Notificaciones
-                </button></a
-              >
-              <a
-                ><button
-                  type="button"
-                  class="botonNavbar"
-                  id="btnModificarDatosPadre"
-                >
-                  Modificar Datos
-                </button></a
-              >
-              <a
-                ><button type="button" class="botonNavbar" id="btnCerrarSesion">
-                  Cerrar Sesion
-                </button></a
-              >
+              <a><button class="botonNavbar" id="btnNotificaciones">Notificaciones</button></a>
+              <a><button class="botonNavbar" id="btnModificarDatosPadre">Modificar Datos</button></a>
+              <a><button class="botonNavbar" id="btnCerrarSesion">Cerrar Sesión</button></a>
             </div>
           </div>
         </div>
+
+
+        
         <!-- Elemento decorativo para subrayar la navegación -->
         <div class="underline"></div>
+
+        <div class="bienvenidoInfo">
+
+          <div id="contenedorBienvenido">
+            <p>Bienvenido, <span id="biembenidoNombre">Administrador</span></p>
+          </div>
+        </div>
+                      
       </div>
     </nav>
 
@@ -207,6 +151,7 @@
         <div class="overlayContenidoCambiarContraseña">
             <p id="descripcionCompletaCambiarContraseña"> 
                 <form method="get" id="formularioCambiarContraseña">
+                  <h1 style="color: #222222;">Cambiar Contraseña</h1>
                     <label for="contrasenia1">
                         Introduce la contraseña nueva:
                         <input type="password" name="contrasenia1" id="contrasenia1">
@@ -232,6 +177,7 @@
         <div class="overlayContenidoCambiarDatos">
             <p id="descripcionCompletaCambiarDatos"> 
                 <form method="get" id="formularioCambiarDatos">
+                  <h1 style="color: #222222;">Datos del Monitor</h1>
                     <label for="nombreModificar">
                         Nombre:
                         <input type="text" name="nombreModificar" id="nombreModificar">
@@ -258,6 +204,7 @@
         <div class="overlayContenidoCrearMonitor">
             <p id="descripcionCompletaCrearMonitor"> 
                 <form method="get" id="formularioCrearMonitor">
+                  <h1 style="color: #222222;">Crear Monitor</h1>
                     <label for="nombreCrear">
                         Nombre:
                         <input type="text" name="nombreCrear" id="nombreCrear">
