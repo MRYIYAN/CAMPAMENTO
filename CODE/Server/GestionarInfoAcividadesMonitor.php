@@ -91,9 +91,30 @@ switch($accion) {
         $stmt->close();
         break;
 
-    default:
-        echo json_encode(["error" => "Acción no reconocida"]);
-        break;
+        case "guardar_asistencia":
+            if (!isset($_POST['id_nino']) || !isset($_POST['estado'])) {
+                echo json_encode(["error" => "Faltan parámetros"]);
+                exit();
+            }
+            $id_nino = intval($_POST['id_nino']);
+            $estado = $_POST['estado'];
+            if ($estado === 'si') {
+                $sql = "UPDATE NINOS SET asistencia = CURDATE(), inasistencia = NULL WHERE id_nino = ?";
+            } else if ($estado === 'no') {
+                $sql = "UPDATE NINOS SET inasistencia = CURDATE(), asistencia = NULL WHERE id_nino = ?";
+            } else {
+                echo json_encode(["error" => "Estado no válido"]);
+                exit();
+            }
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $id_nino);
+            if ($stmt->execute()) {
+                echo json_encode(["mensaje" => "Asistencia guardada correctamente"]);
+            } else {
+                echo json_encode(["error" => "Error al guardar asistencia"]);
+            }
+            $stmt->close();
+            break;
 }
 
 $conn->close();

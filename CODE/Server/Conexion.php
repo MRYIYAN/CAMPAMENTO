@@ -68,6 +68,8 @@ $sql_tables = "
     id_tutor INT NOT NULL,
     pagado BOOLEAN NOT NULL,
     avatar_src text,
+    asistencia DATE NOT NULL,
+    inasistencia DATE NOT NULL,
     FOREIGN KEY (id_tutor) REFERENCES TUTORES(id_tutor)
 );
 

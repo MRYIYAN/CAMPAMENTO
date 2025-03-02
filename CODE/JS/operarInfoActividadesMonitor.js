@@ -267,18 +267,73 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // 4. Modal asistencia: manejo de apertura y cierre
-  var modal = document.getElementById('modalAsistencia');
-  var btnCerrarModal = document.getElementById('btnCerrarModal');
+ // Modal asistencia: manejo de apertura, cierre y guardar asistencia
+var modal = document.getElementById('modalAsistencia');
+var btnCerrarModal = document.getElementById('btnCerrarModal');
+var btnGuardarAsistencia = document.getElementById('btnGuardarAsistencia');
 
-  // Cerrar modal al pulsar el botón de cerrar
-  btnCerrarModal.addEventListener('click', function() {
+// Cerrar modal al pulsar el botón de cerrar
+btnCerrarModal.addEventListener('click', function() {
+  modal.style.display = 'none';
+});
+// Cerrar modal si se hace clic fuera del contenido
+window.addEventListener('click', function(event) {
+  if (event.target == modal) {
     modal.style.display = 'none';
-  });
-  // Cerrar modal si se hace clic fuera del contenido
-  window.addEventListener('click', function(event) {
-    if (event.target == modal) {
+  }
+});
+
+// Guardar asistencia al pulsar el botón "Guardar"
+btnGuardarAsistencia.addEventListener('click', function() {
+  // Obtener el id del niño del atributo "data-id" del modal (este se asigna al abrir el modal)
+  var id_nino = modal.getAttribute('data-id');
+  if (!id_nino) {
+    alert('No se ha seleccionado ningún niño.');
+    return;
+  }
+  // Verificar cuál checkbox está marcado
+  var checkSi = document.getElementById('checkSi').checked;
+  var checkNo = document.getElementById('checkNo').checked;
+  
+  if (!checkSi && !checkNo) {
+    alert('Por favor, seleccione SI o NO.');
+    return;
+  }
+  if (checkSi && checkNo) {
+    alert('Seleccione solo una opción.');
+    return;
+  }
+  
+  var estado = checkSi ? 'si' : 'no';
+  
+  // Enviar la información al servidor para actualizar la asistencia
+  fetch('../Server/GestionarInfoAcividadesMonitor.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      accion: 'guardar_asistencia',
+      id_nino: id_nino,
+      estado: estado
+    })
+  })
+  .then(function(response) {
+    if (!response.ok) throw new Error('Error al guardar asistencia');
+    return response.json();
+  })
+  .then(function(data) {
+    if (data.mensaje) {
+      alert(data.mensaje);
+      // Cerrar el modal
       modal.style.display = 'none';
+      // (Opcional) Reiniciar el estado de los checkboxes
+      document.getElementById('checkSi').checked = false;
+      document.getElementById('checkNo').checked = false;
+    } else {
+      alert('Error: ' + data.error);
     }
+  })
+  .catch(function(error) {
+    console.error('Error al guardar asistencia:', error);
+    });
   });
 });
