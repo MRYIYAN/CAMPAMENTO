@@ -601,4 +601,27 @@ body::-webkit-scrollbar {
 
 .campamento-cards {
   margin-top: 120px; /* Ajusta según sea necesario */
+  display: flex;
+}
+
+/* Estilos para el contenedor de las tarjetas */
+.campamento-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 tarjetas por fila */
+  gap: 20px; /* Espacio entre las tarjetas */
+  padding: 20px;
+}
+
+
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .campamento-cards {
+      grid-template-columns: repeat(2, 1fr); /* 2 tarjetas por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 480px) {
+  .campamento-cards {
+      grid-template-columns: 1fr; /* 1 tarjeta por fila en pantallas pequeñas */
+  }
 }

@@ -173,15 +173,22 @@ document.addEventListener("DOMContentLoaded", () => {
           var tbody = document.createElement('tbody');
           data.forEach(function(tutor) {
             var row = document.createElement('tr');
-  
+
             // Columna AVATAR
             var tdAvatar = document.createElement('td');
             var img = document.createElement('img');
-            img.src = tutor.avatar_src;
-            img.alt = 'Avatar';
-            img.className = 'contact-avatar';
-            tdAvatar.appendChild(img);
-            row.appendChild(tdAvatar);
+            
+            // Comprobamos si la imagen del avatar existe
+            comprobarImagen(tutor.avatar_src).then(existe => {
+              // Si existe, asignamos la ruta de la imagen, de lo contrario asignamos la imagen por defecto
+              img.src = existe ? tutor.avatar_src : '../assets/img/avatar.png';
+              img.alt = 'Avatar';
+              img.className = 'contact-avatar';
+            
+            });
+              tdAvatar.appendChild(img); // Añadimos la imagen al td
+              row.appendChild(tdAvatar);  // Añadimos el td con la imagen a la fila
+           
   
             // Columna NOMBRE
             var tdNombre = document.createElement('td');
@@ -214,3 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarContactos();
   });
   
+// Función para comprobar si la imagen existe
+const comprobarImagen = (url) => {
+  return fetch(url, { method: 'HEAD' })   //se deja la ruta en el head para comprobar
+    .then(res => res.ok)  //si responde pasamo que es ok
+    .catch(() => false);  //si  no lo pasamos es false
+};

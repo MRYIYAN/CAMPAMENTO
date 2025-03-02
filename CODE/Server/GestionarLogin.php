@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["tipo"] = "ADMIN";
             $_SESSION["id"] = $row["id_admin"];
             $_SESSION["login"] = "OK";
-            echo json_encode(["redirect" => "../html/Bienvenido_admin.html"]);
+            echo json_encode(["redirect" => "../html/IndexAdmin.html"]);
             exit();
         }
     }

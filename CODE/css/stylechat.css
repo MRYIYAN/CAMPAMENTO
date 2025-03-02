@@ -307,3 +307,23 @@ html {
 	background-color: #1e6eca;  /* Ajusta el color según tu diseño */
   }
   
+
+
+/* Estilos generales para el pie del mensaje */
+.msg_footer {
+	font-size: 0.75em;
+	color: white;
+	margin-top: 4px;
+}
+
+/* Fecha del monitor alineada a la derecha */
+.monitor_msg + .msg_footer {
+	display: flex;
+	justify-content: flex-end; /* Alinea a la derecha */
+}
+
+/* Fecha del padre alineada a la izquierda */
+.tutor_msg + .msg_footer {
+	display: flex;
+	justify-content: flex-start; /* Alinea a la izquierda */
+}
