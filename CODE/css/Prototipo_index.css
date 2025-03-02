@@ -1,11 +1,46 @@
 /* Estilos generales */
 * {
-    
     padding: 7px;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif; /* Aplica la tipografía Poppins a todos los elementos */
 }
 
+/* =====================================================================/*
+                        TRANSICIÓN CON GSAP
+/*======================================================================== */
+.transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000; /* Valor alto para que cubra todo */
+    pointer-events: none;
+}
+
+.transition-row {
+    flex: 1;
+    display: flex;
+}
+
+/* Ajuste: Usamos .row1 y .row2, de acuerdo a tu HTML */
+.transition-row.row1 .block {
+    transform-origin: top;
+}
+
+.transition-row.row2 .block {
+    transform-origin: bottom;
+}
+
+.block {
+    flex: 1;
+    background-color: #2788c0; /* Puedes ajustar el color si lo deseas */
+    transform: scaleY(1);
+    will-change: transform;
+}
+  
 body::-webkit-scrollbar {
     width: 15px;
   }
@@ -141,7 +176,7 @@ html, body {
 }
 
 .titulo p {
-    color: rgb(63, 82, 19);
+    color: rgb(163, 214, 255);
 }
 
 
@@ -153,7 +188,7 @@ body .recuadro {
     position: relative;
 }
 .inicio {
-    background-image: url(../assets/img/Fondo_cabañas2.png);
+    background-image: url(../assets/img/fondo_inicio.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
@@ -311,6 +346,7 @@ h1 {
 
 span {
     margin: auto;
+    color: white;
     font-size: 2rem;
 }
 
@@ -441,7 +477,7 @@ span {
 
 .my-button {
     padding: 20px 40px;
-    background-color: #4CAF50;
+    background-color: #2788c0;
     color: white;
     border: none;
     border-radius: 30px;
@@ -454,11 +490,11 @@ span {
 }
 
 .my-button:hover {
-    background-color: #45a049;
+    background-color: #1c7ab1;
 }
 
 .my-button:active {
-    background-color: #3e8e41;
+    background-color: #016ead;
 }
 
 .lenguajes {
@@ -562,7 +598,6 @@ span {
 }
 
 /* Media Queries para dispositivos móviles */
-/* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
     /* Ajustes generales */
     body {
@@ -638,19 +673,42 @@ span {
         margin-top: 50px;
     }
 
-    /* Ajuste del carrusel */
-    .container2 {
-        width: 100%;
-        margin: 50px auto;
+    /* 🔹 Ajuste del Carrusel Responsive */
+    .carrusel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 
-    .carousel {
-        animation-duration: 30s; /* Ajuste de velocidad para mejor experiencia en móvil */
+    .carrusel::-webkit-scrollbar {
+        display: none;
     }
 
-    .carousel__face {
-        width: 100%;
-        height: auto;
+    .carrusel-inner {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .carrusel-item {
+        flex: 0 0 80%; /* Reducimos el ancho de cada imagen */
+        scroll-snap-align: center;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .carrusel-item img {
+        width: 80%; /* Hacemos las imágenes más pequeñas */
+        max-height: 200px; /* Reducimos la altura */
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Ocultamos los botones en móvil (uso táctil en su lugar) */
+    .carrusel-control {
+        display: none;
     }
 
     /* Ajuste de tarjetas */

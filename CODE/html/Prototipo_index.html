@@ -11,22 +11,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <title>Document</title>
 </head>
-<div class="color_fondo">
 <body>
-    
-    
-    <div class="inicio">
-        <div class="espacio">
-           
+    <div class="color_fondo">
+    <!-- CONTENEDOR DE TRANSICIÓN -->
+    <div class="transition">
+        <div class="transition-row row1">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
         </div>
+        <div class="transition-row row2">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+    </div>
+
+    <div class="inicio">
+        <div class="espacio"></div>
         <script>
             $(function(){
-                //Captura del evento para mostrar u ocultar el menu
+                // Captura del evento para mostrar u ocultar el menú
                 $(".iconmenu").click(function(){
                     $(".item_menu").toggle();
                 });
                 $(window).resize(function(){
-                    var anchura =$(this).width();
+                    var anchura = $(this).width();
                     if (anchura > 993) {
                         $(".item_menu").show();
                     }
@@ -44,8 +56,9 @@
                 <input type="button" value="Iniciar sesión" class="my-button" onclick="window.location.href='login.html'">
             </div>
         </div>
- </div>
- <div class="recuadro">
+    </div>
+
+    <div class="recuadro">
         <div class="subtitulo">
             <h2>Caracteristicas principales</h2>
             <p class="heading--desc">Un campamento ofrece una experiencia única en la naturaleza, 
@@ -53,7 +66,7 @@
                 al aire libre. A continuación, se detallan algunas de las características más destacadas de 
                 un campamento exitoso.</p>
         </div>
-   </div>
+    </div>
     
     <section class="fotos">
         <div class="container">
@@ -66,59 +79,58 @@
         </div>
     </section>
 
-    
-<!-- carrusel -->
-<h1>Novedades</h1>
-<div class="container2">
-    <div class="carousel">
-        <div class="carousel__face"><span>This is something</span></div>
-        <div class="carousel__face"><span>Very special</span></div>
-        <div class="carousel__face"><span>Special is the key</span></div>
-        <div class="carousel__face"><span>For you</span></div>
-        <div class="carousel__face"><span>Just give it</span></div>
-        <div class="carousel__face"><span>A try</span></div>
-        <div class="carousel__face"><span>And see</span></div>
-        <div class="carousel__face"><span>How it works</span></div>
-        <div class="carousel__face"><span>Out</span></div>
+    <!-- Carrusel -->
+    <h1>Novedades</h1>
+    <div class="container2">
+        <div class="carousel">
+            <div class="carousel__face"><span>Fogata</span></div>
+            <div class="carousel__face"><span></span></div>
+            <div class="carousel__face"><span>Busqueda del tesoro</span></div>
+            <div class="carousel__face"><span></span></div>
+            <div class="carousel__face"><span>Nuevas infraestructuras</span></div>
+            <div class="carousel__face"><span></span></div>
+            <div class="carousel__face"><span>Picnic</span></div>
+            <div class="carousel__face"><span></span></div>
+            <div class="carousel__face"><span></span></div>
+        </div>
     </div>
-</div>
-<div class="recuadro2"><div class="subtitulo">
-    <h1>Ubicación</h1>
-    <div class="lenguajes">
-        
+
+    <div class="recuadro2">
+        <div class="subtitulo">
+            <h1>Ubicación</h1>
+            <div class="lenguajes"></div>
+        </div>
     </div>
-</div></div>
-<div class="recuadro">
-    <div class="subtitulo">
-        <h1>Ubicación</h1>
-        <div class="lenguajes">
-            <div class="texto">La ubicación de nuestro campamento se encuentra en una zona urbana, 
-                lo que proporciona un acceso cómodo a los servicios y las comodidades propias de una 
-                ciudad. Este entorno urbano ofrece una integración única entre las actividades del 
-                campamento y la dinámica de la vida citadina, permitiendo una experiencia enriquecedora 
-                en un contexto moderno y bien conectado.
+
+    <div class="recuadro">
+        <div class="subtitulo">
+            <h1>Ubicación</h1>
+            <div class="lenguajes">
+                <div class="texto">La ubicación de nuestro campamento se encuentra en una zona urbana, 
+                    lo que proporciona un acceso cómodo a los servicios y las comodidades propias de una 
+                    ciudad. Este entorno urbano ofrece una integración única entre las actividades del 
+                    campamento y la dinámica de la vida citadina, permitiendo una experiencia enriquecedora 
+                    en un contexto moderno y bien conectado.
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="mapa">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.182580786143!2d-4.038970323484117!3d40.65992554080125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4173738395d72b%3A0xfe13ae3e9475d794!2sColegio%20Mataespesa%20%7C%20Concertado!5e1!3m2!1ses!2ses!4v1740842913599!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-    
+    <div class="mapa">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.182580786143!2d-4.038970323484117!3d40.65992554080125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4173738395d72b%3A0xfe13ae3e9475d794!2sColegio%20Mataespesa%20%7C%20Concertado!5e1!3m2!1ses!2ses!4v1740842913599!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 
     <div class="final">
         <div class="titulo">
-         
-        
             <div class="titulo2">
                 <h1>Descarga nuestro juego gratuito!!!</h1>
             </div>
             <div class="boton">
-                <input type="button" value="boton" class="my-button">
+                <input type="button" value="Descargar" class="my-button">
             </div>
         </div>
     </div>
+
     <script>
         jQuery(document).ready(function(){   
             jQuery(window).scroll(function () {
@@ -128,7 +140,7 @@
                     jQuery('#myBtn').css('opacity', '0');
                 }
             });
-    
+
             jQuery('#myBtn').click(function () {
                 jQuery('body,html').animate({
                     scrollTop: 0
@@ -140,5 +152,29 @@
     <div id="myBtn" title="Subir">
         <img src="../assets/icons/flecha-hacia-arriba.png" alt="Flecha hacia arriba">
     </div>
-</body></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Selecciona los bloques de transición
+            const blocks = document.querySelectorAll('.block');
+
+            // Función para iniciar la transición
+            function startTransition() {
+                gsap.to(blocks, {
+                    duration: 1,
+                    scaleY: 0,
+                    stagger: 0.2,
+                    ease: "power2.inOut",
+                    onComplete: function() {
+                        // Aquí puedes agregar cualquier acción que desees realizar después de la transición
+                        console.log("Transición completada");
+                    }
+                });
+            }
+
+            // Inicia la transición al cargar la página
+            startTransition();
+        });
+    </script></div>
+</body>
 </html>

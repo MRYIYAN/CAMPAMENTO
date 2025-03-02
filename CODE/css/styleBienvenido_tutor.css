@@ -327,7 +327,7 @@ body::-webkit-scrollbar {
   .introduccion {
     width: 1000px;
     height: 500px;
-    background-color: #555;
+    background-color: #9ed5ff;
     display: flex;
     flex-direction: row; /* Cambiar a fila para alinear la imagen y el texto en una fila */
     align-items: center;
@@ -365,7 +365,7 @@ body::-webkit-scrollbar {
 
 .ubicacion .texto {
   flex: 1;
-  color: black; /* Asegúrate de que el texto sea legible */
+  color: rgb(255, 255, 255); /* Asegúrate de que el texto sea legible */
   max-width: 50%; /* Ajusta el ancho máximo del texto */
 }
 
@@ -427,8 +427,7 @@ body::-webkit-scrollbar {
 }
 /* Recuadro que rodea las tarjetas */
 .recuadro {
-  background-color: #f4f4f4; /* Color de fondo del recuadro */
-  border: 2px solid #ccc; /* Borde del recuadro */
+  background-color: #9ed5ff; /* Color de fondo del recuadro */
   border-radius: 10px; /* Bordes redondeados */
   padding: 20px; /* Espaciado interno */
   margin: 20px auto; /* Margen superior e inferior y centrar horizontalmente */
@@ -450,8 +449,7 @@ body::-webkit-scrollbar {
 
 /* Estilo de las tarjetas dentro del recuadro */
 .recuadro .tarjeta {
-  background-color: white; /* Color de fondo de la tarjeta */
-  border: 1px solid #ddd; /* Borde de la tarjeta */
+  background-color: #80c4f8; /* Color de fondo de la tarjeta */
   border-radius: 5px; /* Bordes redondeados */
   padding: 15px; /* Espaciado interno */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra de la tarjeta */
@@ -459,14 +457,14 @@ body::-webkit-scrollbar {
 }
 
 .recuadro .tarjeta img {
-  width: 100px; /* Ancho de la imagen */
-  height: auto; /* Altura automática para mantener la proporción */
-  margin-bottom: 10px; /* Margen inferior para separar la imagen del texto */
+  width: 400px; /* Ancho de la imagen */
+  /* Altura automática para mantener la proporción */
+  margin-bottom: 2px; /* Margen inferior para separar la imagen del texto */
 }
 
 .recuadro .tarjeta h3 {
   font-size: 1.5em; /* Tamaño de fuente del título */
-  margin-bottom: 10px; /* Margen inferior para separar el título del párrafo */
+  margin-bottom: 5px; /* Margen inferior para separar el título del párrafo */
 }
 
 .recuadro .tarjeta p {
@@ -582,10 +580,10 @@ body::-webkit-scrollbar {
     /* =====================================================================================================================================================*/
 
 h1 {
-  font-size: 24px;
+  font-size: 34px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #333; /* Color oscuro para el texto */
+  color: #ffffff; /* Color oscuro para el texto */
 }
 
     
@@ -1054,5 +1052,48 @@ button#modificar:hover {
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  /* Carrusel */
+  .carrusel {
+    max-width: 100%;
+    margin-bottom: 50px;
+    overflow: hidden;
+  }
+
+  .carrusel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carrusel-item {
+    min-width: 100%; /* Muestra solo una imagen a la vez en pantallas pequeñas */
+    margin: 0; /* Elimina márgenes laterales */
+  }
+
+  .carrusel-item img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+  }
+
+  .carrusel-control {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7); /* Hacerlos más visibles */
+  }
+
+  .carrusel-control.prev {
+    left: 10px;
+  }
+
+  .carrusel-control.next {
+    right: 10px;
   }
 }
