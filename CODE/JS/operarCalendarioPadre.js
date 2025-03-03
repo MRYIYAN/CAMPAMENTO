@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ================================================================= */
     // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
   
+    document.getElementById('btnInicio').addEventListener('click', () => {
+        redirectWithTransition("../html/Bienvenido_tutor.html"); // Redirigir a la página de modificación de datos del padre
+    });
     document.getElementById('btnModificarDatosPadre').addEventListener('click', () => {
         redirectWithTransition("../html/IndexPadre.html"); // Redirigir a la página de modificación de datos del padre
     });
