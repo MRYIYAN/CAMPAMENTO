@@ -23,7 +23,18 @@
         transform: translateY(0);
     }
 }
+.logo {
+    position: relative; /* Asegúrate de que el contenedor del logo use position: relative */
+}
 
+.logo img {
+    width: 500px;
+    height: 500px;
+    position: absolute; /* Cambia a absolute para que no afecte el flujo del documento */
+    top: 200px; /* Ajusta según sea necesario */
+    left: 200px; /* Ajusta según sea necesario */
+    display: block;
+}
 
 /* =====================================================================/*
                         TRANSICIÓN CON GSAP
@@ -178,9 +189,9 @@ html, body {
 .inicio .tarjeta {
     width: 800px;
     height: 600px;
-    background-color: #009fc1;
-    opacity: 1;
-    margin: 5px;
+    background-color: transparent;
+    margin: 50px;
+    margin-left: auto; /* Mueve el elemento a la derecha */
 }
 /* Otros estilos */
 .titulo {
@@ -202,10 +213,19 @@ html, body {
 }
 
 .titulo p {
-    color: rgb(163, 214, 255);
+    color: rgb(17, 148, 255);
 }
 
-
+.titulo h1 {
+    font-size: 70px;
+    color: rgb(17, 148, 255);
+    font-family: "Open Sans", serif;/* Aplica la tipografía Poppins a todos los elementos */
+}
+#blanco{
+    color: white;
+    font-size: 60px;
+    font-family: "Open Sans", serif;/* Aplica la tipografía Poppins a todos los elementos */
+}
 body .recuadro {
     background-color: #c8e6fa; /* Color de fondo */
     border-radius: 10px;
@@ -229,9 +249,11 @@ body .recuadro {
     background-position: center;
     background-size: 100% 100%;
     background-attachment: fixed;
+   
 }
+
 .decoracion img{
-    width: 1700px;
+    width: 100%;
     height: 700px;
     background-size: 100% 100%;
     
