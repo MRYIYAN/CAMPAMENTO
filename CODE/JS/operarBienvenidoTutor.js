@@ -167,3 +167,43 @@ function moveCarrusel(direction) {
     const offset = -currentIndex * (100 / visibleItems);
     carruselInner.style.transform = `translateX(${offset}%)`;
 }
+
+
+
+// Conexión con el servidor para obtener datos del padre y sus hijos
+fetch("../Server/GestionarIndexPadre.php", {
+    method: 'POST', // Método de la solicitud
+    headers: {
+        'Content-type': 'application/json', // Tipo de contenido de la solicitud
+    },
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al obtener datos del servidor.'); // Manejo de error si la respuesta no es OK
+    }
+    return response.json(); // Convertir la respuesta a JSON
+})
+.then(data => {
+    // Comprobar si hay un error en la respuesta
+    if (data.error) {
+        alert('Error: ' + data.error); // Mostrar alerta en caso de error
+    } else if (data.noLogin) {
+        // Redirigir si no hay sesión iniciada
+        window.location.href = data.noLogin;
+        console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+    } else {
+        // Mostrar datos del padre
+        console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+        // Asignar una cookie con el nombre "nombrePadre" y el valor desde data.infoPadre['nombre']
+        document.cookie = `nombrePadre=${data.infoPadre['nombre']}; path=/; expires=${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString()}`;
+            // Función para obtener el valor de una cookie por su nombre
+            function getCookie(nombre) {
+                const cookies = document.cookie.split('; ');
+                const cookie = cookies.find(fila => fila.startsWith(nombre + '='));
+                return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+            }
+    
+            // Asignar el valor de la cookie al elemento HTML
+            document.getElementById('biembenidoNombre').innerHTML = getCookie('nombrePadre');
+    }
+});
