@@ -28,11 +28,11 @@
 }
 
 .logo img {
-    width: 500px;
-    height: 500px;
+    width: 300px;
+    height: 300px;
     position: absolute; /* Cambia a absolute para que no afecte el flujo del documento */
     top: 200px; /* Ajusta según sea necesario */
-    left: 200px; /* Ajusta según sea necesario */
+    left: 100px; /* Ajusta según sea necesario */
     display: block;
 }
 
@@ -200,7 +200,7 @@ html, body {
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
     text-align: center;
-    font-size: 100px;
+    font-size: 60px;
     color: rgb(255, 255, 255);
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
@@ -846,5 +846,29 @@ span {
     #myBtn img {
         width: 30px;
         height: 30px;
+    }
+}
+/* Media Queries para adaptabilidad */
+@media (max-width: 768px) {
+    .card {
+        
+        text-align: center;
+    }
+
+    .logo {
+        width: 40%;
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .logo {
+        width: 35%;
+        display: none;
     }
 }
