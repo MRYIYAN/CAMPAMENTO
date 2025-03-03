@@ -354,6 +354,9 @@ body::-webkit-scrollbar {
   .open-btn:hover {
       background: #0056b3;
   }
+  .logo, #btninicio {
+    cursor: pointer;
+}
   /* -------------------------------------------------------------------------------------------------- */
 
 
@@ -371,6 +374,7 @@ body::-webkit-scrollbar {
     position: relative;
     margin-top: -150px;
     margin-bottom: 40px; /* Agregar margen inferior */
+    z-index: -999;
 }
 
 .introduccion img {

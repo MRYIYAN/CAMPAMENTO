@@ -1,9 +1,29 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
 /* Estilos generales */
 * {
     padding: 7px;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif; /* Aplica la tipografía Poppins a todos los elementos */
+    font-family: "Open Sans", serif;/* Aplica la tipografía Poppins a todos los elementos */
 }
+.fade-in {
+    opacity: 0; /* Inicialmente invisible */
+    animation: fadeInAnimation 2s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Baja un poco el elemento */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 /* =====================================================================/*
                         TRANSICIÓN CON GSAP
@@ -155,8 +175,13 @@ html, body {
 .espacio {
     margin: 10px;
 }
-
-
+.inicio .tarjeta {
+    width: 800px;
+    height: 600px;
+    background-color: #009fc1;
+    opacity: 1;
+    margin: 5px;
+}
 /* Otros estilos */
 .titulo {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -205,7 +230,12 @@ body .recuadro {
     background-size: 100% 100%;
     background-attachment: fixed;
 }
-
+.decoracion img{
+    width: 1700px;
+    height: 700px;
+    background-size: 100% 100%;
+    
+}
 .subtitulo {
     margin: 0; /* Eliminar margen */
     padding: 20px 0; /* Ajustar padding si es necesario */
@@ -406,27 +436,6 @@ span {
 }
 
 
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(#f00, #f0f);
-    clip-path: circle(30% at right 70%);
-}
-
-body::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(#2196f3, #e91e63);
-    clip-path: circle(20% at 10% 10%);
-}
 
 .container {
     position: relative;

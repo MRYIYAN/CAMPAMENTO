@@ -347,13 +347,16 @@ body::-webkit-scrollbar {
   .open-btn:hover {
       background: #0056b3;
   }
+  .logo, #btninicio {
+    cursor: pointer;
+}
   /* -------------------------------------------------------------------------------------------------- */
 
 
   .introduccion {
     width: 1000px;
     height: 500px;
-    background-color: #555;
+    background-color: #9ed5ff;
     display: flex;
     flex-direction: row; /* Cambiar a fila para alinear la imagen y el texto en una fila */
     align-items: center;
