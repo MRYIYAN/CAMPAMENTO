@@ -159,37 +159,37 @@ VALUES
 -- Inserción en la tabla TUTORES
 INSERT INTO TUTORES (nombre, dni, telefono, email, contrasenia, avatar_src)
 VALUES
-('Juan Pérez', '12345678A', '612345678', 'tutor@ejemplo.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'avatar1.jpg'),
-('Laura García', '23456789B', '612345679', 'laura@tutor.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'avatar2.jpg'),
-('Pedro Martínez', '34567890C', '612345680', 'pedro@tutor.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'avatar3.jpg'),
-('Maria Rodríguez', '45678901D', '612345681', 'maria@tutor.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'avatar4.jpg');
+('Juan Pérez', '12345678A', '612345678', 'tutor@ejemplo.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', '../assets/avatar/uploads/avatarPadre1.jpg'),
+('Laura García', '23456789B', '612345679', 'laura@tutor.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', '../assets/avatar/uploads/avatarPadre2.jpg'),
+('Pedro Martínez', '34567890C', '612345680', 'pedro@tutor.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', '../assets/avatar/uploads/avatarPadre3.jpg'),
+('Maria Rodríguez', '45678901D', '612345681', 'maria@tutor.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', '../assets/avatar/uploads/avatarPadre4.jpg');
 
 -- Inserción en la tabla PLAN_COMEDOR
 INSERT INTO PLAN_COMEDOR (nombre_plan, descripcion, precio, imagenComida_src)
 VALUES
-('Plan Comedor Básico', 'Comida sencilla y saludable.', 15.00, 'comida_basica.jpg'),
-('Plan Comedor Premium', 'Comida gourmet con opciones veganas.', 25.00, 'comida_premium.jpg'),
-('Plan Comedor Normal ', 'Comida gourmet con opciones veganas.', 25.00, 'comida_premium.jpg');
+('Plan Comedor Básico', 'Comida sencilla y saludable.', 15.00, '../assets/comida/uploads/comida_basica.jpg'),
+('Plan Comedor Premium', 'Comida gourmet con opciones veganas.', 25.00, '../assets/comida/uploads/comida_premium.jpg'),
+('Plan Comedor Normal ', 'Comida gourmet con opciones veganas.', 25.00, '../assets/comida/uploads/comida_premium2.jpg');
 
 -- Inserción en la tabla NINOS
 INSERT INTO NINOS (nombre, alergias, observaciones, fecha_nacimiento, id_tutor, pagado, avatar_src, asistencia, inasistencia)
 VALUES
-('Carlos', 'Ninguna', 'Le gusta el fútbol.', '2015-05-15', 1, TRUE, 'avatar1.jpg', '2025-06-01', '2025-06-02'),
-('Ana', 'Gluten', 'Muy sociable y creativa.', '2014-07-20', 1, TRUE, 'avatar2.jpg', '2025-06-01', '2025-06-02'),
-('Pedro', 'Ninguna', 'Muy activo, le encanta nadar.', '2014-03-10', 2, TRUE, 'avatar3.jpg', '2025-06-01', '2025-06-02'),
-('Lucía', 'Frutos secos', 'Amante de la naturaleza.', '2014-12-05', 2, TRUE, 'avatar4.jpg', '2025-06-01', '2025-06-02'),
-('Raúl', 'Ninguna', 'Fanático de los deportes extremos.', '2015-02-10', 3, TRUE, 'avatar5.jpg', '2025-06-01', '2025-06-02'),
-('María', 'Lactosa', 'Estudia danza, muy enérgica.', '2015-08-14', 3, TRUE, 'avatar6.jpg', '2025-06-01', '2025-06-02'),
-('José', 'Ninguna', 'Muy curioso y ama los animales.', '2015-10-25', 4, TRUE, 'avatar7.jpg', '2025-06-01', '2025-06-02'),
-('Elena', 'Arachide', 'Le gusta pintar y las actividades creativas.', '2014-01-18', 4, TRUE, 'avatar8.jpg', '2025-06-01', '2025-06-02');
+('Carlos', 'Ninguna', 'Le gusta el fútbol.', '2015-05-15', 1, TRUE, '../assets/avatar/uploads/avatar1.jpg', '2025-06-01', '2025-06-02'),
+('Ana', 'Gluten', 'Muy sociable y creativa.', '2014-07-20', 1, TRUE, '../assets/avatar/uploads/avatar2.jpg', '2025-06-01', '2025-06-02'),
+('Pedro', 'Ninguna', 'Muy activo, le encanta nadar.', '2014-03-10', 2, TRUE, '../assets/avatar/uploads/avatar3.jpg', '2025-06-01', '2025-06-02'),
+('Lucía', 'Frutos secos', 'Amante de la naturaleza.', '2014-12-05', 2, TRUE, '../assets/avatar/uploads/avatar4.jpg', '2025-06-01', '2025-06-02'),
+('Raúl', 'Ninguna', 'Fanático de los deportes extremos.', '2015-02-10', 3, TRUE, '../assets/avatar/uploads/avatar5.jpg', '2025-06-01', '2025-06-02'),
+('María', 'Lactosa', 'Estudia danza, muy enérgica.', '2015-08-14', 3, TRUE, '../assets/avatar/uploads/avatar6.jpg', '2025-06-01', '2025-06-02'),
+('José', 'Ninguna', 'Muy curioso y ama los animales.', '2015-10-25', 4, TRUE, '../assets/avatar/uploads/avatar7.jpg', '2025-06-01', '2025-06-02'),
+('Elena', 'Arachide', 'Le gusta pintar y las actividades creativas.', '2014-01-18', 4, TRUE, '../assets/avatar/uploads/avatar8.jpg', '2025-06-01', '2025-06-02');
 
 -- Inserción en la tabla MONITORES
 INSERT INTO MONITORES (nombre, email, contrasenia, descripcion, avatar_src)
 VALUES
-('Monitor Juan', 'monitor@ejemplo.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Monitor con experiencia en deportes y actividades al aire libre.', 'juan.jpg'),
-('Monitor Laura', 'laura@campamento.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Experta en actividades acuáticas y juegos para niños.', 'laura.jpg'),
-('Monitor Pedro', 'pedro@campamento.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Monitor con formación en actividades de montaña y senderismo.', 'pedro.jpg'),
-('Monitor Maria', 'maria@campamento.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Monitor apasionada por las manualidades y actividades creativas.', 'maria.jpg');
+('Monitor Juan', 'monitor@ejemplo.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Monitor con experiencia en deportes y actividades al aire libre.', '../assets/avatar/uploads/avatarMonitor1.jpg'),
+('Monitor Laura', 'laura@campamento.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Experta en actividades acuáticas y juegos para niños.', '../assets/avatar/uploads/avatarMonitor2.jpg'),
+('Monitor Pedro', 'pedro@campamento.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Monitor con formación en actividades de montaña y senderismo.', '../assets/avatar/uploads/avatarMonitor3.jpg'),
+('Monitor Maria', 'maria@campamento.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu', 'Monitor apasionada por las manualidades y actividades creativas.', '../assets/avatar/uploads/avatarMonitor4.jpg');
 
 -- Inserción en la tabla GRUPOS
 INSERT INTO GRUPOS (nombre, id_monitor)
@@ -227,25 +227,25 @@ VALUES
 INSERT INTO ACTIVIDADES (titulo, descripcion, hora, hora_fin, dia, id_grupo, id_plan, imagen_src)
 VALUES
 -- Actividades para el Grupo A y el Plan 1 (Campamento de Verano 2025)
-('Torneo de Futbol', 'Torneo de futbol entre grupos.', '10:00:00', '12:00:00', '2025-06-01', 1, 1, 'futbol.jpg'),
-('Taller de Pintura', 'Taller creativo para pintar cuadros.', '14:00:00', '16:00:00', '2025-06-01', 1, 1, 'pintura.jpg'),
-('Caminata por el Bosque', 'Caminata guiada por el bosque cercano.', '10:00:00', '12:00:00', '2025-06-02', 1, 1, 'bosque.jpg'),
-('Torneo de Baile', 'Competencia de baile grupal.', '15:00:00', '17:00:00', '2025-06-02', 1, 1, 'baile.jpg'),
-('Búsqueda del Tesoro', 'Búsqueda de objetos escondidos en el campamento.', '10:00:00', '12:00:00', '2025-06-03', 1, 1, 'tesoro.jpg'),
+('Torneo de Futbol', 'Torneo de futbol entre grupos.', '10:00:00', '12:00:00', '2025-06-01', 1, 1, '../assets/actividad/uploads/futbol.jpg'),
+('Taller de Pintura', 'Taller creativo para pintar cuadros.', '14:00:00', '16:00:00', '2025-06-01', 1, 1, '../assets/actividad/uploads/pintura.jpg'),
+('Caminata por el Bosque', 'Caminata guiada por el bosque cercano.', '10:00:00', '12:00:00', '2025-06-02', 1, 1, '../assets/actividad/uploads/bosque.jpg'),
+('Torneo de Baile', 'Competencia de baile grupal.', '15:00:00', '17:00:00', '2025-06-02', 1, 1, '../assets/actividad/uploads/baile.jpg'),
+('Búsqueda del Tesoro', 'Búsqueda de objetos escondidos en el campamento.', '10:00:00', '12:00:00', '2025-06-03', 1, 1, '../assets/actividad/uploads/tesoro.jpg'),
 
 -- Actividades para el Grupo B y el Plan 2 (Campamento de Invierno 2025)
-('Esquí en Nieve', 'Actividades de esquí en la estación de montaña.', '09:00:00', '12:00:00', '2025-12-01', 2, 2, 'esqui.jpg'),
-('Construcción de Muñecos de Nieve', 'Taller de creación de muñecos de nieve.', '14:00:00', '16:00:00', '2025-12-01', 2, 2, 'muñecos.jpg'),
-('Torneo de Hockey', 'Competencia de hockey sobre hielo.', '10:00:00', '12:00:00', '2025-12-02', 2, 2, 'hockey.jpg'),
-('Cine en la Nieve', 'Película en el refugio con chocolate caliente.', '18:00:00', '20:00:00', '2025-12-02', 2, 2, 'cine_nieve.jpg'),
-('Caminata por la Montaña', 'Caminata guiada por la montaña nevada.', '10:00:00', '12:00:00', '2025-12-03', 2, 2, 'montaña.jpg'),
+('Esquí en Nieve', 'Actividades de esquí en la estación de montaña.', '09:00:00', '12:00:00', '2025-12-01', 2, 2, '../assets/actividad/uploads/esqui.jpg'),
+('Construcción de Muñecos de Nieve', 'Taller de creación de muñecos de nieve.', '14:00:00', '16:00:00', '2025-12-01', 2, 2, '../assets/actividad/uploads/muñecos.jpg'),
+('Torneo de Hockey', 'Competencia de hockey sobre hielo.', '10:00:00', '12:00:00', '2025-12-02', 2, 2, '../assets/actividad/uploads/hockey.jpg'),
+('Cine en la Nieve', 'Película en el refugio con chocolate caliente.', '18:00:00', '20:00:00', '2025-12-02', 2, 2, '../assets/actividad/uploads/cine_nieve.jpg'),
+('Caminata por la Montaña', 'Caminata guiada por la montaña nevada.', '10:00:00', '12:00:00', '2025-12-03', 2, 2, '../assets/actividad/uploads/montaña.jpg'),
 
 -- Actividades para el Grupo C y el Plan 3 (Campamento Infantil 2025)
-('Taller de Manualidades', 'Creación de objetos con material reciclado.', '10:00:00', '12:00:00', '2025-06-10', 3, 3, 'manualidades.jpg'),
-('Fiesta de Disfraces', 'Fiesta para niños con disfraces temáticos.', '15:00:00', '17:00:00', '2025-06-10', 3, 3, 'disfraces.jpg'),
-('Teatro de Marionetas', 'Representación de una obra de marionetas.', '14:00:00', '16:00:00', '2025-06-11', 3, 3, 'marionetas.jpg'),
-('Juegos de Agua', 'Diversión con juegos acuáticos.', '10:00:00', '12:00:00', '2025-06-12', 3, 3, 'agua.jpg'),
-('Cuentos y Relatos', 'Hora del cuento con narraciones interactivas.', '10:00:00', '12:00:00', '2025-06-13', 3, 3, 'cuentos.jpg');
+('Taller de Manualidades', 'Creación de objetos con material reciclado.', '10:00:00', '12:00:00', '2025-06-10', 3, 3, '../assets/actividad/uploads/manualidades.jpg'),
+('Fiesta de Disfraces', 'Fiesta para niños con disfraces temáticos.', '15:00:00', '17:00:00', '2025-06-10', 3, 3, '../assets/actividad/uploads/disfraces.jpg'),
+('Teatro de Marionetas', 'Representación de una obra de marionetas.', '14:00:00', '16:00:00', '2025-06-11', 3, 3, '../assets/actividad/uploads/marionetas.jpg'),
+('Juegos de Agua', 'Diversión con juegos acuáticos.', '10:00:00', '12:00:00', '2025-06-12', 3, 3, '../assets/actividad/uploads/agua1.jpg'),
+('Cuentos y Relatos', 'Hora del cuento con narraciones interactivas.', '10:00:00', '12:00:00', '2025-06-13', 3, 3, '../assets/actividad/uploads/cuentos.jpg');
 
 -- Inserción en la tabla MENSAJES
 INSERT INTO MENSAJES (id_tutor, id_monitor, mensaje, enviado_por, fecha)
