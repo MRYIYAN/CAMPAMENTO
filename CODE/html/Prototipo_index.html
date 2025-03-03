@@ -38,7 +38,7 @@
             <p>Wooky Dooky</p>
             
             <div class="boton_inicio">
-                <input type="button" value="Iniciar sesión" class="my-button" onclick="window.location.href='login.html'">
+                <input type="button" value="Iniciar sesión" class="my-button" id="btnIniciarSesion">
             </div>
         </div></div></div>
         <br><br>
@@ -158,49 +158,12 @@
         </div>
     </div>
 
-    <script>
-        jQuery(document).ready(function(){   
-            jQuery(window).scroll(function () {
-                if (jQuery(this).scrollTop() > 600) {
-                    jQuery('#myBtn').css('opacity', '1');
-                } else {
-                    jQuery('#myBtn').css('opacity', '0');
-                }
-            });
-
-            jQuery('#myBtn').click(function () {
-                jQuery('body,html').animate({
-                    scrollTop: 0
-                }, 800);
-                return false;
-            });
-        });
-    </script>
     <div id="myBtn" title="Subir">
         <img src="../assets/icons/flecha-hacia-arriba.png" alt="Flecha hacia arriba">
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Selecciona los bloques de transición
-            const blocks = document.querySelectorAll('.block');
-
-            // Función para iniciar la transición
-            function startTransition() {
-                gsap.to(blocks, {
-                    duration: 1,
-                    scaleY: 0,
-                    stagger: 0.2,
-                    ease: "power2.inOut",
-                    onComplete: function() {
-                        // Aquí puedes agregar cualquier acción que desees realizar después de la transición
-                        console.log("Transición completada");
-                    }
-                });
-            }
-            // Inicia la transición al cargar la página
-            startTransition();
-        });
-    </script></div>
+</div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../JS/Prototipo_index.js"></script>
 </body>
 </html>

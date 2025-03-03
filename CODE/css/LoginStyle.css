@@ -1,3 +1,39 @@
+/* =====================================================================/*
+                            TRANSICIÓN CON GSAP
+  /*======================================================================== */
+  .transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000; /* Valor alto para que cubra todo */
+    pointer-events: none;
+  }
+  
+  .transition-row {
+    flex: 1;
+    display: flex;
+  }
+  
+  /* Ajuste: Usamos .row1 y .row2, de acuerdo a tu HTML */
+  .transition-row.row1 .block {
+    transform-origin: top;
+  }
+  
+  .transition-row.row2 .block {
+    transform-origin: bottom;
+  }
+  
+  .block {
+    flex: 1;
+    background-color: #2788c0; /* Puedes ajustar el color si lo deseas */
+    transform: scaleY(1);
+    will-change: transform;
+  }
+  
 /*--------------------------------------------------------------------------------------------*/
 /* Estilo para el cuerpo de la página (background, alineación y tamaño) */
 /*--------------------------------------------------------------------------------------------*/
@@ -28,6 +64,7 @@ body::before {
     filter: brightness(0.9) contrast(1.0); /* Reducir el filtro blanco */
     z-index: -1; /* Coloca el pseudo-elemento detrás del contenido */
 }
+ 
 
 /*--------------------------------------------------------------------------------------------*/
 /* Estilo para el contenedor principal del login */
