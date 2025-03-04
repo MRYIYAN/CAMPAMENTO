@@ -194,14 +194,14 @@ html, body {
     margin-left: auto; /* Mueve el elemento a la derecha */
 }
 /* Otros estilos */
-.titulo {
+.titulo2{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
     text-align: center;
-    font-size: 60px;
-    color: rgb(255, 255, 255);
+    font-size: 80px;
+    color: white;
     margin: 0; /* Eliminar margen */
     padding: 0; /* Eliminar padding */
     height: 85vh; /* Altura del viewport */
@@ -209,11 +209,35 @@ html, body {
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-    flex-direction: column;
+    flex-direction: column;    
+  
+    margin: 20px;
+    border-radius: 20px; 
+}
+.titulo {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    text-align: center;
+    font-size: 80px;
+    color: white;
+    margin: 0; /* Eliminar margen */
+    padding: 0; /* Eliminar padding */
+    height: 85vh; /* Altura del viewport */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    flex-direction: column;    
+    background-color: rgba(0, 159, 193, 0.5); /* Color de fondo con transparencia */
+    margin: 20px;
+    border-radius: 20px;
 }
 
 .titulo p {
-    color: rgb(17, 148, 255);
+    color: white;
+
 }
 
 .titulo h1 {
