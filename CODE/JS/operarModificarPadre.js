@@ -35,6 +35,7 @@ function comprobarNombre() {
   } else {
     mostrarError(errorNombre_Tutor, "");
   }
+  limpiezaErrorCodico();
 }
 
 function comprobarDni() {
@@ -48,6 +49,7 @@ function comprobarDni() {
       mostrarError(errorDni, "Error de formato, tiene que contener 8 dígitos de número o letra y una letra al final");
     }
   }
+  limpiezaErrorCodico();
 }
 
 function comprobarTelefono() {
@@ -61,6 +63,7 @@ function comprobarTelefono() {
       mostrarError(errorTelefono, "El teléfono tiene que ser de 9 digitos de número");
     }
   }
+  limpiezaErrorCodico();
 }
 
 function comprobarEmail(){
@@ -75,6 +78,7 @@ function comprobarEmail(){
 
     }
   }
+  limpiezaErrorCodico();
 }
 
 let quiereCambiarContrasenia = 'no';  //variable pasa raber si tiene alergia o no
@@ -112,6 +116,7 @@ function comprobarCambiarContrasenia() {
     espacio.innerHTML = ''; // Elimina el textarea si selecciona "No"
     quiereCambiarContrasenia = "no";
   }
+  limpiezaErrorCodico();
 }
 function comprobarContraseñaAntigua() {
   if (document.getElementById('contraseniaAntigua').value.trim() !== "") {
@@ -119,6 +124,7 @@ function comprobarContraseñaAntigua() {
   } else {
     mostrarError(document.getElementById('errorContraseniaAntigua'), "La contraseña no puede estar vacio");
   }
+  limpiezaErrorCodico();
 }
 
 //funcion para comprobar la contraseña1 si es valida con el formato o no
@@ -135,6 +141,7 @@ function comprobarContraseña1 (){
       mostrarError(document.getElementById('errorContraseniaNueva1'), "La contraseña tiene que ser de 6 digitos");
     }
   }
+  limpiezaErrorCodico();
 }
 
 //funcion para comprobar la contraseña2 si es valida con el formato o no
@@ -163,7 +170,9 @@ function comprobarContraseña2 (){
       mostrarError(document.getElementById('errorContraseniaNueva2'), "La contraseña tiene que ser de 6 digitos");
     }
   }
+  limpiezaErrorCodico();
 }
+
 
 
 
@@ -232,19 +241,55 @@ document.querySelectorAll('input[name="cambiarContrasenia"]').forEach(radio => {
 });
 
 
+
+
 //cada vez que se escribe
 nombre_tutor.oninput = comprobarNombre;
 dni.oninput = comprobarDni;
 telefono.oninput = comprobarTelefono;
 email.oninput = comprobarEmail;
+document.getElementById('contraseniaAntigua').oninput = comprobarContraseñaAntigua
+document.getElementById('contraseniaAntigua').onblur = comprobarContraseñaAntigua
 
 
+
+
+  // Función para comprobar si los elementos de error están vacíos
+  function checkError(element) {
+    return element && element.textContent.trim() === "";
+  }
+
+  //funcion para quitar el error generar cuando escribimos algo despues de haber salido el error que esta abajo del modificar
+  function limpiezaErrorCodico (){
+    if (
+      checkError(errorNombre_Tutor) &&
+      checkError(errorDni) &&
+      checkError(errorTelefono) &&
+      checkError(errorEmail)
+    ) {
+      if (quiereCambiarContrasenia === 'si') {
+        // Si el usuario quiere cambiar la contraseña
+        if (
+          checkError(document.getElementById('errorContraseniaAntigua')) &&
+          checkError(document.getElementById('errorContraseniaNueva1')) &&
+          checkError(document.getElementById('errorContraseniaNueva2')) 
+            
+        ) {
+          mostrarError(document.getElementById("errorEnviar"), "");
+        }
+      } else if (quiereCambiarContrasenia === 'no') {
+        // Si no quiere cambiar la contraseña, enviamos los datos
+        mostrarError(document.getElementById("errorEnviar"), "");
+      }
+    }
+  }
 
 // Cuando presionamos el botón de enviar
 const formulario = document.getElementById("formularioModificacion");
 
 // Asigna un evento submit
 formulario.onsubmit = async function (event) {
+  mostrarError(document.getElementById("errorEnviar"), "");
   // Prevenir el envío del formulario al inicio
   event.preventDefault();
 
@@ -264,10 +309,7 @@ formulario.onsubmit = async function (event) {
     comprobarContraseña2();
   }
 
-  // Función para comprobar si los elementos de error están vacíos
-  function checkError(element) {
-    return element && element.textContent.trim() === "";
-  }
+
 
   // Comprobamos todos los errores
   if (

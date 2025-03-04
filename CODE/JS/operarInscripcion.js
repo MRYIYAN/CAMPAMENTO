@@ -123,8 +123,14 @@ function comprobarFechaNacimiento() {
     return mostrarError(errorfecha_nacimiento, "La persona debe tener al menos 6 años");
   }
 
+  // Comprobación adicional para verificar si es mayor de 7 años
+  if (edad > 7 || (edad === 7 && fechaActual >= cumpleEsteAño)) {
+    return mostrarError(errorfecha_nacimiento, "La persona no debe ser mayor de 7 años");
+  }
+
   mostrarError(errorfecha_nacimiento, "");
 }
+
 
 
 
@@ -204,6 +210,30 @@ dni.oninput = comprobarDni;
 nombre_nino.oninput = comprobarNombreNino;
 fecha_nacimiento.oninput = comprobarFechaNacimiento;
 
+      //----------------------------------------------------------------------------------------------------------------------------------//
+
+      //VER AVATAR VISTA PREVIA
+      //----------------------------------------------------------------------------------------------------------------------------------//
+      let avatarbbdd = "../assets/img/avatar.png"
+      document.getElementById('vistaPrevia').src = avatarbbdd; //modificamos el src de del img vacio en el html, con avatarbbdd podemos sacar la ruta del avatar que esta en bbdd
+      document.getElementById('vistaPrevia').style.display = 'block'; //mostramos el img para la vista previa que esta en html como un bloqu
+      document
+        .getElementById("avatar")
+        .addEventListener("change", function (event) {
+          //escogemos el archivo seleccionado
+          const file = event.target.files[0];
+          // comprobamos si existe o no el archivo
+          if (file) {
+            //en caso de existir (adjuntado)
+            document.getElementById('vistaPrevia').src = URL.createObjectURL(file); //modificamos el src de del img vacio en el html, con URL.createObjectURL(file) podemos sacar la ruta del archivo adjuntado
+            document.getElementById('vistaPrevia').style.display = 'block'; //mostramos el img para la vista previa que esta en html como un bloqu
+        } else {
+          //en caso si no existe el archivo (no ha adjuntado)
+           document.getElementById('vistaPrevia').src = avatarbbdd; //modificamos el src de del img vacio en el html, con avatarbbdd podemos sacar la ruta del avatar que esta en bbdd
+          document.getElementById('vistaPrevia').style.display = 'block'; //mostramos el img para la vista previa que esta en html como un bloqu
+        }
+        });
+      //----------------------------------------------------------------------------------------------------------------------------------//
 
 // Evento submit del formulario
 //cogemos el formulario
@@ -381,22 +411,35 @@ function InsertsInscripcionNinoBBDD(){
     observacionesTXT = observaciones.value;
   }
 
+    //PREPARAMOS LOS DATOS PARA ENVIAR AL SERVIDOR CON FETCH PARA HACER EL UBDATE
+    let formData2 = new FormData();
+    //definimos que datos se envia
+    formData2.append('nombre_nino', nombre_nino.value);
+    formData2.append('nacimiento_nino', fecha_nacimiento.value);
+    formData2.append('id_plan', id_plan);
+    formData2.append('alergia', alergiaContenido);
+    formData2.append('observaciones', observacionesTXT);
+
+
+  
+    // Solo agregar el avatar si hay uno seleccionado
+    let avatarInput = document.getElementById("avatar");
+    if (avatarInput.files.length > 0) {
+      //en caso si hay contenido en el input
+      formData2.append("avatar", avatarInput.files[0]);  //pasamos el file al php
+      formData2.append("cambiarAvatar", true); //pasamos un booleano dicidendo que hay que modificar el perfil
+    }else{
+      //en caso si no hay nada en el input
+    formData2.append("avatarBBDD", avatarbbdd);  //pasamos la ruta de avatar que esta en el bbdd
+      formData2.append("cambiarAvatar", false);  //pasamos un boleano para decir que no hay que cambiar nada
+  
+  }
+
 
   //FETCH PARA EL INSCRIPCION DEL NIÑO
   fetch("../Server/GestionarInscripcion.php", {
     method: 'POST',
-    headers: {
-        'Content-type': 'application/json',
-    },
-    body: JSON.stringify({ 
-      //envia datos al php
-      nombre_nino: nombre_nino.value,
-      nacimiento_nino: fecha_nacimiento.value,
-      id_plan: id_plan,
-      alergia: alergiaContenido,
-      observaciones: observacionesTXT
-      
-    })
+    body: formData2,
 })
 .then(response => {
     if (!response.ok) {
@@ -416,6 +459,9 @@ function InsertsInscripcionNinoBBDD(){
       window.location.href = data.noRegistrado;  // Redirige a la URL proporcionada en el JSON
     }else{
       //en otros casos
+      console.log('eror')
+      console.log(data)
+      alert('dededede')
       window.location.href = '../html/inscripcionNinoFallada.html';  // Redirige a la URL proporcionada en el JSON
 
     }

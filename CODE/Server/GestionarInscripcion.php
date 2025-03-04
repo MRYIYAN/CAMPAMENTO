@@ -61,16 +61,41 @@ while ($row = $result->fetch_assoc()) {
 
 
 //INSERTS DE DATOS PARA NIÑO (CREAR NIÑO)
-if (isset($data['nombre_nino']) && isset($data['nacimiento_nino']) && isset($data['id_plan']) && isset($data['alergia']) && isset($data['observaciones'])) {
+if (isset($_POST['nombre_nino']) && isset($_POST['nacimiento_nino']) && isset($_POST['id_plan']) && isset($_POST['alergia']) && isset($_POST['observaciones'])) {
+
+
+    $directorio_subida_avatar = "../assets/avatar/uploads/";
+    $rutaAvatar = "../assets/img/avatar.png";   //esta ruta se actualizara si el usuario ha introducido un avatar, y si el usuario no introduce avatar va a usar esta como default, este paso es para evitar insectar un null en avatar_src
+    //comprobar si hemos asignado el avatar y si hay algun error
+    if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] == 0 && $_POST['cambiarAvatar'] == true){    //aqui comprobamos si hay que cambiar el avatar
+
+        $name_avatar = $_FILES['avatar']['name'];  //sacamos el nombre del archivo
+        //sacamos los informaciones del archivo segun su nombre
+        $array_avatar = pathinfo($name_avatar);
+
+        //sacamos la ruta antigua del avatar
+        $ruta_antiguo_avatar = $_FILES['avatar']['tmp_name'];
+
+        //sacamos la ruta que tiene que estrar en uploads
+        $ruta_destino_avatar = $directorio_subida_avatar . $name_avatar;
+
+        //movemos
+        move_uploaded_file($ruta_antiguo_avatar, $ruta_destino_avatar);
+        $rutaAvatar = $ruta_destino_avatar;
+    }else{
+        //en caso de no cambiar el avatar se usa la ruta que ya esta en bbdd
+        $rutaAvatar = $_POST['avatarBBDD'];
+    }
+
+
     //RUPA DE AVATAR DEFAULT 
-    $avatar_default_src="../assets/img/avatar.png"; //cuando creamos el niño hay que asignar un avatar default sino sale blanco
     $queryInsertNiño = $conn->prepare("INSERT INTO ninos (nombre, fecha_nacimiento, alergias, observaciones, id_tutor, avatar_src) VALUES (?, ?, ?, ?, ?, ?)");
-    $queryInsertNiño->bind_param("ssssis", $data['nombre_nino'], $data['nacimiento_nino'], $data['alergia'], $data['observaciones'], $_SESSION['id'], $avatar_default_src);
+    $queryInsertNiño->bind_param("ssssis", $_POST['nombre_nino'], $_POST['nacimiento_nino'], $_POST['alergia'], $_POST['observaciones'], $_SESSION['id'], $rutaAvatar);
     if ($queryInsertNiño->execute()) { //comprobamos la ejecucion
         if ($queryInsertNiño->affected_rows > 0) { // Si se inserta al menos un registro
             $id_ninoAutomatico = $conn->insert_id; // OBTENEMOS EL ID DEL NIÑO INSERTADO
             $queryInsertNiñoPlan = $conn->prepare("INSERT INTO plan_ninos (id_plan, id_nino) VALUES (?, ?)");
-            $queryInsertNiñoPlan->bind_param("ii", $data['id_plan'], $id_ninoAutomatico);
+            $queryInsertNiñoPlan->bind_param("ii", $_POST['id_plan'], $id_ninoAutomatico);
             if ($queryInsertNiñoPlan->execute()) { //comprobamos la ejecucion
                 echo json_encode(['registrado' => '../html/inscripcionNinoExitosa.html']);
                 $queryInsertNiñoPlan->close();   

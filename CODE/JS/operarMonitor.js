@@ -138,3 +138,82 @@ document.addEventListener("DOMContentLoaded", () => {
   //-----------------------------------------------------------------------------------------------------------//
   //                                           FIN DE JS DE NAVBAR
   //-----------------------------------------------------------------------------------------------------------//
+
+
+
+
+
+//-----------------------------------------------------------------------------------------------------------//
+  //PROTECCION DE RUTA Y EXTRAER EL ID
+  //-----------------------------------------------------------------------------------------------------------//
+   fetch("../Server/comprobacionSesionMonitor.php", {
+    method: "POST", // Método de la solicitud
+    headers: {
+      "Content-type": "application/json", // Tipo de contenido de la solicitud
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+      }
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      // Comprobar si hay un error en la respuesta
+      if (data.error) {
+        alert("Error: " + data.error); // Mostrar alerta en caso de error
+      } else if (data.noLogin) {
+        // Redirigir si no hay sesión iniciada
+        window.location.href = data.noLogin;
+        console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+      } else {
+        console.log(`id: ${data.id}`);
+        cookieNombreMonitor(data.id)  //---------------------
+      }
+    })
+    //-----------------------------------------------------------------------------------------------------------//
+
+
+    //funcion para asignar el cookie que contiene el nombre del monitpr 
+function cookieNombreMonitor(id_monitor){
+   //crear un cookie del nombre del monitor
+    fetch("../Server/GestionarBienvenidoMonitor.php", {
+      method: "POST", // Método de la solicitud
+      headers: {
+        "Content-type": "application/json", // Tipo de contenido de la solicitud
+      },
+      body: JSON.stringify({
+        //enviamos datos para la consulta
+        id: id_monitor
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
+        }
+        return response.json(); // Convertir la respuesta a JSON
+      })
+      .then((data) => {
+        // Comprobar si hay un error en la respuesta
+        if (data.error) {
+          console.log("2Error: " + data.error); // Mostrar en consola el error
+        } else {
+          if (data.nombreMonitor){
+            console.log(`Nombre: ${data.nombreMonitor}`)
+
+            //ASIGNAR UN COOKIE 
+            document.cookie = `nombreMonitor=${data.nombreMonitor}; path=/; expires=${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString()}`;
+            // Función para obtener el valor de una cookie por su nombre
+            function getCookie(nombre) {
+                const cookies = document.cookie.split('; ');
+                const cookie = cookies.find(fila => fila.startsWith(nombre + '='));
+                return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+            }
+            // Asignar el valor de la cookie al elemento HTML
+            document.getElementById('biembenidoNombre').innerHTML = getCookie('nombreMonitor');
+          }
+        }
+      })
+
+}
+   
