@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     document.getElementById("btnNotificaciones").addEventListener("click", () => {
-        redirectWithTransition("../html/NotificacionesAdmin.html"); // Redirigir a la página de notificaciones
+        redirectWithTransition("../html/404_ejemplo.html"); // Redirigir a la página de notificaciones
     });
 
     document.getElementById("btnMonitor").addEventListener("click", () => {
