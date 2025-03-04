@@ -265,24 +265,36 @@ function pintarTablaNinos() {
                         celda1.innerHTML = `${nino.nombre_nino}`; // Introducir información en la celda
 
                         const celda2 = nuevaFila.insertCell(); // Crear celda
-                        celda2.innerHTML = `${nino.pagado}`; // Introducir información en la celda
+                        
                         // Cambiar el color de fondo según el estado de "pagado"
                         if (nino.pagado == 0) {
                             celda2.style.backgroundColor = "yellow"; // Si el valor es 0, color amarillo
+                            celda2.innerHTML = `No pagado`; // Introducir información en la celda
+                        }else {
+                          celda2.innerHTML = `Pagado`; // Introducir información en la celda
                         }
 
                         const celda3 = nuevaFila.insertCell(); // Crear celda
                         celda3.innerHTML = `${nino.alergias}`; // Introducir información en la celda
 
                         const celda4 = nuevaFila.insertCell(); // Crear celda
-                        celda4.innerHTML = `${nino.nombre_grupo} (${nino.id_grupo})`; // Introducir información en la celda
+                        if (nino.nombre_grupo){
+                          celda4.innerHTML = `${nino.nombre_grupo}`; // Introducir información en la celda
+                        }else{
+                          celda4.innerHTML = 'No tiene grupo'
+                        }
+                        
                         // Cambiar el color de fondo si el grupo es null
                         if (nino.nombre_grupo === null) {
                             celda4.style.backgroundColor = "orange"; // Si el grupo es null, color naranja
                         }
 
                         const celda5 = nuevaFila.insertCell(); // Crear celda
-                        celda5.textContent = `${nino.nombre_plan} (${nino.id_plan})`; // Introducir información en la celda
+                        if (nino.nombre_plan){
+                          celda5.textContent = `${nino.nombre_plan}`; // Introducir información en la celda
+                        }else{
+                          celda5.textContent = 'No tiene Plan'
+                        }
                         // Cambiar el color de fondo si el plan es null
                         if (nino.nombre_plan === null) {
                             celda5.style.backgroundColor = "red"; // Si el plan es null, color rojo
