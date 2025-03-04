@@ -900,20 +900,22 @@ body::-webkit-scrollbar {
   animation-duration: 11s;
 }
 
+/* Asegúrate de que el contenedor del día tenga position: relative; */
+.calendar-day-hover {
+  position: relative;
+}
 
-
-@keyframes animate {
-
-  0%{
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-      border-radius: 0;
-  }
-
-  100%{
-      transform: translateY(-1000px) rotate(720deg);
-      opacity: 0;
-      border-radius: 50%;
-  }
+/* Indicador para días con evento */
+.calendar-day-hover.has-event::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  right: 4px; /* Cambiado de right a left */
+  width: 8px;
+  height: 8px;
+  margin-left: 18px;
+  background-color: rgb(250, 153, 9);
+  border-radius: 50%;
 
 }
