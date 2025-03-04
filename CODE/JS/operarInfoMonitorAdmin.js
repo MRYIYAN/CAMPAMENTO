@@ -275,7 +275,7 @@ function pintarTabla() {
 
                         const celda4 = nuevaFila.insertCell(); // Crear la cuarta celda
                         celda4.innerHTML = `
-                        <button class="verMasBtn" onclick="mostrarOverlayOperarMonitor('${monitor.id_monitor}')" id="btnOperar">Operar</button>
+                        <button class="verMasBtn" onclick="mostrarOverlayOperarMonitor('${monitor.id_monitor}')" id="btnOperar">Modific.</button>
                         <button class="verMasBtnEliminar" onclick="mostrarOverlayEliminarMonitor('${monitor.id_monitor}')" id="btnEliminarMonitor">Eliminar</button>
                         <button class="verMasBtn" onclick="mostrarOverlayCambiarContraseña('${monitor.id_monitor}')" id="btnCambiarContraseña">Cambiar Contraseña</button>
                         `; // boton para operar
@@ -403,11 +403,29 @@ document.querySelector('.closeBtnEliminarContrasenia').addEventListener('click',
     document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 })
 function mostrarOverlayCambiarContraseña(idMonitorSeleccionado){
+    limpiarFormularioCambiarContrasenia()
     idMonitorSeleccionados = idMonitorSeleccionado
     console.log(`Id del admin seleccionado para modificar Contraseña es: ${idMonitorSeleccionados}`)
     document.getElementById('overlayCambiarContraseña').classList.add('activeOverlayCambiarContraseña')
     // document.body.classList.add("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 }
+function limpiarFormularioCambiarContrasenia() {
+    // Limpiar los campos de contraseña
+    document.getElementById('contrasenia1').value = '';
+    document.getElementById('contrasenia2').value = '';
+    
+    // Limpiar los mensajes de error
+    document.getElementById('errorContrasenia1').innerHTML = '';
+    document.getElementById('errorContrasenia2').innerHTML = '';
+    document.getElementById('errorModificarContraseniaGeneral').innerHTML = '';
+    
+    // Limpiar mensaje de feedback
+    document.getElementById('mensajeFeedbackComprobarModificarContrasenia').style.display = 'none';
+}
+
+// Llamar a la función para limpiar el formulario cuando sea necesario
+document.getElementById('btnVolverModificarContrasenia').addEventListener('click', limpiarFormularioCambiarContrasenia);
+
 
 //validanos los campos 
 function validarContrasenia1 (){
@@ -469,8 +487,8 @@ formularioCambiarContra.onsubmit = async function (event) {
     event.preventDefault();
 
     //validamos por si acaso
-    validarContrasenia1;
-    validarContrasenia2;
+    validarContrasenia1();
+    validarContrasenia2();
 
     //comprobamos si hay error de validacion
   if (
@@ -588,6 +606,7 @@ document.querySelector('.closeBtnCambiarDatos').addEventListener('click', () =>{
 })
 
 function mostrarOverlayOperarMonitor(idMonitorSeleccionado){
+    limpiarFormularioCambiarDatos()
     idMonitorSeleccionados = idMonitorSeleccionado;
     console.log(`El id de monitor seleccionado para Modificar es: ${idMonitorSeleccionados}`)
     document.getElementById('overlayCambiarDatos').classList.add('activeOverlayCambiarDatos')
@@ -595,6 +614,23 @@ function mostrarOverlayOperarMonitor(idMonitorSeleccionado){
     //rellenamos de datos
     autorelleno()
 }
+function limpiarFormularioCambiarDatos() {
+    // Limpiar los campos de texto
+    document.getElementById('nombreModificar').value = '';
+    document.getElementById('descripcionModificar').value = '';
+    
+    // Limpiar los mensajes de error
+    document.getElementById('errorNombreModificar').innerHTML = '';
+    document.getElementById('errorDescripcionModificar').innerHTML = '';
+    document.getElementById('errorCambiarDatosGeneral').innerHTML = '';
+    
+    // Limpiar mensaje de feedback
+    document.getElementById('mensajeFeedbackComprobarModificarDatos').style.display = 'none';
+}
+
+// Llamar a la función para limpiar el formulario cuando sea necesario
+document.getElementById('btnVolverCambiarDatos').addEventListener('click', limpiarFormularioCambiarDatos);
+
 
 //funcion para rellenar los imputs
 function autorelleno (){
@@ -664,7 +700,7 @@ formularioCambiarDatos.onsubmit = async function (event) {
     event.preventDefault();
 
     //validamos por si acaso
-    validarDescripcion;
+    validarNombre;
     validarDescripcion;
 
     //comprobamos si hay error de validacion
@@ -682,6 +718,9 @@ formularioCambiarDatos.onsubmit = async function (event) {
 }
 
 function modificarDatosMonitor(){
+    console.log(`nombre: ${document.getElementById('nombreModificar').value}`)
+    console.log(`definicion: ${document.getElementById('descripcionModificar').value}`)
+    console.log(`id monitor: ${idMonitorSeleccionados}`)
     //hace el borado
     fetch("../Server/GestionarinfoMonitorAdmin.php", {
         method: "POST", // Método de la solicitud
@@ -786,9 +825,34 @@ document.querySelector('.closeBtnCrearMonitor').addEventListener('click', () =>{
 
 //abrir overlay de crear monitor
 document.getElementById('btnCrearMonitor').addEventListener('click', ()=>{
+    limpiarFormularioCrearMonitor();
     document.getElementById('overlayCrearMonitor').classList.add('activeOverlayCrearMonitor')
     document.body.classList.add("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 })
+
+function limpiarFormularioCrearMonitor() {
+    // Limpiar los campos de texto
+    document.getElementById('nombreCrear').value = '';
+    document.getElementById('emailCrear').value = '';
+    document.getElementById('descripcionCrear').value = '';
+    document.getElementById('contrasenia1Crear').value = '';
+    document.getElementById('contrasenia2Crear').value = '';
+    
+    // Limpiar los mensajes de error
+    document.getElementById('errorNombreCrear').innerHTML = '';
+    document.getElementById('errorEmailCrear').innerHTML = '';
+    document.getElementById('errorDescripcionCrear').innerHTML = '';
+    document.getElementById('errorContrasenia1Crear').innerHTML = '';
+    document.getElementById('errorContrasenia2Crear').innerHTML = '';
+    document.getElementById('errorCrearMonitorGeneral').innerHTML = '';
+    
+    // Limpiar mensaje de feedback
+    document.getElementById('mensajeFeedbackCrearMonitor').style.display = 'none';
+}
+
+// Llamar a la función para limpiar el formulario cuando sea necesario
+document.getElementById('btnVolverCrearMonitor').addEventListener('click', limpiarFormularioCrearMonitor);
+
 
 //vertificamos
 function validarNombreCrear (){
@@ -899,11 +963,11 @@ formularioInsertarDatos.onsubmit = async function (event) {
     event.preventDefault();
 
     //validamos por si acaso
-    validarNombreCrear;
-    validarCorreoCrear;
-    validarDescripcionCrear;
-    validarContrasenia1Crear;
-    validarContrasenia2Crear;
+    validarNombreCrear();
+    validarCorreoCrear();
+    validarDescripcionCrear();
+    validarContrasenia1Crear();
+    validarContrasenia2Crear();
 
     //comprobamos si hay error de validacion
   if (
@@ -915,13 +979,13 @@ formularioInsertarDatos.onsubmit = async function (event) {
   ) {
     mostrarError(document.getElementById('errorCrearMonitorGeneral'), "")
     //SIGUIENTE PASO
-    modificarDatosMonitor()
+    crearDatosMonitor()
   }else{
     mostrarError(document.getElementById('errorCrearMonitorGeneral'), "El formulario contiene error")
   }
 }
 
-function modificarDatosMonitor(){
+function crearDatosMonitor(){
     //hace el borado
     fetch("../Server/GestionarinfoMonitorAdmin.php", {
         method: "POST", // Método de la solicitud
