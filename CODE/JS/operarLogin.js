@@ -1,63 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const ease = "power4.inOut"; // Definir la animación de easing para GSAP
-
-  // ================================================================//
-  //                    TRANSICIÓN CON GSAP
-  // ================================================================= //
-  // Función para ocultar la transición al cargar la página
-  function revealTransition() {
-    return new Promise((resolve) => {
-      gsap.set(".block", { scaleY: 1 }); // Establecer la escala Y de los elementos con clase "block" a 1
-      gsap.to(".block", {
-        scaleY: 0, // Animar la escala Y a 0
-        duration: 1, // Duración de la animación
-        stagger: {
-          each: 0.1, // Intervalo entre cada animación
-          from: "start", // Comenzar la animación desde el inicio
-          grid: "auto", // Disposición automática en una cuadrícula
-          axis: "y", // Animar en el eje Y
-        },
-        ease: ease, // Aplicar la animación de easing definida
-        onComplete: resolve, // Resolver la promesa al completar la animación
-      });
-    });
-  }
-
-  // Función para animar la transición al cambiar de página
-  function animateTransition() {
-    return new Promise((resolve) => {
-      gsap.set(".block", { visibility: "visible", scaleY: 0 }); // Establecer la visibilidad y escala Y de los elementos con clase "block"
-      gsap.to(".block", {
-        scaleY: 1, // Animar la escala Y a 1
-        duration: 1, // Duración de la animación
-        stagger: {
-          each: 0.1, // Intervalo entre cada animación
-          from: "start", // Comenzar la animación desde el inicio
-          grid: [2, 4], // Disposición en una cuadrícula de 2 filas y 4 columnas
-          axis: "x", // Animar en el eje X
-        },
-        ease: ease, // Aplicar la animación de easing definida
-        onComplete: resolve, // Resolver la promesa al completar la animación
-      });
-    });
-  }
-
-  // Al cargar la página se ejecuta la transición de revelado
-  revealTransition().then(() => {
-    gsap.set(".block", { visibility: "hidden" }); // Ocultar los elementos con clase "block" después de la transición
-  });
-
-  // Función que ejecuta la animación y luego redirige
-  function redirectWithTransition(url) {
-    animateTransition().then(() => {
-      window.location.href = url; // Redirigir a la URL especificada después de la animación
-    });
-  }
     //----------------------------------------------------------------------------------------//
     // Añadir listener para el submit del formulario de login
     //----------------------------------------------------------------------------------------//
     document.getElementById("loginForm").addEventListener("submit", function (e) {
         e.preventDefault();  // Prevenir el comportamiento por defecto del formulario
+
         //----------------------------------------------------------------------------------------//
         // Obtener los valores de los campos de email y contraseña
         //----------------------------------------------------------------------------------------//
@@ -80,20 +27,36 @@ document.addEventListener("DOMContentLoaded", function () {
             // Procesar la respuesta JSON
             //------------------------------------------------------------------------------------//
             if (data.error) { 
-                alert(data.error);
+                mostrarErrorLogin(data.error); // Mostrar error localmente
             } else if (data.redirect) {
-                redirectWithTransition(data.redirect); // Redirigir a la página de modificación de datos del padre
+                window.location.href = data.redirect;
             } else if (data.message) {
                 console.log(data.message);  // Manejar el mensaje de éxito si es necesario
             } else {
-                alert("Respuesta desconocida del servidor.");
+                mostrarErrorLogin("Respuesta desconocida del servidor."); // Mostrar error localmente
             }
         })
         .catch(error => console.error("Error:", error));  // Manejar errores en la petición 
     });
 });
 
-//-----------------------------------------------------------------------------------------//
+//--------------------------------------------------------------------------------------------//
+// Función para mostrar errores de login localmente
+//--------------------------------------------------------------------------------------------//
+function mostrarErrorLogin(mensaje) {
+    const errorContainer = document.getElementById("errorLogin");
+    const iconoError = `<img src="../assets/icons/errorIcon.png" alt="error" id="iconoError">`; // Icono de error
+    if (!errorContainer) {
+        const nuevoErrorContainer = document.createElement("div");
+        nuevoErrorContainer.id = "errorLogin";
+        nuevoErrorContainer.style.color = "red";
+        nuevoErrorContainer.style.marginTop = "10px";
+        nuevoErrorContainer.innerHTML = `${iconoError} ${mensaje}`;
+        document.getElementById("loginForm").appendChild(nuevoErrorContainer);
+    } else {
+        errorContainer.innerHTML = `${iconoError} ${mensaje}`;
+    }
+}
 
 //--------------------------------------------------------------------------------------------//
 // Selección de elementos de formulario (Iniciar sesión y Crear Cuenta)
@@ -215,7 +178,39 @@ formularioLogin.addEventListener('submit', function (e) {
         if (errorContrasena) contrasenaLogin.setCustomValidity('error');
     } else {
         // Si todo está correcto, limpia los errores
-        limpiarErrores();
+
+        //----------------------------------------------------------------------------------------//
+        // Obtener los valores de los campos de email y contraseña
+        //----------------------------------------------------------------------------------------//
+        let email = correoLogin.value;
+        let pswd = contrasenaLogin.value;
+
+        //----------------------------------------------------------------------------------------//
+        // Enviar los datos al servidor usando fetch
+        //----------------------------------------------------------------------------------------//
+        fetch("../Server/GestionarLogin.php", {  // Verifica que la ruta sea correcta
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `email=${encodeURIComponent(email)}&pswd=${encodeURIComponent(pswd)}`
+        })
+        .then(response => response.json())  // Parsear la respuesta como JSON
+        .then(data => {
+            //------------------------------------------------------------------------------------//
+            // Procesar la respuesta JSON
+            //------------------------------------------------------------------------------------//
+            if (data.error) { 
+                mostrarErrorLogin(data.error); // Mostrar error localmente
+            } else if (data.redirect) {
+                window.location.href = data.redirect;
+            } else if (data.message) {
+                console.log(data.message);  // Manejar el mensaje de éxito si es necesario
+            } else {
+                mostrarErrorLogin("Respuesta desconocida del servidor."); // Mostrar error localmente
+            }
+        })
+        .catch(error => console.error("Error:", error));  // Manejar errores en la petición 
     }
 });
 
@@ -257,6 +252,11 @@ correoLogin.addEventListener('input', function() {
 });
 contrasenaLogin.addEventListener('input', function() {
     validarCampos(contrasenaLogin, errorContrasenaLogin, validarContrasena); // Llama a la función de validación para la contraseña de login
+    // Además, elimina el mensaje de error del login (creado por mostrarErrorLogin) si existe:
+    const errorContainer = document.getElementById("errorLogin");
+    if (errorContainer) {
+        errorContainer.remove();
+    }
 });
 correoSignup.addEventListener('input', function() {
     validarCampos(correoSignup, errorCorreoSignup, validarCorreo); // Llama a la función de validación para el correo de signup
@@ -264,7 +264,6 @@ correoSignup.addEventListener('input', function() {
 contrasenaSignup.addEventListener('input', function() {
     validarCampos(contrasenaSignup, errorContrasenaSignup, validarContrasena); // Llama a la función de validación para la contraseña de signup
 });
-
 
 //--------------------------------------------------------------------------------------------//
 // Listener para la validación al perder el foco (onblur)
@@ -280,11 +279,9 @@ contrasenaLogin.addEventListener('blur', function () {
 correoSignup.addEventListener('blur', function () {
     validarCampos(correoSignup, errorCorreoSignup, validarCorreo); // Valida el correo de signup al perder el foco
 });
-
 contrasenaSignup.addEventListener('blur', function () {
     validarCampos(contrasenaSignup, errorContrasenaSignup, validarContrasena); // Valida la contraseña de signup al perder el foco
 });
-
 
 //--------------------------------------------------------------------------------------------//
 //                             INICIAR SESION CON GOOGLE 
