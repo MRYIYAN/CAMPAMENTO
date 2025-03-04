@@ -250,11 +250,11 @@ VALUES
 -- Inserción en la tabla MENSAJES
 INSERT INTO MENSAJES (id_tutor, id_monitor, mensaje, enviado_por, fecha)
 VALUES
-(1, 1, '¿Cómo va el progreso del campamento?', 'tutor', '2025-05-01 10:00:00'),
-(2, 2, 'El niño está disfrutando mucho, gracias.', 'tutor', '2025-05-02 15:00:00'),
-(3, 3, '¿Hay algún problema con la comida?', 'tutor', '2025-05-03 18:00:00'),
-(4, 4, 'Todo está perfecto, los niños están muy felices.', 'tutor', '2025-05-04 20:00:00'),
-(1, 1, 'Todo marcha bien, los niños están muy activos.', 'monitor', '2025-05-05 09:00:00');
+(1, 1, '¿Cómo va el progreso del campamento?', 'tutor', '2024-05-01 10:00:00'),
+(2, 2, 'El niño está disfrutando mucho, gracias.', 'tutor', '2024-05-02 15:00:00'),
+(3, 3, '¿Hay algún problema con la comida?', 'tutor', '2024-05-03 18:00:00'),
+(4, 4, 'Todo está perfecto, los niños están muy felices.', 'tutor', '2024-05-04 20:00:00'),
+(1, 1, 'Todo marcha bien, los niños están muy activos.', 'monitor', '2024-05-05 09:00:00');
 
 ";
 
