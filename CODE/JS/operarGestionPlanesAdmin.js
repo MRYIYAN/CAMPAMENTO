@@ -385,8 +385,11 @@ function validarFechaMaximaInscripcion() {
         if (document.getElementById('fechaInicioCrearPlan')) {
             const fechaInicioInput = new Date(document.getElementById('fechaInicioCrearPlan').value);
             const fechaMaximaInput = new Date(document.getElementById('fechaMaximaIncribcionCrearPlan').value);
+            fechaInicioInput.setHours(0, 0, 0, 0);
+            fechaMaximaInput.setHours(0, 0, 0, 0)
+        
 
-            if (fechaInicioInput < fechaMaximaInput) {
+            if (fechaInicioInput <= fechaMaximaInput) {
                 mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "La fecha maxima de inscripcion no puede ser despues del inicio")
             } else {
                 mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
@@ -430,13 +433,20 @@ function validarHoraMaximaInscripcion() {
 }
 
 //validacion de precio
-function validarPrecio() {
-    if (document.getElementById('precioCrearPlan').value.trim() == "") {
-        mostrarError(document.getElementById('errorPrecioCrearPlan'), "El precio no puede ser nulo")
+function validarPrecio(){
+    const precio = document.getElementById('precioCrearPlan').value.trim();
+  
+    if (precio === "") {
+      mostrarError(document.getElementById('errorPrecioCrearPlan'), "El precio no puede ser nulo");
     } else {
-        mostrarError(document.getElementById('errorPrecioCrearPlan'), "")
+      const precioNumero = parseInt(precio, 10); // Convierte el valor a número entero
+      if (isNaN(precioNumero) || precioNumero <= 0 || precio !== String(precioNumero)) {
+        mostrarError(document.getElementById('errorPrecioCrearPlan'), "El precio debe ser un número entero positivo sin decimales");
+      } else {
+        mostrarError(document.getElementById('errorPrecioCrearPlan'), "");
+      }
     }
-}
+  }
 
 //validar Descripcion 
 function validarDescripcion() {
@@ -451,6 +461,13 @@ function validarDescripcion() {
 //UTILIZAR LOS VALIDACIONES
 document.getElementById('nombrePlan').onblur = validaNombrePlan;
 document.getElementById('fechaInicioCrearPlan').onblur = validarFechaInicio;
+document.getElementById('fechaInicioCrearPlan').onblur =recombrebacionFechaMaximaInscripcion;
+function recombrebacionFechaMaximaInscripcion (){
+    if (document.getElementById('fechaMaximaIncribcionCrearPlan').value){
+    validarFechaMaximaInscripcion();
+  }
+}
+
 document.getElementById('fechaFinCrearPlan').onblur = validarFechaFin;
 document.getElementById('fechaMaximaIncribcionCrearPlan').onblur = validarFechaMaximaInscripcion;
 document.getElementById('horaMaximaInscribcionCrearPlan').onblur = validarHoraMaximaInscripcion;
@@ -1914,3 +1931,31 @@ document.getElementById("btnCrearAñadirNinoAlGrupo").addEventListener("click", 
 
 
 
+//-----------------------------------------------------------------------------------------------------------//
+  //PROTECCION DE RUTA Y EXTRAER EL ID
+  //-----------------------------------------------------------------------------------------------------------//
+  fetch("../Server/comprobacionSesionAdmin.php", {
+    method: "POST", // Método de la solicitud
+    headers: {
+      "Content-type": "application/json", // Tipo de contenido de la solicitud
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+      }
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      // Comprobar si hay un error en la respuesta
+      if (data.error) {
+        alert("Error: " + data.error); // Mostrar alerta en caso de error
+      } else if (data.noLogin) {
+        // Redirigir si no hay sesión iniciada
+        window.location.href = data.noLogin;
+        console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+      } else {
+        console.log(`id: ${data.id}`);
+      }
+    })
+    //-----------------------------------------------------------------------------------------------------------//

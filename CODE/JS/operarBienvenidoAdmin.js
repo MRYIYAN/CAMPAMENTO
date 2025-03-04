@@ -249,3 +249,32 @@ async function actualizarContraseña(){
           }
       })
 }
+
+//-----------------------------------------------------------------------------------------------------------//
+  //PROTECCION DE RUTA Y EXTRAER EL ID
+  //-----------------------------------------------------------------------------------------------------------//
+  fetch("../Server/comprobacionSesionAdmin.php", {
+    method: "POST", // Método de la solicitud
+    headers: {
+      "Content-type": "application/json", // Tipo de contenido de la solicitud
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+      }
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      // Comprobar si hay un error en la respuesta
+      if (data.error) {
+        alert("Error: " + data.error); // Mostrar alerta en caso de error
+      } else if (data.noLogin) {
+        // Redirigir si no hay sesión iniciada
+        window.location.href = data.noLogin;
+        console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+      } else {
+        console.log(`id: ${data.id}`);
+      }
+    })
+    //-----------------------------------------------------------------------------------------------------------//
