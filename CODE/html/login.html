@@ -40,15 +40,7 @@
   
   <div class="main">   
     <input type="checkbox" id="chk" aria-hidden="true">
-    <!-- Formulario de Registro -->
-    <div class="signup">
-      <form id="signupForm">
-        <label for="chk" aria-hidden="true">Crear Cuenta</label>
-        <input type="email" name="email" placeholder="Email" id="reg_email" required>
-        <input type="password" name="pswd" placeholder="Password" id="reg_pswd" required>
-        <button type="submit">Crear Cuenta</button>
-      </form>
-    </div>
+
 
     <!-- Formulario de Login -->
     <div class="login">
@@ -56,9 +48,20 @@
         <label for="chk" aria-hidden="true">Login</label>
         <input type="email" name="email" placeholder="Email" id="email" required>
         <input type="password" name="pswd" placeholder="Password" id="pswd" required>
+        <div id="errorLogin123"></div>
         <button type="submit">Login</button>
       </form>
     </div>
+
+        <!-- Formulario de Registro -->
+        <div class="signup">
+          <form id="signupForm">
+            <label for="chk" aria-hidden="true">Crear Cuenta</label>
+            <input type="email" name="email" placeholder="Email" id="reg_email" required>
+            <input type="password" name="pswd" placeholder="Password" id="reg_pswd" required>
+            <button type="submit">Crear Cuenta</button>
+          </form>
+        </div>
   </div>
   <script src="../JS/operarLogin.js"></script>
   <script src="../JS/operarRegistro.js"></script>

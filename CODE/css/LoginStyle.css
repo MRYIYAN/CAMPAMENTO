@@ -88,7 +88,7 @@ body::before {
 /*--------------------------------------------------------------------------------------------*/
 /* Estilo para la sección de signup (Crear cuenta) */
 /*--------------------------------------------------------------------------------------------*/
-.signup {
+.login {
     position: relative; /* Posiciona de manera relativa dentro de su contenedor */
     width: 100%; /* Ocupa el 100% del ancho */
     height: 100%; /* Ocupa el 100% de la altura */
@@ -155,7 +155,7 @@ button:hover {
 /*--------------------------------------------------------------------------------------------*/
 /* Estilo para el contenedor de login */
 /*--------------------------------------------------------------------------------------------*/
-.login {
+.signup {
     height: 460px; /* Altura del contenedor de login */
     background: #5395e0; /* Color de fondo del login */
     border-radius: 60% / 10%; /* Bordes redondeados en un patrón elíptico */
@@ -166,7 +166,7 @@ button:hover {
 /*--------------------------------------------------------------------------------------------*/
 /* Estilo para la etiqueta dentro del contenedor de login (cambia al hacer interactuar con el formulario) */
 /*--------------------------------------------------------------------------------------------*/
-.login label {
+.signup label {
     color: #ffffff; /* Color del texto en el formulario de login */
     transform: scale(.6); /* Reduce el tamaño del texto cuando está en login */
 }
@@ -174,21 +174,21 @@ button:hover {
 /*--------------------------------------------------------------------------------------------*/
 /* Efecto cuando el checkbox está marcado, transforma el login hacia arriba */
 /*--------------------------------------------------------------------------------------------*/
-#chk:checked ~ .login {
+#chk:checked ~ .signup {
     transform: translateY(-500px); /* Desplaza el contenedor aún más arriba */
 }
 
 /*--------------------------------------------------------------------------------------------*/
 /* Estilo para la etiqueta dentro del login cuando el checkbox está marcado (escala de nuevo) */
 /*--------------------------------------------------------------------------------------------*/
-#chk:checked ~ .login label {
+#chk:checked ~ .signup label {
     transform: scale(1); /* Escala el texto a su tamaño original */
 }
 
 /*--------------------------------------------------------------------------------------------*/
 /* Estilo para la etiqueta dentro del signup cuando el checkbox está marcado (reduce el tamaño) */
 /*--------------------------------------------------------------------------------------------*/
-#chk:checked ~ .signup label {
+#chk:checked ~ .login label {
     transform: scale(.6); /* Escala el texto hacia abajo */
 }
 

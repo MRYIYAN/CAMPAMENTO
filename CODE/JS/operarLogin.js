@@ -50,9 +50,10 @@ function mostrarErrorLogin(mensaje) {
         const nuevoErrorContainer = document.createElement("div");
         nuevoErrorContainer.id = "errorLogin";
         nuevoErrorContainer.style.color = "red";
-        nuevoErrorContainer.style.marginTop = "10px";
+        nuevoErrorContainer.style.margin = "10px";
+        nuevoErrorContainer.style.marginLeft = "70px";
         nuevoErrorContainer.innerHTML = `${iconoError} ${mensaje}`;
-        document.getElementById("loginForm").appendChild(nuevoErrorContainer);
+        document.getElementById("errorLogin123").appendChild(nuevoErrorContainer);
     } else {
         errorContainer.innerHTML = `${iconoError} ${mensaje}`;
     }
