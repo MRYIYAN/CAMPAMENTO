@@ -169,14 +169,14 @@ $(document).ready(function(){
 
 
 
- // Función para obtener el valor de una cookie por su nombre
- function getCookie(nombre) {
-     const cookies = document.cookie.split('; ');
-     const cookie = cookies.find(fila => fila.startsWith(nombre + '='));
-     return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
- }
- // Asignar el valor de la cookie al elemento HTML
- document.getElementById('biembenidoNombre').innerHTML = getCookie('nombreMonitor');
+//  // Función para obtener el valor de una cookie por su nombre
+//  function getCookie(nombre) {
+//      const cookies = document.cookie.split('; ');
+//      const cookie = cookies.find(fila => fila.startsWith(nombre + '='));
+//      return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+//  }
+//  // Asignar el valor de la cookie al elemento HTML
+//  document.getElementById('biembenidoNombre').innerHTML = getCookie('nombreMonitor');
 
 
  //-----------------------------------------------------------------------------------------------------------//
@@ -204,7 +204,7 @@ $(document).ready(function(){
         console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
       } else {
         console.log(`id: ${data.id}`);
-        cookieNombreMonitor(data.id)  //---------------------
+        // cookieNombreMonitor(data.id)  //---------------------
       }
     })
     //-----------------------------------------------------------------------------------------------------------//

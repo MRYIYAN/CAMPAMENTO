@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
       } else {
         console.log(`id: ${data.id}`);
-        cookieNombreMonitor(data.id)  //---------------------
+        // cookieNombreMonitor(data.id)  //---------------------
       }
     })
     //-----------------------------------------------------------------------------------------------------------//
