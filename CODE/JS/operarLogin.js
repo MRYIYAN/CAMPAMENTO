@@ -95,6 +95,7 @@ const estiloError = `
     margin-top: 5px; 
     display: flex; 
     align-items: center; 
+    justify-content: center;
 `;
 // Aplica el estilo a todos los contenedores de errores
 [errorCorreoLogin, errorContrasenaLogin, errorCorreoSignup, errorContrasenaSignup].forEach(el => (el.style.cssText = estiloError));
