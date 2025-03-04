@@ -37,7 +37,6 @@ body::-webkit-scrollbar {
 
   body {
     font-family: "Euclid Circular A", "Poppins";
-    background: linear-gradient(225deg, #ffffff, #3E99E3); /* Ajusta este color según sea necesario */
     color: white;
     margin: 0;
     height: 100vh;
@@ -429,7 +428,7 @@ body::-webkit-scrollbar {
     height: 350px; /* Altura del footer */
     overflow-x: hidden;
     z-index: 10; /* Asegura que el footer quede por encima de otros elementos */
-    background: linear-gradient(225deg, #ffffff, #3E99E3); /* Ajusta este color según sea necesario */
+  
   }
   
   /* ==================================================================*/

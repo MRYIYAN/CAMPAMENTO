@@ -4,7 +4,7 @@
 
 /* Estilos generales */
 * {
-    padding: 7px;
+   
     box-sizing: border-box;
     font-family: "Open Sans", serif;/* Aplica la tipografía Poppins a todos los elementos */
 }
@@ -83,25 +83,8 @@ body::-webkit-scrollbar {
       background: #B8D3EF;
   } 
 
-.color_fondo {
-    position: relative; /* Necesario para que el pseudo-elemento se posicione correctamente */
-}
-
-.color_fondo::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../assets/img/fondo_agua.png'); /* Ruta a tu imagen */
+ /* Ruta a tu imagen */
    
-    background-position: center;
-    /* Ajusta el tamaño de la imagen para que se ajuste dentro del contenedor */
-    opacity: 0.1; /* Ajusta la opacidad para que se vea como una marca de agua */
-    z-index: -1; /* Asegura que la imagen esté detrás de todo el contenido */
-    pointer-events: none; /* Permite que los eventos pasen a través del pseudo-elemento */
-}
 
 html, body {
     background-color: #fff; /* Establecer el color de fondo */
@@ -109,8 +92,8 @@ html, body {
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-    margin: 0; /* Eliminar margen */
-    padding: 0; /* Eliminar padding */
+    margin: 0px; /* Eliminar margen */
+    padding: 0px; /* Eliminar padding */
     height: 100%; /* Asegurar que el fondo cubra toda la altura */
 }
 
@@ -183,14 +166,19 @@ html, body {
         width: 45px; /* Ajusta el tamaño de la imagen según sea necesario */
         height: 45px; /* Ajusta el tamaño de la imagen según sea necesario */
     }
-.espacio {
-    margin: 10px;
+.inicio {
+    background-image: url(../assets/img/nuevo_fondo.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    
 }
+
 .inicio .tarjeta {
     width: 800px;
-    height: 600px;
+    height: 650px;
     background-color: transparent;
-    margin: 50px;
     margin-left: auto; /* Mueve el elemento a la derecha */
 }
 /* Otros estilos */
@@ -210,8 +198,6 @@ html, body {
     background-size: cover;
     background-attachment: fixed;
     flex-direction: column;    
-  
-    margin: 20px;
     border-radius: 20px; 
 }
 .titulo {
@@ -231,7 +217,7 @@ html, body {
     background-attachment: fixed;
     flex-direction: column;    
     background-color: rgba(0, 159, 193, 0.5); /* Color de fondo con transparencia */
-    margin: 20px;
+    
     border-radius: 20px;
 }
 
@@ -251,36 +237,30 @@ html, body {
     font-family: "Open Sans", serif;/* Aplica la tipografía Poppins a todos los elementos */
 }
 body .recuadro {
-    background-color: #c8e6fa; /* Color de fondo */
+    /*background-color: #c8e6fa;*/ /* Color de fondo */
     border-radius: 10px;
     margin: 10px auto; /* Centrar horizontalmente */
     width: 80%;
     position: relative;
 }
-.inicio {
-    background-image: url(../assets/img/fondo_inicio.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-}
+
 
 .final {
-    margin: 0; /* Eliminar margen */
-    padding: 0; /* Eliminar padding */
+    width: 100%;
+    
     background-image: url(../assets/img/noche.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
     background-attachment: fixed;
+    display: inline-block;
    
 }
 
-.decoracion img{
-    width: 100%;
-    height: 700px;
+.decoracion img {
+    width: 100%; /* Ocupar todo el ancho del contenedor */
+    height: auto; /* Mantener la proporción de aspecto */
     background-size: 100% 100%;
-    
 }
 .subtitulo {
     margin: 0; /* Eliminar margen */
@@ -312,10 +292,12 @@ body .recuadro {
     background-size: 100% 100%;
     background-attachment: fixed;
 }
-.mapa {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente si es necesario */
+.mapa iframe{
+    position: relative;
+    margin-top: 900px;
+    
+    justify-content: flex-end; /* Alinear a la derecha */
+    
     margin: 20px 0; /* Agregar margen superior e inferior si es necesario */
 }
 .texto {
@@ -326,8 +308,9 @@ body .recuadro {
     font-size: 20px;
 }
 .recuadro {
+    color:#000;
     opacity: 0.5;
-    background-color: #c7c4c4;
+    background-color:transparent;
     border-radius: 10px;
     margin: 10px auto; /* Centrar horizontalmente */
     width: 80%;
@@ -609,15 +592,19 @@ span {
     opacity: 1;
 }
 /* Cuadro de ubicación */
-.mapa {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente si es necesario */
-    margin: 20px 0; /* Agregar margen superior e inferior si es necesario */
-    margin-top: 50px; /* Agregar margen superior para separar del carrusel */
+
+
+.explorador img{
+    position: relative;
+    width: 450px;
+    height: 450px;
+    border-radius: 30px;
+    margin-left: 100px;
+    margin-top: 87px;
+    float: left;
+    
+    
 }
-
-
 .my-button {
     padding: 20px 40px;
     background-color: #2788c0;
@@ -658,7 +645,7 @@ span {
 }
 
 .card .face {
-    position: absolute;
+    position: abso2ute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden; /* Determina si la cara posterior de un elemento es visible de frente al usuario */
@@ -925,6 +912,134 @@ span {
     width: 20px;
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    
+  }
+  
+  .circles li:nth-child(1){
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+  }
+  
+  
+  .circles li:nth-child(2){
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+  }
+  
+  .circles li:nth-child(3){
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+  }
+  
+  .circles li:nth-child(4){
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+  }
+  
+  .circles li:nth-child(5){
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+  }
+  
+  .circles li:nth-child(6){
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+  }
+  
+  .circles li:nth-child(7){
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+  }
+  
+  .circles li:nth-child(8){
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+  }
+  
+  .circles li:nth-child(9){
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+  }
+  
+  .circles li:nth-child(10){
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+  }
+  
+  
+  
+  @keyframes animate {
+  
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+  
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+  
+  }
+
+
+
+  .area{
+    background: #cff4ff;  
+    background: -webkit-linear-gradient(to left, #83d0f7, #248de3);  
+    width: 100%;
+    height:100vh;
+    z-index: -1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .circles{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .circles li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(78, 205, 255, 0.2);
     animation: animate 25s linear infinite;
     bottom: -150px;
     
