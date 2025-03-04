@@ -235,7 +235,7 @@ function pintarTabla() {
                         celda5.textContent = definicionCorta;
                         const celda6 = nuevaFila.insertCell(); // Crear la cuarta celda
                         celda6.innerHTML = `
-                        <button class="verMasBtn" onclick="mostrarOverlayOperar('${plan.id_plan}')" id="btnOperar">Operar</button>
+                        <button class="verMasBtn" onclick="mostrarOverlayOperar('${plan.id_plan}')" id="btnOperar">Modificar</button>
                         <button class="verMasBtn" onclick="mostrarOverlayNinos('${plan.id_plan}')" id="btnVerNinos">VerNinos</button>
                         
                         `; // boton para operar
@@ -1243,11 +1243,15 @@ function pintarListaNino(){
                     celda3.innerHTML = nino.pagado === 1 ? "Pagado" : "No Pagado";
 
                     const celda4 = nuevaFila.insertCell(); // Crear la segunda celda
-                    celda4.innerHTML = `${nino.fecha_inicio} - ${nino.fecha_fin}`; // Introducir información en la segunda celda
+                    if (nino.fecha_inicio){
+                        celda4.innerHTML = `${nino.fecha_inicio} - ${nino.fecha_fin}`; // Introducir información en la segunda celda
+                    }else{
+                        celda4.innerHTML = "No tiene Plan "
+                    }
 
                     const celda5 = nuevaFila.insertCell(); // Crear la cuarta celda
                     celda5.innerHTML = `
-                <button class="verMasBtn" onclick="mostrarOverlayModificarDatosNino('${nino.id_nino}')" id="btnModificarDatosNino">Operar</button>
+                <button class="verMasBtn" onclick="mostrarOverlayModificarDatosNino('${nino.id_nino}')" id="btnModificarDatosNino">Modificar</button>
                 <button class="verMasBtn" onclick="mostrarOverlayEliminarNino('${nino.id_nino}')" id="btnEliminarNino">Eliminar</button>
                 `;
                 });

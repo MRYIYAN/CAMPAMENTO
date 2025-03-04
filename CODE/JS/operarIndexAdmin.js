@@ -561,6 +561,7 @@ function mostrarOverlayOperar(id_actividad) {
 
   //hacemos que el overlay sea visible
   document.getElementById("overlayOperar").classList.add("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+  document.body.classList.add("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
   document.getElementById('btnEliminarActividad').classList.remove("oculto")
   document.getElementById('btnModificarActividad').classList.remove("oculto") //mostramos el boton de modificar
   document.getElementById('btnInsertarActividad').classList.add("oculto") //quitamos el boton de modificar
@@ -574,6 +575,8 @@ function mostrarOverlayOperar(id_actividad) {
       document
         .getElementById("overlayOperar")
         .classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+        document.body.classList.remove("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
+
     });
 }
 
@@ -582,6 +585,8 @@ function cerrarOverlayOperar() {
   document
     .getElementById("overlayOperar")
     .classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+    document.body.classList.remove("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
+
 }
 
 //================================================================================================//

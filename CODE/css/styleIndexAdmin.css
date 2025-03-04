@@ -566,6 +566,7 @@ section {
     overflow: auto; /* Agrega desplazamiento si es necesario */
     padding: 20px;  /* Evita que el contenido toque los bordes */
     z-index: 998;
+    pointer-events: auto;  /* Habilita la interacción con el overlay */
 }
 
 /* Estilo para la ventana emergente */
@@ -658,6 +659,45 @@ label {
     margin-bottom: 5px;
     display: block;
     color: #444;
+}
+#btnModificarActividad{
+  border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    width: 90%;
+    margin-top: 20px;
+}
+#btnEliminarActividad{
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    width: 90%;
+}
+#btnEliminarActividad:hover{
+    background-color: #842b2b;
+}
+
+#btnRegresarActividad{
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    width: 90%;
+}
+#btnRegresarActividad:hover{
+    background-color: #ccc;
 }
 /* ==================================================================*/
 /* Cerrar Overlay para mostrar más operar */

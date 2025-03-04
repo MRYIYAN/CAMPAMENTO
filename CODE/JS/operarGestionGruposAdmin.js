@@ -730,7 +730,12 @@ function repintarLista() {
                         celda3.innerHTML = nino.pagado === 1 ? "Pagado" : "No Pagado";
 
                         const celda4 = nuevaFila.insertCell(); // Crear la segunda celda
-                        celda4.innerHTML = `${nino.fecha_inicio} - ${nino.fecha_fin}`; // Introducir información en la segunda celda
+                        if (nino.fecha_inicio){
+                            celda4.innerHTML = `${nino.fecha_inicio} - ${nino.fecha_fin}`; // Introducir información en la segunda celda
+                        }else{
+                            celda4.innerHTML='No tiene plan'
+                        }
+                        
 
                         const celda5 = nuevaFila.insertCell(); // Crear la cuarta celda
                         celda5.innerHTML = `

@@ -986,7 +986,10 @@ body::-webkit-scrollbar {
 
 /* Estilo para los radio buttons */
 #pagadoSi, #pagadoNo {
-  margin: -120px;
+  margin-left: -120px;
+}
+.estodoPagoTXT{
+margin-left: -100px;
 }
 
 

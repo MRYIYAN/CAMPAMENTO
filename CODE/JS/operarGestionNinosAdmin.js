@@ -326,8 +326,9 @@ function pintarTablaNinos() {
                         }else{
                             celda6.innerHTML = `
                             <button class="verMasBtn" onclick="mostrarOverlayOperar('${nino.id_nino}')" id="btnOperar">Operar</button>
-                            <button class="verMasBtn" id= "btnVerActividadesDelNino"onclick="mostrarOverlayActividad('${nino.id_plan}', '${nino.id_grupo}')" id="btnVerActividadNinos">Ver su Actividad</button>
                             <button class="verMasBtn" onclick="mostrarOverlayEliminar('${nino.id_nino}')" id="btneliminarNinos">Eliminar</button>
+                            <button class="verMasBtn" id= "btnVerActividadesDelNino"onclick="mostrarOverlayActividad('${nino.id_plan}', '${nino.id_grupo}')" id="btnVerActividadNinos">Ver su Actividad</button>
+
                         `;
                         }
                         

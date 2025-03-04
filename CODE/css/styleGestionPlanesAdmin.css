@@ -355,6 +355,11 @@ nav .item:nth-child(5):hover ~ .underline {
 .open-btn:hover {
   background: #0056b3;
 }
+
+#btnOperar{
+padding-left: 5px;
+padding-right: 5px;
+}
 /* -------------------------------------------------------------------------------------------------- */
 
 /* =====================================================================================================================================================*/
@@ -1109,9 +1114,15 @@ select {
 margin-right: -100px;
 margin-left: -50px;
 }
-.pagado{
-  margin-right: -100px;
+#pagadoSelect {
+  display: flex;
+  flex-direction: column;
 }
+.imputRadioSelect{
+  display: inline;
+  margin-right: 100px;
+}
+
 
 
 /* Botón de cierre */

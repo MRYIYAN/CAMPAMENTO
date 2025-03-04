@@ -322,9 +322,15 @@
                   Nombre: <br>
                     <input type="text" name="nombreNino" id="nombreNino" disabled>
                 </label><br>
-                <label for="pagado">
-                    <input type="radio" name="padago" id="pagadoSi" value="1" required>Pagado <br>
-                    <input type="radio" name="padago" id="pagadoNo" value="0">No Pagado
+                <label for="pagado" id="pagadoSelect">
+                  <div class="imputRadioSelect">
+                    <input type="radio" name="padago" id="pagadoSi" value="1" required>
+                    Pagado 
+                  </div>
+                    <div class="imputRadioSelect">
+                      <input type="radio" name="padago" id="pagadoNo" value="0">No Pagado
+                    </div>
+                    
                 </label><br>
                 <label for="planNino">
                     Plan:
