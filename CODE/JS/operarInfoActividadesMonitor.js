@@ -172,12 +172,13 @@ document.addEventListener('DOMContentLoaded', function() {
   .then(function(data) {
     var monitorName = data.nombre || 'Monitor';
     var monitorAvatar = data.avatar_src;
+
     if (data.avatar_src) {
-      monitorAvatar = '../assets/img/avatar.png';
-      
+      monitorAvatar = data.avatar_src;
     }
-    comprobarImagen(data.avatar_src).then(existe => {  //usamos el metodo para la comprobacion
-      monitorAvatar = existe ? data.avatar_src : '../assets/img/avatar.png';  //creamos un variable que guarda la ruta, y si el funcion del comprobacion devualve un false, asignamos la ruta predefinida del imagen, al contrario asignamos la ruta que esta en bbdd
+    comprobarImagen(data.avatar_src).then(existe => {
+      monitorAvatar = existe ? data.avatar_src : '../assets/img/avatar.png';
+      document.getElementById('monitorAvatar').setAttribute('src', monitorAvatar);
     });
     document.getElementById('monitorName').textContent = monitorName;
     document.getElementById('monitorAvatar').setAttribute('src', monitorAvatar);
