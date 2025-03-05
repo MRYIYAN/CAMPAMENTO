@@ -139,6 +139,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+// Función para alternar la visibilidad del menú hamburguesa
+document.getElementById('menuToggle').addEventListener('click', function() {
+    var menu = document.getElementById('menu');
+    menu.classList.toggle('mostrar');
+});
+
+
 //-----------------------------------------------------------------------------------------------------------//
 //                                               FIN DE JS DE NAVBAR
 //-----------------------------------------------------------------------------------------------------------//
