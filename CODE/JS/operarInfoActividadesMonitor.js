@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Encabezado
         var thead = document.createElement('thead');
         var headerRow = document.createElement('tr');
-        ['ID', 'NOMBRE', 'OPERAR'].forEach(function(text) {
+        ['FOTO', 'NOMBRE', 'OPERAR'].forEach(function(text) { // Removed 'ID' and added 'FOTO'
           var th = document.createElement('th');
           th.textContent = text;
           headerRow.appendChild(th);
@@ -274,10 +274,13 @@ document.addEventListener('DOMContentLoaded', function() {
         data.forEach(function(nino) {
           var row = document.createElement('tr');
           
-          // Columna ID
-          var tdId = document.createElement('td');
-          tdId.textContent = nino.id_nino;
-          row.appendChild(tdId);
+          // Columna FOTO
+          var tdFoto = document.createElement('td');
+          var imgFoto = document.createElement('img');
+          imgFoto.src = nino.avatar_src || '../assets/img/avatar.png';
+          imgFoto.className = 'nino-avatar';
+          tdFoto.appendChild(imgFoto);
+          row.appendChild(tdFoto);
           
           // Columna NOMBRE
           var tdNombre = document.createElement('td');
@@ -340,22 +343,17 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('No se ha seleccionado ningún niño.');
       return;
     }
-    var checkSi = document.getElementById('checkSi').checked;
-    var checkNo = document.getElementById('checkNo').checked;
+    var radioSi = document.getElementById('radioSi').checked;
+    var radioNo = document.getElementById('radioNo').checked;
     
     // Validaciones: Debe seleccionar solo una opción
-    if (!checkSi && !checkNo) {
+    if (!radioSi && !radioNo) {
       errorDiv.innerHTML = '⚠️ Debe seleccionar SI o NO.';
       errorDiv.style.cssText = estiloError;
       return;
     }
-    if (checkSi && checkNo) { 
-      errorDiv.innerHTML = '⚠️ Seleccione solo una opción.';
-      errorDiv.style.cssText = estiloError;
-      return;
-    }
     
-    var estado = checkSi ? 'si' : 'no';
+    var estado = radioSi ? 'si' : 'no';
     
     // Enviar la información al servidor para actualizar la asistencia
     fetch('../Server/GestionarInfoAcividadesMonitor.php', {
@@ -375,8 +373,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (data.mensaje) {
         errorDiv.style.cssText = "color: green; font-size: 12px; margin-top: 5px; display: flex; align-items: center;";
         errorDiv.innerHTML = "Guardado con éxito 🎉";
-        document.getElementById('checkSi').checked = false;
-        document.getElementById('checkNo').checked = false;
+        document.getElementById('radioSi').checked = false;
+        document.getElementById('radioNo').checked = false;
       } else {
         errorDiv.style.cssText = estiloError;
         errorDiv.innerHTML = data.error || "Error desconocido";
