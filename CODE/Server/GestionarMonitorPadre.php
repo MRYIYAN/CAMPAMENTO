@@ -1,5 +1,4 @@
 <?php
-// Activar errores para depuración (puedes desactivar en producción)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -12,12 +11,18 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
     exit();
 }
 
+// Consulta SQL
 $sql = "SELECT id_monitor, nombre, descripcion FROM MONITORES";
 $result = $conn->query($sql);
 
+// Verificación de errores en la consulta
+if (!$result) {
+    die("Error en la consulta SQL: " . $conn->error);
+}
+
 $monitores = [];
 
-if ($result && $result->num_rows > 0) {
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $monitores[] = [
             'id'          => $row['id_monitor'],  
@@ -26,7 +31,7 @@ if ($result && $result->num_rows > 0) {
         ];
     }
 } else {
-    $monitores = [];
+    $monitores = []; // Si no hay registros
 }
 
 header('Content-Type: application/json; charset=utf-8');

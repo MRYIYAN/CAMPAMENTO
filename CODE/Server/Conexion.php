@@ -128,8 +128,7 @@ $sql_tables = "
     CREATE TABLE IF NOT EXISTS ADMIN (
         id_admin INT PRIMARY KEY AUTO_INCREMENT,
         email VARCHAR(50) NOT NULL UNIQUE,
-        contrasenia text NOT NULL,
-      
+        contrasenia text NOT NULL
     );
 
     CREATE TABLE IF NOT EXISTS MENSAJES (
@@ -143,7 +142,6 @@ $sql_tables = "
     FOREIGN KEY (id_monitor) REFERENCES MONITORES(id_monitor) ON DELETE CASCADE
 
 );
-
 -- Admin 
 INSERT IGNORE INTO ADMIN (email, contrasenia) 
 VALUES ('admin@ejemplo.com', '\$2y\$10\$BdT7ajvlvw8G4ExY0CQ57ewHfT2ctoziqRgpYvoF4QA41uu0/VEgu');
