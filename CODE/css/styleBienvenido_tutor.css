@@ -362,6 +362,7 @@ body::-webkit-scrollbar {
 
 
   .introduccion {
+    margin: 20px;
     width: 1000px;
     height: 500px;
     background-color: #9ed5ff;
@@ -371,9 +372,10 @@ body::-webkit-scrollbar {
     justify-content: center;
     gap: 20px;
     text-align: center;
-    margin-top: 10px;
+    
     position: relative;
     margin-top: -150px;
+    margin-left: 20px;
     margin-bottom: 40px; /* Agregar margen inferior */
     z-index: -999;
 }
@@ -389,6 +391,7 @@ body::-webkit-scrollbar {
 }
 /* Ubicación */
 .ubicacion {
+  background-color: #9ed5ff;
   width: 100%;
   max-width: 1200px;
   margin: 20px auto; /* Agregar margen superior e inferior para separar la ubicación */
@@ -399,12 +402,14 @@ body::-webkit-scrollbar {
   gap: 20px;
   position: relative;
   margin-top: 200px;
+  margin: 20px;
 }
 
 .ubicacion .texto {
   flex: 1;
   color: rgb(255, 255, 255); /* Asegúrate de que el texto sea legible */
   max-width: 50%; /* Ajusta el ancho máximo del texto */
+  margin: 20px;
 }
 
 .ubicacion .mapa {
@@ -1394,3 +1399,14 @@ button#modificar:hover {
   }
 
 }
+
+
+@media (max-width: 768px) {
+  .nav{
+position: relative;
+margin-left: 500px;
+  }
+}
+
+
+

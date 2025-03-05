@@ -89,7 +89,7 @@ body::-webkit-scrollbar {
                                                                        /* NAVBAR */
   /* =====================================================================================================================================================*/
   /* Estilo del navbar */
-* {
+  * {
     box-sizing: border-box;
     border-radius: 8px;
   }
@@ -108,17 +108,17 @@ body::-webkit-scrollbar {
     border-radius: 10px;
     }
     nav {
-        border-radius: 10px;
-        position: fixed;
-        background: var(--color-nav-bg);
-        font-weight: 400;
-        font-size: 0;
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        width: 95%;
-        z-index: 1000; /* Valor alto para que el navbar esté encima */
-      }
+      border-radius: 10px;
+      position: relative;
+      background: var(--color-nav-bg);
+      font-weight: 400;
+      font-size: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      width: 100%;
+      z-index: 1000; /* Valor alto para que el navbar esté encima */
+    }
 
   /* =================================================================*/
   /* El logo se posiciona de forma absoluta (como pegatina) */
@@ -189,7 +189,7 @@ body::-webkit-scrollbar {
     height: 40px;
     line-height: 40px;
     background: var(--color-primary);
-    color: rgb(26, 106, 143);
+    color: rgb(117, 21, 96);
     text-decoration: none;
   }
   
@@ -242,37 +242,39 @@ body::-webkit-scrollbar {
     width: 100%;
     height: 100%;
   }
-/* bienvenida */
-#contenedorBienvenido {
-  background-color: #e9ecef;
-  padding: 5px 15px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: 'Arial', sans-serif;
-  max-width: 250px;
-  height: 30px;
-  margin-left: auto;
-}
-#contenedorBienvenido p {
-  margin: 0; /* Eliminar márgenes predeterminados */
-  font-size: 14px; /* Texto más pequeño */
-  color: #333; /* Color de texto oscuro */
   
+  /* bienvenida */
+  #contenedorBienvenido {
+    background-color: #e9ecef;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Arial', sans-serif;
+    max-width: 250px;
+    height: 30px;
+    margin-left: auto;
 }
+  #contenedorBienvenido p {
+    margin: 0; /* Eliminar márgenes predeterminados */
+    font-size: 14px; /* Texto más pequeño */
+    color: #333; /* Color de texto oscuro */
+    
+  }
+  
+  #biembenidoNombre {
+    font-weight: bold; /* Resaltar el nombre */
+    color: #007bff; /* Color azul para un toque moderno */
+  }
 
-#biembenidoNombre {
-  font-weight: bold; /* Resaltar el nombre */
-  color: #007bff; /* Color azul para un toque moderno */
-}
-
-.bienvenidoInfo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-}
+  .bienvenidoInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  
 
   /* espaciador para el navbar y el contenido, para que no se superpongan */
   .espaciador{
@@ -352,7 +354,8 @@ body::-webkit-scrollbar {
     cursor: pointer;
 }
   /* -------------------------------------------------------------------------------------------------- */
-
+  
+  
 /* =====================================================================================================================================================*/
                                                             /* FOOTER */        
 /* =====================================================================================================================================================*/
@@ -749,3 +752,17 @@ section {
   }
 
 }
+
+
+
+@media (max-width: 768px) {
+  .nav {
+    position: relative;
+    height: 100px;
+    margin-left: 500px;
+     /* Ancho del 100% del contenedor padre */
+    max-width: 1200px; /* Ancho máximo si deseas limitarlo */
+  }
+}
+
+
