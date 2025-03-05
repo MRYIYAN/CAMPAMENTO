@@ -152,49 +152,59 @@ const tablesInner = document.querySelector(".tables-inner");
 const selectList = (element, index = 0) => {
   tablesInner.style.translate = `${index === 0 ? 0 : 0 - index * 500}px 0`;
 
-  tables.forEach((table) => table.classList.remove("active"));
-  tables[index].classList.add("active");
+ // Remover la clase 'active' de todas las tablas
+ tables.forEach((table) => table.classList.remove("active"));
+  
+ // Agregar la clase 'active' a la tabla seleccionada
+ tables[index].classList.add("active");
 
-  if (element) {
-    buttons.forEach((button) => button.classList.remove("active"));
-    element.classList.add("active");
-  }
+ // Resaltar el botón seleccionado
+ if (element) {
+   buttons.forEach((button) => button.classList.remove("active"));
+   element.classList.add("active");
+ }
 };
-
 selectList();
 
 //------------------------------------------------------------------------------------------------// 
 //                             GESTION DE BD PARA INFORMACIÓN DEL MONITOR
 //------------------------------------------------------------------------------------------------//
+// Función para actualizar los datos de los monitores
+function actualizarMonitores() {
+    fetch('../Server/GestionarMonitorPadre.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error de red');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Datos recibidos:', data);  // Verifica la estructura de los datos en la consola
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Función para actualizar los datos de los monitores
-    function actualizarMonitores() {
-        fetch('../Server/GestionarMonitorPadre.php')
-            .then(response => {
-                console.log(response);
-                if (!response.ok) {
-                    throw new Error('Error de red');
+            if (data.length < 4) {
+                console.warn('Faltan algunos usuarios, solo se reciben', data.length, 'usuarios');
+            }
+
+            // Itera sobre la cantidad de datos que se recibieron
+            for (let i = 0; i < data.length; i++) {
+                const monitor = data[i];
+                const userDiv = document.querySelector(`#usuario${i + 1}`);
+                
+                if (userDiv) {
+                    const h3 = userDiv.querySelector('h3');
+                    const h4 = userDiv.querySelector('h4');
+                    if (h3) h3.innerHTML = monitor ? monitor.nombre : 'Usuario no encontrado';
+                    if (h4) h4.innerHTML = monitor ? monitor.descripcion : 'Descripción no disponible';
+                } else {
+                    console.warn(`No se encontró el contenedor para el usuario ${i + 1}`);
                 }
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(monitor => {
-                    const userDiv = document.querySelector(`#usuario${monitor.id}`);
-                    if (userDiv) {
-                        const h3 = userDiv.querySelector('h3');
-                        const h4 = userDiv.querySelector('h4');
-                        if (h3) h3.innerHTML = monitor.nombre;
-                        if (h4) h4.innerHTML = monitor.descripcion;
-                    }
-                });
-            })
-            .catch(error => console.error('Error:', error));
-    }
+            }
+        })
+        .catch(error => console.error('Error en la carga de monitores:', error));
+}
 
-    // Llamar a la función para actualizar los datos de los monitores
-    actualizarMonitores();
-});
+// Llamar a la función para actualizar los datos de los monitores
+actualizarMonitores();
 //-----------------------------------------------------------------------------------------------------------//
 
         // Función para obtener el valor de una cookie por su nombre

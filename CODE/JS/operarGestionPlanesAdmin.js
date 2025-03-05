@@ -73,9 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página de modificación de datos del padre
         });
 
-    document.getElementById("btnNotificaciones").addEventListener("click", () => {
-        redirectWithTransition("../html/404_ejemplo.html"); // Redirigir a la página de notificaciones
-    });
+  
 
     document.getElementById("btnMonitor").addEventListener("click", () => {
         redirectWithTransition("../html/infoMonitorAdmin.html"); // Redirigir a la página de información del monitor

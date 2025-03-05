@@ -1,182 +1,812 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/logo/Logo1.png" type="image/x-icon">
-    <link rel="stylesheet" href="../css/Prototipo_index.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-   
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <title>Index</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - primary meta tags
+  -->
+  <title>Grilli - Amazing & Delicious Food</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <meta name="title" content="Grilli - Amazing & Delicious Food">
+  <meta name="description" content="This is a Restaurant html template made by codewithsadee">
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="../css/Prototipo_index.css">
+
+  <!-- 
+    - preload images
+  -->
+  <link rel="preload" as="image" href="./assets/images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
+
 </head>
-<body>
-    <div class="color_fondo">
-    <!-- CONTENEDOR DE TRANSICIÓN -->
-    <div class="transition">
-        <div class="transition-row row1">
-            <div class="block"></div>
-            <div class="block"></div>
-            <div class="block"></div>
-            <div class="block"></div>
-        </div>
-        <div class="transition-row row2">
-            <div class="block"></div>
-            <div class="block"></div>
-            <div class="block"></div>
-            <div class="block"></div>
-        </div>
-    </div>
 
-    <div class="inicio">
-        <div class="fade-in">
-        <div class="logo">
-        <img src="../assets/logo/Logo1.png" alt=""></div>
-        <div class="espacio"></div></div>
-        
-        <div class="fade-in">
-            <div class="tarjeta">
-        <div class="titulo">
-            <p>Campamento</p>
-            <p>Wooky Dooky</p>
-            
-            <div class="boton_inicio">
-                <input type="button" value="Iniciar sesión" class="my-button" id="btnIniciarSesion">
-            </div>
-        </div></div></div>
-        <br><br>
-    </div>
-<div></div>
-    <div class="recuadro">
-        <div class="subtitulo">
-            <h2>Caracteristicas principales</h2>
-            <p class="heading--desc">Un campamento ofrece una experiencia única en la naturaleza, 
-                brindando a los participantes la oportunidad de desconectar y disfrutar de actividades 
-                al aire libre. A continuación, se detallan algunas de las características más destacadas de 
-                un campamento exitoso.</p>
-        </div>
-    </div>
-    <div class="cuadrado">
+<body id="top">
+
+  <!-- 
+    - #PRELOADER
+  -->
+<!-- 
+  <div class="preload" data-preaload>
+    <div class="circle"></div>
+    <p class="text">Grilli</p>
+  </div>
+
+
+ -->
+
+
+  <!-- 
+    - #TOP BAR
+  -->
+
+  <div class="topbar">
     <div class="container">
-        <div class="card">
-            <div class="card-image">
-                <img src="../assets/img/participacion.jpg" alt="Imagen de tarjeta">
-            </div>
-            <div class="content">
-                <h2>01</h2>
-                <h3>Fomentar la inclusividad</h3>
-                <p>Un campamento inclusivo es un espacio donde todas las personas, sin importar sus diferencias, son bienvenidas y valoradas.</p>
-                <a href="#">Saber más</a>
-            </div>
+
+      <address class="topbar-item">
+        <div class="icon">
+          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
         </div>
 
-        <div class="card">
-            <div class="card-image">
-                <img src="../assets/img/curiosidad.jpg" alt="Imagen de tarjeta">
-            </div>
-            <div class="content">
-                <h2>02</h2>
-                <h3>Fomentar la curiosidad</h3>
-                <p>Un campamento que fomenta la curiosidad inspira a los participantes a explorar, aprender y hacerse preguntas sobre el mundo que los rodea.</p>
-                <a href="#">Saber más</a>
-            </div>
+        <span class="span">
+          Calle Mataespesa, Alpedrete, Madrid
+        </span>
+      </address>
+
+      <div class="separator"></div>
+
+      <div class="topbar-item item-2">
+        <div class="icon">
+          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
         </div>
 
-        <div class="card">
-            <div class="card-image">
-                <img src="../assets/img/creatividad.jpg" alt="Imagen de tarjeta">
-            </div>
-            <div class="content">
-                <h2>03</h2>
-                <h3>Fomentar la creatividad</h3>
-                <p>Un campamento que fomenta la creatividad anima a los participantes a explorar nuevas ideas, resolver problemas y expresarse de forma original.</p>
-                <a href="#">Saber más</a>
-            </div>
+        <span class="span">Horario : 8.00 am to 18.00 pm</span>
+      </div>
+
+      <a href="tel:+11234567890" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
         </div>
+
+        <span class="span">+1 123 456 7890</span>
+      </a>
+
+      <div class="separator"></div>
+
+      <a href="mailto:booking@restaurant.com" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+        </div>
+
+        <span class="span">Campamento@gmail.com</span>
+      </a>
+
     </div>
+  </div>
 
-</div>
-   <div class="decoracion">
-   <img src="../assets/img/decoracion2.jpg" alt="">
-   </div>
 
-    <!-- Carrusel -->
-     <div class="recuadro"> <h1>Novedades</h1></div>
-   
-    <div class="container2">
-        <div class="carousel">
-            <div class="carousel__face"><span>Fogata</span></div>
-            <div class="carousel__face"><span></span></div>
-            <div class="carousel__face"><span>Busqueda del tesoro</span></div>
-            <div class="carousel__face"><span></span></div>
-            <div class="carousel__face"><span>Nuevas infraestructuras</span></div>
-            <div class="carousel__face"><span></span></div>
-            <div class="carousel__face"><span>Picnic</span></div>
-            <div class="carousel__face"><span></span></div>
-            <div class="carousel__face"><span></span></div>
-        </div>
-    </div>
 
-    <div class="recuadro2">
-        <div class="subtitulo">
-            <h1>Ubicación</h1>
-            <div class="lenguajes"></div>
-        </div>
-    </div>
-    <div class="decoracion">
-        <img src="../assets/img/decoracion3 (2).jpg" alt="">
-        </div>
-    <div class="recuadro">
-        <div class="subtitulo">
-            <h1>Ubicación</h1>
-            <div class="lenguajes">
-                <div class="texto">La ubicación de nuestro campamento se encuentra en una zona urbana, 
-                    lo que proporciona un acceso cómodo a los servicios y las comodidades propias de una 
-                    ciudad. Este entorno urbano ofrece una integración única entre las actividades del 
-                    campamento y la dinámica de la vida citadina, permitiendo una experiencia enriquecedora 
-                    en un contexto moderno y bien conectado.
-                </div>
-            </div>
-        </div>
-    </div>
-<div class="explorador"><img src="../assets/img/explorador__1_-removebg-preview.png" alt=""></div>
-    <div class="mapa">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.182580786143!2d-4.038970323484117!3d40.65992554080125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4173738395d72b%3A0xfe13ae3e9475d794!2sColegio%20Mataespesa%20%7C%20Concertado!5e1!3m2!1ses!2ses!4v1740842913599!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
 
-    <div class="final">
-        <br><br><br><br><br><br>
-        <div class="titulo2">
-            <div class="titulo2">
-                <h1><span id="blanco">Descarga nuestro juego gratuito!!!</span></h1>
-            </div>
-            <div class="boton">
-                <input type="button" value="Descargar" class="my-button">
-            </div>
-        </div>
-    </div>
 
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="#" class="logo">
+        <img src="../assets/logo/Logo1.png" width="80" height="50" alt="Grilli - Home">
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <button class="close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+
+        <a href="#" class="logo">
+          <img src="../assets/logo/Logo1.png" width="160" height="50" alt="Grilli - Home">
+        </a>
+
+        <ul class="navbar-list">
+
+<li class="navbar-item">
+            <a href="#Caracteristicas" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Caracteristicas</span>
+            </a>
+            <li class="navbar-item">
+            <a href="#about" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Nuestra Historia</span>
+            </a>
+          </li>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#Proximamente" class="navbar-link hover-underline">
+              <div class="separator"></div>
+
+              <span class="span">Proximamente</span>
+            </a>
+          </li>
+
+          
+          
+
+          
+
+        </ul>
+
+        <div class="text-center">
+          <p class="headline-1 navbar-title">Visit Us</p>
+
+          <address class="body-4">
+            Restaurant St, Delicious City, <br>
+            London 9578, UK
+          </address>
+
+          <p class="body-4 navbar-text">Open: 9.30 am - 2.30pm</p>
+
+          <a href="mailto:booking@grilli.com" class="body-4 sidebar-link">booking@grilli.com</a>
+
+          <div class="separator"></div>
+
+          <p class="contact-label">Booking Request</p>
+
+          <a href="tel:+88123123456" class="body-1 contact-number hover-underline">
+            +88-123-123456
+          </a>
+        </div>
+  
     
-    <div id="myBtn" title="Subir">
-        <img src="../assets/icons/flecha-hacia-arriba.png" alt="Flecha hacia arriba">
-    </div>
+      </nav>
+
+      
+
+      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
 
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="../JS/Prototipo_index.js"></script>
-    <div class="area">
-        <ul class="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-    </ul></div>
+  </header>
+
+
+
+
+
+  <main>
+    <article>
+
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="hero text-center" aria-label="home" id="home">
+
+        <ul class="hero-slider" data-hero-slider>
+
+          <li class="slider-item active" data-hero-slider-item>
+
+            <div class="slider-bg">
+              <img src="../assets/img/Fondo1.jpg" width="1880" height="950" alt="" class="img-cover">
+            </div>
+
+            <p class="label-2 section-subtitle slider-reveal">Tradicional y Novedoso</p>
+
+            <h1 class="display-1 hero-title slider-reveal">
+              Wooky Dooky <br>
+              
+            </h1>
+
+            <p class="body-2 hero-text slider-reveal">
+              La aventura empieza con una sonrisa
+            </p>
+
+
+            <div class="btn btn-primary slider-reveal">
+                <input type="button" value="Iniciar sesión" class="btnIniciarSesion">
+            </div>
+
+         
+          </li>
+
+      
+
+        </ul>
+        <ul class="hero-slider" data-hero-slider>
+
+            <li class="slider-item active" data-hero-slider-item>
+  
+              <div class="slider-bg">
+                <img src="../assets/img/Fondo2 (2).jpg" width="1880" height="950" alt="" class="img-cover">
+              </div>
+  
+              <p class="label-2 section-subtitle slider-reveal">Tradicional y Novedoso</p>
+  
+              <h1 class="display-1 hero-title slider-reveal">
+                Wooky Dooky <br>
+                
+              </h1>
+  
+              <p class="body-2 hero-text slider-reveal">
+                La aventura empieza con una sonrisa
+              </p>
+  
+  
+  
+              <div class="btn btn-primary slider-reveal">
+                <input type="button" value="Iniciar sesión" class="btnIniciarSesion">
+            </div>
+  
+           
+            </li>
+  
+        
+  
+          </ul>
+          <ul class="hero-slider" data-hero-slider>
+
+            <li class="slider-item active" data-hero-slider-item>
+  
+              <div class="slider-bg">
+                <img src="../assets/img/Fondo3 (2).jpg" width="1880" height="950" alt="" class="img-cover">
+              </div>
+  
+              <p class="label-2 section-subtitle slider-reveal">Tradicional y Novedoso</p>
+  
+              <h1 class="display-1 hero-title slider-reveal">
+                Wooky Dooky <br>
+                
+              </h1>
+  
+              <p class="body-2 hero-text slider-reveal">
+                La aventura empieza con una sonrisa
+              </p>
+  
+  
+  
+              <div class="btn btn-primary slider-reveal">
+                <input type="button" value="Iniciar sesión" class="btnIniciarSesion">
+            </div>
+  
+  
+           
+            </li>
+  
+        
+  
+          </ul>
+
+        <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
+          <ion-icon name="chevron-back"></ion-icon>
+        </button>
+
+        <button class="slider-btn next" aria-label="slide to next" data-next-btn>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </button>
+
+        <a href="#" class="hero-btn has-after">
+          <img src="../assets/logo/Logo1.png" width="90" height="48" alt="booking icon">
+
+       
+        </a>
+
+      </section>
+
+
+
+
+
+      <!-- 
+        - #SERVICE
+      -->
+
+      <section class="section service bg-black-10 text-center" aria-label="service">
+        <div class="container">
+
+          <p class="section-subtitle label-2">Destacamos</p>
+
+          <h2 class="headline-1 section-title" id="Caracteristicas">Caracteristicas Principales</h2>
+
+          <p class="section-text">
+            Las caracteristicas por las que nuestro campamento es pacaz de destacan entro los demás y poder atraer a cada vez más público.
+          </p>
+
+          <ul class="grid-list">
+
+            <li>
+              <div class="service-card">
+
+                <a href="#" class="has-before hover:shine">
+                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
+                    <img src="../assets/img/creatividad.jpg" width="285" height="336" loading="lazy" alt="Breakfast"
+                      class="img-cover">
+                  </figure>
+                </a>
+
+                <div class="card-content">
+
+                  <h3 class="title-4 card-title">
+                    <a href="#">Estimular la creatividad</a>
+                  </h3>
+
+                  <p>Fomenta la creatividad de los niños a través de actividades que estimulen su imaginación y originalidad.</p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+
+                <a href="#" class="has-before hover:shine">
+                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
+                    <img src="../assets/img/cooperar.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
+                      class="img-cover">
+                  </figure>
+                </a>
+
+                <div class="card-content">
+
+                  <h3 class="title-4 card-title">
+                    <a href="#">Fomentar la cooperación</a>
+                  </h3>
+
+                  <p>Incentiva la cooperación entre los niños, promoviendo el trabajo en equipo y el apoyo mutuo.</p>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+
+                <a href="#" class="has-before hover:shine">
+                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
+                    <img src="../assets/img/curiosidad.jpg" width="285" height="336" loading="lazy" alt="Drinks"
+                      class="img-cover">
+                  </figure>
+                </a>
+
+                <div class="card-content">
+
+                  <h3 class="title-4 card-title">
+                    <a href="#">Incitar su curiosidad</a>
+                  </h3>
+
+                  <p>Inspira la curiosidad de los niños para que exploren y aprendan más sobre su entorno.</p>
+
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+         
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #ABOUT
+      -->
+
+      <section class="section about text-center" aria-labelledby="about-label" id="about">
+        <div class="container">
+
+          <div class="about-content">
+
+            <p class="label-2 section-subtitle" id="about-label">Nuestra Historia</p>
+
+            <h2 class="headline-1 section-title">Motivaciones y objetivos</h2>
+
+            <p class="section-text">
+              El campamento para niños de 6 años tiene como objetivo crear un ambiente divertido y aventurero donde puedan socializar, desarrollar habilidades sociales y fomentar su 
+              confianza e independencia. A través de actividades creativas y educativas, se busca estimular su imaginación, enseñarles sobre el cuidado del medio ambiente y promover hábitos de vida saludables. La seguridad y el bienestar de los niños son prioritarios, garantizando que todas las actividades sean divertidas y seguras.
+            </p>
+
+           
+
+          </div>
+
+          <figure class="about-banner">
+
+            <img src="../assets/img/conectar.jpg" width="570" height="570" loading="lazy" alt="about banner"
+              class="w-100" data-parallax-item data-parallax-speed="1">
+
+            <div class="abs-img abs-img-1 has-before" data-parallax-item data-parallax-speed="1.75">
+              <img src="../assets/img/actividades_nuevas.jpg" width="285" height="285" loading="lazy" alt=""
+                class="w-100">
+            </div>
+
+            <div class="abs-img abs-img-2 has-before">
+              <img src="../assets/logo/Logo1.png" width="133" height="134" loading="lazy" alt="">
+            </div>
+
+          </figure>
+
+        
+
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #SPECIAL DISH
+      -->
+
+      <section class="special-dish text-center" aria-labelledby="dish-label">
+
+        <div class="special-dish-banner">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.182580786143!2d-4.038970323484117!3d40.65992554080125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4173738395d72b%3A0xfe13ae3e9475d794!2sColegio%20Mataespesa%20%7C%20Concertado!5e1!3m2!1ses!2ses!4v1740842913599!5m2!1ses!2ses" width="650" height="985" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="special-dish-content bg-black-10">
+          <div class="container">
+
+            <img src="../assets/img/place_1691986-01.png" width="50" height="41" loading="lazy" alt="badge" class="abs-img">
+
+            <p class="section-subtitle label-2">Localización</p>
+
+            <h2 class="headline-1 section-title">Calle Mataespesa</h2>
+
+            <p class="section-text">
+              La ubicación de nuestro campamento se encuentra en una zona urbana, lo que proporciona un acceso cómodo a los servicios y 
+              las comodidades propias de una ciudad. Este entorno urbano ofrece una integración única entre las actividades del campamento 
+              y la dinámica de la vida citadina, permitiendo una experiencia enriquecedora en un contexto moderno y bien conectado.
+            </p>
+
+            
+
+          </div>
+        </div>
+
+      
+
+      </section>
+
+
+
+
+
+   
+
+
+
+
+      <!-- 
+        - #FEATURES
+      -->
+
+      <section class="section features text-center" aria-label="features">
+        <div class="container">
+
+          <p class="section-subtitle label-2">¿Por que elegirnos?</p>
+
+          <h2 class="headline-1 section-title">Nuestras virtudes</h2>
+
+          <ul class="grid-list">
+
+            <li class="feature-item">
+              <div class="feature-card">
+
+                <div class="card-icon">
+                  <img src="../assets/img/translation_6682546.png" width="100" height="80" loading="lazy" alt="icon">
+                </div>
+
+                <h3 class="title-2 card-title">Centro bilingüe</h3>
+
+                <p class="label-1 card-text">Ambientes donde se promueva el uso de ambos idiomas constantemente.</p>
+
+              </div>
+            </li>
+
+            <li class="feature-item">
+              <div class="feature-card">
+
+                <div class="card-icon">
+                  <img src="../assets/img/plant_525967.png" width="100" height="80" loading="lazy" alt="icon">
+                </div>
+
+                <h3 class="title-2 card-title">Conexión con la Naturaleza</h3>
+
+                <p class="label-1 card-text"><p>Contacto cercano con el entorno natural.</p></p>
+
+              </div>
+            </li>
+
+            <li class="feature-item">
+              <div class="feature-card">
+
+                <div class="card-icon">
+                  <img src="../assets/img/heart_13381099.png" width="100" height="80" loading="lazy" alt="icon">
+                </div>
+
+                <h3 class="title-2 card-title">Fomento de Valores</h3>
+
+                <p class="label-1 card-text">Promoción de valores como el trabajo en equipo, la responsabilidad y el respeto.</p>
+
+              </div>
+            </li>
+
+            <li class="feature-item">
+              <div class="feature-card">
+
+                <div class="card-icon">
+                  <img src="../assets/img/training_11113120.png" width="100" height="80" loading="lazy" alt="icon">
+                </div>
+
+                <h3 class="title-2 card-title">Monitores Capacitados</h3>
+
+                <p class="label-1 card-text"><p>Personal experimentado y apasionado por su trabajo.</p></p>
+
+              </div>
+            </li>
+
+          </ul>
+
+          
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #EVENT
+      -->
+
+      <section class="section event bg-black-10" aria-label="event">
+        <div class="container">
+
+          <p class="section-subtitle label-2 text-center">Proximamente</p>
+
+          <h2 class="section-title headline-1 text-center" id="Proximamente">Nuevos planes para el futuro</h2>
+
+          <ul class="grid-list">
+
+            <li>
+              <div class="event-card has-before hover:shine">
+
+                <div class="card-banner img-holder" style="--width: 350; --height: 450;">
+                  <img src="../assets/img/concurso_talento.jpg" width="350" height="450" loading="lazy"
+                    alt="Flavour so good you’ll try to eat with your eyes." class="img-cover">
+
+                  <time class="publish-date label-2" datetime="2022-09-15">15/09/2025</time>
+                </div>
+
+                <div class="card-content">
+                  <p class="card-subtitle label-2 text-center">Novedades</p>
+
+                  <h3 class="card-title title-2 text-center">
+                    Concurso de talentos
+                  </h3>
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="event-card has-before hover:shine">
+
+                <div class="card-banner img-holder" style="--width: 350; --height: 450;">
+                  <img src="../assets/img/teatro_sombras.jpg" width="350" height="450" loading="lazy"
+                    alt="Flavour so good you’ll try to eat with your eyes." class="img-cover">
+
+                  <time class="publish-date label-2" datetime="2022-09-08">08/09/2025</time>
+                </div>
+
+                <div class="card-content">
+                  <p class="card-subtitle label-2 text-center">Novedades</p>
+
+                  <h3 class="card-title title-2 text-center">
+                    Teatro de sombras
+                  </h3>
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="event-card has-before hover:shine">
+
+                <div class="card-banner img-holder" style="--width: 350; --height: 450;">
+                  <img src="../assets/img/caminatas.jpg" width="350" height="450" loading="lazy"
+                    alt="Flavour so good you’ll try to eat with your eyes." class="img-cover">
+
+                  <time class="publish-date label-2" datetime="2022-09-03">03/09/2025</time>
+                </div>
+
+                <div class="card-content">
+                  <p class="card-subtitle label-2 text-center" >Novedade</p>
+
+                  <h3 class="card-title title-2 text-center">
+                    Caminatas por senderos
+                  </h3>
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+          
+
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer section has-bg-image text-center"
+    style="background-image: url('./assets/images/footer-bg.jpg')">
+    <div class="container">
+
+      <div class="footer-top grid-list">
+
+        <div class="footer-brand has-before has-after">
+
+          <a href="#" class="logo">
+            <img src="../assets/logo/Logo1.png" width="160" height="50" loading="lazy" alt="grilli home">
+          </a>
+
+          <address class="body-4">
+            Calle Mataespesa, Alpedrete, Madrid
+          </address>
+
+          <a href="mailto:booking@grilli.com" class="body-4 contact-link">Campamento@gmail.com</a>
+
+          <a href="tel:+88123123456" class="body-4 contact-link">Teléfono : +88-123-123456</a>
+
+          <p class="body-4">
+            Open : 08:00 am - 18:00 pm
+          </p>
+
+          <div class="wrapper">
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+          </div>
+
+          
+
+          
+          
+
+             
+          </form>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <a href="#" class="label-2 footer-link hover-underline">Home</a>
+          </li>
+
+          <li>
+            <a href="#Caracteristicas" class="label-2 footer-link hover-underline">Caracteristicas</a>
+          </li>
+
+          <li>
+            <a href="#about" class="label-2 footer-link hover-underline">Nuestra Historia</a>
+          </li>
+          <li>
+            <a href="#Proximamente" class="label-2 footer-link hover-underline">Proximamete</a>
+          </li>
+
+
+         
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <a href="https://es-es.facebook.com/login/web/" class="label-2 footer-link hover-underline">Facebook</a>
+          </li>
+
+          <li>
+            <a href="https://www.instagram.com/accounts/login/" class="label-2 footer-link hover-underline">Instagram</a>
+          </li>
+
+          <li>
+            <a href="https://x.com/i/flow/login" class="label-2 footer-link hover-underline">Twitter</a>
+          </li>
+
+
+          <li>
+            <a href="https://www.tiktok.com/login" class="label-2 footer-link hover-underline">Tik Tok</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <p class="copyright">
+          &copy; Campamento | Sociedad privada
+           
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+
+
+
+
+  <!-- 
+    - #BACK TO TOP
+  -->
+
+  <a href="#top" class="back-top-btn active" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+  </a>
+
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="../JS/Prototipo_index.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
+
 </html>

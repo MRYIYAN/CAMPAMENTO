@@ -1,0 +1,110 @@
+body{
+    background-color: blue;
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent; /* Inicialmente transparente */
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Cuando el usuario hace scroll, cambia el color de fondo */
+.scrolled {
+    background-color: rgb(73, 182, 255);
+    
+}
+
+
+li{
+    /* poner en bloque y poner en horiozontal */
+    margin-top: -40px;
+    display: inline-block;
+}
+li:hover>div{
+    opacity: 1;
+    left: -25%;
+    z-index: 1;
+}
+li:hover a{
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    border-radius: 20px;
+}
+nav li a{
+    display: inline-block;
+    padding: 30px 40px; /* Reduce el espacio interno */
+    color: #fff;
+}
+li>div{
+    transition: opacity 1s, left 0.5s;
+    position: absolute;
+    left: -50px;
+    width: 150%;
+    padding: 60px 0;
+    opacity: 0;
+    z-index: -1;
+}
+li>div>div{
+    color: #000;
+    border: 1px solid black;
+    padding: 40px;
+    /* color */
+    background-color: rgb(121, 121, 123, 0.5);
+
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    unicode-bidi: isolate;
+}
+img{
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
+.logo_img{
+    width: 70px;
+    height: 70px;
+    position: relative;
+    top: 15px;
+}
+/* FIN DE MENU  */
+/*Parte del logo y del menu*/
+
+header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu_item {
+    padding: 0.5em;
+    display: none;
+}
+@media screen and (min-width:576px) {
+    nav{
+        display: flex;
+    }
+    .menu_item{
+        display: inline-block;/* para poder loner elementos en linea en bloque y poder poner de vertical en horizontal */
+    }
+    .icon{
+        display: none;
+    }
+    .novedades{
+        width: 25%;
+    }
+    section.main_text, section.images{
+        width: 50%;
+    }
+    section.images img{
+        width: 50%;
+        height: 25%;
+    }
+}

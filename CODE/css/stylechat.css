@@ -61,6 +61,7 @@ html {
 	color: white !important;
 	height: 60px !important;
 	overflow-y: auto;
+	padding-top: 17px; /* Add padding to move the placeholder text down */
 }
 
 .type_msg:focus {

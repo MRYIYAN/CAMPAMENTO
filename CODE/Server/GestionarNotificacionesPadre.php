@@ -21,22 +21,38 @@ require_once "conexion.php";
 // Se cierra la conexion a la base de datos
 // Se retorna el array de monitores en formato JSON
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["accion"])) {
+
+    // Nueva acción para obtener los datos del tutor (padre)
+    if ($_POST["accion"] == "obtener_tutor") {
+        $id_tutor = $_SESSION["id"];
+        $sql = "SELECT avatar_src FROM TUTORES WHERE id_tutor = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_tutor);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tutorData = $result->fetch_assoc();
+        $stmt->close();
+        $conn->close();
+        echo json_encode($tutorData);
+        exit;
+    }
+
+    // Acción para obtener los monitores
     if ($_POST["accion"] == "obtener_monitores") {
-        $sql = "SELECT id_monitor, nombre FROM MONITORES";
+        $sql = "SELECT id_monitor, nombre, avatar_src FROM MONITORES";
         $result = $conn->query($sql);
         $monitores = [];
 
-        if ($result->num_rows > 0) { 
+        if ($result && $result->num_rows > 0) { 
             while ($row = $result->fetch_assoc()) {
                 $monitores[] = $row;
             }
         }
-
+        
         $conn->close();
         echo json_encode($monitores);
         exit;
     }
-
 
 //-----------------------------------------------------------------------------------------------//
 //                          OBTENER MENSAJES ENTRE PADRE Y MONITOR
@@ -94,5 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["accion"])) {
         $conn->close();
         exit;
     }
+
+    
 }
 ?>
