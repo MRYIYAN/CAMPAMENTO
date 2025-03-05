@@ -14,18 +14,37 @@ require_once "conexion.php";
 //-----------------------------------------------------------------------------------------------//
 //                          OBTENER LISTADO DE PADRES DISPONIBLES
 //-----------------------------------------------------------------------------------------------//
+
+// Metodo POST para obtener los padres disponibles
+// Se realiza una consulta a la base de datos para obtener los padres disponibles
+// Se almacenan los padres en un array
+// Se cierra la conexion a la base de datos
+// Se retorna el array de padres en formato JSON
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["accion"])) {
+    if ($_POST["accion"] == "obtener_monitor") {
+        $id_monitor = $_SESSION["id"];
+        $sql = "SELECT avatar_src FROM MONITORES WHERE id_monitor = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_monitor);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $monitorData = $result->fetch_assoc();
+        $stmt->close();
+        $conn->close();
+        echo json_encode($monitorData);
+        exit;
+    }
+
+    // Acción para obtener a los padres
     if ($_POST["accion"] == "obtener_padres") {
-        $sql = "SELECT id_tutor, nombre FROM TUTORES";
+        $sql = "SELECT id_tutor, nombre, avatar_src FROM TUTORES";
         $result = $conn->query($sql);
         $padres = [];
-
-        if ($result->num_rows > 0) { 
+        if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $padres[] = $row;
             }
         }
-
         $conn->close();
         echo json_encode($padres);
         exit;
