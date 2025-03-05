@@ -57,52 +57,79 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
   
-    /* ================================================================
+   /* ================================================================
        EVENTOS DEL NAVBAR ADAPTADOS PARA USAR LA TRANSICIÓN
     ================================================================= */
     // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
-    document.getElementById('btnInicio').addEventListener('click', () => {
-        redirectWithTransition("../html/Bienvenido_tutor.html"); // Redirigir a la página de modificación de datos del padre
-    });
-    document.getElementById('btnModificarDatosPadre').addEventListener('click', () => {
-        redirectWithTransition("../html/IndexPadre.html"); // Redirigir a la página de modificación de datos del padre
-    });
-  
-    document.getElementById('btnNotificaciones').addEventListener('click', () => {
-        redirectWithTransition("../html/NotificacionesPadre.html"); // Redirigir a la página de notificaciones
+      // Evento para el logo de inicio (solo hay uno)
+      document.querySelectorAll("#btninicio").forEach(btn => {
+        btn.addEventListener("click", () => {
+            redirectWithTransition("../html/Bienvenido_tutor.html");
+        });
     });
   
-    document.getElementById('btnMonitor').addEventListener('click', () => {
-        redirectWithTransition("../html/infoMonitorPadre.html"); // Redirigir a la página de información del monitor
-    });
+      // Seleccionamos TODOS los botones con la misma funcionalidad y les añadimos eventos
+      document.querySelectorAll("#btnModificarDatosPadre").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/IndexPadre.html");
+          });
+      });
   
-    document.getElementById('btnContacto').addEventListener('click', () => {
-        redirectWithTransition("../html/infoContactoPadre.html"); // Redirigir a la página de contactos
-    });
+      document.querySelectorAll("#btnNotificaciones").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/NotificacionesPadre.html");
+          });
+      });
   
-    document.getElementById('btnPolitica').addEventListener('click', () => {
-        redirectWithTransition("../html/politicas.html"); // Redirigir a la página de políticas
-    });
+      document.querySelectorAll("#btnMonitor").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/infoMonitorPadre.html");
+          });
+      });
   
-    document.getElementById('btnComedor').addEventListener('click', () => {
-        redirectWithTransition("../html/comedor.html"); // Redirigir a la página de comedor
-    });
+      document.querySelectorAll("#btnContacto").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/infoContactoPadre.html");
+          });
+      });
   
-    document.getElementById('btnCalendario').addEventListener('click', () => {
-        redirectWithTransition("../html/calendarioPadre.html"); // Redirigir a la página de calendario
-    });
+      document.querySelectorAll("#btnPolitica").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/politicas.html");
+          });
+      });
   
-    document.getElementById('btnInfoActividades').addEventListener('click', () => {
-        redirectWithTransition("../html/infoActividades.html"); // Redirigir a la página de actividades
-    });
+      document.querySelectorAll("#btnComedor").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/comedor.html");
+          });
+      });
   
-    /* ================================================================
-            EVENTOS EXISTENTES (OVERLAY Y CERRAR SESIÓN)
-    ================================================================= */
-    // Función para abrir el overlay de cerrar sesión
-    document.getElementById('btnCerrarSesion').addEventListener('click', () => {
-        document.getElementById("overlay").classList.add("activeOverlay"); // Añadir clase para mostrar el overlay
+      document.querySelectorAll("#btnCalendario").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/calendarioPadre.html");
+          });
+      });
+  
+      document.querySelectorAll("#btnInfoActividades").forEach(btn => {
+          btn.addEventListener("click", () => {
+              redirectWithTransition("../html/infoActividades.html");
+          });
+      });
+  
+      document.getElementById('menuToggle').addEventListener('click', function() {
+        document.getElementById('menu').classList.toggle('mostrar-menu');
     });
+    
+      /* ================================================================
+              EVENTOS EXISTENTES (OVERLAY Y CERRAR SESIÓN)
+      ================================================================= */
+      // Función para abrir el overlay de cerrar sesión
+      document.querySelectorAll("#btnCerrarSesion").forEach(btn => {
+          btn.addEventListener("click", () => {
+              document.getElementById("overlay").classList.add("activeOverlay"); // Añadir clase para mostrar el overlay
+          });
+      });
   
     // Cerrar el overlay
     document.getElementById('cerrarOverlayCerrarSesion').addEventListener('click', cerrarOverlayCerrarSesion); // Evento para cerrar el overlay
