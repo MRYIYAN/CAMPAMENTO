@@ -559,6 +559,7 @@ function mostrarOverlayOperar(id_actividad) {
 
   //hacemos que el overlay sea visible
   document.getElementById("overlayOperar").classList.add("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+  document.getElementById('mensajeFeedbackAgregarActividad').style.display = "none"
   document.body.classList.add("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
   document.getElementById('btnEliminarActividad').classList.remove("oculto")
   document.getElementById('btnModificarActividad').classList.remove("oculto") //mostramos el boton de modificar
@@ -973,12 +974,39 @@ function actualizarActividad() {
       } else {
         if (data.modificado){
             if (data.modificado == "ok"){
-                console.log("modificado")
+
+                
+                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
+                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                                        "Actividad Modificado con éxito 🎉";
+                  console.log("modificado")
+                  btnConsultarEnTabla()
+
+
+                  setTimeout(() => {
+                    mensajeFeedbackPlan.style.display = "none";
+                  //cerrar el overlay de operar
+                  document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+                  document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+                }, 2000);
+
+            }else{
+                
+              document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+              document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
+              document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                                      "actividad no modificado";
+                console.log("insertado")
                 btnConsultarEnTabla()
+
+
+                setTimeout(() => {
+                  mensajeFeedbackPlan.style.display = "none";
                 //cerrar el overlay de operar
                 document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-            }else{
-                console.log('no modificado')
+                document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+              }, 2000);
             }
         }
       }
@@ -1042,12 +1070,37 @@ function borrarActividadBBDD(){
       } else {
         if (data.borrado){
             if (data.borrado == 'ok'){
-                console.log('borrado')
+                
+              document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+              document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
+              document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                                      "Actividad Eliminado con éxito 🎉";
+                console.log("eliminado")
                 btnConsultarEnTabla()
+
+
+                setTimeout(() => {
+                  mensajeFeedbackPlan.style.display = "none";
                 //cerrar el overlay de operar
                 document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+                document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+              }, 2000);
             }else{
                 console.log('no borrado')
+                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
+                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                                        "no eliminado";
+                  console.log("eliminado")
+                  btnConsultarEnTabla()
+  
+  
+                  setTimeout(() => {
+                    mensajeFeedbackPlan.style.display = "none";
+                  //cerrar el overlay de operar
+                  document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+                  document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+                }, 2000);
             }
         }
       }
@@ -1178,14 +1231,30 @@ function insertBBDDActividad(){
           console.log("Error: " + data.error);
         } else {
           if (data.insertado){
-            alert('insertado')
+          
               if (data.insertado == "ok"){
+
+                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
+                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                                        "Actividad Agregado con éxito 🎉";
                   console.log("insertado")
                   btnConsultarEnTabla()
+
+
+                  setTimeout(() => {
+                    mensajeFeedbackPlan.style.display = "none";
                   //cerrar el overlay de operar
                   document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+                  document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+                }, 2000);
+                  
+
               }else{
-                  console.log('no insertado')
+                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
+                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                                        "Actividad no agregado";
               }
           }
         }
