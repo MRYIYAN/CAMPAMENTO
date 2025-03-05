@@ -661,4 +661,9 @@ body::-webkit-scrollbar {
       border-radius: 50%;
   }
 
+  img-comida {
+    width: 100px;
+    height: auto;
+  }
+
 }

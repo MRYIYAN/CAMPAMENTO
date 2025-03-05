@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Función que ejecuta la animación y luego redirige
     function redirectWithTransition(url) {
+      console.log("Redirecting to:", url); // Add this line to log the URL
       animateTransition().then(() => {
         window.location.href = url; // Redirigir a la URL especificada después de la animación
       });
@@ -166,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Encabezado de la tabla
         var thead = document.createElement('thead');
         var headerRow = document.createElement('tr');
-        ['NOMBRE', 'PRECIO', 'DESCRIPCIÓN'].forEach(function(text) {
+        ['IMAGEN', 'NOMBRE', 'PRECIO', 'DESCRIPCIÓN'].forEach(function(text) {
           var th = document.createElement('th');
           th.textContent = text;
           headerRow.appendChild(th);
@@ -178,6 +179,15 @@ document.addEventListener('DOMContentLoaded', function() {
         var tbody = document.createElement('tbody');
         data.forEach(function(plan) {
           var row = document.createElement('tr');
+
+          // Columna IMAGEN
+          var tdImagen = document.createElement('td');
+          var imgComida = document.createElement('img');
+          imgComida.src = plan.imagenComida_src;
+          imgComida.alt = plan.nombre_plan;
+          imgComida.className = 'img-comida';
+          tdImagen.appendChild(imgComida);
+          row.appendChild(tdImagen);
 
           // Columna NOMBRE
           var tdNombre = document.createElement('td');

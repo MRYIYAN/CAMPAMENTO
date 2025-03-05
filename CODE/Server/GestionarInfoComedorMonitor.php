@@ -13,8 +13,8 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
     exit();
 }
 
-// Consulta sin fecha_inicio y fecha_fin
-$sql = "SELECT id_plan_comedor, nombre_plan, descripcion, precio 
+// Consulta incluyendo el campo imagenComida_src
+$sql = "SELECT id_plan_comedor, nombre_plan, descripcion, precio, imagenComida_src 
         FROM PLAN_COMEDOR";
 $result = $conn->query($sql);
 
