@@ -479,8 +479,8 @@ nav .logo {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #ff4d4d;
-  color: white;
+  background: #ff4d4d00;
+  color: rgb(255, 0, 0);
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -489,7 +489,7 @@ nav .logo {
 }
 
 .close-btn:hover {
-  background: #cc0000;
+  background: #cc000000;
 }
 
 /* Clase para mostrar el overlay */
@@ -516,6 +516,24 @@ nav .logo {
 #btninicio {
   cursor: pointer;
 }
+
+#volverOverlayCerrarSesion{
+  cursor: pointer;
+  background-color: #ccc;
+  color: #333;
+}
+#volverOverlayCerrarSesion:hover{
+  background-color: #bbb;
+}
+#cerrarSesionOverlayCerrarSesion{
+  cursor: pointer;
+  background-color: #f00;
+  color: #fff;
+}
+#cerrarSesionOverlayCerrarSesion:hover{
+  background-color: #d00;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
 /* General */
 body {

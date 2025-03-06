@@ -444,78 +444,95 @@ nav .logo {
     height: 15em;
   }
   /* -------------------------------------------------------------------------------------------------- */
-  /* overlay para cerrar sesion */
-  /* -------------------------------------------------------------------------------------------------- */
-    /* Estilo para el overlay */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease, visibility 0.3s;
-      color: #333;  /* Color del texto */
-      z-index: 1000;
-  }
+/* overlay para cerrar sesion */
+/* -------------------------------------------------------------------------------------------------- */
+/* Estilo para el overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  color: #333; /* Color del texto */
+  z-index: 1000; /* Valor alto para que cubra todo */
+}
 
-  /* Estilo para la ventana emergente */
-  .overlay-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      width: 300px;
-      text-align: center;
-      position: relative;
-   
-  }
+/* Estilo para la ventana emergente */
+.overlay-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  text-align: center;
+  position: relative;
+}
 
-  /* Botón de cierre */
-  .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-  }
+/* Botón de cierre */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d00;
+  color: rgb(255, 0, 0);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-  .close-btn:hover {
-      background: #cc0000;
-  }
+.close-btn:hover {
+  background: #cc000000;
+}
 
-  /* Clase para mostrar el overlay */
-  .overlay.activeOverlay {
-      visibility: visible;
-      opacity: 1;
-  }
+/* Clase para mostrar el overlay */
+.overlay.activeOverlay {
+  visibility: visible;
+  opacity: 1;
+}
 
-  /* Botón para abrir */
-  .open-btn {
-      padding: 10px 15px;
-      background: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-  }
+/* Botón para abrir */
+.open-btn {
+  padding: 10px 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-  .open-btn:hover {
-      background: #0056b3;
-  }
-  .logo, #btninicio {
-    cursor: pointer;
+.open-btn:hover {
+  background: #0056b3;
+}
+.logo,
+#btninicio {
+  cursor: pointer;
+}
+
+#volverOverlayCerrarSesion{
+  cursor: pointer;
+  background-color: #ccc;
+  color: #333;
+}
+#volverOverlayCerrarSesion:hover{
+  background-color: #bbb;
+}
+#cerrarSesionOverlayCerrarSesion{
+  cursor: pointer;
+  background-color: #f00;
+  color: #fff;
+}
+#cerrarSesionOverlayCerrarSesion:hover{
+  background-color: #d00;
 }
   /* -------------------------------------------------------------------------------------------------- */
 
