@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
        EVENTOS DEL NAVBAR ADAPTADOS PARA USAR LA TRANSICIÓN
     ================================================================= */
   // En lugar de redirigir directamente, se llama a redirectWithTransition(url)
-  
+
   document.getElementById("btnInicio").addEventListener("click", () => {
     redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página Inndex
   });
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       redirectWithTransition("../html/IndexAdmin.html"); // Redirigir a la página de modificación de datos del padre
     });
 
-  
+
 
   document.getElementById("btnMonitor").addEventListener("click", () => {
     redirectWithTransition("../html/infoMonitorAdmin.html"); // Redirigir a la página de información del monitor
@@ -163,66 +163,66 @@ function cerrarSesionSeguro() {
 let id_adminGlobal = null
 repintarListaSelect();
 function repintarListaSelect() {
-// Conexión con el servidor para obtener datos del admin
-fetch("../Server/GestionarIndexAdmin.php", {
-  method: "POST", // Método de la solicitud
-  headers: {
-    "Content-type": "application/json", // Tipo de contenido de la solicitud
-  },
-})
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
-    }
-    return response.json(); // Convertir la respuesta a JSON
+  // Conexión con el servidor para obtener datos del admin
+  fetch("../Server/GestionarIndexAdmin.php", {
+    method: "POST", // Método de la solicitud
+    headers: {
+      "Content-type": "application/json", // Tipo de contenido de la solicitud
+    },
   })
-  .then((data) => {
-    // Comprobar si hay un error en la respuesta
-    if (data.error) {
-      alert("Error: " + data.error); // Mostrar alerta en caso de error
-    } else if (data.noLogin) {
-      // Redirigir si no hay sesión iniciada
-      window.location.href = data.noLogin;
-      console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
-    } else {
-      console.log(`idAdmin: ${data.id_admin}`);
-      id_adminGlobal = data.id_admin; //asignamos al variable global
-      document.getElementById("idAdmin").innerHTML = data.info["id_admin"];
-      document.getElementById("emailAdmin").innerHTML = data.info["email"];
-      console.log(data.info);
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+      }
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      // Comprobar si hay un error en la respuesta
+      if (data.error) {
+        alert("Error: " + data.error); // Mostrar alerta en caso de error
+      } else if (data.noLogin) {
+        // Redirigir si no hay sesión iniciada
+        window.location.href = data.noLogin;
+        console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+      } else {
+        console.log(`idAdmin: ${data.id_admin}`);
+        id_adminGlobal = data.id_admin; //asignamos al variable global
+        document.getElementById("idAdmin").innerHTML = data.info["id_admin"];
+        document.getElementById("emailAdmin").innerHTML = data.info["email"];
+        console.log(data.info);
 
-      let arrayGrupos = data.grupos;
-      gruposDisponibles = data.grupos; //asignamos al variable externo
-      console.log(data.grupos);
-      document.getElementById("selectGrupo").innerHTML = `
+        let arrayGrupos = data.grupos;
+        gruposDisponibles = data.grupos; //asignamos al variable externo
+        console.log(data.grupos);
+        document.getElementById("selectGrupo").innerHTML = `
         <select name="selectGrupoS" id="selectGrupoS">
         <option value="0">Selecciona un grupo</option>
             ${arrayGrupos
-              .map(
-                (grupo) => `
+            .map(
+              (grupo) => `
                 <option value="${grupo["id_grupo"]}">${grupo["nombre"]}</option>
             `
-              )
-              .join("")}
+            )
+            .join("")}
         </select>
         `;
 
-      let arrayPlanFecha = data.planFecha;
-      planesDisponibles = data.planFecha; //asignamos al variable externo
-      document.getElementById("selectPlan").innerHTML = `
+        let arrayPlanFecha = data.planFecha;
+        planesDisponibles = data.planFecha; //asignamos al variable externo
+        document.getElementById("selectPlan").innerHTML = `
         <select name="selectPlanS" id="selectPlanS">
         <option value="0">Selecciona un Plan de fecha</option>
             ${arrayPlanFecha
-              .map(
-                (plan) => `
+            .map(
+              (plan) => `
                 <option value="${plan["id_plan"]}">${plan.nombre}(${plan["fecha_inicio"]} - ${plan["fecha_fin"]})</option>
             `
-              )
-              .join("")}
+            )
+            .join("")}
         </select>
         `;
-    }
-  });
+      }
+    });
 }
 
 
@@ -244,12 +244,12 @@ function mostrarError(lugar, mensaje) {
 //-----------------------------------------------------------------------------------------------------------//
 //                                      BOTON CONSSULTA DE ACTIVIDADES EN TABLA
 //-----------------------------------------------------------------------------------------------------------//
-document.getElementById("btnConsultarTabla").addEventListener("click", () =>{
-    btnConsultarEnTabla()
+document.getElementById("btnConsultarTabla").addEventListener("click", () => {
+  btnConsultarEnTabla()
 });
 
 let planSeleccionado;
-function btnConsultarEnTabla(){
+function btnConsultarEnTabla() {
   //COMPROBACION SI ESTA TODO BIEN
   let okGrupo = false;
   let okPlan = false;
@@ -394,7 +394,7 @@ function btnConsultarEnTabla(){
           if (data.datosTabla.length == 0) {
             //en caso si es vacio
             document.getElementById("tablaActividad").classList.add("oculto"); // Ocultar el tabla
-            document.getElementById('contenedorBotonAgregaractividad').innerHTML=`<button type="button" id="botonAgregaractividad" onclick = "agregarActividad()">Agregar Actividad</button>`;
+            document.getElementById('contenedorBotonAgregaractividad').innerHTML = `<button type="button" id="botonAgregaractividad" onclick = "agregarActividad()">Agregar Actividad</button>`;
             document.getElementById("infoTabla").innerText =
               "No tiene ningun actividad";
           } else {
@@ -403,7 +403,7 @@ function btnConsultarEnTabla(){
               .getElementById("tablaActividad")
               .classList.remove("oculto"); // mostramos la tabla
             document.getElementById("infoTabla").innerText = "";
-            document.getElementById('contenedorBotonAgregaractividad').innerHTML=`<button type="button" id="botonAgregaractividad" onclick = "agregarActividad()">Agregar Actividad</button>`;
+            document.getElementById('contenedorBotonAgregaractividad').innerHTML = `<button type="button" id="botonAgregaractividad" onclick = "agregarActividad()">Agregar Actividad</button>`;
 
             //imprimimos la lista de actividades
             const tabla = document
@@ -429,7 +429,7 @@ function btnConsultarEnTabla(){
               celda4.innerHTML = `${actividad.dia}`; // Introducir información en la cuarta celda
 
               const celda5 = nuevaFila.insertCell(); // Crear la cuarta celda
-              celda5.innerHTML = `<button class="verMasBtn" onclick="mostrarOverlayOperar('${actividad.id_actividad}') ">Operar</button>`; // boton para operar
+              celda5.innerHTML = `<button class="verMasBtn" onclick="mostrarOverlayOperar('${actividad.id_actividad}') ">Modificar</button>`; // boton para operar
             });
           }
         }
@@ -477,6 +477,7 @@ let fodoActividad = "../assets/actividad/uploads/defaultActividad.png";
 
 // Función para mostrar el overlay con la OPERAR
 function mostrarOverlayOperar(id_actividad) {
+  limpiarFormularioOperar()
   id_actividadSeleccionada = id_actividad;
   //hacemos una consuta a bbdd para sacar todo los informaciones de esa actividad
   //haccemos consulta al bbdd
@@ -574,7 +575,7 @@ function mostrarOverlayOperar(id_actividad) {
       document
         .getElementById("overlayOperar")
         .classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-        document.body.classList.remove("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
+      document.body.classList.remove("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
 
     });
 }
@@ -584,7 +585,7 @@ function cerrarOverlayOperar() {
   document
     .getElementById("overlayOperar")
     .classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-    document.body.classList.remove("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
+  document.body.classList.remove("body-fondo-bloqueado"); // Bloquea interacciones con el fondo y el desplazamiento
 
 }
 
@@ -688,28 +689,38 @@ function vertificarHoraFin() {
 
 //comprobacion del select del grupo
 function vertificarSeleccionGrupoOperar() {
-  grupoSeleccionadoOperar = document.getElementById("selectGrupoOperar").value; // Asignar el valor del hijo seleccionado
-  if (grupoSeleccionadoOperar == 0) {
-    mostrarError(
-      document.getElementById("errorCambiarGrupo"),
-      "Por favor, elige un grupo para cambiar"
-    );
+  if (document.getElementById("selectGrupoOperar")) {
+    grupoSeleccionadoOperar = document.getElementById("selectGrupoOperar").value; // Asignar el valor del hijo seleccionado
+    if (grupoSeleccionadoOperar == 0) {
+      mostrarError(
+        document.getElementById("errorCambiarGrupo"),
+        "Por favor, elige un grupo para cambiar"
+      );
+    } else {
+      mostrarError(document.getElementById("errorCambiarGrupo"), "");
+    }
   } else {
     mostrarError(document.getElementById("errorCambiarGrupo"), "");
   }
+
 }
 
 //comprobacion del select del plan
 function vertificarSeleccionPlanOperar() {
-  planSeleccionadoOperar = document.getElementById("selectPlanOperar").value; // Asignar el valor del hijo seleccionado
-  if (planSeleccionadoOperar == 0) {
-    mostrarError(
-      document.getElementById("errorCambiarPlan"),
-      "Por favor, elige un plan para cambiar"
-    );
+  if (document.getElementById("selectPlanOperar")) {
+    planSeleccionadoOperar = document.getElementById("selectPlanOperar").value; // Asignar el valor del hijo seleccionado
+    if (planSeleccionadoOperar == 0) {
+      mostrarError(
+        document.getElementById("errorCambiarPlan"),
+        "Por favor, elige un plan para cambiar"
+      );
+    } else {
+      mostrarError(document.getElementById("errorCambiarPlan"), "");
+    }
   } else {
     mostrarError(document.getElementById("errorCambiarPlan"), "");
   }
+
 }
 
 //comprobacion en live cuando escribimos
@@ -747,11 +758,11 @@ document.addEventListener("change", function (event) {
                 <select name="selectPlanOperar" id="selectPlanOperar">
                     <option value="0">Selecciona un Plan de fecha</option>
                     ${planesDisponibles
-                      .map(
-                        (plan) =>
-                          `<option value="${plan.id_plan}">${plan.nombre} = ${plan.fecha_inicio} - ${plan.fecha_fin}</option>`
-                      )
-                      .join("")}
+          .map(
+            (plan) =>
+              `<option value="${plan.id_plan}">${plan.nombre} = ${plan.fecha_inicio} - ${plan.fecha_fin}</option>`
+          )
+          .join("")}
                 </select>
             `;
       //comprobamos y validamos
@@ -782,11 +793,11 @@ document.addEventListener("change", function (event) {
                 <select name="selectGrupoOperar" id="selectGrupoOperar">
                     <option value="0">Selecciona un grupo</option>
                     ${gruposDisponibles
-                      .map(
-                        (grupo) =>
-                          `<option value="${grupo.id_grupo}">${grupo.nombre}</option>`
-                      )
-                      .join("")}
+          .map(
+            (grupo) =>
+              `<option value="${grupo.id_grupo}">${grupo.nombre}</option>`
+          )
+          .join("")}
                 </select>
             `;
       //comprobamos y validamos
@@ -856,7 +867,7 @@ formularioOperar.onsubmit = async function (event) {
       if (checkError(document.getElementById("errorCambiarPlan"))) {
         //PASO SIGUIENTE
 
-        arError(document.gmostretElementById("errorModificar"), "");
+        mostrarError(document.getElementById("errorModificar"), "");
         actualizarActividad();
       } else {
         mostrarError(
@@ -972,42 +983,42 @@ function actualizarActividad() {
         //en caso de si tener error
         console.log("Error: " + data.error);
       } else {
-        if (data.modificado){
-            if (data.modificado == "ok"){
-
-                
-                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
-                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
-                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
-                                        "Actividad Modificado con éxito 🎉";
-                  console.log("modificado")
-                  btnConsultarEnTabla()
+        if (data.modificado) {
+          if (data.modificado == "ok") {
 
 
-                  setTimeout(() => {
-                    mensajeFeedbackPlan.style.display = "none";
-                  //cerrar el overlay de operar
-                  document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-                  document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
-                }, 2000);
-
-            }else{
-                
-              document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
-              document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
-              document.getElementById('mensajeFeedbackAgregarActividad').innerText =
-                                      "actividad no modificado";
-                console.log("insertado")
-                btnConsultarEnTabla()
+            document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+            document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
+            document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+              "Actividad Modificado con éxito 🎉";
+            console.log("modificado")
+            btnConsultarEnTabla()
 
 
-                setTimeout(() => {
-                  mensajeFeedbackPlan.style.display = "none";
-                //cerrar el overlay de operar
-                document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-                document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
-              }, 2000);
-            }
+            setTimeout(() => {
+              mensajeFeedbackPlan.style.display = "none";
+              //cerrar el overlay de operar
+              document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+              document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+            }, 2000);
+
+          } else {
+
+            document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+            document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
+            document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+              "actividad no modificado";
+            console.log("insertado")
+            btnConsultarEnTabla()
+
+
+            setTimeout(() => {
+              mensajeFeedbackPlan.style.display = "none";
+              //cerrar el overlay de operar
+              document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+              document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+            }, 2000);
+          }
         }
       }
     });
@@ -1020,33 +1031,33 @@ function actualizarActividad() {
 //                            BORRAR UN ACTIVIDAD EN BBDD
 //================================================================================================//
 //cuando damos el bton eliminar
-document.getElementById('btnEliminarActividad').addEventListener('click', ()=>{
-    //hacemos que el overlay de comprobacion sea visible
-    document.getElementById("overlaySeguroBorrar").classList.add("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
+document.getElementById('btnEliminarActividad').addEventListener('click', () => {
+  //hacemos que el overlay de comprobacion sea visible
+  document.getElementById("overlaySeguroBorrar").classList.add("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
 })
 //cuando damos al x del overlay de borrar
-document.querySelector('.closeBtnSeguroBorrar').addEventListener('click', ()=>{
-    //hacemos que el overlay de comprobacion sea escondido
-    document.getElementById("overlaySeguroBorrar").classList.remove("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
+document.querySelector('.closeBtnSeguroBorrar').addEventListener('click', () => {
+  //hacemos que el overlay de comprobacion sea escondido
+  document.getElementById("overlaySeguroBorrar").classList.remove("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
 })
 //cuando damos el boton de volver en overlay 
-document.getElementById('cancelarBorrar').addEventListener('click', ()=>{
-    //hacemos que el overlay de comprobacion sea escondido
-    document.getElementById("overlaySeguroBorrar").classList.remove("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
+document.getElementById('cancelarBorrar').addEventListener('click', () => {
+  //hacemos que el overlay de comprobacion sea escondido
+  document.getElementById("overlaySeguroBorrar").classList.remove("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
 })
 
 //cuando esta seguro de que queiro borrar
-document.getElementById('confirmadoBorrar').addEventListener('click', ()=>{
-    //hacemos que el overlay de comprobacion sea escondido
-    borrarActividadBBDD();
-    document.getElementById("overlaySeguroBorrar").classList.remove("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
+document.getElementById('confirmadoBorrar').addEventListener('click', () => {
+  //hacemos que el overlay de comprobacion sea escondido
+  borrarActividadBBDD();
+  document.getElementById("overlaySeguroBorrar").classList.remove("activeOverlaySeguroBorrar"); // Añadir clase para mostrar el overlay
 })
 
 
 
-function borrarActividadBBDD(){
-    console.log(`id_actividadSeleccionado = ${id_actividadSeleccionada}`);
-    //haccemos consulta al bbdd
+function borrarActividadBBDD() {
+  console.log(`id_actividadSeleccionado = ${id_actividadSeleccionada}`);
+  //haccemos consulta al bbdd
   fetch("../Server/GestionarIndexAdmin.php", {
     method: "POST", // Método de la solicitud
     headers: {
@@ -1068,40 +1079,40 @@ function borrarActividadBBDD(){
       if (data.error) {
         console.log("2Error: " + data.error); // Mostrar en consola el error
       } else {
-        if (data.borrado){
-            if (data.borrado == 'ok'){
-                
-              document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
-              document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
-              document.getElementById('mensajeFeedbackAgregarActividad').innerText =
-                                      "Actividad Eliminado con éxito 🎉";
-                console.log("eliminado")
-                btnConsultarEnTabla()
+        if (data.borrado) {
+          if (data.borrado == 'ok') {
+
+            document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+            document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
+            document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+              "Actividad Eliminado con éxito 🎉";
+            console.log("eliminado")
+            btnConsultarEnTabla()
 
 
-                setTimeout(() => {
-                  mensajeFeedbackPlan.style.display = "none";
-                //cerrar el overlay de operar
-                document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-                document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
-              }, 2000);
-            }else{
-                console.log('no borrado')
-                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
-                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
-                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
-                                        "no eliminado";
-                  console.log("eliminado")
-                  btnConsultarEnTabla()
-  
-  
-                  setTimeout(() => {
-                    mensajeFeedbackPlan.style.display = "none";
-                  //cerrar el overlay de operar
-                  document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-                  document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
-                }, 2000);
-            }
+            setTimeout(() => {
+              mensajeFeedbackPlan.style.display = "none";
+              //cerrar el overlay de operar
+              document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+              document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+            }, 2000);
+          } else {
+            console.log('no borrado')
+            document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+            document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
+            document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+              "no eliminado";
+            console.log("eliminado")
+            btnConsultarEnTabla()
+
+
+            setTimeout(() => {
+              mensajeFeedbackPlan.style.display = "none";
+              //cerrar el overlay de operar
+              document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+              document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+            }, 2000);
+          }
         }
       }
     });
@@ -1113,7 +1124,7 @@ function borrarActividadBBDD(){
 //================================================================================================//
 //                            FUNCION PARA AGREGAR ACTIVIDAD EN BBDD mostrar overlay
 //================================================================================================//
-function agregarActividad(){
+function agregarActividad() {
   sacarFechas();
   //abrir el overlay de operar
   document.getElementById("overlayOperar").classList.add("activeOverlayOperar"); // Añadir clase para mostrar el overlay
@@ -1144,10 +1155,10 @@ function agregarActividad(){
       }
     })
 
-  
+
 
   //COMPROBAMOS LOS CAMPOS 
-  
+
   //comprobacion en live cuando escribimos
   document.getElementById("titulo").oninput = vertificarNombre;
   document.getElementById("hora_inicio").oninput = vertificarHoraInicio;
@@ -1163,7 +1174,7 @@ function agregarActividad(){
   document.getElementById("fecha").onblur = verificarFecha;
 }
 
-function insertBBDDActividad(){
+function insertBBDDActividad() {
 
   //hacemos la comprobacion 
   vertificarNombre();
@@ -1182,34 +1193,34 @@ function insertBBDDActividad(){
   ) {
     //hacemos el envio 
     //creamos un formada
-  let formDataInsert = new FormData();
-  //cogemos los inputs
-  let inputTitulo = document.getElementById('titulo').value;
-  let inputHoraInicio = document.getElementById('hora_inicio').value;
-  let inputHoraFin = document.getElementById('hora_fin').value;
-  let inputDescripcion = document.getElementById('descripcion').value;
-  let inputFecha = document.getElementById('fecha').value;
+    let formDataInsert = new FormData();
+    //cogemos los inputs
+    let inputTitulo = document.getElementById('titulo').value;
+    let inputHoraInicio = document.getElementById('hora_inicio').value;
+    let inputHoraFin = document.getElementById('hora_fin').value;
+    let inputDescripcion = document.getElementById('descripcion').value;
+    let inputFecha = document.getElementById('fecha').value;
 
-  //asignamos en el variable en formdata
-  formDataInsert.append("titulo", inputTitulo);
-  formDataInsert.append("hora_inicio", inputHoraInicio);
-  formDataInsert.append("hora_fin", inputHoraFin);
-  formDataInsert.append("descripcion", inputDescripcion);
-  formDataInsert.append("fecha", inputFecha);
-  formDataInsert.append("planSeleccionado", planSeleccionado);
-  formDataInsert.append("grupoSeleccionado", grupoSeleccionado);
+    //asignamos en el variable en formdata
+    formDataInsert.append("titulo", inputTitulo);
+    formDataInsert.append("hora_inicio", inputHoraInicio);
+    formDataInsert.append("hora_fin", inputHoraFin);
+    formDataInsert.append("descripcion", inputDescripcion);
+    formDataInsert.append("fecha", inputFecha);
+    formDataInsert.append("planSeleccionado", planSeleccionado);
+    formDataInsert.append("grupoSeleccionado", grupoSeleccionado);
 
-  // Solo agregar el avatar si hay uno seleccionado
-  let avatarInput = document.getElementById("avatar");
-  if (avatarInput.files.length > 0) {
-    //en caso si hay contenido en el input
-    formDataInsert.append("foto", avatarInput.files[0]); //pasamos el file al php
-    formDataInsert.append("cambiarfoto", true); //pasamos un booleano dicidendo que hay que modificar el perfil
-  } else {
-    //en caso si no hay nada en el input
-    formDataInsert.append("fodoActividad", fodoActividad); //pasamos la ruta de avatar que esta en el bbdd
-    formDataInsert.append("cambiarFoto", false); //pasamos un boleano para decir que no hay que cambiar nada
-  }
+    // Solo agregar el avatar si hay uno seleccionado
+    let avatarInput = document.getElementById("avatar");
+    if (avatarInput.files.length > 0) {
+      //en caso si hay contenido en el input
+      formDataInsert.append("foto", avatarInput.files[0]); //pasamos el file al php
+      formDataInsert.append("cambiarfoto", true); //pasamos un booleano dicidendo que hay que modificar el perfil
+    } else {
+      //en caso si no hay nada en el input
+      formDataInsert.append("fodoActividad", fodoActividad); //pasamos la ruta de avatar que esta en el bbdd
+      formDataInsert.append("cambiarFoto", false); //pasamos un boleano para decir que no hay que cambiar nada
+    }
 
 
     //FETCH PARA ENVIAR LOS MODIFICACIONES AL BBDD
@@ -1230,36 +1241,36 @@ function insertBBDDActividad(){
           //en caso de si tener error
           console.log("Error: " + data.error);
         } else {
-          if (data.insertado){
-          
-              if (data.insertado == "ok"){
+          if (data.insertado) {
 
-                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
-                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
-                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
-                                        "Actividad Agregado con éxito 🎉";
-                  console.log("insertado")
-                  btnConsultarEnTabla()
+            if (data.insertado == "ok") {
+
+              document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+              document.getElementById('mensajeFeedbackAgregarActividad').style.color = "green";
+              document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                "Actividad Agregado con éxito 🎉";
+              console.log("insertado")
+              btnConsultarEnTabla()
 
 
-                  setTimeout(() => {
-                    mensajeFeedbackPlan.style.display = "none";
-                  //cerrar el overlay de operar
-                  document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
-                  document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
-                }, 2000);
-                  
+              setTimeout(() => {
+                mensajeFeedbackPlan.style.display = "none";
+                //cerrar el overlay de operar
+                document.getElementById("overlayOperar").classList.remove("activeOverlayOperar"); // Añadir clase para mostrar el overlay
+                document.body.classList.remove("body-fondo-bloqueado"); // bloquea el fondo y el desplazamie
+              }, 2000);
 
-              }else{
-                document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
-                document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
-                document.getElementById('mensajeFeedbackAgregarActividad').innerText =
-                                        "Actividad no agregado";
-              }
+
+            } else {
+              document.getElementById('mensajeFeedbackAgregarActividad').style.display = "block";
+              document.getElementById('mensajeFeedbackAgregarActividad').style.color = "red";
+              document.getElementById('mensajeFeedbackAgregarActividad').innerText =
+                "Actividad no agregado";
+            }
           }
         }
       });
-  }else{
+  } else {
     mostrarError(
       document.getElementById("errorModificar"),
       "El formulario contiene errores"
@@ -1295,7 +1306,7 @@ function vaciarCamposFormulario() {
   // Limpiar errores
   let errores = ["errorTitulo", "errorHora", "errorHoraFin", "errorDescripcion", "errorFecha", "errorFoto", "errorCambiarGrupo", "errorCambiarPlan", "errorModificar"];
   errores.forEach(id => {
-      document.getElementById(id).innerHTML = "";
+    document.getElementById(id).innerHTML = "";
   });
 
   console.log("Formulario limpiado correctamente.");
@@ -1309,7 +1320,7 @@ function vaciarCamposFormulario() {
 //================================================================================================//
 //                    CONSULTA DE FECHA INICIO Y FECHA FIN CON EL ID DEL PLAN PARA INSERTS DE ACTIVIDAD
 //================================================================================================//
-function sacarFechas(){
+function sacarFechas() {
   console.log(`id_plan seleccionado ${planSeleccionado}`)
   fetch("../Server/GestionarIndexAdmin.php", {
     method: "POST", // Método de la solicitud
@@ -1353,7 +1364,7 @@ function sacarFechas(){
 //                    OVERLAY DE AÑADIR GRUPO
 //================================================================================================//
 //cuando hacemos click el boton de añadir grupo
-document.getElementById('btnCrearGrupo').addEventListener('click', ()=>{
+document.getElementById('btnCrearGrupo').addEventListener('click', () => {
   limpiarFormularioAñadirGrupo()  //limpiamos el formulario 
   //mostramos el overlay
   document.getElementById("overlayAñadirGrupo").classList.add("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
@@ -1361,14 +1372,14 @@ document.getElementById('btnCrearGrupo').addEventListener('click', ()=>{
 
 });
 //cuando hacemos click el boton de cerrar de añadir grupo
-document.querySelector('.closeBtnAñadirGrupo').addEventListener('click', ()=>{
+document.querySelector('.closeBtnAñadirGrupo').addEventListener('click', () => {
   //mostramos el overlay
   document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
   document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
 
 });
 //cuando hacemos click el boton de volver de añadir grupo
-document.getElementById('btnVolverAñadirGrupo').addEventListener('click', ()=>{
+document.getElementById('btnVolverAñadirGrupo').addEventListener('click', () => {
   //mostramos el overlay
   document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
   document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
@@ -1387,46 +1398,46 @@ fetch("../Server/GestionarIndexAdmin.php", {
     consultarMonitorDisponible: "monitor"
   }),
 })
-.then((response) => {
-  if (!response.ok) {
-    throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
-  }
-  return response.json(); // Convertir la respuesta a JSON
-})
-.then((data) => {
-  // Comprobar si hay un error en la respuesta
-  if (data.error) {
-    console.log("2Error: " + data.error); // Mostrar en consola el error
-  } else {
-    if (data.monitoresDisponible){
-      document.getElementById('monitorAsignado').innerHTML = `
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
+    }
+    return response.json(); // Convertir la respuesta a JSON
+  })
+  .then((data) => {
+    // Comprobar si hay un error en la respuesta
+    if (data.error) {
+      console.log("2Error: " + data.error); // Mostrar en consola el error
+    } else {
+      if (data.monitoresDisponible) {
+        document.getElementById('monitorAsignado').innerHTML = `
         <option value="0" id="monitorSeleccionadoGrupo">Selecciona un monitor</option>
         ${data.monitoresDisponible.map((monitor) => `
           <option value="${monitor['id_monitor']}" id="monitorSeleccionadoGrupo">${monitor['nombre']}</option>
         `).join('')}
       `;
+      }
     }
-  }
-});
+  });
 //FIN DE CONEXION AL BBDD
 
 //creamos los funciones para comprobar los variables si es valido o no
 //validar el nombre
-function validarNombreGrupo(){
+function validarNombreGrupo() {
   //comprobar si es vacio o no 
-  if (document.getElementById('nombreGrupo').value.trim() == ""){
+  if (document.getElementById('nombreGrupo').value.trim() == "") {
     mostrarError(document.getElementById('errorNombreGrupo'), "El no puede estar vacio")
-  }else{
+  } else {
     mostrarError(document.getElementById('errorNombreGrupo'), "") //quitamos el error
   }
 }
 //validar el select del monitor
-function validarSelectMonitorGrupo(){
+function validarSelectMonitorGrupo() {
   console.log(document.getElementById("monitorAsignado").value)
   //comprobar si es 0 o no
-  if (document.getElementById("monitorAsignado").value == 0){
+  if (document.getElementById("monitorAsignado").value == 0) {
     mostrarError(document.getElementById('errorMonitorAsignado'), "Por favor, elige un monitor")
-  }else{
+  } else {
     mostrarError(document.getElementById('errorMonitorAsignado'), "") //quitamos el error
   }
 }
@@ -1462,7 +1473,7 @@ formularioCrearGrupo.onsubmit = async function (event) {
   validarSelectMonitorGrupo();
 
   //comprobamos si hay error
-  if (checkError(document.getElementById('errorNombreGrupo')) && checkError(document.getElementById('errorMonitorAsignado'))){
+  if (checkError(document.getElementById('errorNombreGrupo')) && checkError(document.getElementById('errorMonitorAsignado'))) {
     //borramos el eror por si acaso 
     mostrarError(document.getElementById('errorCrearGrupo'), "")
     //SIGUIENTE PASO 
@@ -1470,7 +1481,7 @@ formularioCrearGrupo.onsubmit = async function (event) {
     console.log(`nombre para insertar : ${document.getElementById('nombreGrupo').value}`)
     console.log(`idmonitor para insertar : ${document.getElementById('monitorAsignado')}.value`)
     crearGrupo(document.getElementById('nombreGrupo').value, document.getElementById("monitorAsignado").value)
-  }else{
+  } else {
     mostrarError(document.getElementById('errorCrearGrupo'), "Error de formulario")
   }
 
@@ -1478,7 +1489,7 @@ formularioCrearGrupo.onsubmit = async function (event) {
 
 
 //CONEXION CON EL BBDD PARA HACER EL INSERT 
-function crearGrupo(nombre, id_monitor){
+function crearGrupo(nombre, id_monitor) {
   fetch("../Server/GestionarIndexAdmin.php", {
     method: "POST", // Método de la solicitud
     headers: {
@@ -1490,57 +1501,57 @@ function crearGrupo(nombre, id_monitor){
       idMonitoGrupoCrearGrupo: id_monitor
     }),
   })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
-    }
-    return response.json(); // Convertir la respuesta a JSON
-  })
-  .then((data) => {
-    let mensajeFeedback = document.getElementById("mensajeFeedback"); //sacamos el div del html 
-    // Comprobar si hay un error en la respuesta
-    if (data.error) {
-      console.log("2Error: " + data.error); // Mostrar en consola el error
-    } else {
-      if (data.crearGrupo){
-        if (data.crearGrupo == 'ok'){
-          // Éxito
-          document.getElementById('errorCrearGrupo').innerHTML = "";
-          mensajeFeedback.style.display = "block";
-          mensajeFeedback.style.color = "green";
-          mensajeFeedback.innerText = "Grupo creado con éxito 🎉";
-          repintarListaSelect();
-          document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
-          // Deshabilitamos el botón
-          document.getElementById('btnCrearGrupoConfirmar').disabled = true;
-          // cerrar el overlay despues de 2s
-          setTimeout(() => {
-            mensajeFeedback.style.display = "none";
-            document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
-            // habilitamos de nuevo el botón
-          document.getElementById('btnCrearGrupoConfirmar').disabled = false;
-          }, 2000);
-        }else{
-          // FALLO
-          document.getElementById('errorCrearGrupo').innerHTML = "";
-          mensajeFeedback.style.display = "block";
-          mensajeFeedback.style.color = "red";
-          mensajeFeedback.innerText = "Grupo no creado";
-                    // Deshabilitamos el botón
-                    document.getElementById('btnCrearGrupoConfirmar').disabled = true;
-
-          // cerrar el overlay despues de 3s
-          setTimeout(() => {
-            mensajeFeedback.style.display = "none";
-            document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
-                // habilitamos de nuevo el botón
-          document.getElementById('btnCrearGrupoConfirmar').disabled = false;
-          }, 3000);
-        }
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
       }
-      
-    }
-  });
+      return response.json(); // Convertir la respuesta a JSON
+    })
+    .then((data) => {
+      let mensajeFeedback = document.getElementById("mensajeFeedback"); //sacamos el div del html 
+      // Comprobar si hay un error en la respuesta
+      if (data.error) {
+        console.log("2Error: " + data.error); // Mostrar en consola el error
+      } else {
+        if (data.crearGrupo) {
+          if (data.crearGrupo == 'ok') {
+            // Éxito
+            document.getElementById('errorCrearGrupo').innerHTML = "";
+            mensajeFeedback.style.display = "block";
+            mensajeFeedback.style.color = "green";
+            mensajeFeedback.innerText = "Grupo creado con éxito 🎉";
+            repintarListaSelect();
+            document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+            // Deshabilitamos el botón
+            document.getElementById('btnCrearGrupoConfirmar').disabled = true;
+            // cerrar el overlay despues de 2s
+            setTimeout(() => {
+              mensajeFeedback.style.display = "none";
+              document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
+              // habilitamos de nuevo el botón
+              document.getElementById('btnCrearGrupoConfirmar').disabled = false;
+            }, 2000);
+          } else {
+            // FALLO
+            document.getElementById('errorCrearGrupo').innerHTML = "";
+            mensajeFeedback.style.display = "block";
+            mensajeFeedback.style.color = "red";
+            mensajeFeedback.innerText = "Grupo no creado";
+            // Deshabilitamos el botón
+            document.getElementById('btnCrearGrupoConfirmar').disabled = true;
+
+            // cerrar el overlay despues de 3s
+            setTimeout(() => {
+              mensajeFeedback.style.display = "none";
+              document.getElementById("overlayAñadirGrupo").classList.remove("activeOverlayAñadirGrupo"); // Quitar clase para ocultar el overlay
+              // habilitamos de nuevo el botón
+              document.getElementById('btnCrearGrupoConfirmar').disabled = false;
+            }, 3000);
+          }
+        }
+
+      }
+    });
 }
 
 
@@ -1555,21 +1566,21 @@ function crearGrupo(nombre, id_monitor){
 //                    OVERLAY DE AÑADIR PLAN
 //================================================================================================//
 //cuando hacemos click el boton de añadir plan
-document.getElementById('btnCrearPlan').addEventListener('click', ()=>{
+document.getElementById('btnCrearPlan').addEventListener('click', () => {
   limpiarFormularioAñadirPlan()  //limpiamos el formulario 
   //mostramos el overlay
   document.getElementById("overlayAñadirPlan").classList.add("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
   document.body.classList.add('body-fondo-bloqueado');  // Bloquea interacciones con el fondo y el desplazamiento
 });
 //cuando hacemos click el boton de cerrar de añadir plan
-document.querySelector('.closeBtnAñadirPlan').addEventListener('click', ()=>{
+document.querySelector('.closeBtnAñadirPlan').addEventListener('click', () => {
   //mostramos el overlay
   document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
   document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
 
 });
 //cuando hacemos click el boton de volver de añadir plan
-document.getElementById('btnVolverAñadirPlan').addEventListener('click', ()=>{
+document.getElementById('btnVolverAñadirPlan').addEventListener('click', () => {
   //mostramos el overlay
   document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
   document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
@@ -1578,25 +1589,25 @@ document.getElementById('btnVolverAñadirPlan').addEventListener('click', ()=>{
 
 //VALIDACION DE CAMPO
 //validacion de fecha inicio
-function validaNombrePlan(){
-  if (document.getElementById('nombrePlan').value.trim()==""){
+function validaNombrePlan() {
+  if (document.getElementById('nombrePlan').value.trim() == "") {
     mostrarError(document.getElementById('errorNombrePlan'), "El nombre no puede estar vacio")
-  }else{
+  } else {
     mostrarError(document.getElementById('errorNombrePlan'), "")
   }
 }
-function validarFechaInicio (){
+function validarFechaInicio() {
   //comprobar si existe o no 
-  if (document.getElementById('fechaInicioCrearPlan').value){
+  if (document.getElementById('fechaInicioCrearPlan').value) {
     mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "")
     // Obtener la fecha ingresada
     const fechaInput = new Date(document.getElementById('fechaInicioCrearPlan').value);
     // Obtener la fecha actual
     const fechaActual = new Date();
-      // Establecer las horas, minutos y segundos de la fecha actual a 00:00:00 para hacer la comparación sin horas
+    // Establecer las horas, minutos y segundos de la fecha actual a 00:00:00 para hacer la comparación sin horas
     fechaActual.setHours(0, 0, 0, 0);
 
-     // Comparar las fechas
+    // Comparar las fechas
     if (fechaInput < fechaActual) {
       mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "La fecha no puede ser pasado")
     } else if (fechaInput > fechaActual) {
@@ -1606,16 +1617,16 @@ function validarFechaInicio (){
       //en caso si es hoy
       mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "")
     }
-  }else{
+  } else {
     mostrarError(document.getElementById('errorFechaInicioCrearPlan'), "La fecha no puede ser vacia")
   }
-    
+
 }
 
 
 //validacion de fecha fin
-function validarFechaFin (){
-  if (document.getElementById('fechaFinCrearPlan').value){
+function validarFechaFin() {
+  if (document.getElementById('fechaFinCrearPlan').value) {
     mostrarError(document.getElementById('errorFechaCrearPlan'), "")
     // Obtener la fecha ingresada
     const fechaInput = new Date(document.getElementById('fechaFinCrearPlan').value);
@@ -1624,8 +1635,8 @@ function validarFechaFin (){
     // Establecer las horas, minutos y segundos de la fecha actual a 00:00:00 para hacer la comparación sin horas
     fechaActual.setHours(0, 0, 0, 0);
 
-      // Comparar las fechas
-      if (fechaInput < fechaActual) {
+    // Comparar las fechas
+    if (fechaInput < fechaActual) {
       mostrarError(document.getElementById('errorFechaCrearPlan'), "La fecha no puede ser pasado")
     } else if (fechaInput > fechaActual) {
       //en caso de ser futuro
@@ -1636,30 +1647,30 @@ function validarFechaFin (){
       mostrarError(document.getElementById('errorFechaCrearPlan'), "")
       comprobarDuracionFechas();
     }
-  }else{
+  } else {
     mostrarError(document.getElementById('errorFechaCrearPlan'), "La fecha no puede ser vacia")
   }
 
-   //funcion que comprueba si es los dos fechas tiene sentido o no 
-   function comprobarDuracionFechas(){
+  //funcion que comprueba si es los dos fechas tiene sentido o no 
+  function comprobarDuracionFechas() {
     const fechaInicioInput = new Date(document.getElementById('fechaInicioCrearPlan').value);
     const fechaFinInput = new Date(document.getElementById('fechaFinCrearPlan').value);
 
     //comparamos los fechas
-    if(fechaInicioInput > fechaFinInput){
+    if (fechaInicioInput > fechaFinInput) {
       mostrarError(document.getElementById('errorFechaCrearPlan'), "La fecha puede finalizarse antes de iniciarse")
-    }else{
+    } else {
       mostrarError(document.getElementById('errorFechaCrearPlan'), "")
     }
-   }
+  }
 }
 
 //validar la fecha maxima de inscripcion 
-function validarFechaMaximaInscripcion(){
-  if (document.getElementById('fechaMaximaIncribcionCrearPlan').value){
+function validarFechaMaximaInscripcion() {
+  if (document.getElementById('fechaMaximaIncribcionCrearPlan').value) {
     mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
 
-      // Obtener la fecha ingresada
+    // Obtener la fecha ingresada
     const fechaInput = new Date(document.getElementById('fechaMaximaIncribcionCrearPlan').value);
     // Obtener la fecha actual
     const fechaActual = new Date();
@@ -1668,15 +1679,15 @@ function validarFechaMaximaInscripcion(){
     fechaInput.setHours(0, 0, 0, 0)
 
     console.log("Fecha input:", fechaInput);
-console.log("Fecha actual:", fechaActual);
+    console.log("Fecha actual:", fechaActual);
 
 
-      // Comparar las fechas
+    // Comparar las fechas
     if (fechaInput < fechaActual) {
       mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "La fecha maxima de inscripcion no puede ser pasado")
-    
-      
-    }else if (fechaInput > fechaActual) {
+
+
+    } else if (fechaInput > fechaActual) {
       //en caso de ser futuro
       mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
       comprobarSiIniciaONo();
@@ -1686,22 +1697,22 @@ console.log("Fecha actual:", fechaActual);
       mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
       comprobarSiIniciaONo();
     }
-  }else{
+  } else {
     mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "La fecha maxima de inscripcion no puede ser vacio")
   }
-  
+
 
   //funcion que se comprueba si se asignado el fecha de inicio tiene que ser menor que fecha de inicio
-  function comprobarSiIniciaONo(){
-    if (document.getElementById('fechaInicioCrearPlan')){
+  function comprobarSiIniciaONo() {
+    if (document.getElementById('fechaInicioCrearPlan')) {
       const fechaInicioInput = new Date(document.getElementById('fechaInicioCrearPlan').value);
       const fechaMaximaInput = new Date(document.getElementById('fechaMaximaIncribcionCrearPlan').value);
       fechaInicioInput.setHours(0, 0, 0, 0);
       fechaMaximaInput.setHours(0, 0, 0, 0)
 
-      if (fechaInicioInput <= fechaMaximaInput){
+      if (fechaInicioInput <= fechaMaximaInput) {
         mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "La fecha maxima de inscripcion no puede ser despues del inicio")
-      }else{
+      } else {
         mostrarError(document.getElementById('errorFechaMaximaIncribcionCrearPlan'), "")
       }
     }
@@ -1709,7 +1720,7 @@ console.log("Fecha actual:", fechaActual);
 }
 
 //validar la hora maxima 
-function validarHoraMaximaInscripcion(){
+function validarHoraMaximaInscripcion() {
   const horaMaximaInput = document.getElementById('horaMaximaInscribcionCrearPlan').value;
   const fechaMaximaInput = document.getElementById('fechaMaximaIncribcionCrearPlan').value;
 
@@ -1743,7 +1754,7 @@ function validarHoraMaximaInscripcion(){
 }
 
 //validacion de precio
-function validarPrecio(){
+function validarPrecio() {
   const precio = document.getElementById('precioCrearPlan').value.trim();
 
   if (precio === "") {
@@ -1759,21 +1770,21 @@ function validarPrecio(){
 }
 
 //validar Descripcion 
-function validarDescripcion(){
-  if (document.getElementById('descripcionCrearPlan').value.trim()==""){
+function validarDescripcion() {
+  if (document.getElementById('descripcionCrearPlan').value.trim() == "") {
     mostrarError(document.getElementById('errorDescripcionCrearPlan'), "El definicion no puede estar vacio")
-  }else{
+  } else {
     mostrarError(document.getElementById('errorDescripcionCrearPlan'), "")
   }
 }
 
 
 //UTILIZAR LOS VALIDACIONES
-document.getElementById('nombrePlan').onblur =validaNombrePlan;
+document.getElementById('nombrePlan').onblur = validaNombrePlan;
 document.getElementById('fechaInicioCrearPlan').onblur = validarFechaInicio;
-document.getElementById('fechaInicioCrearPlan').onblur =recombrebacionFechaMaximaInscripcion;
-function recombrebacionFechaMaximaInscripcion (){
-    if (document.getElementById('fechaMaximaIncribcionCrearPlan').value){
+document.getElementById('fechaInicioCrearPlan').onblur = recombrebacionFechaMaximaInscripcion;
+function recombrebacionFechaMaximaInscripcion() {
+  if (document.getElementById('fechaMaximaIncribcionCrearPlan').value) {
     validarFechaMaximaInscripcion();
   }
 }
@@ -1784,7 +1795,7 @@ document.getElementById('horaMaximaInscribcionCrearPlan').onblur = validarHoraMa
 document.getElementById('precioCrearPlan').onblur = validarPrecio;
 document.getElementById('descripcionCrearPlan').onblur = validarDescripcion;
 
-document.getElementById('nombrePlan').oninput =validaNombrePlan;
+document.getElementById('nombrePlan').oninput = validaNombrePlan;
 document.getElementById('fechaInicioCrearPlan').oninput = validarFechaInicio;
 document.getElementById('fechaFinCrearPlan').oninput = validarFechaFin;
 document.getElementById('fechaMaximaIncribcionCrearPlan').oninput = validarFechaMaximaInscripcion;
@@ -1793,7 +1804,7 @@ document.getElementById('precioCrearPlan').oninput = validarPrecio;
 document.getElementById('descripcionCrearPlan').oninput = validarDescripcion;
 
 //funcion para limpiar los el formulario
-function limpiarFormularioAñadirPlan(){
+function limpiarFormularioAñadirPlan() {
   // Limpiar todos los campos del formulario
   document.getElementById('formAñadirPlan').reset();
 
@@ -1826,12 +1837,12 @@ formularioCrearPlan.onsubmit = async function (event) {
 
   //comprobamos si hay error o no 
   if (
-    checkError(document.getElementById('errorNombrePlan')) && 
-    checkError(document.getElementById('errorFechaInicioCrearPlan')) && 
-    checkError(document.getElementById('errorFechaCrearPlan')) && 
-    checkError(document.getElementById('errorFechaMaximaIncribcionCrearPlan')) && 
-    checkError(document.getElementById('errorHoraMaximaInscribcionCrearPlan')) && 
-    checkError(document.getElementById('errorPrecioCrearPlan')) && 
+    checkError(document.getElementById('errorNombrePlan')) &&
+    checkError(document.getElementById('errorFechaInicioCrearPlan')) &&
+    checkError(document.getElementById('errorFechaCrearPlan')) &&
+    checkError(document.getElementById('errorFechaMaximaIncribcionCrearPlan')) &&
+    checkError(document.getElementById('errorHoraMaximaInscribcionCrearPlan')) &&
+    checkError(document.getElementById('errorPrecioCrearPlan')) &&
     checkError(document.getElementById('errorDescripcionCrearPlan'))) {
     // Si no hay errores en ninguno de los campos, continuar con el proceso
     // Aquí puedes agregar la lógica para enviar el formulario o mostrar un mensaje de éxito
@@ -1839,19 +1850,19 @@ formularioCrearPlan.onsubmit = async function (event) {
     //SIGUENTE PASO 
     crearPlan(
       document.getElementById('nombrePlan').value,
-      document.getElementById('fechaInicioCrearPlan').value, 
-      document.getElementById('fechaFinCrearPlan').value, 
-      document.getElementById('fechaMaximaIncribcionCrearPlan').value, 
-      document.getElementById('horaMaximaInscribcionCrearPlan').value, 
-      document.getElementById('precioCrearPlan').value, 
-      document.getElementById('descripcionCrearPlan').value, 
+      document.getElementById('fechaInicioCrearPlan').value,
+      document.getElementById('fechaFinCrearPlan').value,
+      document.getElementById('fechaMaximaIncribcionCrearPlan').value,
+      document.getElementById('horaMaximaInscribcionCrearPlan').value,
+      document.getElementById('precioCrearPlan').value,
+      document.getElementById('descripcionCrearPlan').value,
     )
   } else {
     // Si hay algún error, evitar el envío y mostrar el mensaje de error
     mostrarError(document.getElementById('errorCrearPlan'), "Hay campos del formulario no completado")
   }
 
-  function crearPlan(nombre, fechaInicio, fechaFin, fechaMaxima, horaMaxima, precio, descripcion){
+  function crearPlan(nombre, fechaInicio, fechaFin, fechaMaxima, horaMaxima, precio, descripcion) {
     fetch("../Server/GestionarIndexAdmin.php", {
       method: "POST", // Método de la solicitud
       headers: {
@@ -1859,68 +1870,68 @@ formularioCrearPlan.onsubmit = async function (event) {
       },
       body: JSON.stringify({
         //enviamos datos para la consulta
-        nombreAgregatPlan : nombre,
+        nombreAgregatPlan: nombre,
         fechaInicioCrearPlan: fechaInicio,
         fechaFinCrearPlan: fechaFin,
         fechaMaximaCrearPlan: fechaMaxima,
-        horaMaximaCrearPlan: horaMaxima, 
-        precioCrearPlan: precio, 
+        horaMaximaCrearPlan: horaMaxima,
+        precioCrearPlan: precio,
         descripcionCrearPlan: descripcion
       }),
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
-      }
-      return response.json(); // Convertir la respuesta a JSON
-    })
-    .then((data) => {
-      let mensajeFeedbackPlan = document.getElementById("mensajeFeedbackPlan"); //sacamos el div del html 
-      // Comprobar si hay un error en la respuesta
-      if (data.error) {
-        console.log("2Error: " + data.error); // Mostrar en consola el error
-      } else {
-        if (data.crearPlan){
-          if (data.crearPlan == 'ok'){
-            // Éxito
-            document.getElementById('errorCrearPlan').innerHTML = "";
-            mensajeFeedbackPlan.style.display = "block";
-            mensajeFeedbackPlan.style.color = "green";
-            mensajeFeedbackPlan.innerText = "Plan creado con éxito 🎉";
-            repintarListaSelect();
-            document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
-
-            // Deshabilitamos el botón
-            document.getElementById('btnCrearPlanConfirmar').disabled = true;
-            // cerrar el overlay despues de 2s
-            setTimeout(() => {
-              mensajeFeedbackPlan.style.display = "none";
-              document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
-              document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
-              // habilitamos el botón
-              document.getElementById('btnCrearPlanConfirmar').disabled = false;
-            }, 2000);
-          }else{
-            // FALLO
-            document.getElementById('errorCrearPlan').innerHTML = "";
-            mensajeFeedbackPlan.style.display = "block";
-            mensajeFeedbackPlan.style.color = "red";
-            mensajeFeedbackPlan.innerText = "Plan no creado";
-            // Deshabilitamos el botón
-            document.getElementById('btnCrearPlanConfirmar').disabled = true;
-            // cerrar el overlay despues de 3s
-            setTimeout(() => {
-              mensajeFeedbackPlan.style.display = "none";
-              document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
-              document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
-               // habilitamos el botón
-               document.getElementById('btnCrearPlanConfirmar').disabled = false;
-            }, 3000);
-          }
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
         }
-        
-      }
-    });
+        return response.json(); // Convertir la respuesta a JSON
+      })
+      .then((data) => {
+        let mensajeFeedbackPlan = document.getElementById("mensajeFeedbackPlan"); //sacamos el div del html 
+        // Comprobar si hay un error en la respuesta
+        if (data.error) {
+          console.log("2Error: " + data.error); // Mostrar en consola el error
+        } else {
+          if (data.crearPlan) {
+            if (data.crearPlan == 'ok') {
+              // Éxito
+              document.getElementById('errorCrearPlan').innerHTML = "";
+              mensajeFeedbackPlan.style.display = "block";
+              mensajeFeedbackPlan.style.color = "green";
+              mensajeFeedbackPlan.innerText = "Plan creado con éxito 🎉";
+              repintarListaSelect();
+              document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+
+              // Deshabilitamos el botón
+              document.getElementById('btnCrearPlanConfirmar').disabled = true;
+              // cerrar el overlay despues de 2s
+              setTimeout(() => {
+                mensajeFeedbackPlan.style.display = "none";
+                document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
+                document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+                // habilitamos el botón
+                document.getElementById('btnCrearPlanConfirmar').disabled = false;
+              }, 2000);
+            } else {
+              // FALLO
+              document.getElementById('errorCrearPlan').innerHTML = "";
+              mensajeFeedbackPlan.style.display = "block";
+              mensajeFeedbackPlan.style.color = "red";
+              mensajeFeedbackPlan.innerText = "Plan no creado";
+              // Deshabilitamos el botón
+              document.getElementById('btnCrearPlanConfirmar').disabled = true;
+              // cerrar el overlay despues de 3s
+              setTimeout(() => {
+                mensajeFeedbackPlan.style.display = "none";
+                document.getElementById("overlayAñadirPlan").classList.remove("activeOverlayAñadirPlan"); // Quitar clase para ocultar el overlay
+                document.body.classList.remove('body-fondo-bloqueado');  // Desbloquea el fondo y el desplazamiento
+                // habilitamos el botón
+                document.getElementById('btnCrearPlanConfirmar').disabled = false;
+              }, 3000);
+            }
+          }
+
+        }
+      });
   }
 
 
@@ -1935,16 +1946,16 @@ formularioCrearPlan.onsubmit = async function (event) {
 //                    OVERLAY DE MODIFICAR DATOS DEL ADMIN
 //================================================================================================//
 //cerrar overlay de modificar datos
-document.getElementById('btnVolverModificarContrasenia').addEventListener('click', ()=>{
+document.getElementById('btnVolverModificarContrasenia').addEventListener('click', () => {
   document.getElementById('overlayCambiarContraseña').classList.remove('activeOverlayCambiarContraseña')
   document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 })
-document.querySelector('.closeBtnEliminarContrasenia').addEventListener('click', () =>{
+document.querySelector('.closeBtnEliminarContrasenia').addEventListener('click', () => {
   document.getElementById('overlayCambiarContraseña').classList.remove('activeOverlayCambiarContraseña')
   document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 })
 //activar overlay de modificar datos del admin
-document.getElementById('modificarPadre').addEventListener('click', ()=>{
+document.getElementById('modificarPadre').addEventListener('click', () => {
   limpiarFormularioCambiarContrasenia()
   document.getElementById('overlayCambiarContraseña').classList.add('activeOverlayCambiarContraseña')
   document.body.classList.add("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
@@ -1953,70 +1964,70 @@ document.getElementById('modificarPadre').addEventListener('click', ()=>{
 
 
 //validanos los campos 
-function validarContrasenia1 (){
+function validarContrasenia1() {
   //comprobamos si es vacio o no
-  if(document.getElementById('contrasenia1').value.trim() == ""){
-      mostrarError(document.getElementById('errorContrasenia1'), "La Contraseña no puede ser vacia")
-  }else{
+  if (document.getElementById('contrasenia1').value.trim() == "") {
+    mostrarError(document.getElementById('errorContrasenia1'), "La Contraseña no puede ser vacia")
+  } else {
+    mostrarError(document.getElementById('errorContrasenia1'), "");
+    //comprobar con el expresion regular
+    if (/^\d{6}$/.test(document.getElementById('contrasenia1').value) == true) {
       mostrarError(document.getElementById('errorContrasenia1'), "");
-      //comprobar con el expresion regular
-      if (/^\d{6}$/.test(document.getElementById('contrasenia1').value) == true){
-          mostrarError(document.getElementById('errorContrasenia1'), "");
-      }else{
-          mostrarError(document.getElementById('errorContrasenia1'), "El pin debe tener 6 digitos");
-      }
+    } else {
+      mostrarError(document.getElementById('errorContrasenia1'), "El pin debe tener 6 digitos");
+    }
   }
   //comprobamos si ha asignado el segundo contraseña o no, en principio no
-  if(document.getElementById('contrasenia2').value){
-      if (document.getElementById('contrasenia1').value !== document.getElementById('contrasenia2').value){
-          mostrarError(document.getElementById('errorContrasenia2'), "No coinciden la contraseña")
-      }else{
-          mostrarError(document.getElementById('errorContrasenia2'), "")
-           //comprobar con el expresion regular
-      if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true){
-          mostrarError(document.getElementById('errorContrasenia2'), "");
-      }else{
-          mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
+  if (document.getElementById('contrasenia2').value) {
+    if (document.getElementById('contrasenia1').value !== document.getElementById('contrasenia2').value) {
+      mostrarError(document.getElementById('errorContrasenia2'), "No coinciden la contraseña")
+    } else {
+      mostrarError(document.getElementById('errorContrasenia2'), "")
+      //comprobar con el expresion regular
+      if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true) {
+        mostrarError(document.getElementById('errorContrasenia2'), "");
+      } else {
+        mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
       }
-      }
+    }
   }
 }
-function validarContrasenia2 (){
+function validarContrasenia2() {
   //comprobamos si es vacio o no
-  if(document.getElementById('contrasenia2').value.trim() == ""){
-      mostrarError(document.getElementById('errorContrasenia2'), "La Contraseña no puede ser vacia")
-  }else{
+  if (document.getElementById('contrasenia2').value.trim() == "") {
+    mostrarError(document.getElementById('errorContrasenia2'), "La Contraseña no puede ser vacia")
+  } else {
+    mostrarError(document.getElementById('errorContrasenia2'), "");
+    //comprobar con el expresion regular
+    if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true) {
       mostrarError(document.getElementById('errorContrasenia2'), "");
-       //comprobar con el expresion regular
-       if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true){
-          mostrarError(document.getElementById('errorContrasenia2'), "");
-      }else{
-          mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
-      }
+    } else {
+      mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
+    }
   }
   //comprobamos si ha asignado el primer contraseña o no, en principio si
-  if(document.getElementById('contrasenia1').value){
-      if (document.getElementById('contrasenia2').value !== document.getElementById('contrasenia1').value){
-          mostrarError(document.getElementById('errorContrasenia2'), "No coinciden la contraseña")
-      }else{
-          mostrarError(document.getElementById('errorContrasenia2'), "")
-           //comprobar con el expresion regular
-          if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true){
-              mostrarError(document.getElementById('errorContrasenia2'), "");
-          }else{
-              mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
-          }
+  if (document.getElementById('contrasenia1').value) {
+    if (document.getElementById('contrasenia2').value !== document.getElementById('contrasenia1').value) {
+      mostrarError(document.getElementById('errorContrasenia2'), "No coinciden la contraseña")
+    } else {
+      mostrarError(document.getElementById('errorContrasenia2'), "")
+      //comprobar con el expresion regular
+      if (/^\d{6}$/.test(document.getElementById('contrasenia2').value) == true) {
+        mostrarError(document.getElementById('errorContrasenia2'), "");
+      } else {
+        mostrarError(document.getElementById('errorContrasenia2'), "El pin debe tener 6 digitos");
       }
+    }
   }
 }
 
 //validacion de contraseña antigua
-async function validarContraseniaAntigua (){
+async function validarContraseniaAntigua() {
   //compruba si la contraseña esta vacia o no
-  if (document.getElementById('contraseniaAntigua').value.trim()==""){
+  if (document.getElementById('contraseniaAntigua').value.trim() == "") {
     //en caso de estar vacio
     mostrarError(document.getElementById('errorContraseniaAntigua'), "La contraseña no puede estar vacio")
-  }else{
+  } else {
     //en caso si no esta vacia
     mostrarError(document.getElementById('errorContraseniaAntigua'), "")
     //comprueba en bbdd si la contraseña es corecta o no
@@ -2066,7 +2077,7 @@ async function comprobarContraseniaBBDD(contraseniaTXT) {
 //inicializaos los comprobacion 
 document.getElementById('contrasenia1').onblur = validarContrasenia1;
 document.getElementById('contrasenia2').onblur = validarContrasenia2;
-document.getElementById('contraseniaAntigua').oninput = function() {  //eliminar error cuando escribe contraseña antigua
+document.getElementById('contraseniaAntigua').oninput = function () {  //eliminar error cuando escribe contraseña antigua
   document.getElementById('errorContraseniaAntigua').innerHTML = "";
 };
 //comprobacion live
@@ -2076,15 +2087,15 @@ document.getElementById('contrasenia2').oninput = validarContrasenia2;
 //cuando recibe un submit
 let formularioCambiarContra = document.getElementById("formularioCambiarContraseña");
 formularioCambiarContra.onsubmit = async function (event) {
-    // Prevenir el envío del formulario al inicio
-    event.preventDefault();
+  // Prevenir el envío del formulario al inicio
+  event.preventDefault();
 
-    //validamos por si acaso
-    validarContrasenia1();
-    validarContrasenia2();
-    await validarContraseniaAntigua();
+  //validamos por si acaso
+  validarContrasenia1();
+  validarContrasenia2();
+  await validarContraseniaAntigua();
 
-    //comprobamos si hay error de validacion
+  //comprobamos si hay error de validacion
   if (
     checkError(document.getElementById("errorContrasenia1")) &&
     checkError(document.getElementById("errorContrasenia2")) &&
@@ -2096,7 +2107,7 @@ formularioCambiarContra.onsubmit = async function (event) {
     document.getElementById('overlayComprobarContraseña').classList.add('activeOverlayComprobarContraseña')
     document.body.classList.add("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 
-  }else{
+  } else {
     mostrarError(document.getElementById('errorModificarContraseniaGeneral'), "El formulario contiene error")
   }
 }
@@ -2114,136 +2125,168 @@ function limpiarFormularioCambiarContrasenia() {
 
 
 //Comprobar el cambio de contraseña 
-document.getElementById('volverOverlayComprobarContraseña').addEventListener('click', ()=>{
+document.getElementById('volverOverlayComprobarContraseña').addEventListener('click', () => {
   document.getElementById('overlayComprobarContraseña').classList.remove('activeOverlayComprobarContraseña')
   document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 })
-document.querySelector('#cerrarOverlayComprobarContraseña').addEventListener('click', () =>{
+document.querySelector('#cerrarOverlayComprobarContraseña').addEventListener('click', () => {
   document.getElementById('overlayComprobarContraseña').classList.remove('activeOverlayComprobarContraseña')
   document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
 })
 
-document.getElementById('cerrarComprobarContraseña').addEventListener('click', async ()=>{
+document.getElementById('cerrarComprobarContraseña').addEventListener('click', async () => {
   await actualizarContraseña()  //actualizamos la contraseña
 
 })
 
 
-async function actualizarContraseña(){
+async function actualizarContraseña() {
   //hace el borado
   await fetch("../Server/GestionarIndexAdmin.php", {
-      method: "POST", // Método de la solicitud
-      headers: {
-          "Content-type": "application/json", // Tipo de contenido de la solicitud
-      },
-      body: JSON.stringify({
-          //enviamos datos para la consulta
-          contraseñaParaCambiar2: document.getElementById('contrasenia2').value,
-          idAdminCambiarContrasenia :id_adminGlobal
-      }),
-  })
-      .then((response) => {
-          if (!response.ok) {
-              throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
-          }
-          return response.json(); // Convertir la respuesta a JSON
-      })
-      .then((data) => {
-          let mensajeFeedbackOperar = document.getElementById(
-              "mensajeFeedbackComprobarModificarContrasenia"
-          ); //sacamos el div del html
-          // Comprobar si hay un error en la respuesta
-          if (data.error) {
-              console.log("2Error: " + data.error); // Mostrar en consola el error
-          } else {
-              if (data.contraseniaAdminCambiado) {
-                  if (data.contraseniaAdminCambiado == "ok") {
-                      // Éxito
-                      document.getElementById(
-                          "errorModificarContraseniaGeneral"
-                      ).innerHTML = "";
-                      mensajeFeedbackOperar.style.display = "block";
-                      mensajeFeedbackOperar.style.color = "green";
-                      mensajeFeedbackOperar.innerText =
-                          "Contraseña modificado con éxito 🎉";
-                      // Deshabilitamos el botón
-                      document.getElementById(
-                          "cerrarComprobarContraseña"
-                      ).disabled = true;
-                      document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
-                      // cerrar el overlay despues de 2s
-                      setTimeout(() => {
-                          mensajeFeedbackOperar.style.display =
-                              "none";
-                          document
-                              .getElementById("overlayCambiarContraseña")
-                              .classList.remove("activeOverlayCambiarContraseña"); // Quitar clase para ocultar el overlay
-                          // habilitamos de nuevo el botón
-                          document.getElementById(
-                              "cerrarComprobarContraseña"
-                          ).disabled = false;
-
-                          cerrarSesionSeguro()  //cerramos el sesion 
-                      }, 2000);
-                  } else {
-                     // fallo
-                     document.getElementById(
-                      "errorModificarContraseniaGeneral"
-                  ).innerHTML = "";
-                  mensajeFeedbackOperar.style.display = "block";
-                  mensajeFeedbackOperar.style.color = "red";
-                  mensajeFeedbackOperar.innerText =
-                      "Contraseña no modificado";
-                  // Deshabilitamos el botón
-                  document.getElementById(
-                      "cerrarComprobarContraseña"
-                  ).disabled = true;
-                  document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
-                  // cerrar el overlay despues de 2s
-                  setTimeout(() => {
-                      mensajeFeedbackOperar.style.display =
-                          "none";
-                      document
-                          .getElementById("overlayCambiarContraseña")
-                          .classList.remove("activeOverlayCambiarContraseña"); // Quitar clase para ocultar el overlay
-                      // habilitamos de nuevo el botón
-                      document.getElementById(
-                          "cerrarComprobarContraseña"
-                      ).disabled = false;
-                  }, 2000);
-                  }
-              
-              }
-
-          }
-      })
-}
-
-//-----------------------------------------------------------------------------------------------------------//
-  //PROTECCION DE RUTA Y EXTRAER EL ID
-  //-----------------------------------------------------------------------------------------------------------//
-  fetch("../Server/comprobacionSesionAdmin.php", {
     method: "POST", // Método de la solicitud
     headers: {
       "Content-type": "application/json", // Tipo de contenido de la solicitud
     },
+    body: JSON.stringify({
+      //enviamos datos para la consulta
+      contraseñaParaCambiar2: document.getElementById('contrasenia2').value,
+      idAdminCambiarContrasenia: id_adminGlobal
+    }),
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+        throw new Error("Error al obtener datos del servidor (2)."); // Manejo de error si la respuesta no es OK
       }
       return response.json(); // Convertir la respuesta a JSON
     })
     .then((data) => {
+      let mensajeFeedbackOperar = document.getElementById(
+        "mensajeFeedbackComprobarModificarContrasenia"
+      ); //sacamos el div del html
       // Comprobar si hay un error en la respuesta
       if (data.error) {
-        alert("Error: " + data.error); // Mostrar alerta en caso de error
-      } else if (data.noLogin) {
-        // Redirigir si no hay sesión iniciada
-        window.location.href = data.noLogin;
-        console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+        console.log("2Error: " + data.error); // Mostrar en consola el error
       } else {
-        console.log(`id: ${data.id}`);
+        if (data.contraseniaAdminCambiado) {
+          if (data.contraseniaAdminCambiado == "ok") {
+            // Éxito
+            document.getElementById(
+              "errorModificarContraseniaGeneral"
+            ).innerHTML = "";
+            mensajeFeedbackOperar.style.display = "block";
+            mensajeFeedbackOperar.style.color = "green";
+            mensajeFeedbackOperar.innerText =
+              "Contraseña modificado con éxito 🎉";
+            // Deshabilitamos el botón
+            document.getElementById(
+              "cerrarComprobarContraseña"
+            ).disabled = true;
+            document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+            // cerrar el overlay despues de 2s
+            setTimeout(() => {
+              mensajeFeedbackOperar.style.display =
+                "none";
+              document
+                .getElementById("overlayCambiarContraseña")
+                .classList.remove("activeOverlayCambiarContraseña"); // Quitar clase para ocultar el overlay
+              // habilitamos de nuevo el botón
+              document.getElementById(
+                "cerrarComprobarContraseña"
+              ).disabled = false;
+
+              cerrarSesionSeguro()  //cerramos el sesion 
+            }, 2000);
+          } else {
+            // fallo
+            document.getElementById(
+              "errorModificarContraseniaGeneral"
+            ).innerHTML = "";
+            mensajeFeedbackOperar.style.display = "block";
+            mensajeFeedbackOperar.style.color = "red";
+            mensajeFeedbackOperar.innerText =
+              "Contraseña no modificado";
+            // Deshabilitamos el botón
+            document.getElementById(
+              "cerrarComprobarContraseña"
+            ).disabled = true;
+            document.body.classList.remove("body-fondo-bloqueado"); // Desbloquea el fondo y el desplazamiento
+            // cerrar el overlay despues de 2s
+            setTimeout(() => {
+              mensajeFeedbackOperar.style.display =
+                "none";
+              document
+                .getElementById("overlayCambiarContraseña")
+                .classList.remove("activeOverlayCambiarContraseña"); // Quitar clase para ocultar el overlay
+              // habilitamos de nuevo el botón
+              document.getElementById(
+                "cerrarComprobarContraseña"
+              ).disabled = false;
+            }, 2000);
+          }
+
+        }
+
       }
     })
-    //-----------------------------------------------------------------------------------------------------------//
+}
+
+//-----------------------------------------------------------------------------------------------------------//
+//PROTECCION DE RUTA Y EXTRAER EL ID
+//-----------------------------------------------------------------------------------------------------------//
+fetch("../Server/comprobacionSesionAdmin.php", {
+  method: "POST", // Método de la solicitud
+  headers: {
+    "Content-type": "application/json", // Tipo de contenido de la solicitud
+  },
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Error al obtener datos del servidor."); // Manejo de error si la respuesta no es OK
+    }
+    return response.json(); // Convertir la respuesta a JSON
+  })
+  .then((data) => {
+    // Comprobar si hay un error en la respuesta
+    if (data.error) {
+      alert("Error: " + data.error); // Mostrar alerta en caso de error
+    } else if (data.noLogin) {
+      // Redirigir si no hay sesión iniciada
+      window.location.href = data.noLogin;
+      console.log(`Login: ${data.login}`); // Mostrar en consola el estado de login
+    } else {
+      console.log(`id: ${data.id}`);
+    }
+  })
+//-----------------------------------------------------------------------------------------------------------//
+
+
+
+function limpiarFormularioOperar() {
+  const formulario = document.getElementById('formularioOperarActividad');
+  formulario.reset();
+
+  // Limpiar la vista previa de la imagen
+  const vistaPrevia = document.getElementById('vistaPrevia');
+  vistaPrevia.src = '';
+  vistaPrevia.style.display = 'none';
+
+  // Limpiar los campos de error
+  document.getElementById('errorTitulo').textContent = '';
+  document.getElementById('errorHora').textContent = '';
+  document.getElementById('errorHoraFin').textContent = '';
+  document.getElementById('errorDescripcion').textContent = '';
+  document.getElementById('errorFecha').textContent = '';
+  document.getElementById('errorFoto').textContent = '';
+  document.getElementById('errorCambiarGrupo').textContent = '';
+  document.getElementById('errorCambiarPlan').textContent = '';
+  document.getElementById('errorModificar').textContent = '';
+  document.getElementById('mensajeFeedbackAgregarActividad').style.display = 'none';
+
+  // Restablecer los radios
+  document.getElementById('cambiarGrupoNo').checked = true;
+  document.getElementById('cambiarPlanNo').checked = true;
+
+  // Limpiar los contenedores dinámicos
+  document.getElementById('espacioCambiarGrupo').innerHTML = '';
+  document.getElementById('espacioCambiarPlan').innerHTML = '';
+}

@@ -453,6 +453,7 @@ function validarContrasenia1 (){
         }
         }
     }
+    limpiezaCambiarContraseñaMonitor();
 }
 function validarContrasenia2 (){
     //comprobamos si es vacio o no
@@ -468,6 +469,26 @@ function validarContrasenia2 (){
         }else{
             mostrarError(document.getElementById('errorContrasenia2'), "")
         }
+    }
+    limpiezaCambiarContraseñaMonitor();
+}
+
+//funcion para quitar el error general (limpieza)
+//FUNCION PARA LIMPIAR EL ERROR GENERAL SI NO HAY ERROR EN EL FORMULARIO 
+//comprobamos si existe el error general o no, si hay error general se comprueba otra vez si hay errores en el formulario o no, 
+//si no hay error tras la compribacion del formulario se borraria el error general y si hay algun fallo se mantiene el error
+//**este funcion siempre se ejecuta despues de comprobacion de validacion de los campos (deben estar dentro del funcion de validacion de cada input) */
+function limpiezaCambiarContraseñaMonitor(){
+    console.log(checkError(document.getElementById('errorModificarContraseniaGeneral')))
+    if (checkError(document.getElementById('errorModificarContraseniaGeneral')) == false){
+        if (
+            checkError(document.getElementById("errorContrasenia1")) &&
+            checkError(document.getElementById("errorContrasenia2"))
+          ) {
+            mostrarError(document.getElementById('errorModificarContraseniaGeneral'), "")
+          }else{
+            mostrarError(document.getElementById('errorModificarContraseniaGeneral'), "El formulario contiene error")
+          }
     }
 }
 
@@ -673,12 +694,28 @@ function validarNombre (){
     }else{
         mostrarError(document.getElementById('errorNombreModificar'), "")
     }
+    limpiezaCambiarDatoMonitor()
 }
 function validarDescripcion(){
     if (document.getElementById('descripcionModificar').value.trim() == ""){
         mostrarError(document.getElementById('errorDescripcionModificar'), "El descripcion no puede estar vacio")
     }else{
         mostrarError(document.getElementById('errorDescripcionModificar'), "")
+    }
+    limpiezaCambiarDatoMonitor()
+}
+//funcion para quitar el error general (limpieza)
+function limpiezaCambiarDatoMonitor(){
+    console.log(checkError(document.getElementById('errorCambiarDatosGeneral')))
+    if (checkError(document.getElementById('errorCambiarDatosGeneral')) == false){
+        if (
+            checkError(document.getElementById("errorNombreModificar")) &&
+            checkError(document.getElementById("errorDescripcionModificar"))
+          ) {
+            mostrarError(document.getElementById('errorCambiarDatosGeneral'), "")
+          }else{
+            mostrarError(document.getElementById('errorCambiarDatosGeneral'), "El formulario contiene error")
+          }
     }
 }
 
@@ -859,6 +896,7 @@ function validarNombreCrear (){
     }else{
         mostrarError(document.getElementById('errorNombreCrear'), "")
     }
+    limpiezaCrearMonitor()
 }
 function validarCorreoCrear (){
     if(document.getElementById('emailCrear').value.trim()==""){
@@ -871,6 +909,7 @@ function validarCorreoCrear (){
             mostrarError(document.getElementById('errorEmailCrear'), "Error del formato")
         }
     }
+    limpiezaCrearMonitor()
 }
 function validarDescripcionCrear (){
     if(document.getElementById('descripcionCrear').value.trim()==""){
@@ -878,6 +917,7 @@ function validarDescripcionCrear (){
     }else{
         mostrarError(document.getElementById('errorDescripcionCrear'), "")
     }
+    limpiezaCrearMonitor()
 }
 
 
@@ -894,6 +934,7 @@ function validarContrasenia1Crear (){
         }else{
             mostrarError(document.getElementById('errorContrasenia1Crear'), "El pin debe tener 6 digitos");
         }
+        limpiezaCrearMonitor()
     }
     //comprobamos si ha asignado el segundo contraseña o no, en principio no
     if(document.getElementById('contrasenia2Crear').value){
@@ -908,6 +949,7 @@ function validarContrasenia1Crear (){
             mostrarError(document.getElementById('errorContrasenia2Crear'), "El pin debe tener 6 digitos");
         }
         }
+        limpiezaCrearMonitor()
     }
 }
 function validarContrasenia2Crear (){
@@ -936,6 +978,25 @@ function validarContrasenia2Crear (){
                 mostrarError(document.getElementById('errorContrasenia2Crear'), "El pin debe tener 6 digitos");
             }
         }
+    }
+    limpiezaCrearMonitor()
+}
+
+//funcion para quitar el error general (limpieza)
+function limpiezaCrearMonitor(){
+    console.log(checkError(document.getElementById('errorCrearMonitorGeneral')))
+    if (checkError(document.getElementById('errorCrearMonitorGeneral')) == false){
+        if (
+            checkError(document.getElementById("errorNombreCrear")) &&
+            checkError(document.getElementById("errorEmailCrear")) &&
+            checkError(document.getElementById("errorDescripcionCrear")) &&
+            checkError(document.getElementById("errorContrasenia1Crear")) &&
+            checkError(document.getElementById("errorContrasenia2Crear"))
+          ) {
+            mostrarError(document.getElementById('errorCrearMonitorGeneral'), "")
+          }else{
+            mostrarError(document.getElementById('errorCrearMonitorGeneral'), "El formulario contiene error")
+          }
     }
 }
 

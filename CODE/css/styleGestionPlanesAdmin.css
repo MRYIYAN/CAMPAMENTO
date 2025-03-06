@@ -1073,6 +1073,15 @@ select {
   #btnEliminarComprobarEliminarPersona:hover{
     background-color: #982c37;
   }
+  #btnEliminarComprobarEliminar{
+    background-color: #dc3545;
+    color: white;
+    margin: 10px;
+  }
+  #btnEliminarComprobarEliminar:hover{
+    background-color: #982c37;
+  }
+  
 
 /* //---------------------------------------------------------------// */
 

@@ -542,7 +542,7 @@ function mostrarOverlayOperar(id_nino){
                                 (plan) => `
                         <option value="${plan.id_plan}" ${plan.id_plan == planNinoBBDD ? "selected" : ""
                                     }>
-                            ${plan.fecha_inicio} - ${plan.fecha_fin}
+                            ${plan.nombre} (${plan.fecha_inicio} - ${plan.fecha_fin})
                         </option>
                     `
                             )
