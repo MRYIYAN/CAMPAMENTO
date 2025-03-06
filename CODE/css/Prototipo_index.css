@@ -1,18 +1,4 @@
-/*-----------------------------------*\
-  #index.css
-\*-----------------------------------*/
 
-/**
- * copyright 2022 codewithsadee
- */
-
-
-
-
-
-/*-----------------------------------*\
-  #CUSTOM PROPERTY
-\*-----------------------------------*/
 :root {
     /**
      * COLORS (Basados en la paleta de la imagen)
@@ -44,10 +30,10 @@
   :root {
   
       /**
-       * COLORS
+       * COLORES
        */
     
-      --gold-crayola: hsl(38, 61%, 73%);
+
       --quick-silver: hsla(0, 0%, 65%, 1);
       --davys-grey: hsla(30, 3%, 34%, 1);
       --smoky-black-1: hsla(40, 12%, 5%, 1);
@@ -146,9 +132,6 @@
     
     
     
-    /*-----------------------------------*\
-      #RESET
-    \*-----------------------------------*/
     
     *,
     *::before,
@@ -1035,8 +1018,8 @@
     
     
     /*-----------------------------------*\
-      #SPECIAL DISH
-    \*-----------------------------------*/
+      #SPECIAL 
+    \*-------------------------------*/
     
     .special-dish-content { padding-block: 70px; }
     
@@ -1191,65 +1174,12 @@
     
     
     
-    /*-----------------------------------*\
-      #RESERVATION
-    \*-----------------------------------*/
-    
-    .reservation-form { margin-block-start: -270px; }
-    
-    .form-text { margin-block-end: 40px; }
-    
-    .form-text .link {
-      display: inline;
-      color: var(--blue-2);
-    }
-    
-    .form-right .headline-1 { margin-block-end: 40px; }
-    
-    .form-right .contact-label { margin-block-end: 5px; }
-    
-    .form-right .separator { margin: 20px auto; }
-    
-    .form-right .body-4 {
-      color: var(--quick-silver);
-      line-height: var(--lineHeight-3);
-    }
-    
-    .form-right .body-4:not(:last-child) { margin-block-end: 25px; }
-    
-    .form-left,
-    .form-right { padding: 40px 20px 30px; }
-    
-    .input-field[type="date"] {
-      text-transform: uppercase;
-      padding-inline-end: 10px;
-    }
-    
-    .input-field[type="date"]::-webkit-calendar-picker-indicator { opacity: 0; }
-    
-    textarea.input-field {
-      resize: none;
-      height: 140px;
-      padding-block: 20px;
-      line-height: var(--lineHeight-1);
-    }
-    
-    .form-left .btn {
-      max-width: 100%;
-      width: 100%;
-    }
-    
-    .form-right {
-      background-repeat: repeat;
-      background-position: top left;
-    }
-    
     
     
     
     
     /*-----------------------------------*\
-      #FEATURES
+      #virtudes
     \*-----------------------------------*/
     
     .features .section-title { margin-block-end: 40px; }
@@ -1729,21 +1659,6 @@
     
     
     
-      /**
-       * RESERVATION
-       */
-    
-      .reservation .input-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 20px;
-      }
-    
-      .reservation .input-wrapper:nth-child(4) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    
-    
     
       /**
        * FOOTER
@@ -1880,26 +1795,6 @@
       }
     
     
-    
-      /**
-       * TESTIMONIALS
-       */
-    
-      .testi-text {
-        max-width: 910px;
-        margin-inline: auto;
-      }
-    
-    
-    
-      /**
-       * RESERVATION
-       */
-    
-      .reservation-form {
-        display: grid;
-        grid-template-columns: 1fr 0.5fr;
-      }
     
     
     
