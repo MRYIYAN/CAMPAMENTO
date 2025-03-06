@@ -420,6 +420,10 @@ body::-webkit-scrollbar {
   .socials a {
     font-size: 24px;
   }
+  #iconos{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
   
   .links {
     gap: 10px;
