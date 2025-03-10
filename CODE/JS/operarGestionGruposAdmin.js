@@ -737,7 +737,7 @@ function repintarLista() {
                         const celda5 = nuevaFila.insertCell(); // Crear la cuarta celda
                         celda5.innerHTML = `
                     <button class="verMasBtn" onclick="mostrarOverlayModificarDatosNino('${nino.id_nino}')" id="btnModificarDatosNino">Operar</button>
-                    <button class="verMasBtn" onclick="mostrarOverlayEliminarNino('${nino.id_nino}')" id="btnEliminarNino">Eliminar</button>
+                    <button class="verMasBtn" onclick="mostrarOverlayEliminarNino('${nino.id_nino}')" id="btnEliminarNino">Quitar del Grupo</button>
                     `;
                     });
                 }
