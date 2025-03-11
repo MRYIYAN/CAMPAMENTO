@@ -305,6 +305,7 @@ body::-webkit-scrollbar {
       opacity: 0;
       transition: opacity 0.3s ease, visibility 0.3s;
       color: #333;  /* Color del texto */
+      z-index: 100000;
   }
 
   /* Estilo para la ventana emergente */
