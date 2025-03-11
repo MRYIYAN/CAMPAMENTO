@@ -11,12 +11,10 @@ if ($conn->connect_error) {
 $data = json_decode(file_get_contents("php://input"), true);
 session_start(); // Reanuda/recuperar la sesión que teníamos creada
 
-
-
-
 if(isset($data['id'])){
+    // Preparar la consulta para evitar inyecciones SQL
     $query = $conn->prepare("SELECT nombre FROM monitores WHERE id_monitor = ?");
-    $query->bind_param("i", $data['id']);
+    $query->bind_param("i", $data['id']); // Vincular el parámetro
     $query->execute();   
     $result = $query->get_result();  
     
@@ -34,7 +32,6 @@ if(isset($data['id'])){
     exit();
 }
 
-
-      //  Si no se cumple ninguna condición, envía una respuesta vacía pero válida:
-      echo json_encode(['error' => 'ID del monitor no proporcionado o no encontrado']);
-      exit();
+// Si no se cumple ninguna condición, envía una respuesta vacía pero válida:
+echo json_encode(['error' => 'ID del monitor no proporcionado o no encontrado']);
+exit();

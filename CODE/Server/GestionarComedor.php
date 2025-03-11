@@ -10,8 +10,9 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
 }
 
 // Consulta para obtener los datos de PLAN_COMEDOR
-$sql = "SELECT * FROM PLAN_COMEDOR";
-$result = $conn->query($sql);
+$query = $conn->prepare("SELECT nombre_plan, descripcion, precio, imagenComida_src FROM PLAN_COMEDOR");
+$query->execute();
+$result = $query->get_result();
 
 // Crear un array de los resultados
 $plans = [];
@@ -31,6 +32,7 @@ if ($result->num_rows > 0) {
 // Devolver los datos como JSON
 echo json_encode($plans);
 
-// Cerrar la conexión
+// Cerrar la consulta y la conexión
+$query->close();
 $conn->close();
 ?>

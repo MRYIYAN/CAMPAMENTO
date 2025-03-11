@@ -13,8 +13,10 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
     exit();
 }
 
-$sql = "SELECT id_tutor, nombre, telefono, email, avatar_src FROM TUTORES";
-$result = $conn->query($sql);
+// Consulta para obtener los datos de los tutores
+$query = $conn->prepare("SELECT id_tutor, nombre, telefono, email, avatar_src FROM TUTORES");
+$query->execute();
+$result = $query->get_result();
 
 $tutores = [];
 if ($result && $result->num_rows > 0) {
@@ -28,6 +30,9 @@ if ($result && $result->num_rows > 0) {
 }
 ob_clean(); // Limpia cualquier salida anterior
 echo json_encode($tutores);
+
+// Cerrar la consulta y la conexión
+$query->close();
 $conn->close();
 exit();
 ?>

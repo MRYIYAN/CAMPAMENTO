@@ -11,9 +11,10 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
     exit();
 }
 
-// Consulta SQL
-$sql = "SELECT id_monitor, nombre, descripcion FROM MONITORES";
-$result = $conn->query($sql);
+// Consulta SQL preparada
+$query = $conn->prepare("SELECT id_monitor, nombre, descripcion FROM MONITORES");
+$query->execute();
+$result = $query->get_result();
 
 // Verificación de errores en la consulta
 if (!$result) {
@@ -36,5 +37,8 @@ if ($result->num_rows > 0) {
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($monitores);
+
+// Cerrar la consulta y la conexión
+$query->close();
 $conn->close();
 ?>

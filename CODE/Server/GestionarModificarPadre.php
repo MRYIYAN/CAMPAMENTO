@@ -29,11 +29,6 @@ if (!isset($_SESSION['id'])) {
 // Obtener el contenido JSON de la solicitud POST
 $data = json_decode(file_get_contents('php://input'), true);
 
-
-
-
-
-
  //CONSULTA PARA SACAR TODO LOS DATOS DEL TUTOR
  $queryInfoTutor = $conn->prepare("SELECT * FROM tutores WHERE id_tutor = ?");   //sacamos todo los informaciones del actividad, dependiendo del monitor y el plan, por que no va a ser el mismo actividades en los diferentes plan 
  $queryInfoTutor->bind_param("i", $_SESSION['id'] );    //asignamos el valor de ?, es un i porque es un numero(integer)

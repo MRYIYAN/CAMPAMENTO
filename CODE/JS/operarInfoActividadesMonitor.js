@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // 3. Buscar niños según grupo y mostrarlos en una tabla con botón "ASISTENCIA"
+  // 3. Buscar niños según grupo y mostrarlos en una tabla con botones de asistencia
   document.getElementById('btnBuscarNinos').addEventListener('click', function() {
     var grupoSelect = document.getElementById('grupoSelect');
     var grupoId = grupoSelect.value;
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Encabezado
         var thead = document.createElement('thead');
         var headerRow = document.createElement('tr');
-        ['FOTO', 'NOMBRE', 'OPERAR'].forEach(function(text) { // Removed 'ID' and added 'FOTO'
+        ['FOTO', 'NOMBRE', 'ASISTENCIA'].forEach(function(text) { // Removed 'OPERAR'
           var th = document.createElement('th');
           th.textContent = text;
           headerRow.appendChild(th);
@@ -287,20 +287,70 @@ document.addEventListener('DOMContentLoaded', function() {
           tdNombre.textContent = nino.nombre;
           row.appendChild(tdNombre);
           
-          // Columna OPERAR: Botón "ASISTENCIA"
-          var tdOperar = document.createElement('td');
-          var btnAsistencia = document.createElement('button');
-          btnAsistencia.textContent = 'ASISTENCIA';
-          btnAsistencia.className = 'btn-asistencia';
-          // Al hacer clic, abre el modal y almacena el ID del niño en el atributo data-id del modal
-          btnAsistencia.addEventListener('click', function() {
-            var modal = document.getElementById('modalAsistencia');
-            modal.setAttribute('data-id', nino.id_nino);
-            modal.style.display = 'block';
-          });
-          tdOperar.appendChild(btnAsistencia);
-          row.appendChild(tdOperar);
+          // Columna ASISTENCIA: Radio buttons "SI" y "NO" y botón "Guardar"
+          var tdAsistencia = document.createElement('td');
+          var radioSi = document.createElement('input');
+          radioSi.type = 'radio';
+          radioSi.name = 'asistencia_' + nino.id_nino;
+          radioSi.value = 'si';
+          radioSi.id = 'radioSi_' + nino.id_nino;
           
+          var labelSi = document.createElement('label');
+          labelSi.htmlFor = 'radioSi_' + nino.id_nino;
+          labelSi.textContent = 'SI';
+          
+          var iconoSi = document.createElement('i');
+          iconoSi.className = 'fas fa-check-circle';
+          iconoSi.style.color = 'green';
+          iconoSi.style.display = 'block';
+          
+          var radioNo = document.createElement('input');
+          radioNo.type = 'radio';
+          radioNo.name = 'asistencia_' + nino.id_nino;
+          radioNo.value = 'no';
+          radioNo.id = 'radioNo_' + nino.id_nino;
+          
+          var labelNo = document.createElement('label');
+          labelNo.htmlFor = 'radioNo_' + nino.id_nino;
+          labelNo.textContent = 'NO';
+          
+          var iconoNo = document.createElement('i');
+          iconoNo.className = 'fas fa-times-circle';
+          iconoNo.style.color = 'red';
+          iconoNo.style.display = 'block';
+          
+          var btnGuardar = document.createElement('button');
+          btnGuardar.textContent = 'Guardar';
+          btnGuardar.className = 'btn-guardar';
+          btnGuardar.style.marginLeft = '20px';
+          btnGuardar.addEventListener('click', function() {
+            var estado = radioSi.checked ? 'si' : (radioNo.checked ? 'no' : null);
+            if (estado) {
+              guardarAsistencia(nino.id_nino, estado);
+            } else {
+              alert('⚠️ Debe seleccionar SI o NO.');
+            }
+          });
+          
+          var divSi = document.createElement('div');
+          divSi.style.display = 'inline-flex';
+          divSi.style.alignItems = 'center';
+          divSi.appendChild(radioSi);
+          divSi.appendChild(labelSi);
+          divSi.appendChild(iconoSi);
+          
+          var divNo = document.createElement('div');
+          divNo.style.display = 'inline-flex';
+          divNo.style.alignItems = 'center';
+          divNo.appendChild(radioNo);
+          divNo.appendChild(labelNo);
+          divNo.appendChild(iconoNo);
+          
+          tdAsistencia.appendChild(divSi);
+          tdAsistencia.appendChild(divNo);
+          tdAsistencia.appendChild(btnGuardar);
+          
+          row.appendChild(tdAsistencia);
           tbody.appendChild(row);
         });
         table.appendChild(tbody);
@@ -314,48 +364,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // 4. Modal asistencia: manejo de apertura, cierre y guardar asistencia
-  var modal = document.getElementById('modalAsistencia');
-  var btnCerrarModal = document.getElementById('btnCerrarModal');
-  var btnGuardarAsistencia = document.getElementById('btnGuardarAsistencia');
-  // Añadir un contenedor para mensajes de error o éxito en el modal
-  var errorDiv = document.createElement('div');
-  errorDiv.id = 'errorAsistencia';
-  modal.querySelector('.modal-content').insertBefore(errorDiv, btnGuardarAsistencia);
-  
-  // Cerrar modal al pulsar el botón "Cerrar"
-  btnCerrarModal.addEventListener('click', function() {
-    modal.style.display = 'none';
-    errorDiv.innerHTML = ''; // Limpiar mensajes
-  });
-  // Cerrar modal si se hace clic fuera del contenido
-  window.addEventListener('click', function(event) {
-    if (event.target == modal) {
-      modal.style.display = 'none';
-      errorDiv.innerHTML = '';
-    }
-  });
-  
-  // Guardar asistencia al pulsar el botón "Guardar"
-  btnGuardarAsistencia.addEventListener('click', function() {
-    var id_nino = modal.getAttribute('data-id');
-    if (!id_nino) {
-      alert('No se ha seleccionado ningún niño.');
-      return;
-    }
-    var radioSi = document.getElementById('radioSi').checked;
-    var radioNo = document.getElementById('radioNo').checked;
-    
-    // Validaciones: Debe seleccionar solo una opción
-    if (!radioSi && !radioNo) {
-      errorDiv.innerHTML = '⚠️ Debe seleccionar SI o NO.';
-      errorDiv.style.cssText = estiloError;
-      return;
-    }
-    
-    var estado = radioSi ? 'si' : 'no';
-    
-    // Enviar la información al servidor para actualizar la asistencia
+  // Función para guardar asistencia
+  function guardarAsistencia(id_nino, estado) {
     fetch('../Server/GestionarInfoAcividadesMonitor.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -371,19 +381,28 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(function(data) {
       if (data.mensaje) {
-        errorDiv.style.cssText = "color: green; font-size: 12px; margin-top: 5px; display: flex; align-items: center;";
-        errorDiv.innerHTML = "Guardado con éxito 🎉";
-        document.getElementById('radioSi').checked = false;
-        document.getElementById('radioNo').checked = false;
+        mostrarOverlayMensaje("Asistencia guardada");
+        console.log("Guardado con éxito 🎉");
       } else {
-        errorDiv.style.cssText = estiloError;
-        errorDiv.innerHTML = data.error || "Error desconocido";
+        console.error(data.error || "Error desconocido");
       }
     })
     .catch(function(error) {
       console.error('Error al guardar asistencia:', error);
     });
-  });
+  }
+
+  // Función para mostrar un overlay con un mensaje
+  function mostrarOverlayMensaje(mensaje) {
+    var overlayMensaje = document.createElement('div');
+    overlayMensaje.className = 'overlay-mensaje';
+    overlayMensaje.textContent = mensaje;
+    document.body.appendChild(overlayMensaje);
+    
+    setTimeout(function() {
+      overlayMensaje.remove();
+    }, 2000); // El overlay desaparece después de 2 segundos
+  }
 });
 
 // Función para comprobar si la imagen existe

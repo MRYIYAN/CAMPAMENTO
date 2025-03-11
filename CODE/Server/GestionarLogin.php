@@ -29,16 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     //------------------------------------------------------------------------------------//
-    // Escapar los datos para prevenir SQL Injection
-    //------------------------------------------------------------------------------------//
-    $email = $conn->real_escape_string($email);
-    $password = $conn->real_escape_string($password);
-
-    //------------------------------------------------------------------------------------//
     // Verificar en la tabla TUTORES (Padres)
     //------------------------------------------------------------------------------------//
-    $sql = "SELECT id_tutor, contrasenia FROM TUTORES WHERE email = '$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT id_tutor, contrasenia FROM TUTORES WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result === false) {
         manejarError("Error en la consulta SQL: " . $conn->error);
     }
@@ -58,8 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //------------------------------------------------------------------------------------//
     // Verificar en la tabla MONITORES
     //------------------------------------------------------------------------------------//
-    $sql = "SELECT id_monitor, contrasenia FROM MONITORES WHERE email = '$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT id_monitor, contrasenia FROM MONITORES WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result === false) {
         manejarError("Error en la consulta SQL: " . $conn->error);
     }
@@ -78,8 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //------------------------------------------------------------------------------------//
     // Verificar en la tabla ADMIN
     //------------------------------------------------------------------------------------//
-    $sql = "SELECT id_admin, contrasenia FROM ADMIN WHERE email = '$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT id_admin, contrasenia FROM ADMIN WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
     if ($result === false) {
         manejarError("Error en la consulta SQL: " . $conn->error);
     }

@@ -14,9 +14,9 @@ if (!isset($_SESSION["login"]) || !isset($_SESSION["id"])) {
 }
 
 // Consulta incluyendo el campo imagenComida_src
-$sql = "SELECT id_plan_comedor, nombre_plan, descripcion, precio, imagenComida_src 
-        FROM PLAN_COMEDOR";
-$result = $conn->query($sql);
+$query = $conn->prepare("SELECT id_plan_comedor, nombre_plan, descripcion, precio, imagenComida_src FROM PLAN_COMEDOR");
+$query->execute();
+$result = $query->get_result();
 
 $planes = [];
 if($result->num_rows > 0){
@@ -26,6 +26,9 @@ if($result->num_rows > 0){
 }
 ob_clean(); // Limpia cualquier salida previa
 echo json_encode($planes);
+
+// Cerrar la consulta y la conexión
+$query->close();
 $conn->close();
 exit();
 ?>

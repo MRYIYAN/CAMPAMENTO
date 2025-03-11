@@ -23,8 +23,9 @@ if (!isset($_SESSION['id'])) {
 }
 
 // Consulta para obtener las fechas de inicio, fin, precio y definición
-$sql = "SELECT fecha_inicio, fecha_fin, precio, definicion FROM PLAN_FECHAS";
-$result = $conn->query($sql);
+$query = $conn->prepare("SELECT fecha_inicio, fecha_fin, precio, definicion FROM PLAN_FECHAS");
+$query->execute();
+$result = $query->get_result();
 
 $fechas = []; // Array para almacenar los resultados
 
@@ -46,4 +47,7 @@ if ($result->num_rows > 0) {
 
 // Devolver los datos en formato JSON para usarlos en el frontend
 echo json_encode($fechas);
+
+// Cerrar la consulta
+$query->close();
 ?>

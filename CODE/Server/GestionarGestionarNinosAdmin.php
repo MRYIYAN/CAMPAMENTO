@@ -152,7 +152,7 @@ if (isset($data['idNinoSeleccionaParaEliminar'])){
 }
 
 //---------------------------------------------------------------//
-//SACAR DATOS DEL NINO PARA MODIFICAR
+            //SACAR DATOS DEL NINO PARA MODIFICAR
 //---------------------------------------------------------------//
 
 

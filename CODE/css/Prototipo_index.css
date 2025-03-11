@@ -1295,7 +1295,7 @@
     }
     
     .footer-brand :is(.body-4, .label-1) {
-      color: var(--quick-silver);
+      color: white;
       line-height: var(--lineHeight-3);
     }
     
@@ -1333,7 +1333,7 @@
     }
     
     .footer-link {
-      color: var(--quick-silver);
+      color: white;
       font-weight: var(--weight-bold);
       text-transform: uppercase;
       letter-spacing: var(--letterSpacing-4);
@@ -1344,7 +1344,7 @@
     .footer-link:is(:hover, :focus-visible) { color: var(--blue-2); }
     
     .copyright {
-      color: var(--quick-silver);
+      color: white;
       line-height: var(--lineHeight-3);
     }
     
