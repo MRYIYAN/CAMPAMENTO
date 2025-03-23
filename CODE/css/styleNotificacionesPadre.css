@@ -509,22 +509,6 @@ nav .logo {
   .logo, #btninicio {
     cursor: pointer;
 }
-#volverOverlayCerrarSesion{
-  cursor: pointer;
-  background-color: #ccc;
-  color: #333;
-}
-#volverOverlayCerrarSesion:hover{
-  background-color: #bbb;
-}
-#cerrarSesionOverlayCerrarSesion{
-  cursor: pointer;
-  background-color: #f00;
-  color: #fff;
-}
-#cerrarSesionOverlayCerrarSesion:hover{
-  background-color: #d00;
-}
   /* -------------------------------------------------------------------------------------------------- */
 
 
