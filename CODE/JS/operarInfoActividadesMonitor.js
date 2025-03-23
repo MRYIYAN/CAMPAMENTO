@@ -412,7 +412,6 @@ const comprobarImagen = (url) => {
     .catch(() => false);  //si  no lo pasamos es false
 };
 
- 
  // Función para obtener el valor de una cookie por su nombre
  function getCookie(nombre) {
      const cookies = document.cookie.split('; ');
@@ -421,7 +420,6 @@ const comprobarImagen = (url) => {
  }
  // Asignar el valor de la cookie al elemento HTML
  document.getElementById('biembenidoNombre').innerHTML = getCookie('nombreMonitor');
-
 
  //-----------------------------------------------------------------------------------------------------------//
   //PROTECCION DE RUTA Y EXTRAER EL ID
